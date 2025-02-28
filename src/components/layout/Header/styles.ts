@@ -1,10 +1,15 @@
 export const styles = {
   component: { 
+    position: "sticky",
     width: "100%", 
     backgroundColor: "background.default", 
   },
   container: {
     margin: "0 auto",
+    padding: {
+      xs: "0 1rem",
+      sm: 0,
+    },
     height: "6rem",
     display: "flex",
     justifyContent: "space-between",

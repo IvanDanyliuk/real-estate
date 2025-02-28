@@ -20,13 +20,7 @@ export const Footer: React.FC = () => {
             tempore debitis quaerat quo accusamus incidunt soluta excepturi 
             voluptatum vel. Quisquam totam quo tempora aliquam veniam, 
             saepe rem, eum aperiam veritatis impedit eos sunt dolore 
-            deserunt omnis dicta qui optio, pariatur eligendi. Soluta cum 
-            fugiat nisi architecto ex, delectus harum labore veniam 
-            voluptate aliquid libero laborum asperiores officiis 
-            reprehenderit qui cupiditate atque inventore, natus dignissimos 
-            sapiente suscipit! Exercitationem repellat, error hic esse 
-            cupiditate nostrum eius expedita, molestias distinctio, 
-            est numquam alias?
+            deserunt omnis dicta qui optio, pariatur eligendi. 
           </Typography>
           <Box component="ul" sx={styles.sociaMediaLinks}>
             {SOCIAL_MEDIA_LINKS.map(({ href, icon, label }) => (
