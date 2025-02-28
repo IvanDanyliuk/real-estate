@@ -29,7 +29,7 @@ export const styles = {
       color: "text.primary",
       paddingBottom: "0.5rem",
       transition: "color 0.2s ease-in-out",
-      "&:hover": {
+      "&:hover, &.active": {
         color: "primary.main",
       },
       "&::before": {
@@ -42,7 +42,7 @@ export const styles = {
         backgroundColor: "primary.main",
         transition: "all 0.2s ease-in-out",
       },
-      "&:hover::before": {
+      "&:hover::before, &.active::before": {
         width: "100%",
         color: "primary.main",
       },

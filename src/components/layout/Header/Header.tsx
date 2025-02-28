@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import { Box, Container, useMediaQuery, useTheme } from "@mui/material";
 import { NAV_LINKS } from "../../../utils/constants";
 import logo from "../../../assets/images/logo_primary.svg";
@@ -23,9 +23,9 @@ export const Header: React.FC = () => {
               <Box component="ul" sx={styles.navLinks}>
                 {NAV_LINKS.map(link => (
                   <Box key={crypto.randomUUID()} component="li">
-                    <Link to={link.href}>
+                    <NavLink to={link.href}>
                       {link.label}
-                    </Link>
+                    </NavLink>
                   </Box>
                 ))}
               </Box>
