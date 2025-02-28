@@ -1,8 +1,9 @@
-import { Box, Container, Typography } from "@mui/material";
-import { styles } from "./styles";
-import logo from "../../../assets/images/logo_secondary.svg"
-import { NAV_LINKS, SOCIAL_MEDIA_LINKS, SUPPORT_LINKS } from "../../../utils/constants";
 import { Link } from "react-router";
+import { Box, Container, Typography } from "@mui/material";
+import { SocialMediaLinks } from "../SocialMediaLinks/SocialMediaList";
+import logo from "../../../assets/images/logo_secondary.svg"
+import { NAV_LINKS, SUPPORT_LINKS } from "../../../utils/constants";
+import { styles } from "./styles";
 
 export const Footer: React.FC = () => {
   return (
@@ -22,15 +23,7 @@ export const Footer: React.FC = () => {
             saepe rem, eum aperiam veritatis impedit eos sunt dolore 
             deserunt omnis dicta qui optio, pariatur eligendi. 
           </Typography>
-          <Box component="ul" sx={styles.sociaMediaLinks}>
-            {SOCIAL_MEDIA_LINKS.map(({ href, icon, label }) => (
-              <Box key={crypto.randomUUID()} component="li">
-                <Link to={href} target="_blank">
-                  <Box component="img" src={icon} alt={label} />
-                </Link>
-              </Box>
-            ))}
-          </Box>
+          <SocialMediaLinks />
         </Box>
         <Box sx={styles.column}>
           <Typography variant="h3">

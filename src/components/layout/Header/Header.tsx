@@ -1,9 +1,9 @@
 import { Link, NavLink } from "react-router";
 import { Box, Container, useMediaQuery, useTheme } from "@mui/material";
+import { NavbarMobile } from "../NavbarMobile/NavbarMobile.tsx";
 import { NAV_LINKS } from "../../../utils/constants";
 import logo from "../../../assets/images/logo_primary.svg";
 import { styles } from "./styles.ts";
-import { NavbarMobile } from "../NavbarMobile/NavbarMobile.tsx";
 
 export const Header: React.FC = () => {
   const theme = useTheme();

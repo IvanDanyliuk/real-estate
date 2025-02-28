@@ -1,6 +1,6 @@
 export const styles = {
   container: {
-    padding: "2rem 1rem",
+    padding: "2.5rem 1rem",
     width: "80vw",
     minHeight: "100vh",
     display: "flex",
@@ -21,10 +21,21 @@ export const styles = {
     },
   },
   navLinkList: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "2rem",
     listStyleType: "none",
+    "li": {
+      textAlign: "center",
+    },
     "a": {
-      color: "text.primary",
+      fontSize: "1.3rem",
+      fontWeight: 600,
       textDecoration: "none",
+      color: "text.primary",
+      "&.active": {
+        color: "primary.main",
+      }
     }
   },
 };
