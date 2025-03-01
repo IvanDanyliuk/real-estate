@@ -1,12 +1,12 @@
+import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { ThemeProvider } from "@mui/material";
 import { Layout } from "./components/layout";
 import { routes } from "./router/routes";
 import { RouteParams } from "./router/types";
 import theme from "./config/theme";
-import "./App.css"
-import { Provider } from "react-redux";
 import store from "./app/store";
+import "./App.css"
 
 const renderRoutes = (routes: RouteParams[]) => {
   return routes.map(({ path, component: Component, children }) =>(
