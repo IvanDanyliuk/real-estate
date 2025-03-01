@@ -5,6 +5,8 @@ import { routes } from "./router/routes";
 import { RouteParams } from "./router/types";
 import theme from "./config/theme";
 import "./App.css"
+import { Provider } from "react-redux";
+import store from "./app/store";
 
 const renderRoutes = (routes: RouteParams[]) => {
   return routes.map(({ path, component: Component, children }) =>(
@@ -17,13 +19,15 @@ const renderRoutes = (routes: RouteParams[]) => {
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Layout>
-          <Routes>
-            {renderRoutes(routes)}
-          </Routes>
-        </Layout>
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Layout>
+            <Routes>
+              {renderRoutes(routes)}
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      </Provider>
     </ThemeProvider>
   );
 };
