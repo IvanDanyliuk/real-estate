@@ -37,10 +37,36 @@ export const TypeDefs = gql`
 export const userResolvers = {
   Query: {
     getUsers: async () => {
-      return await UserModel.find().populate("likedProperties");
+      try {
+        const users = await UserModel.find().populate("likedProperties");
+        return {
+          status: ResponseStatus.Succeeded,
+          users,
+          error: null,
+        };
+      } catch (error: any) {
+        return {
+          status: ResponseStatus.Failed,
+          users: [],
+          error: error.message,
+        };
+      }
     },
     getUser: async (_: any, { id }: { id: string }) => {
-      return await UserModel.findById(id).populate("likedProperties");
+      try {
+        const user = await UserModel.findById(id).populate("likedProperties");
+        return {
+          status: ResponseStatus.Succeeded,
+          user,
+          error: null,
+        };
+      } catch (error: any) {
+        return {
+          status: ResponseStatus.Failed,
+          user: null,
+          error: error.message,
+        }
+      }
     },
   },
   Mutation: {
@@ -67,6 +93,7 @@ export const userResolvers = {
         const newUser = new UserModel({
           name, role, email, phone, password, location, profilePhoto, likedProperties
         });
+        await newUser.save();
         
         return {
           status: ResponseStatus.Succeeded,
