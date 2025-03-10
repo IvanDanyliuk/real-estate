@@ -5,7 +5,7 @@ const userSchema = new Schema({
   role: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   phone: { type: String, required: true },
-  password: { tyoe: String, requried: true },
+  password: { type: String, requried: true },
   location: { type: String },
   profilePhoto: { type: String },
   likedProperties: [{ type: Schema.Types.ObjectId, ref: "Property" }],
