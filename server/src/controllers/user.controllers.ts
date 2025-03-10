@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
+import asyncHandler from "express-async-handler";
 import User from "../models/user.model";
 import generateToken from "../utils/generateToken";
 
-export const registerUser = async (req: Request, res: Response) => {
+export const registerUser = asyncHandler(async (req: Request, res: Response) => {
   try {
     const { name, role, email, phone, password, location, profilePhoto } = req.body;
 
@@ -13,7 +14,8 @@ export const registerUser = async (req: Request, res: Response) => {
       res.status(400).json({ message: "User already exists" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(password, salt);
     const newUser = await User.create({
       name,
       role,
@@ -29,9 +31,9 @@ export const registerUser = async (req: Request, res: Response) => {
   } catch (error: any) {
     res.status(301).json({ message: "Failed to create a new user" });
   }
-};
+});
 
-export const loginUser = async (req: Request, res: Response) => {
+export const loginUser = asyncHandler(async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -53,4 +55,4 @@ export const loginUser = async (req: Request, res: Response) => {
   } catch (error: any) {
     res.status(400).json({ message: error.message });
   }
-};
+});
