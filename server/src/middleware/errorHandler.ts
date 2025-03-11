@@ -1,6 +1,7 @@
 import { ErrorRequestHandler, Response } from "express";
 import { z as zod } from "zod";
 import { BAD_REQUEST, INTERNAL_SERVER_ERROR } from "../constants/http";
+import AppError from "../utils/AppError";
 
 const handleZodError = (res: Response, error: zod.ZodError) => {
   const errors = error.issues.map((err) => ({
@@ -14,11 +15,22 @@ const handleZodError = (res: Response, error: zod.ZodError) => {
   });
 };
 
+const handleAppError = (res: Response, error: AppError) => {
+  return res.status(error.statusCode).json({
+    message: error.message,
+    errorCode: error.errorCode,
+  });
+};
+
 const errorHandler: ErrorRequestHandler = (error: any, req: any, res: any, next: any) => {
   console.log(`PATH: ${req.path}`, error);
 
   if(error instanceof zod.ZodError) {
     return handleZodError(res, error);
+  }
+
+  if(error instanceof AppError) {
+    return handleAppError(res, error);
   }
 
   return res.status(INTERNAL_SERVER_ERROR).send("Internal server error");

@@ -1,9 +1,4 @@
-import { Request, Response } from "express";
 import { z as zod } from "zod";
-import bcrypt from "bcryptjs";
-import asyncHandler from "express-async-handler";
-import User from "../models/user.model";
-import generateToken from "../utils/generateToken";
 import catchErrors from "../utils/catchErrors";
 import { createAccount } from "../services/auth.service";
 import { CREATED } from "../constants/http";
