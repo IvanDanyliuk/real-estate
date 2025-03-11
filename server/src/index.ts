@@ -3,9 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import connectDB from "./config/db";
-import authRoutes from "./routes/user.routes";
+import authRoutes from "./routes/auth.route";
 import errorHandler from "./middleware/errorHandler";
-import catchErrors from "./utils/catchErrors";
 import { OK } from "./constants/http";
 
 dotenv.config();
@@ -22,12 +21,14 @@ app.use(cors({
 }));
 app.use(cookieParser());
 
-app.use("api/auth", authRoutes);
 app.get("/", (req: any, res: any, next: any) => {
   return res.status(OK).json({
     message: "Hello World!"
   });
 });
+
+app.use("/auth", authRoutes);
+
 
 //The middlware to catch all the errors across the existing routes
 app.use(errorHandler);
