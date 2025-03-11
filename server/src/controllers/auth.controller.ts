@@ -5,6 +5,9 @@ import asyncHandler from "express-async-handler";
 import User from "../models/user.model";
 import generateToken from "../utils/generateToken";
 import catchErrors from "../utils/catchErrors";
+import { createAccount } from "../services/auth.service";
+import { CREATED } from "../constants/http";
+import { setAuthCookies } from "../utils/cookies";
 
 const registerSchema = zod.object({
   name: zod.string().min(1).max(255),
@@ -13,7 +16,7 @@ const registerSchema = zod.object({
   phone: zod.string().min(12).max(18),
   password: zod.string().min(6).max(255),
   confirmPassword: zod.string().min(6).max(255),
-  location: zod.string().min(6).optional(),
+  location: zod.string().max(255),
   profilePhoto: zod.string().optional(),
   userAgent: zod.string().optional(),
 }).refine(
@@ -28,6 +31,12 @@ export const registerUser = catchErrors(async (req, res) => {
     ...req.body,
     userAgent: req.headers["user-agent"],
   });
+
+  const { user, accessToken, refreshToken } = await createAccount(request);
+
+  return setAuthCookies({ res, accessToken, refreshToken })
+    .status(CREATED)
+    .json(user);
 });
 
 export const loginUser = catchErrors(async (req, res) => {

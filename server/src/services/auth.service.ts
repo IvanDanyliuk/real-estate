@@ -4,7 +4,7 @@ import VerificationCodeModel from "../models/verificationCode.model";
 import SessionModel from "../models/session.model";
 import VerificationCodeType from "../constants/verificationCodeTypes";
 import { oneYearFromNow } from "../utils/date";
-import { JWT_REFRESH_SECRET } from "../constants/env";
+import { JWT_REFRESH_SECRET, JWT_SECRET } from "../constants/env";
 
 export type CreateAccountParams = {
   name: string,
@@ -27,7 +27,7 @@ export const createAccount = async (data: CreateAccountParams) => {
   }
 
   // create user
-  const newUser = await UserModel.create({
+  const user = await UserModel.create({
     name: data.name,
     role: data.role,
     email: data.email,
@@ -40,7 +40,7 @@ export const createAccount = async (data: CreateAccountParams) => {
 
   // create verification code
   const verificationCode = await VerificationCodeModel.create({
-    userId: newUser._id,
+    userId: user._id,
     type: VerificationCodeType.EmailVerification,
     expiresAt: oneYearFromNow(),
   });
@@ -49,7 +49,7 @@ export const createAccount = async (data: CreateAccountParams) => {
 
   // create session
   const session = await SessionModel.create({
-    userId: newUser._id,
+    userId: user._id,
     userAgent: data.userAgent,
   });
 
@@ -57,5 +57,26 @@ export const createAccount = async (data: CreateAccountParams) => {
   const refreshToken = jwt.sign(
     { sessionId: session._id },
     JWT_REFRESH_SECRET,
+    { 
+      audience: ["user"], 
+      expiresIn: "30d" 
+    },
   );
-}
+
+  const accessToken = jwt.sign(
+    { 
+      userId: user._id, 
+      sessionId: session._id 
+    },
+    JWT_SECRET,
+    { 
+      audience: ["user"], 
+      expiresIn: "15m", 
+    },
+  );
+
+  // return user, refresh token and access token
+  return {
+    user, accessToken, refreshToken,
+  };
+};
