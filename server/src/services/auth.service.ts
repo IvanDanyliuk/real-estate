@@ -1,7 +1,10 @@
-import VerificationCodeType from "../constants/verificationCodeTypes";
+import jwt from "jsonwebtoken";
 import UserModel from "../models/user.model";
 import VerificationCodeModel from "../models/verificationCode.model";
+import SessionModel from "../models/session.model";
+import VerificationCodeType from "../constants/verificationCodeTypes";
 import { oneYearFromNow } from "../utils/date";
+import { JWT_REFRESH_SECRET } from "../constants/env";
 
 export type CreateAccountParams = {
   name: string,
@@ -45,5 +48,14 @@ export const createAccount = async (data: CreateAccountParams) => {
   // send verification email
 
   // create session
-  
+  const session = await SessionModel.create({
+    userId: newUser._id,
+    userAgent: data.userAgent,
+  });
+
+  // sign access token & refresh token
+  const refreshToken = jwt.sign(
+    { sessionId: session._id },
+    JWT_REFRESH_SECRET,
+  );
 }
