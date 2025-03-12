@@ -1,9 +1,9 @@
 import UserModel from "../models/user.model";
 import VerificationCodeModel from "../models/verificationCode.model";
 import SessionModel from "../models/session.model";
-import { oneYearFromNow } from "../utils/date";
+import { ONE_DAY_IN_MS, oneYearFromNow, thirtyDaysFromNow } from "../utils/date";
 import appAssert from "../utils/appAssert";
-import { refreshTokenSignOptions, signToken } from "../utils/jwt";
+import { RefreshTokenPayload, refreshTokenSignOptions, signToken, verifyToken } from "../utils/jwt";
 import VerificationCodeType from "../constants/verificationCodeTypes";
 import { CONFLICT, UNAUTHORIZED } from "../constants/http";
 
@@ -21,7 +21,7 @@ export type CreateAccountParams = {
 export const createAccount = async (data: CreateAccountParams) => {
   // verifiy existing user does not exist
   const existingUser = await UserModel.exists({
-    email: data.email
+    email: data.email,
   });
 
   appAssert(!existingUser, CONFLICT, "Email already in use");
@@ -89,7 +89,7 @@ export const loginUser = async ({ email, password, userAgent }: LoginParams) => 
   const isValid = await user?.comparePassword(password);
   appAssert(isValid, UNAUTHORIZED, "Invalid email or password");
 
-  const userId = user?._id;
+  const userId = user._id;
 
   // create a session
   const session = await SessionModel.create({
@@ -105,7 +105,7 @@ export const loginUser = async ({ email, password, userAgent }: LoginParams) => 
   const refreshToken = signToken(sessionInfo, refreshTokenSignOptions);
 
   const accessToken = signToken({ 
-    userId: user?._id, 
+    userId: user._id, 
     ...sessionInfo, 
   });
 
@@ -114,5 +114,44 @@ export const loginUser = async ({ email, password, userAgent }: LoginParams) => 
     user: user?.omitPassword(),
     accessToken,
     refreshToken,
+  };
+};
+
+export const refreshUserAccessToken = async (refreshToken: string) => {
+  const { payload } = verifyToken<RefreshTokenPayload>(refreshToken, {
+    secret: refreshTokenSignOptions.secret,
+  });
+  appAssert(payload, UNAUTHORIZED, "Invalid refresh token");
+
+  const now = Date.now();
+  const session = await SessionModel.findById(payload?.sessionId);
+  appAssert(
+    session && session.expiresAt.getTime() > now, 
+    UNAUTHORIZED, 
+    "Session expired"
+  );
+
+  // refresh the session if it expires in the next 24 hours
+  const sessionNeedsRefresh = session!.expiresAt.getTime() - now <= ONE_DAY_IN_MS;
+  if(sessionNeedsRefresh) {
+    session.expiresAt = thirtyDaysFromNow();
+    await session.save();
+  }
+
+  const newRefreshToken = sessionNeedsRefresh 
+    ? signToken(
+        { sessionId: session._id }, 
+        refreshTokenSignOptions
+      ) 
+    : undefined;
+
+  const accessToken = signToken({
+    userId: session.userId,
+    sessionId: session._id,
+  });
+
+  return {
+    accessToken,
+    newRefreshToken,
   };
 };
