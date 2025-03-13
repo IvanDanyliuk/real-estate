@@ -26,3 +26,8 @@ export const registerSchema = loginSchema
   );
 
 export const verificationCodeSchema = zod.string().min(1).max(24);
+
+export const resetPasswordSchema = zod.object({
+  password: passwordSchema,
+  verificationCode: verificationCodeSchema,
+});
