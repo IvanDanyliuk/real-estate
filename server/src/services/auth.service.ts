@@ -5,7 +5,10 @@ import { ONE_DAY_IN_MS, oneYearFromNow, thirtyDaysFromNow } from "../utils/date"
 import appAssert from "../utils/appAssert";
 import { RefreshTokenPayload, refreshTokenSignOptions, signToken, verifyToken } from "../utils/jwt";
 import VerificationCodeType from "../constants/verificationCodeTypes";
-import { CONFLICT, UNAUTHORIZED } from "../constants/http";
+import { CONFLICT, INTERNAL_SERVER_ERROR, NOT_FOUND, UNAUTHORIZED } from "../constants/http";
+import { sendEmail } from "../utils/sendEmail";
+import { APP_ORIGIN } from "../constants/env";
+import { getVerifyEmailTemplate } from "../utils/emailTemplates";
 
 export type CreateAccountParams = {
   name: string,
@@ -48,6 +51,15 @@ export const createAccount = async (data: CreateAccountParams) => {
   });
 
   // send verification email
+  const url = `${APP_ORIGIN}/email/verify/${verificationCode._id}`;
+  const { error } = await sendEmail({
+    to: user.email,
+    ...getVerifyEmailTemplate(url),
+  });
+
+  if(error) {
+    console.log(error);
+  }
 
   // create session
   const session = await SessionModel.create({
@@ -153,5 +165,31 @@ export const refreshUserAccessToken = async (refreshToken: string) => {
   return {
     accessToken,
     newRefreshToken,
+  };
+};
+
+export const verifyEmail = async (code: string) => {
+  // get verification code
+  const validCode = await VerificationCodeModel.findOne({
+    _id: code,
+    type: VerificationCodeType.EmailVerification,
+    expiresAt: { $gt: new Date() },
+  });
+  appAssert(validCode, NOT_FOUND, "Invalid or expired verification code");
+
+  // update user to verified true
+  const updatedUser = await UserModel.findByIdAndUpdate(
+    validCode.userId,
+    { verified: true },
+    { new: true },
+  );
+  appAssert(updatedUser, INTERNAL_SERVER_ERROR, "Failed to verify email");
+
+  // delete verification code
+  await validCode.deleteOne();
+
+  // return user
+  return {
+    user: updatedUser.omitPassword(),
   };
 };
