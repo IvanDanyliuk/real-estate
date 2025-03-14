@@ -4,9 +4,11 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./config/db";
 import authRoutes from "./routes/auth.route";
+import userRoutes from "./routes/user.route";
 import errorHandler from "./middleware/errorHandler";
 import { OK } from "./constants/http";
 import { APP_ORIGIN, PORT } from "./constants/env";
+import authenticate from "./middleware/authenticate";
 
 const app = express();
 
@@ -27,6 +29,8 @@ app.get("/", (req: any, res: any, next: any) => {
 
 app.use("/auth", authRoutes);
 
+// protected routes
+app.use("/user", authenticate, userRoutes);
 
 //The middlware to catch all the errors across the existing routes
 app.use(errorHandler);

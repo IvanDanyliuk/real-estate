@@ -1,15 +1,36 @@
 import UserModel from "../models/user.model";
 import VerificationCodeModel from "../models/verificationCode.model";
 import SessionModel from "../models/session.model";
-import { fiveMinutesAgo, ONE_DAY_IN_MS, oneHourFromNow, oneYearFromNow, thirtyDaysFromNow } from "../utils/date";
+import { 
+  fiveMinutesAgo, 
+  ONE_DAY_IN_MS, 
+  oneHourFromNow, 
+  oneYearFromNow, 
+  thirtyDaysFromNow 
+} from "../utils/date";
 import appAssert from "../utils/appAssert";
-import { RefreshTokenPayload, refreshTokenSignOptions, signToken, verifyToken } from "../utils/jwt";
-import VerificationCodeType from "../constants/verificationCodeTypes";
-import { CONFLICT, INTERNAL_SERVER_ERROR, NOT_FOUND, TOO_MANY_REQUESTS, UNAUTHORIZED } from "../constants/http";
+import { 
+  RefreshTokenPayload, 
+  refreshTokenSignOptions, 
+  signToken, 
+  verifyToken 
+} from "../utils/jwt";
 import { sendEmail } from "../utils/sendEmail";
-import { APP_ORIGIN } from "../constants/env";
-import { getPasswordResetTemplate, getVerifyEmailTemplate } from "../utils/emailTemplates";
+import { 
+  getPasswordResetTemplate, 
+  getVerifyEmailTemplate 
+} from "../utils/emailTemplates";
 import { hashValue } from "../utils/bcrypt";
+import { 
+  CONFLICT, 
+  INTERNAL_SERVER_ERROR, 
+  NOT_FOUND, 
+  TOO_MANY_REQUESTS, 
+  UNAUTHORIZED 
+} from "../constants/http";
+import VerificationCodeType from "../constants/verificationCodeTypes";
+import { APP_ORIGIN } from "../constants/env";
+
 
 export type CreateAccountParams = {
   name: string,

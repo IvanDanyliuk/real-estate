@@ -1,11 +1,29 @@
 import SessionModel from "../models/session.model";
-import catchErrors from "../utils/catchErrors";
-import { createAccount, loginUser, refreshUserAccessToken, resetPassword, sendPasswordResetEmail, verifyEmail } from "../services/auth.service";
-import { CREATED, OK, UNAUTHORIZED } from "../constants/http";
-import { clearAuthCookies, getAccessTokenCookieOptions, getRefreshTokenCookieOptions, setAuthCookies } from "../utils/cookies";
-import { emailSchema, loginSchema, registerSchema, resetPasswordSchema, verificationCodeSchema } from "../schemas/auth.schema";
-import { verifyToken } from "../utils/jwt";
+import { 
+  createAccount, 
+  loginUser, 
+  refreshUserAccessToken, 
+  resetPassword, 
+  sendPasswordResetEmail, 
+  verifyEmail 
+} from "../services/auth.service";
+import { 
+  emailSchema, 
+  loginSchema, 
+  registerSchema, 
+  resetPasswordSchema, 
+  verificationCodeSchema 
+} from "../schemas/auth.schema";
+import { 
+  clearAuthCookies, 
+  getAccessTokenCookieOptions, 
+  getRefreshTokenCookieOptions, 
+  setAuthCookies 
+} from "../utils/cookies";
 import appAssert from "../utils/appAssert";
+import catchErrors from "../utils/catchErrors";
+import { verifyToken } from "../utils/jwt";
+import { CREATED, OK, UNAUTHORIZED } from "../constants/http";
 
 export const registerUserHandler = catchErrors(async (req, res) => {
   const request = registerSchema.parse({
