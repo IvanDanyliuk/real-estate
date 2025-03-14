@@ -9,6 +9,7 @@ import errorHandler from "./middleware/errorHandler";
 import { OK } from "./constants/http";
 import { APP_ORIGIN, PORT } from "./constants/env";
 import authenticate from "./middleware/authenticate";
+import sessionRoutes from "./routes/session.route";
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use("/auth", authRoutes);
 
 // protected routes
 app.use("/user", authenticate, userRoutes);
+app.use("/sessions", authenticate, sessionRoutes)
 
 //The middlware to catch all the errors across the existing routes
 app.use(errorHandler);

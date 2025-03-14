@@ -3,7 +3,7 @@ import { getUserHandler } from "../controllers/user.controller";
 
 const userRoutes = Router();
 
-userRoutes.get("/user", getUserHandler);
+userRoutes.get("/", getUserHandler);
 
 
 export default userRoutes;
