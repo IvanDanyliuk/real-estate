@@ -2,7 +2,7 @@ import { Box } from "@mui/material"
 import { Header } from "../../components/layout/Header/Header"
 import { Outlet } from "react-router"
 
-const MainLayout: React.FC = () => {
+const MainLayout = () => {
   return (
     <Box>
       <Header />

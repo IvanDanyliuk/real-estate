@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 
-const ProfilePage: React.FC = () => {
+const ProfilePage = () => {
   return (
     <Box>
       Profile page

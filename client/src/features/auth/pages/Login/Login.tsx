@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 
-const LoginPage: React.FC = () => {
+const LoginPage = () => {
   return (
     <Box>
       Login page

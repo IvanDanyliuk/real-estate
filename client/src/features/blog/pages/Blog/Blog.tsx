@@ -1,11 +1,11 @@
 import { Box } from '@mui/material';
 
-const RegisterPage = () => {
+const BlogPage = () => {
   return (
     <Box>
-      Register page
+      Blog page
     </Box>
   );
 };
 
-export default RegisterPage;
+export default BlogPage;

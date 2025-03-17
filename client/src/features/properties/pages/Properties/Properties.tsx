@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 
-const PropertiesPage: React.FC = () => {
+const PropertiesPage = () => {
   return (
     <Box>
       Properties Page

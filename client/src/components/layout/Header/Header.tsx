@@ -2,6 +2,7 @@
 import { UserMenu } from '../UserMenu/UserMenu';
 import { styles } from './styles';
 import { Container } from '../Container/Container';
+import { Navbar } from '../Navbar/Navbar';
 
 export const Header: React.FC = () => {
   return (
@@ -10,7 +11,7 @@ export const Header: React.FC = () => {
       wrapperStyles={styles.component}
     >
       <div>Logo</div>
-      <nav>Navigation</nav>
+      <Navbar />
       <UserMenu />
     </Container>
   );

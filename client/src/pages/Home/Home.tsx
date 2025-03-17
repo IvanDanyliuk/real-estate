@@ -1,4 +1,4 @@
-const HomePage: React.FC = () => {
+const HomePage = () => {
   return (
     <div>
       Home page
