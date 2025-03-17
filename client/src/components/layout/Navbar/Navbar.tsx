@@ -8,9 +8,11 @@ export const Navbar: React.FC = () => {
     <Box component='nav'>
       <Box component='ul' sx={styles.navList}>
         {NAV_LINKS.map(link => (
-          <NavLink key={crypto.randomUUID()} to={link.href}>
-            {link.label}
-          </NavLink>
+          <Box key={crypto.randomUUID()} component='li' sx={styles.navListItem}>
+            <NavLink to={link.href}>
+              {link.label}
+            </NavLink>
+          </Box>
         ))}
       </Box>
     </Box>

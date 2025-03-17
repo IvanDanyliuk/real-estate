@@ -10,10 +10,16 @@ export const theme = createTheme({
       light: '#EEEEEE',
       main: '#7B7B7B',
       dark: '#222222',
+    },
+    text: {
+      primary: '#222222',
+      secondary: '#7B7B7B',
     }
   },
   typography: {
     fontFamily: 'Montserrat',
-    
+    body1: {
+      color: 'secondary.main'
+    }
   }
 });
