@@ -3,6 +3,7 @@ import { UserMenu } from '../UserMenu/UserMenu';
 import { styles } from './styles';
 import { Container } from '../Container/Container';
 import { Navbar } from '../Navbar/Navbar';
+import { Logo } from '../Logo/Logo';
 
 export const Header: React.FC = () => {
   return (
@@ -11,7 +12,7 @@ export const Header: React.FC = () => {
       wrapperStyles={styles.component}
       contentStyles={styles.container}
     >
-      <div>Logo</div>
+      <Logo />
       <Navbar />
       <UserMenu />
     </Container>

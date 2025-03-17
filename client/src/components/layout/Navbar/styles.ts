@@ -22,7 +22,7 @@ export const styles = {
         left: 0,
         bottom: 0,
         width: 0,
-        height: '3px',
+        height: '2px',
         backgroundColor: 'primary.main',
         transition: 'width 0.3s ease-in-out',
       },
