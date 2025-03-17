@@ -11,9 +11,9 @@ interface NavRoute {
   };
 };
 
-const Home = lazy(() => import('../pages/Home'));
-const About = lazy(() => import('../pages/About'));
-const Contact = lazy(() => import('../pages/Contact'));
+const Home = lazy(() => import('../pages/Home/Home'));
+const About = lazy(() => import('../pages/About/About'));
+const Contact = lazy(() => import('../pages/Contact/Contact'));
 
 export const NAV_ROUTES: NavRoute[] = [
   {
