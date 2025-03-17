@@ -1,10 +1,11 @@
 export const styles = {
   component: {
-    background: '',
+    background: 'primary.light',
   },
   container: {
+    height: '8vh',
     display: 'flex',
-    justifyContent: 'justify-between',
+    justifyContent: 'space-between',
     alignItems: 'center',
   }
 }

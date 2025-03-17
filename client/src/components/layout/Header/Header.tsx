@@ -9,6 +9,7 @@ export const Header: React.FC = () => {
     <Container 
       componentType='header' 
       wrapperStyles={styles.component}
+      contentStyles={styles.container}
     >
       <div>Logo</div>
       <Navbar />

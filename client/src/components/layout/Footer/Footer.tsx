@@ -1,11 +1,9 @@
-import { Box, Container } from "@mui/material";
+import { Container } from "../Container/Container";
 
 export const Footer: React.FC = () => {
   return (
-    <Box component='footer'>
-      <Container>
-        
-      </Container>
-    </Box>
+    <Container componentType='footer'>
+      Footer
+    </Container>
   );
 };
