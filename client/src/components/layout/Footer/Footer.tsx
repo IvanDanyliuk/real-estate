@@ -5,6 +5,7 @@ import { Logo } from "../Logo/Logo";
 import { SocialMediaLinks } from "../SocialMediaLinks/SocialMediaLinks";
 import { styles } from "./styles";
 import { FOOTER_LINKS } from "../../../constants/footerLinks";
+import { SubscriptionForm } from "../SubscriptionForm/SubscriptionForm";
 
 const LinkList = ({ links }: { 
   links: { 
@@ -13,9 +14,9 @@ const LinkList = ({ links }: {
   }[] 
 }) => {
   return (
-    <List>
+    <List sx={styles.list}>
       {links.map(({ href, label }) => (
-        <ListItem key={crypto.randomUUID()}>
+        <ListItem key={crypto.randomUUID()} sx={styles.listItem}>
           <NavLink to={href}>
             {label}
           </NavLink>
@@ -59,7 +60,7 @@ export const Footer: React.FC = () => {
         <Typography variant='h4'>
           Get latest updates
         </Typography>
-        
+        <SubscriptionForm />
       </Box>
     </Container>
   );

@@ -11,16 +11,25 @@ export const styles = {
   },
   column: {
     flex: 1,
-    '&:first-child': {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '1rem',
-      'p': {
-        textWrap: 'balance',
-      }
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
+    'p': {
+      textWrap: 'balance',
     },
     'a': {
       color: 'primary.light'
     }
+  },
+  list: {
+    margin: 0,
+    padding: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 2,
+  },
+  listItem: {
+    margin: 0,
+    padding: 0,
   }
 }
