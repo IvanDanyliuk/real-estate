@@ -23,5 +23,18 @@ export const theme = createTheme({
       fontSize: '14px',
       color: 'secondary.main'
     }
-  }
+  },
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: '2.6rem',
+        },
+        input: {
+          padding: '1rem 1.1rem',
+          fontStyle: 'italic',
+        },
+      },
+    },
+  },
 });
