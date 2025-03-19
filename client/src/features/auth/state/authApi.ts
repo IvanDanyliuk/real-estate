@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { REQUEST_METHODS } from '../../constants/requestMethods';
-import { AUTH_ROUTES } from '../../constants/apiRoutePaths';
+import { REQUEST_METHODS } from '../../../constants/requestMethods';
+import { AUTH_ROUTES } from '../../../constants/apiRoutePaths';
 
 export const authApi = createApi({
-  reducerPath: 'auth',
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_BASE_URL }),
+  reducerPath: 'authApi',
+  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.REACT_APP_API_BASE_URL }),
   endpoints: (builder) => ({
     register: builder.mutation({
       query: (newUser) => ({
