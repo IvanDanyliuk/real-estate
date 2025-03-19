@@ -20,6 +20,7 @@ export const theme = createTheme({
   typography: {
     fontFamily: 'Montserrat',
     body1: {
+      fontSize: '14px',
       color: 'secondary.main'
     }
   }

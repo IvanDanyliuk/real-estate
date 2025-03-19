@@ -7,7 +7,7 @@ export const styles = {
   container: {
     display: 'flex',
     justifyContent: 'space-between',
-    gap: '2rem',
+    gap: '3rem',
   },
   column: {
     flex: 1,

@@ -5,6 +5,7 @@ export const styles = {
     gap: '2rem',
   },
   listItem: {
+    padding: 0,
     'a': {
       width: '2.3rem',
       height: '2.3rem',
