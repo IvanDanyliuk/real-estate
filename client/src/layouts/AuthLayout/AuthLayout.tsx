@@ -1,11 +1,20 @@
-import { Outlet } from 'react-router';
-import { Container } from '../../components/layout/Container/Container';
+import { NavLink, Outlet } from 'react-router';
+import { Box } from '@mui/material';
+import { Logo } from '../../components/layout/Logo/Logo';
+import { styles } from './styles';
 
 const AuthLayout = () => {
   return (
-    <Container componentType='main'>
-      <Outlet />
-    </Container>
+    <Box sx={styles.component}>
+      <Box component='header' sx={styles.header}>
+        <NavLink to='/'>
+          <Logo />
+        </NavLink>
+      </Box>
+      <Box component='main' sx={styles.main}>
+        <Outlet />
+      </Box>
+    </Box>
   );
 };
 

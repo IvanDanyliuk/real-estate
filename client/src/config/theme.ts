@@ -36,5 +36,22 @@ export const theme = createTheme({
         },
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          height: '2.6rem',
+          backgroundColor: theme.palette.primary.main,
+          color: theme.palette.primary.light,
+          borderWidth: '2px',
+          borderStyle: 'solid',
+          borderColor: theme.palette.primary.main,
+          borderRadius: '2.6rem',
+          '&:hover': {
+            backgroundColor: theme.palette.primary.light,
+            color: theme.palette.primary.main,
+          }
+        }),
+      },
+    },
   },
 });

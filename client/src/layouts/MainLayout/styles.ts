@@ -7,4 +7,4 @@ export const styles = {
   main: {
     flex: 1,
   },
-}
+};
