@@ -10,15 +10,15 @@ export const registerSchema = zod.object({
   location: zod.string().min(1).max(255).optional(),
   profilePhoto: zod
   .any()
-  .optional()
-  .refine(
-    (file) => !file || (file.size && file.size <= MAX_IMAGE_FILE_SIZE), 
-    'Image size is outside the limit!'
-  )
-  .refine(
-    (file) => !file || (file.type && ACCEPTED_IMAGE_TYPES.includes(file.type)), 
-    'Unaccepted image type'
-  ),
+  // .optional()
+  // .refine(
+  //   (file) => !file || (file.size && file.size <= MAX_IMAGE_FILE_SIZE), 
+  //   'Image size is outside the limit!'
+  // )
+  // .refine(
+  //   (file) => !file || (file.type && ACCEPTED_IMAGE_TYPES.includes(file.type)), 
+  //   'Unaccepted image type'
+  // ),
 }).refine((data) => data.password === data.confirmPassword, {
   message: 'Passwords do not match',
   path: ['confirmPassword'],

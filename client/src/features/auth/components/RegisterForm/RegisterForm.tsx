@@ -4,12 +4,14 @@ import { Box, Button, TextField } from '@mui/material';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { RegisterDataType, registerSchema } from '../../data-models';
 import { styles } from './styles';
+import { FileInput } from '../../../../components/inputs/FileInput/FileInput';
 
 export const RegisterForm: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
+    setValue,
   } = useForm<RegisterDataType>({
     resolver: zodResolver(registerSchema)
   });
@@ -21,14 +23,14 @@ export const RegisterForm: React.FC = () => {
   return (
     <Box component='form' onSubmit={handleSubmit(onSubmit)} sx={styles.form}>
       <TextField 
-        placeholder='Name' 
+        label='Name' 
         fullWidth 
         error={!!errors.name}
         helperText={errors.name?.message}
         {...register('name')} 
       />
       <TextField 
-        placeholder='Email' 
+        label='Email' 
         type='email' 
         fullWidth 
         error={!!errors.email}
@@ -36,37 +38,44 @@ export const RegisterForm: React.FC = () => {
         {...register('email')} 
       />
       <TextField 
-        placeholder='Phone' 
+        label='Phone' 
         fullWidth 
         error={!!errors.phone}
         helperText={errors.phone?.message}
         {...register('phone')} 
       />
       <TextField 
-        placeholder='Password' 
+        label='Password' 
         fullWidth 
         error={!!errors.password}
         helperText={errors.password?.message}
         {...register('password')} 
       />
       <TextField 
-        placeholder='Confirm password' 
+        label='Confirm password' 
         fullWidth 
         error={!!errors.confirmPassword}
         helperText={errors.confirmPassword?.message}
         {...register('confirmPassword')} 
       />
       <TextField 
-        placeholder='Location'
+        label='Location'
         fullWidth
         error={!!errors.location}
         helperText={errors.location?.message}
         {...register('location')}
       />
-      
-      {/* TODO: Add the Upload Image input */}
-
-      <Button type='submit'>
+      <FileInput 
+        name='profilePhoto'
+        label='Photo' 
+        title='Upload a profile photo'
+        error={!!errors.profilePhoto} 
+        helperText={errors.profilePhoto?.message} 
+        register={register}
+        setValue={setValue}
+        multiple
+      />
+      <Button type='submit' sx={styles.submitBtn}>
         {isSubmitting ? 'Loading' : 'Submit'}
       </Button>
     </Box>

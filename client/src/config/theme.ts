@@ -19,6 +19,9 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: 'Montserrat',
+    h1: {
+      fontSize: '3rem',
+    },
     body1: {
       fontSize: '14px',
       color: 'secondary.main'
@@ -31,7 +34,7 @@ export const theme = createTheme({
           borderRadius: '2.6rem',
         },
         input: {
-          padding: '1rem 1.1rem',
+          padding: '1rem 1.3rem',
           fontStyle: 'italic',
         },
       },
