@@ -7,6 +7,7 @@ export const styles = {
     flex: 1,
     '& .MuiInputBase-root': {
       minWidth: '16rem',
+      height: '2.6rem',
       backgroundColor: 'primary.light',
       borderRadius: '10px 0 0 10px',
     },
