@@ -1,14 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { REQUEST_METHODS } from '../../../constants/requestMethods';
 import { AUTH_ROUTES } from '../../../constants/apiRoutePaths';
+import { RegisterDataType } from '../data-models';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.REACT_APP_API_BASE_URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000' }),
   endpoints: (builder) => ({
-    register: builder.mutation({
+    signUp: builder.mutation<RegisterDataType, Partial<RegisterDataType>>({
       query: (newUser) => ({
-        url: AUTH_ROUTES.register,
+        url: `/auth${AUTH_ROUTES.register}`,
         method: REQUEST_METHODS.post,
         body: newUser,
       }),
@@ -23,4 +24,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation } = authApi;
+export const { useSignUpMutation, useLoginMutation } = authApi;

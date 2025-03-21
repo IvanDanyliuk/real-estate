@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { RegisterDataType, registerSchema } from '../../data-models';
 import { styles } from './styles';
 import { FileInput } from '../../../../components/inputs/FileInput/FileInput';
+import { useSignUpMutation } from '../../state/authApi';
 
 export const RegisterForm: React.FC = () => {
   const {
@@ -16,8 +17,24 @@ export const RegisterForm: React.FC = () => {
     resolver: zodResolver(registerSchema)
   });
 
-  const onSubmit: SubmitHandler<RegisterDataType> = (data) => {
+  const [signUp, response] = useSignUpMutation();
+
+  const onSubmit: SubmitHandler<RegisterDataType> = async (data) => {
     console.log('REGISTER FORM', data);
+    const formData = new FormData();
+    formData.append('name', data.name); 
+    formData.append('email', data.email); 
+    formData.append('phone', data.phone); 
+    formData.append('password', data.password); 
+    formData.append('confirmPassword', data.confirmPassword); 
+    if(data.location) formData.append('location', data.location); 
+    if(data.profilePhoto) {
+      for (const file of data.profilePhoto) {
+        formData.append('profilePhoto', file);
+      }
+    } 
+
+    await signUp(data);
   };
 
   return (
