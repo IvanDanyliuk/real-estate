@@ -34,7 +34,7 @@ export const RegisterForm: React.FC = () => {
       }
     } 
 
-    await signUp(data);
+    await signUp(formData);
   };
 
   return (

@@ -7,7 +7,7 @@ export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000' }),
   endpoints: (builder) => ({
-    signUp: builder.mutation<RegisterDataType, Partial<RegisterDataType>>({
+    signUp: builder.mutation<RegisterDataType, FormData>({
       query: (newUser) => ({
         url: `/auth${AUTH_ROUTES.register}`,
         method: REQUEST_METHODS.post,
