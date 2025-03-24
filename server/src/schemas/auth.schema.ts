@@ -16,7 +16,7 @@ export const registerSchema = loginSchema
     phone: zod.string().min(12).max(18),
     confirmPassword: zod.string().min(6).max(255),
     location: zod.string().max(255),
-    profilePhoto: zod.string().optional(),
+    profilePhoto: zod.any().optional(),
   })
   .refine(
     (data) => data.password === data.confirmPassword, {

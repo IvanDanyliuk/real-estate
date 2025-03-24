@@ -21,6 +21,7 @@ import {
   getVerifyEmailTemplate 
 } from "../utils/emailTemplates";
 import { hashValue } from "../utils/bcrypt";
+import { uploadToCloudinary } from "./cloudinary.service";
 import { 
   CONFLICT, 
   INTERNAL_SERVER_ERROR, 
@@ -39,7 +40,7 @@ export type CreateAccountParams = {
   phone: string,
   password: string,
   location: string,
-  profilePhoto?: string,
+  profilePhoto?: any,
   userAgent?: string,
 };
 
@@ -51,6 +52,12 @@ export const createAccount = async (data: CreateAccountParams) => {
 
   appAssert(!existingUser, CONFLICT, "Email already in use");
 
+  console.log('UPLOAD FILE', data.profilePhoto)
+
+  const uploadedImagePath = data.profilePhoto 
+    ? await uploadToCloudinary(data.profilePhoto.buffer) 
+    : null;
+
   // create user
   const user = await UserModel.create({
     name: data.name,
@@ -59,7 +66,7 @@ export const createAccount = async (data: CreateAccountParams) => {
     phone: data.phone,
     password: data.password,
     location: data.location,
-    profilePhoto: data.profilePhoto,
+    profilePhoto: uploadedImagePath,
     likedProperties: []
   });
 
@@ -92,12 +99,12 @@ export const createAccount = async (data: CreateAccountParams) => {
   // sign access token & refresh token
   const refreshToken = signToken(
     { sessionId: session._id }, 
-    refreshTokenSignOptions
+    refreshTokenSignOptions,
   );
 
   const accessToken = signToken({ 
     userId, 
-    sessionId: session._id 
+    sessionId: session._id, 
   });
 
   // return user, refresh token and access token

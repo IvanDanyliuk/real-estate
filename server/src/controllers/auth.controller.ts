@@ -1,4 +1,3 @@
-import { v2 } from "cloudinary";
 import SessionModel from "../models/session.model";
 import { 
   createAccount, 
@@ -24,41 +23,27 @@ import {
 import appAssert from "../utils/appAssert";
 import catchErrors from "../utils/catchErrors";
 import { verifyToken } from "../utils/jwt";
-import { CREATED, NOT_FOUND, OK, UNAUTHORIZED } from "../constants/http";
-// import { cloudinary } from "../config/cloudinary";
+import { CREATED, OK, UNAUTHORIZED } from "../constants/http";
 
 export const registerUserHandler = catchErrors(async (req, res) => {
-  console.log('REGISTER REQUEST', req.body, req.files)
-  const request = registerSchema.safeParse({
+  const files = req.files as any;
+
+  const request = registerSchema.parse({
     ...req.body,
+    profilePhoto: files[0],
+    role: 'user',
     userAgent: req.headers["user-agent"],
   });
 
-  const files = req.files;
-  const uploadedImagePaths = await Promise.all(files!.map(async (file: any) => {
-    const uploaded = await v2.uploader.upload_stream(
-      { resource_type: "auto" },
-      (error, result) => {
-        if(error) {
-          // return res.status(NOT_FOUND).json({ message: "Cannot upload images" });
-          console.log("FAILED TO UPLOAD IMAGES");
-        }
-        return result?.secure_url;
-      }
-    ).end(file.buffer);
-    return uploaded;
-  }));
+  const { 
+    user, 
+    accessToken, 
+    refreshToken 
+  } = await createAccount(request);
 
-  // const { 
-  //   user, 
-  //   accessToken, 
-  //   refreshToken 
-  // } = await createAccount(request);
-
-  // return setAuthCookies({ res, accessToken, refreshToken })
-  //   .status(CREATED)
-  //   .json(user);
-  return res.status(OK).json({ message: 'New user has been successfully created!' });
+  return setAuthCookies({ res, accessToken, refreshToken })
+    .status(CREATED)
+    .json(user);
 });
 
 export const loginUserHandler = catchErrors(async (req, res) => {
