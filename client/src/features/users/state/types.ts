@@ -4,6 +4,8 @@ export interface User {
   role: string;
   email: string;
   phone: string;
+  verified: boolean;
+  likedProperties: any[];
   location: string;
   profilePhoto?: string;
   createdAt?: string;

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Box, Button, TextField } from '@mui/material';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -6,11 +7,12 @@ import { RegisterDataType, registerSchema } from '../../data-models';
 import { styles } from './styles';
 import { FileInput } from '../../../../components/inputs/FileInput/FileInput';
 import { useSignUpMutation } from '../../state/authApi';
-import { QueryStatus } from '@reduxjs/toolkit/query';
-import { useNavigate } from 'react-router';
+import { useAppDispatch } from '../../../../hooks/useAppDispatch';
+import { setUser } from '../../../users/state/userSlice';
 
 export const RegisterForm: React.FC = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -21,12 +23,9 @@ export const RegisterForm: React.FC = () => {
     resolver: zodResolver(registerSchema)
   });
 
-  const [signUp, response] = useSignUpMutation();
-
-  console.log('REGISTER FORM', response)
+  const [signUp, { isSuccess }] = useSignUpMutation();
 
   const onSubmit: SubmitHandler<RegisterDataType> = async (data) => {
-    console.log('REGISTER FORM', data);
     const formData = new FormData();
     formData.append('name', data.name); 
     formData.append('email', data.email); 
@@ -40,19 +39,23 @@ export const RegisterForm: React.FC = () => {
       }
     } 
 
-    await signUp(formData);
-    console.log('REGISTER FORM: SUBMIT HANDLER', response)
+    const user = await signUp(formData);
+    dispatch(setUser(user.data as any));
   };
 
   useEffect(() => {
-    if(response.status === QueryStatus.fulfilled) {
+    if(isSuccess) {
       reset();
       navigate('/', { replace: true });
     }
-  }, [response]);
+  }, [isSuccess]);
 
   return (
-    <Box component='form' onSubmit={handleSubmit(onSubmit)} sx={styles.form}>
+    <Box 
+      component='form' 
+      onSubmit={handleSubmit(onSubmit)} 
+      sx={styles.form}
+    >
       <TextField 
         label='Name' 
         fullWidth 

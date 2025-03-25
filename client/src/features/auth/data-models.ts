@@ -12,15 +12,13 @@ export const registerSchema = zod.object({
     .custom<FileList>((fileList) => fileList instanceof FileList, {
       message: "File is required",
     })
-    .refine((fileList) => fileList.length > 0, {
-      message: "File is required",
-    })
     .refine((fileList) => fileList[0].size <= MAX_IMAGE_FILE_SIZE, {
       message: "File size must be less than 5MB",
     })
     .refine((fileList) => ACCEPTED_IMAGE_TYPES.includes(fileList[0].type), {
       message: "Invalid file format. Only PNG, JPEG, and SVG are allowed.",
-    }),
+    })
+    .optional(),
 }).refine((data) => data.password === data.confirmPassword, {
   message: 'Passwords do not match',
   path: ['confirmPassword'],

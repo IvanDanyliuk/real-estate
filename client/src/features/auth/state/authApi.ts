@@ -5,7 +5,10 @@ import { RegisterDataType } from '../data-models';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000' }),
+  baseQuery: fetchBaseQuery({ 
+    baseUrl: 'http://localhost:5000', 
+    credentials: 'include' 
+  }),
   endpoints: (builder) => ({
     signUp: builder.mutation<RegisterDataType, FormData>({
       query: (newUser) => ({
@@ -21,7 +24,17 @@ export const authApi = createApi({
         body: credentials,
       }),
     }),
+    refreshToken: builder.mutation({
+      query: () => ({
+        url: AUTH_ROUTES.refresh,
+        method: REQUEST_METHODS.post,
+      }),
+    }),
   }),
 });
 
-export const { useSignUpMutation, useLoginMutation } = authApi;
+export const { 
+  useSignUpMutation, 
+  useLoginMutation, 
+  useRefreshTokenMutation 
+} = authApi;
