@@ -9,16 +9,18 @@ export const registerSchema = zod.object({
   confirmPassword: zod.string().min(6).max(255),
   location: zod.string().min(1).max(255).optional(),
   profilePhoto: zod
-  .any()
-  // .optional()
-  // .refine(
-  //   (file) => !file || (file.size && file.size <= MAX_IMAGE_FILE_SIZE), 
-  //   'Image size is outside the limit!'
-  // )
-  // .refine(
-  //   (file) => !file || (file.type && ACCEPTED_IMAGE_TYPES.includes(file.type)), 
-  //   'Unaccepted image type'
-  // ),
+    .custom<FileList>((fileList) => fileList instanceof FileList, {
+      message: "File is required",
+    })
+    .refine((fileList) => fileList.length > 0, {
+      message: "File is required",
+    })
+    .refine((fileList) => fileList[0].size <= MAX_IMAGE_FILE_SIZE, {
+      message: "File size must be less than 5MB",
+    })
+    .refine((fileList) => ACCEPTED_IMAGE_TYPES.includes(fileList[0].type), {
+      message: "Invalid file format. Only PNG, JPEG, and SVG are allowed.",
+    }),
 }).refine((data) => data.password === data.confirmPassword, {
   message: 'Passwords do not match',
   path: ['confirmPassword'],

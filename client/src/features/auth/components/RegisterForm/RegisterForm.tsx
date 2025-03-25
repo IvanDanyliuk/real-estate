@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Box, Button, TextField } from '@mui/material';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -6,18 +6,24 @@ import { RegisterDataType, registerSchema } from '../../data-models';
 import { styles } from './styles';
 import { FileInput } from '../../../../components/inputs/FileInput/FileInput';
 import { useSignUpMutation } from '../../state/authApi';
+import { QueryStatus } from '@reduxjs/toolkit/query';
+import { useNavigate } from 'react-router';
 
 export const RegisterForm: React.FC = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
     setValue,
+    reset,
   } = useForm<RegisterDataType>({
     resolver: zodResolver(registerSchema)
   });
 
   const [signUp, response] = useSignUpMutation();
+
+  console.log('REGISTER FORM', response)
 
   const onSubmit: SubmitHandler<RegisterDataType> = async (data) => {
     console.log('REGISTER FORM', data);
@@ -35,7 +41,15 @@ export const RegisterForm: React.FC = () => {
     } 
 
     await signUp(formData);
+    console.log('REGISTER FORM: SUBMIT HANDLER', response)
   };
+
+  useEffect(() => {
+    if(response.status === QueryStatus.fulfilled) {
+      reset();
+      navigate('/', { replace: true });
+    }
+  }, [response]);
 
   return (
     <Box component='form' onSubmit={handleSubmit(onSubmit)} sx={styles.form}>
@@ -90,7 +104,7 @@ export const RegisterForm: React.FC = () => {
         helperText={errors.profilePhoto?.message} 
         register={register}
         setValue={setValue}
-        multiple
+        // multiple
       />
       <Button type='submit' sx={styles.submitBtn}>
         {isSubmitting ? 'Loading' : 'Submit'}
