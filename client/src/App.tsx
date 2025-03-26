@@ -1,6 +1,8 @@
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
 import { NAV_ROUTES, NavRoute } from './constants/navRoutesPaths';
+import { useAppDispatch } from './hooks/useAppDispatch';
+import { useRefreshTokenQuery } from './features/auth/state/authApi';
 
 const renderRoutes = (routes: NavRoute[]) => {
   return routes.map(route => (
@@ -15,6 +17,13 @@ const renderRoutes = (routes: NavRoute[]) => {
 };
 
 function App() {
+  const dispatch = useAppDispatch();
+  // const { data } = useRefreshTokenQuery(null);
+
+  // useEffect(() => {
+  //   console.log('APP', data)
+  // }, [dispatch]);
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>

@@ -24,4 +24,10 @@ export const registerSchema = zod.object({
   path: ['confirmPassword'],
 });
 
+export const loginSchema = zod.object({
+  email: zod.string().email().min(1).max(255),
+  password: zod.string().min(6).max(255),
+});
+
 export type RegisterDataType = zod.infer<typeof registerSchema>;
+export type LoginDataType = zod.infer<typeof loginSchema>;

@@ -38,7 +38,6 @@ export const RegisterForm: React.FC = () => {
         formData.append('profilePhoto', file);
       }
     } 
-
     const user = await signUp(formData);
     dispatch(setUser(user.data as any));
   };
