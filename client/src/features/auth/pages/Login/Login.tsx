@@ -1,6 +1,6 @@
+import { NavLink } from 'react-router';
 import { Box, Typography } from '@mui/material';
 import { styles } from './styles';
-import { NavLink } from 'react-router';
 import { LoginForm } from '../../components/LoginForm/LoginForm';
 
 const LoginPage = () => {
@@ -12,7 +12,7 @@ const LoginPage = () => {
       <LoginForm />
       <Typography sx={styles.signInText}>
         Do not have an account?&nbsp;
-        <NavLink to='/login'>
+        <NavLink to='/register'>
           Sign in
         </NavLink>
       </Typography>

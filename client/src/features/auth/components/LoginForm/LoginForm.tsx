@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Box, Button, TextField } from '@mui/material';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -35,8 +35,8 @@ export const LoginForm: React.FC = () => {
 
   useEffect(() => {
     if(isSuccess) {
-      // reset();
-      // navigate('/', { replace: true });
+      reset();
+      navigate('/', { replace: true });
     }
   }, [isSuccess]);
 
@@ -62,6 +62,9 @@ export const LoginForm: React.FC = () => {
         helperText={errors.password?.message}
         {...register('password')} 
       />
+      <Link to='/forgot-password'>
+        Forgot a password?
+      </Link>
       <Button type='submit' sx={styles.submitBtn}>
         {isSubmitting ? 'Loading' : 'Submit'}
       </Button>
