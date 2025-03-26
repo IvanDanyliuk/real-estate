@@ -1,6 +1,6 @@
 export enum USER_ROLES {
-  User = 'User',
-  Admin = 'Admin',
+  User = 'user',
+  Admin = 'admin',
 };
 
 export const MAX_IMAGE_FILE_SIZE = 5000000;
