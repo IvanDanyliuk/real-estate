@@ -1,9 +1,12 @@
-import { Avatar, Box, Button, Menu, MenuItem, Typography } from '@mui/material';
+import { Avatar, Box, Menu, MenuItem, Typography } from '@mui/material';
 import { User } from '../../../features/users/state/types';
 import { MouseEvent, useState } from 'react';
 import { Link } from 'react-router';
 import { styles } from './styles';
 import { USER_ROLES } from '../../../constants/main';
+import { useLogoutMutation } from '../../../features/auth/state/authApi';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { setUser } from '../../../features/users/state/userSlice';
 
 interface UserMenuProps {
   user: User;
@@ -11,8 +14,13 @@ interface UserMenuProps {
 
 export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
   const { name, email, role, profilePhoto } = user;
+
+  const dispatch = useAppDispatch();
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  const [logout, { isLoading, isSuccess }] = useLogoutMutation();
 
   const handleOpenMenu = (e: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(e.currentTarget);
@@ -20,6 +28,11 @@ export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
 
   const handleCloseMenu = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = async () => {
+    await logout(null);
+    dispatch(setUser(null));
   };
 
   return (
@@ -59,8 +72,8 @@ export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
             </Link>
           </MenuItem>
         )}
-        <MenuItem sx={styles.menuItem}>
-          Logout
+        <MenuItem onClick={handleLogout} sx={styles.menuItem}>
+          {isLoading ? 'Loading...' : 'Logout'}
         </MenuItem>
       </Menu>
     </Box>
