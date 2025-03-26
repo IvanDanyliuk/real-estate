@@ -28,9 +28,8 @@ export const LoginForm: React.FC = () => {
     const formData = new FormData();
     formData.append('email', data.email); 
     formData.append('password', data.password); 
-    console.log('ON SUBMIT', data)
-    await login(formData);
-    // dispatch(setUser(user.data as any));
+    const response = await login(formData);
+    dispatch(setUser(response.data as any));
   };
 
   useEffect(() => {

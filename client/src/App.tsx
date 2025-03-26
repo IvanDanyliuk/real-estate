@@ -3,6 +3,9 @@ import { Route, Routes } from 'react-router';
 import { NAV_ROUTES, NavRoute } from './constants/navRoutesPaths';
 import { useAppDispatch } from './hooks/useAppDispatch';
 import { useRefreshTokenQuery } from './features/auth/state/authApi';
+import { useAppSelector } from './hooks/useAppSelector';
+import { useGetUserQuery } from './features/users/state/userApi';
+import { setUser } from './features/users/state/userSlice';
 
 const renderRoutes = (routes: NavRoute[]) => {
   return routes.map(route => (
@@ -18,11 +21,13 @@ const renderRoutes = (routes: NavRoute[]) => {
 
 function App() {
   const dispatch = useAppDispatch();
-  // const { data } = useRefreshTokenQuery(null);
+  const { data } = useGetUserQuery(null);
 
-  // useEffect(() => {
-  //   console.log('APP', data)
-  // }, [dispatch]);
+  useEffect(() => {
+    if(data) {
+      dispatch(setUser(data));
+    }
+  }, [dispatch, data]);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
