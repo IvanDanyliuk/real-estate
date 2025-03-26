@@ -52,8 +52,6 @@ export const createAccount = async (data: CreateAccountParams) => {
 
   appAssert(!existingUser, CONFLICT, "Email already in use");
 
-  console.log('UPLOAD FILE', data.profilePhoto)
-
   const uploadedImagePath = data.profilePhoto 
     ? await uploadToCloudinary(data.profilePhoto.buffer) 
     : null;

@@ -10,12 +10,10 @@ import {
 } from "../controllers/auth.controller";
 import { upload } from "../middleware/multer";
 
-// const storage = multer.memoryStorage();
-// const upload = multer({ storage });
-
 const authRoutes = Router();
+
 authRoutes.post("/register", upload.array('profilePhoto'), registerUserHandler);
-authRoutes.post("/login", loginUserHandler);
+authRoutes.post("/login", upload.none(), loginUserHandler);
 authRoutes.get("/refresh", refreshHandler);
 authRoutes.get("/logout", logoutHandler);
 authRoutes.get("/email/verify/:code", verifyEmailHandler);
