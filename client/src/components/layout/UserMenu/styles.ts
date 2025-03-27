@@ -9,7 +9,7 @@ export const styles = {
   userInfo: {
     '& p': {
       textAlign: 'left',
-      '&:first-child': {
+      '&:first-of-type': {
         fontWeight: 500,
         color: 'secondary.dark',
       },
