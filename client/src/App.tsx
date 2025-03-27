@@ -2,8 +2,6 @@ import { Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
 import { NAV_ROUTES, NavRoute } from './constants/navRoutesPaths';
 import { useAppDispatch } from './hooks/useAppDispatch';
-import { useRefreshTokenQuery } from './features/auth/state/authApi';
-import { useAppSelector } from './hooks/useAppSelector';
 import { useGetUserQuery } from './features/users/state/userApi';
 import { setUser } from './features/users/state/userSlice';
 

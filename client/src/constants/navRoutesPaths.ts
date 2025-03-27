@@ -1,6 +1,7 @@
 import { ComponentType, lazy } from 'react';
 import MainLayout from '../layouts/MainLayout/MainLayout';
 import AuthLayout from '../layouts/AuthLayout/AuthLayout';
+import { AdminDashboardLayout } from '../layouts/AdminDashboardLayout/AdminDashboardLayout';
 
 const Home = lazy(() => import('../pages/Home/Home'));
 const About = lazy(() => import('../pages/About/About'));
@@ -12,6 +13,11 @@ const Article = lazy(() => import('../features/blog/pages/Article/Article'));
 
 const Login = lazy(() => import('../features/auth/pages/Login/Login'));
 const Register = lazy(() => import('../features/auth/pages/Register/Register'));
+
+const AdminDashboard = lazy(() => import('../features/admin/pages/Dashboard/Dashboard'));
+const AdminProperties = lazy(() => import('../features/admin/pages/Properties/Properties'));
+const AdminBlog = lazy(() => import('../features/admin/pages/Blog/Blog'));
+const AdminUsers = lazy(() => import('../features/admin/pages/Users/Users'));
 
 export interface NavRoute {
   element: ComponentType;
@@ -65,6 +71,27 @@ export const NAV_ROUTES: NavRoute[] = [
       {
         path: '/register',
         element: Register,
+      },
+    ],
+  },
+  {
+    element: AdminDashboardLayout,
+    children: [
+      {
+        path: '/admin/dashboard',
+        element: AdminDashboard
+      },
+      {
+        path: '/admin/properties',
+        element: AdminProperties,
+      },
+      {
+        path: '/admin/blog',
+        element: AdminBlog,
+      },
+      {
+        path: '/admin/users',
+        element: AdminUsers,
       },
     ],
   },
