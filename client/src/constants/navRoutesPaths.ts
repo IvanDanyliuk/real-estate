@@ -1,7 +1,7 @@
 import { ComponentType, lazy } from 'react';
 import MainLayout from '../layouts/MainLayout/MainLayout';
 import AuthLayout from '../layouts/AuthLayout/AuthLayout';
-import { AdminDashboardLayout } from '../layouts/AdminDashboardLayout/AdminDashboardLayout';
+import AdminDashboardLayout from '../layouts/AdminDashboardLayout/AdminDashboardLayout';
 
 const Home = lazy(() => import('../pages/Home/Home'));
 const About = lazy(() => import('../pages/About/About'));
@@ -10,6 +10,7 @@ const Properties = lazy(() => import('../features/properties/pages/Properties/Pr
 const Property = lazy(() => import('../features/properties/pages/Property/Property'));
 const Blog = lazy(() => import('../features/blog/pages/Blog/Blog'));
 const Article = lazy(() => import('../features/blog/pages/Article/Article'));
+const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
 
 const Login = lazy(() => import('../features/auth/pages/Login/Login'));
 const Register = lazy(() => import('../features/auth/pages/Register/Register'));
@@ -58,6 +59,10 @@ export const NAV_ROUTES: NavRoute[] = [
       {
         path: '/blog/:id',
         element: Article,
+      },
+      {
+        path: '*',
+        element: NotFound,
       },
     ],
   },

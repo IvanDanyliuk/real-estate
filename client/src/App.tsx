@@ -1,9 +1,10 @@
 import { Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
-import { NAV_ROUTES, NavRoute } from './constants/navRoutesPaths';
-import { useAppDispatch } from './hooks/useAppDispatch';
+import { Loader } from './components/layout/Loader/Loader';
 import { useGetUserQuery } from './features/users/state/userApi';
 import { setUser } from './features/users/state/userSlice';
+import { useAppDispatch } from './hooks/useAppDispatch';
+import { NAV_ROUTES, NavRoute } from './constants/navRoutesPaths';
 
 const renderRoutes = (routes: NavRoute[]) => {
   return routes.map(route => (
@@ -28,7 +29,7 @@ function App() {
   }, [dispatch, data]);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loader />}>
       <Routes>
         {renderRoutes(NAV_ROUTES)}
       </Routes>
