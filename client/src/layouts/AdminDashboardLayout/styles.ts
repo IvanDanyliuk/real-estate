@@ -5,9 +5,12 @@ export const styles = {
     flexDirection: 'column',
   },
   header: {
-
+    margin: '0 auto',
   },
-  main: {
-    flex: 1,
+  headerContainer: {
+    height: '8vh',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 };
