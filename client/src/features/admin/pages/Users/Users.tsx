@@ -1,12 +1,10 @@
-import { Box } from '@mui/material';
-import { styles } from './styles';
-
+import { AdminPageContainer } from '../../components/AdminPageContainer/AdminPageContainer';
 
 const UsersPage = () => {
   return (
-    <Box>
-      Users page
-    </Box>
+    <AdminPageContainer heading='Users'>
+      Users
+    </AdminPageContainer>
   );
 };
 

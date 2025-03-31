@@ -12,16 +12,26 @@ export const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    '& a': {
+      padding: '0.5rem 1rem',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 1,
+      backgroundColor: 'secondary.light',
+      color: 'secondary.dark',
+      borderRadius: '5px',
+    }
   },
   mainContainer: {
     display: 'flex',
+    flex: 1,
     gap: 3,
   },
   navSection: {
 
   },
   contenSection: {
-
+    width: '100%',
   },
   navList: {
     display: 'flex',
@@ -30,7 +40,6 @@ export const styles = {
   },
   navListItem: {
     padding: 0,
-    
     '& a': {
       padding: '1rem 2rem',
       width: '100%',
@@ -39,13 +48,13 @@ export const styles = {
       gap: 1,
       fontWeight: 500,
       backgroundColor: 'secondary.light',
-      color: 'inherit',
+      color: 'secondary.dark',
       borderRadius: '5px',
       transition: 'all ease-out 0.5s',
-      '&:hover, & .active': {
-        backgroundColor: 'primary.main',
-        color: 'primary.light',
-      },
+    },
+    '& a.active, & a:hover': {
+      backgroundColor: 'primary.main',
+      color: 'primary.light',
     },
   },
 };

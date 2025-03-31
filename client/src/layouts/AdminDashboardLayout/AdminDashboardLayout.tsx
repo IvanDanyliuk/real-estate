@@ -1,5 +1,6 @@
 import { Link, Navigate, NavLink, Outlet } from 'react-router';
 import { Box, List, ListItem, SvgIcon } from '@mui/material';
+import ArrowBack from '@mui/icons-material/ArrowBack';
 import { Logo } from '../../components/layout/Logo/Logo';
 import { Loader } from '../../components/layout/Loader/Loader';
 import { USER_ROLES } from '../../constants/main';
@@ -27,6 +28,7 @@ const AdminDashboardLayout: React.FC = () => {
       >
         <Logo />
         <Link to='/'>
+          <ArrowBack />
           Go back
         </Link>
       </Container>
@@ -34,8 +36,14 @@ const AdminDashboardLayout: React.FC = () => {
         <Box component='nav'>
           <List sx={styles.navList}>
             {ADMIN_DASHBOARD_NAV_LINKS.map(({ href, label, icon }) => (
-              <ListItem key={crypto.randomUUID()} sx={styles.navListItem}>
-                <NavLink to={href}>
+              <ListItem 
+                key={crypto.randomUUID()} 
+                sx={styles.navListItem}
+              >
+                <NavLink 
+                  to={href} 
+                  end={href === ADMIN_DASHBOARD_NAV_LINKS[0].href}
+                >
                   <SvgIcon component={icon} />
                   {label}
                 </NavLink>
@@ -43,7 +51,10 @@ const AdminDashboardLayout: React.FC = () => {
             ))}
           </List>
         </Box>
-        <Box component='main'>
+        <Box 
+          component='main' 
+          sx={styles.contenSection}
+        >
           <Outlet />
         </Box>
       </Container>

@@ -1,11 +1,18 @@
-import { Box } from '@mui/material';
-import { styles } from './styles';
+import { AdminPageContainer } from '../../components/AdminPageContainer/AdminPageContainer';
 
 const PropertiesPage = () => {
+  const handleOpenPropertyForm = () => {
+
+  };
+
   return (
-    <Box>
-      Properties page
-    </Box>
+    <AdminPageContainer 
+      heading='Properties' 
+      actionBtnTooltip='Create a new property' 
+      actionBtnHandler={handleOpenPropertyForm}
+    >
+      Properties
+    </AdminPageContainer>
   );
 };
 

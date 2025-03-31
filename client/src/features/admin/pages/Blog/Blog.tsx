@@ -1,12 +1,19 @@
-import { Box } from '@mui/material';
-import { styles } from './styles';
+import { AdminPageContainer } from '../../components/AdminPageContainer/AdminPageContainer';
 
 
 const BlogPage = () => {
+  const handleOpenPostForm = () => {
+
+  };
+
   return (
-    <Box>
-      Blog page
-    </Box>
+    <AdminPageContainer 
+      heading='Blog' 
+      actionBtnTooltip='Create a new post' 
+      actionBtnHandler={handleOpenPostForm}
+    >
+      Blog
+    </AdminPageContainer>
   );
 };
 
