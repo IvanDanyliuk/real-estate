@@ -1,15 +1,13 @@
 import { AdminPageContainer } from '../../components/AdminPageContainer/AdminPageContainer';
+import { PropertyForm } from '../../components/forms/PropertyForm/PropertyForm';
 
 const PropertiesPage = () => {
-  const handleOpenPropertyForm = () => {
-
-  };
+  
 
   return (
     <AdminPageContainer 
       heading='Properties' 
-      actionBtnTooltip='Create a new property' 
-      actionBtnHandler={handleOpenPropertyForm}
+      actionComponent={<PropertyForm />} 
     >
       Properties
     </AdminPageContainer>

@@ -1,4 +1,6 @@
-export const styles = {
+import { StyleProps } from '../../types';
+
+export const styles: StyleProps = {
   form: {
     width: '100%',
     display: 'flex',
@@ -21,5 +23,5 @@ export const styles = {
     backgroundColor: 'primary.main',
     color: 'primary.light',
     borderRadius: '0 10px 10px 0'
-  }
-}
+  },
+};

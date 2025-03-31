@@ -1,4 +1,6 @@
-export const styles = {
+import { StyleProps } from '../../components/types';
+
+export const styles: StyleProps = {
   component: {
     minHeight: '100vh',
     display: 'flex',
@@ -12,7 +14,7 @@ export const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    '& a': {
+    '& a:last-child': {
       padding: '0.5rem 1rem',
       display: 'flex',
       alignItems: 'center',

@@ -9,8 +9,7 @@ const BlogPage = () => {
   return (
     <AdminPageContainer 
       heading='Blog' 
-      actionBtnTooltip='Create a new post' 
-      actionBtnHandler={handleOpenPostForm}
+      actionComponent={<div>New post</div>}
     >
       Blog
     </AdminPageContainer>

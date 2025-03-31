@@ -1,4 +1,6 @@
-export const styles = {
+import { StyleProps } from '../../types';
+
+export const styles: StyleProps = {
   component: {
     width: '100%',
     height: '92vh',

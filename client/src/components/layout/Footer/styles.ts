@@ -1,4 +1,6 @@
-export const styles = {
+import { StyleProps } from '../../types';
+
+export const styles: StyleProps = {
   component: {
     padding: '3rem 0',
     backgroundColor: 'secondary.dark',
