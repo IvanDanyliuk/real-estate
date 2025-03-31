@@ -83,7 +83,7 @@ export const NAV_ROUTES: NavRoute[] = [
     element: AdminDashboardLayout,
     children: [
       {
-        path: '/admin/dashboard',
+        path: '/admin',
         element: AdminDashboard
       },
       {

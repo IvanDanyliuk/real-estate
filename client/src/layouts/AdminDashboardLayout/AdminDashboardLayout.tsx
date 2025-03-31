@@ -1,11 +1,12 @@
-import { Link, Navigate, Outlet } from 'react-router';
-import { Box } from '@mui/material';
+import { Link, Navigate, NavLink, Outlet } from 'react-router';
+import { Box, List, ListItem, SvgIcon } from '@mui/material';
 import { Logo } from '../../components/layout/Logo/Logo';
 import { Loader } from '../../components/layout/Loader/Loader';
 import { USER_ROLES } from '../../constants/main';
 import { Container } from '../../components/layout/Container/Container';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { styles } from './styles';
+import { ADMIN_DASHBOARD_NAV_LINKS } from '../../constants/navLinks';
 
 const AdminDashboardLayout: React.FC = () => {
   const { user } = useAppSelector((state) => state.user);
@@ -29,7 +30,23 @@ const AdminDashboardLayout: React.FC = () => {
           Go back
         </Link>
       </Container>
-      <Outlet />
+      <Container contentStyles={styles.mainContainer}>
+        <Box component='nav'>
+          <List sx={styles.navList}>
+            {ADMIN_DASHBOARD_NAV_LINKS.map(({ href, label, icon }) => (
+              <ListItem key={crypto.randomUUID()} sx={styles.navListItem}>
+                <NavLink to={href}>
+                  <SvgIcon component={icon} />
+                  {label}
+                </NavLink>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+        <Box component='main'>
+          <Outlet />
+        </Box>
+      </Container>
     </Box>
   );
 };

@@ -67,7 +67,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
         </MenuItem>
         {role === USER_ROLES.Admin && (
           <MenuItem sx={styles.menuItem}>
-            <Link to='/admin/dashboard'>
+            <Link to='/admin'>
               Dashboard
             </Link>
           </MenuItem>
