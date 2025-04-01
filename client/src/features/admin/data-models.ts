@@ -2,7 +2,7 @@ import { z as zod } from 'zod';
 import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE } from '../../constants/main';
 
 export const propertySchema = zod.object({
-  title: zod.string().min(1).min(255),
+  title: zod.string().min(1).max(255),
   price: zod.number().gte(0),
   location: zod.object({
     city: zod.string().min(1).max(255),
@@ -13,9 +13,9 @@ export const propertySchema = zod.object({
     }).optional(),
   }),
   adType: zod.string().min(1).max(255),
-  author: zod.string().min(1),
+  // author: zod.string().min(1),
   description: zod.string().min(1).max(1000),
-  images: zod.any(),
+  images: zod.any().optional(),
     // .custom<FileList>((fileList) => fileList instanceof FileList, {
     //   message: "File is required",
     // })
@@ -27,7 +27,7 @@ export const propertySchema = zod.object({
     // })
     // .optional(),
   overview: zod.object({
-    roomsNumber: zod.number().lte(0),
+    roomsNumber: zod.number().gte(0),
     propertyType: zod.string().min(1).max(255),
     yearBuilt: zod.number().gt(0),
     floor: zod.number().gte(0).optional(),
