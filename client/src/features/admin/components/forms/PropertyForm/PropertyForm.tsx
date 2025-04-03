@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { 
@@ -7,12 +7,15 @@ import {
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import Close from '@mui/icons-material/Close';
+import { toast } from 'sonner';
 import { FileInput } from '../../../../../components/inputs/FileInput/FileInput';
 import { useAppDispatch } from '../../../../../hooks/useAppDispatch';
+import { useAppSelector } from '../../../../../hooks/useAppSelector';
 import { PropertyDataType, propertySchema } from '../../../data-models';
+import { useCreatePropertyMutation } from '../../../../properties/state/propertyApi';
+import { removeFalseyFields } from '../../../../../utils/helpers';
 import { AD_TYPES, PROPERTY_TYPES } from '../../../../../constants/main';
 import { styles } from './styles';
-import { useCreatePropertyMutation } from '../../../../properties/state/propertyApi';
 
 const initialState: PropertyDataType = {
   title: '',
@@ -26,7 +29,6 @@ const initialState: PropertyDataType = {
     },
   },
   adType: '',
-  // author: '',
   description: '',
   images: [],
   overview: {
@@ -48,6 +50,7 @@ const amenityInitialValue = {
 
 export const PropertyForm: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.user);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [amenity, setAmenity] = useState(amenityInitialValue);
@@ -94,26 +97,43 @@ export const PropertyForm: React.FC = () => {
     const formData = new FormData();
     formData.append('title', data.title);
     formData.append('price', +data.price as any);
-    formData.append('location.city', data.location.city);
-    formData.append('location.address', data.location.address);
-    if(data.location.mapCoords) formData.append('location.mapCoords.lat', +data.location.mapCoords.lat as any);
-    if(data.location.mapCoords) formData.append('location.mapCoords.lng', +data.location.mapCoords.lng as any);
+    formData.append('location', JSON.stringify(removeFalseyFields({
+      city: data.location.city,
+      address: data.location.address,
+      mapCoords: data.location.mapCoords && data.location.mapCoords.lat && data.location.mapCoords.lng 
+        ? {
+          lat: data.location.mapCoords.lat,
+          lng: data.location.mapCoords.lng,
+        } 
+        : undefined,
+    })));
     formData.append('adType', data.adType);
-    // formData.append('author', data.author);
+    if(user) formData.append('author', user._id);
     formData.append('description', data.description);
-    formData.append('images', data.images);
-    formData.append('overview.roomsNumber', +data.overview.roomsNumber as any);
-    formData.append('overview.propertyType', data.overview.propertyType);
-    formData.append('overview.yearBuilt', +data.overview.yearBuilt as any);
-    if(data.overview.floor) formData.append('overview.floor', +data.overview.floor as any);
-    formData.append('overview.numberOfFloors', +data.overview.numberOfFloors as any);
-    formData.append('overview.area', +data.overview.area as any);
-    formData.append('overview.isRenovated', Boolean(data.overview.isRenovated) as any);
-    formData.append('nearbyAmenities', data.nearbyAmenities as any);
+    if(data.images) {
+      for(const image of data.images) {
+        formData.append('images', image);
+      }
+    }
+    formData.append('overview', JSON.stringify(removeFalseyFields({
+      roomsNumber: data.overview.roomsNumber,
+      propertyType: data.overview.propertyType,
+      yearBuilt: data.overview.yearBuilt,
+      floor: data.overview.floor,
+      numberOfFloors: data.overview.numberOfFloors,
+      area: data.overview.area,
+      isRenovated: data.overview.isRenovated,
+    })));
+    formData.append('nearbyAmenities', JSON.stringify(data.nearbyAmenities));
 
-    console.log('PROPERTY FORM DATA', data);
-    await createProperty(formData);
+    const response = await createProperty(formData);
+    console.log('PROPERTY FORM STATUS', response);
   };
+
+  useEffect(() => {
+    if(isSuccess) toast.success('New property has been successfully created!');
+    if(error) toast.error('Failed to create a new property');
+  }, [isSuccess, error]);
 
   return (
     <>

@@ -1,5 +1,6 @@
 import { Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
+import { Toaster } from 'sonner';
 import { Loader } from './components/layout/Loader/Loader';
 import { useGetUserQuery } from './features/users/state/userApi';
 import { setUser } from './features/users/state/userSlice';
@@ -30,6 +31,7 @@ function App() {
 
   return (
     <Suspense fallback={<Loader />}>
+      <Toaster />
       <Routes>
         {renderRoutes(NAV_ROUTES)}
       </Routes>
