@@ -1,6 +1,7 @@
-import { OK } from "../constants/http";
+import { propertySchema } from "../schemas/property.schema";
 import catchErrors from "../utils/catchErrors";
-
+import { OK } from "../constants/http";
+import { createProperty } from "../services/property.service";
 
 export const getPropertiesHandler = catchErrors(async (req, res) => {
   console.log('GET PROPERTIES', req)
@@ -11,9 +12,20 @@ export const getPropertyByIdHandler = catchErrors(async (req, res) => {
 });
 
 export const createPropertyHandler = catchErrors(async (req, res) => {
-  console.log('CREATE A NEW PROPERTY', req.body);
+  const transformedBody = {
+    ...req.body,
+    price: +req.body.price,
+    images: req.files,
+    location: JSON.parse(req.body.location),
+    overview: JSON.parse(req.body.overview),
+    nearbyAmenities: JSON.parse(req.body.nearbyAmenities),
+  };
 
-  return res.status(OK).json({ message: 'New Property has been successfully created!' });
+  const request = propertySchema.parse(transformedBody);
+
+  const response = await createProperty(request);
+
+  return res.status(OK).json(response);
 });
 
 export const updatePropertyHandler = catchErrors(async (req, res) => {
