@@ -12,6 +12,7 @@ import { useAppDispatch } from '../../../../../hooks/useAppDispatch';
 import { PropertyDataType, propertySchema } from '../../../data-models';
 import { AD_TYPES, PROPERTY_TYPES } from '../../../../../constants/main';
 import { styles } from './styles';
+import { useCreatePropertyMutation } from '../../../../properties/state/propertyApi';
 
 const initialState: PropertyDataType = {
   title: '',
@@ -67,6 +68,8 @@ export const PropertyForm: React.FC = () => {
     name: 'nearbyAmenities',
   });
 
+  const [createProperty, { isLoading, isSuccess, error }] = useCreatePropertyMutation();
+
   const handleMenuOpen = () => {
     setIsOpen(!isOpen);
   };
@@ -86,10 +89,6 @@ export const PropertyForm: React.FC = () => {
       setAmenity(amenityInitialValue);
     }
   };
-
-  const handleDeleteAmenity = () => {
-
-  }
 
   const onSubmit: SubmitHandler<PropertyDataType> = async (data) => {
     const formData = new FormData();
@@ -113,6 +112,7 @@ export const PropertyForm: React.FC = () => {
     formData.append('nearbyAmenities', data.nearbyAmenities as any);
 
     console.log('PROPERTY FORM DATA', data);
+    await createProperty(formData);
   };
 
   return (
@@ -288,8 +288,8 @@ export const PropertyForm: React.FC = () => {
               </List>
             </Box>
             <Box sx={styles.submitBtnContainer}>
-              <Button type='submit' sx={styles.submitBtn}>
-                Create
+              <Button type='submit' disabled={isLoading} sx={styles.submitBtn}>
+                {isLoading ? 'Loading...' : 'Create'}
               </Button>
             </Box>
           </Box>
