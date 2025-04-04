@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 // import { PropertyDataType } from "../../admin/data-models";
-import { CreatePropertyResponse } from "./types";
+import { CreatePropertyResponse, GetPropertiesQuery } from "./types";
 import { REQUEST_METHODS } from "../../../constants/requestMethods";
 
 
@@ -11,8 +11,11 @@ export const propertyApi = createApi({
     credentials: 'include' 
   }),
   endpoints: (builder) => ({
-    getProperties: builder.query({
-      query: () => '/properties',
+    getProperties: builder.query<any, GetPropertiesQuery>({
+      query: (params) => ({
+        url: '/properties',
+        params,
+      }),
     }),
     getPropertyById: builder.query({
       query: (id) => `/properties/${id}`,

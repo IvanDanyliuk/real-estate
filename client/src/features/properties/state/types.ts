@@ -20,7 +20,7 @@ export interface PropertyFormData {
     floor?: number;
     numberOfFloors: number;
     area: number;
-    isRenovated: boolean;
+    withRenovation: string;
   };
   nearbyAmenities: {
     object: string;
@@ -31,4 +31,12 @@ export interface PropertyFormData {
 export interface CreatePropertyResponse {
   payload: PropertyFormData;
   message: string;
+};
+
+export interface GetPropertiesQuery { 
+  page: number; 
+  itemsPerPage: number; 
+  filters?: any; 
+  sortParams?: any; 
+  userId?: string;
 };

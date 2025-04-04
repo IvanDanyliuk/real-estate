@@ -1,5 +1,5 @@
 import { Suspense, useEffect } from 'react';
-import { Route, Routes } from 'react-router';
+import { Route, Routes } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { Loader } from './components/layout/Loader/Loader';
 import { useGetUserQuery } from './features/users/state/userApi';

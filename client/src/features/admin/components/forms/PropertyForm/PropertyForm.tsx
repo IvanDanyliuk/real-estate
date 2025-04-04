@@ -1,14 +1,14 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { 
-  Box, Button, Checkbox, Dialog, DialogContent, DialogTitle, FormControlLabel, 
-  IconButton, List, ListItem, MenuItem, Select, TextField, Tooltip, Typography 
+  Box, Button, Dialog, DialogContent, DialogTitle, IconButton, List, 
+  ListItem, MenuItem, Select, TextField, Tooltip, Typography 
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import Close from '@mui/icons-material/Close';
-import { toast } from 'sonner';
 import { FileInput } from '../../../../../components/inputs/FileInput/FileInput';
+import { statusToast } from '../../../../../components/toast/toast';
 import { useAppDispatch } from '../../../../../hooks/useAppDispatch';
 import { useAppSelector } from '../../../../../hooks/useAppSelector';
 import { PropertyDataType, propertySchema } from '../../../data-models';
@@ -16,7 +16,6 @@ import { useCreatePropertyMutation } from '../../../../properties/state/property
 import { removeFalseyFields } from '../../../../../utils/helpers';
 import { AD_TYPES, PROPERTY_TYPES } from '../../../../../constants/main';
 import { styles } from './styles';
-import { statusToast } from '../../../../../components/toast/toast';
 
 const initialState: PropertyDataType = {
   title: '',
