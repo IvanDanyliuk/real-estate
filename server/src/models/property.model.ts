@@ -21,7 +21,7 @@ const propertySchema = new Schema({
     floor: { type: String },
     numberOfFloors: { type: Number },
     area: { type: Number, required: true },
-    isRenovated: { type: Boolean },
+    withRenovation: { type: String },
   },
   nearbyAmenities: [{
     object: { type: String },

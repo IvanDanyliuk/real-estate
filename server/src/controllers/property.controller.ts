@@ -22,10 +22,12 @@ export const createPropertyHandler = catchErrors(async (req, res) => {
   };
 
   const request = propertySchema.parse(transformedBody);
-
   const response = await createProperty(request);
 
-  return res.status(OK).json(response);
+  return res.status(OK).json({
+    payload: response,
+    message: 'New property has been successfully created!',
+  });
 });
 
 export const updatePropertyHandler = catchErrors(async (req, res) => {

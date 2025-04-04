@@ -23,7 +23,7 @@ export type CreatePropertyParams = {
     floor?: number;
     numberOfFloors: number;
     area: number;
-    isRenovated: boolean;
+    withRenovation: string;
   };
   nearbyAmenities: {
     object: string;
