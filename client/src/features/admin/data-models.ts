@@ -33,7 +33,7 @@ export const propertySchema = zod.object({
     floor: zod.number().gte(0).optional(),
     numberOfFloors: zod.number().gt(0),
     area: zod.number().gt(0),
-    isRenovated: zod.boolean(),
+    withRenovation: zod.string(),
   }),
   nearbyAmenities: zod.array(
     zod.object({

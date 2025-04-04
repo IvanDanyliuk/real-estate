@@ -27,3 +27,8 @@ export interface PropertyFormData {
     distanceTo: number;
   }[];
 };
+
+export interface CreatePropertyResponse {
+  payload: PropertyFormData;
+  message: string;
+};

@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+// import { PropertyDataType } from "../../admin/data-models";
+import { CreatePropertyResponse } from "./types";
 import { REQUEST_METHODS } from "../../../constants/requestMethods";
-import { PropertyDataType } from "../../admin/data-models";
 
 
 export const propertyApi = createApi({
@@ -16,7 +17,7 @@ export const propertyApi = createApi({
     getPropertyById: builder.query({
       query: (id) => `/properties/${id}`,
     }),
-    createProperty: builder.mutation<PropertyDataType, FormData>({
+    createProperty: builder.mutation<CreatePropertyResponse, FormData>({
       query: (newProperty) => ({
         url: '/properties',
         method: REQUEST_METHODS.post,

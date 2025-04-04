@@ -16,6 +16,7 @@ import { useCreatePropertyMutation } from '../../../../properties/state/property
 import { removeFalseyFields } from '../../../../../utils/helpers';
 import { AD_TYPES, PROPERTY_TYPES } from '../../../../../constants/main';
 import { styles } from './styles';
+import { statusToast } from '../../../../../components/toast/toast';
 
 const initialState: PropertyDataType = {
   title: '',
@@ -38,7 +39,7 @@ const initialState: PropertyDataType = {
     floor: 0,
     numberOfFloors: 1,
     area: 0,
-    isRenovated: true,
+    withRenovation: 'yes',
   },
   nearbyAmenities: [],
 };
@@ -59,8 +60,9 @@ export const PropertyForm: React.FC = () => {
     register,
     control,
     handleSubmit,
-    formState: { isSubmitting, errors },
+    formState: { errors },
     setValue,
+    reset,
   } = useForm<PropertyDataType>({
     defaultValues: initialState,
     resolver: zodResolver(propertySchema)
@@ -71,7 +73,7 @@ export const PropertyForm: React.FC = () => {
     name: 'nearbyAmenities',
   });
 
-  const [createProperty, { isLoading, isSuccess, error }] = useCreatePropertyMutation();
+  const [createProperty, { isLoading }] = useCreatePropertyMutation();
 
   const handleMenuOpen = () => {
     setIsOpen(!isOpen);
@@ -93,47 +95,58 @@ export const PropertyForm: React.FC = () => {
     }
   };
 
-  const onSubmit: SubmitHandler<PropertyDataType> = async (data) => {
+  const onSubmit: SubmitHandler<PropertyDataType> = async (propertyData) => {
     const formData = new FormData();
-    formData.append('title', data.title);
-    formData.append('price', +data.price as any);
+    formData.append('title', propertyData.title);
+    formData.append('price', +propertyData.price as any);
     formData.append('location', JSON.stringify(removeFalseyFields({
-      city: data.location.city,
-      address: data.location.address,
-      mapCoords: data.location.mapCoords && data.location.mapCoords.lat && data.location.mapCoords.lng 
+      city: propertyData.location.city,
+      address: propertyData.location.address,
+      mapCoords: propertyData.location.mapCoords && propertyData.location.mapCoords.lat && propertyData.location.mapCoords.lng 
         ? {
-          lat: data.location.mapCoords.lat,
-          lng: data.location.mapCoords.lng,
+          lat: propertyData.location.mapCoords.lat,
+          lng: propertyData.location.mapCoords.lng,
         } 
         : undefined,
     })));
-    formData.append('adType', data.adType);
+    formData.append('adType', propertyData.adType);
     if(user) formData.append('author', user._id);
-    formData.append('description', data.description);
-    if(data.images) {
-      for(const image of data.images) {
+    formData.append('description', propertyData.description);
+    if(propertyData.images) {
+      for(const image of propertyData.images) {
         formData.append('images', image);
       }
     }
     formData.append('overview', JSON.stringify(removeFalseyFields({
-      roomsNumber: data.overview.roomsNumber,
-      propertyType: data.overview.propertyType,
-      yearBuilt: data.overview.yearBuilt,
-      floor: data.overview.floor,
-      numberOfFloors: data.overview.numberOfFloors,
-      area: data.overview.area,
-      isRenovated: data.overview.isRenovated,
+      roomsNumber: propertyData.overview.roomsNumber,
+      propertyType: propertyData.overview.propertyType,
+      yearBuilt: propertyData.overview.yearBuilt,
+      floor: propertyData.overview.floor,
+      numberOfFloors: propertyData.overview.numberOfFloors,
+      area: propertyData.overview.area,
+      withRenovation: propertyData.overview.withRenovation,
     })));
-    formData.append('nearbyAmenities', JSON.stringify(data.nearbyAmenities));
+    formData.append('nearbyAmenities', JSON.stringify(propertyData.nearbyAmenities));
 
-    const response = await createProperty(formData);
-    console.log('PROPERTY FORM STATUS', response);
+    const { data, error } = await createProperty(formData);
+
+    // TODO: Set response to the state
+
+    if(data && data.payload) {
+      statusToast({ 
+        type: 'success', 
+        message: data.message 
+      });
+    }
+    if(error) {
+      statusToast({
+        type: 'error',
+        message: 'Failed to create a new property',
+      });
+    }
+    reset();
+    setIsOpen(false);
   };
-
-  useEffect(() => {
-    if(isSuccess) toast.success('New property has been successfully created!');
-    if(error) toast.error('Failed to create a new property');
-  }, [isSuccess, error]);
 
   return (
     <>
@@ -258,10 +271,29 @@ export const PropertyForm: React.FC = () => {
                 helperText={errors.overview?.area?.message}
                 {...register('overview.area', { valueAsNumber: true })} 
               />
-              <FormControlLabel 
+              <Select
+                label='With renovation'
+                fullWidth
+                defaultValue='yes'
+                error={!!errors.overview?.withRenovation}
+                {...register('overview.withRenovation')}
+              >
+                <MenuItem 
+                  value='yes'
+                >
+                  Yes
+                </MenuItem>
+                <MenuItem 
+                  value='no'
+                >
+                  No
+                </MenuItem>
+              </Select>
+              {/* <FormControlLabel 
                 label='Is renovated' 
                 control={<Checkbox {...register('overview.isRenovated')} />} 
-              />
+              /> */}
+
               <FileInput 
                 name='images'
                 label='Images'
