@@ -31,7 +31,7 @@ const initialState: PropertyDataType = {
   },
   adType: '',
   description: '',
-  images: [],
+  images: undefined,
   overview: {
     roomsNumber: 0,
     propertyType: '',
@@ -289,11 +289,6 @@ export const PropertyForm: React.FC = () => {
                   No
                 </MenuItem>
               </Select>
-              {/* <FormControlLabel 
-                label='Is renovated' 
-                control={<Checkbox {...register('overview.isRenovated')} />} 
-              /> */}
-
               <FileInput 
                 name='images'
                 label='Images'
