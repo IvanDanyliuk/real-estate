@@ -29,6 +29,7 @@ const itemsPerPageOptions = [10, 15, 20];
 
 export const DataTable = <T,>({ data, count, columns }: TableProps<T>) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  
   const [page, setPage] = useState<number>(0);
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [orderBy, setOrderBy] = useState<string | null>(null);
