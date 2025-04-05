@@ -1,10 +1,60 @@
 import { propertySchema } from "../schemas/property.schema";
 import catchErrors from "../utils/catchErrors";
 import { OK } from "../constants/http";
-import { createProperty } from "../services/property.service";
+import { createProperty, getProperties } from "../services/property.service";
+import { removeFalseyFields } from "../utils/removeFlaseyFields";
+
+import PropertyModel from '../models/property.model'
+
+type FiltersType = {
+  price?: {
+    $gte?: number,
+    $lte?: number,
+  },
+  "location.city"?: string,
+  "overview.roomsNumber"?: number,
+  "overview.propertyType"?: string,
+  "overview.yearBuilt"?: number,
+  "overview.area"?: number,
+  "overview.withRenovation"?: string,
+  adType?: string,
+};
 
 export const getPropertiesHandler = catchErrors(async (req, res) => {
-  console.log('GET PROPERTIES', req)
+  // PARAMS: page, itemsPerPage, filters(optional), sortParams(optional), userId(optional)
+  // FILTERS: priceFrom, priceTo, city, adType, roomsNumber, propertyType, yearBuilt, area, withRenovation
+  // SORT PARAMS: indicators(price, roomsNumber, yearBuilt, area), order(desc, asc)
+  console.log('GET PROPERTIES', req.query)
+
+  const filters: FiltersType = {};
+
+  if(req.query.priceFrom || req.query.priceTo) {
+    filters.price = {};
+    if(req.query.priceFrom) filters.price.$gte = +req.query.priceFrom;
+    if(req.query.priceTo) filters.price.$lte = +req.query.priceTo;
+
+    if(Object.keys(filters.price).length === 0) delete filters.price;
+  }
+
+  if(req.query.city) {
+    filters['location.city'] = req.query.city.toString();
+  }
+
+  if(req.query.adType) filters.adType = req.query.adType.toString();
+
+  if(req.query.area) filters['overview.area'] = +req.query.area;
+  if(req.query.roomsNumber) filters['overview.roomsNumber'] = +req.query.roomsNumber;
+  if(req.query.propertyType) filters['overview.propertyType'] = req.query.propertyType.toString();
+  if(req.query.yearBuilt) filters['overview.yearBuilt'] = +req.query.yearBuilt;
+  if(req.query.withRenovation) filters['overview.withRenovation'] = req.query.withRenovation.toString();
+
+  const response = await getProperties({
+    page: +req.query.page!,
+    itemsPerPage: +req.query.itemsPerPage!,
+    filters,
+  });
+
+  return res.status(OK).json(response);
 });
 
 export const getPropertyByIdHandler = catchErrors(async (req, res) => {
