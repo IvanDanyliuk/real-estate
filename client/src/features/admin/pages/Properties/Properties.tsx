@@ -38,8 +38,8 @@ const columns = [
     key: 'overview.propertyType',
     header: 'Type',
     render: (item: any) => item.overview.propertyType,
-  }
-]
+  },
+];
 
 const PropertiesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -47,7 +47,7 @@ const PropertiesPage = () => {
 
   const { data, isSuccess } = useGetPropertiesQuery({
     page: +query.page || 1,
-    itemsPerPage: 10,
+    itemsPerPage: +query.itemsPerPage || 10,
     ...query,
   });
 

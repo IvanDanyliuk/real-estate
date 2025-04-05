@@ -1,4 +1,4 @@
-import { MouseEvent, ReactNode, useEffect, useState } from 'react';
+import { ChangeEvent, MouseEvent, ReactNode, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { 
   Paper, 
@@ -8,7 +8,8 @@ import {
   TableContainer,
   TableHead, 
   TablePagination, 
-  TableRow 
+  TableRow, 
+  TableSortLabel
 } from '@mui/material';
 
 type TableProps<T> = {
@@ -22,24 +23,42 @@ type TableProps<T> = {
   }[],
 };
 
+type OrderDirection = 'asc' | 'desc';
+
+const itemsPerPageOptions = [10, 15, 20];
+
 export const DataTable = <T,>({ data, count, columns }: TableProps<T>) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = useState<number>(0);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(10);
+  const [orderBy, setOrderBy] = useState<string | null>(null);
+  const [orderDirection, setOrderDirection] = useState<OrderDirection>('desc');  
 
-  // console.log('TABLE SEARCH PARAMS', Object.fromEntries(searchParams));
+  const handleSortColumn = (property: string) => {
+    const isDesc = property && orderDirection === 'desc';
+    setOrderDirection(isDesc ? 'asc' : 'desc');
+    setOrderBy(property);
+    searchParams.set('orderBy', property);
+    searchParams.set('order', isDesc ? 'asc' : 'desc');
+    setSearchParams(searchParams);
+  };
 
-  const handlePageChange = (e: MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+  const handleRowsPerPageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setItemsPerPage(parseInt(e.target.value, 10));
+    setPage(0);
+    searchParams.set('page', '1');
+    searchParams.set('itemsPerPage', parseInt(e.target.value, 10).toString())
+    setSearchParams(searchParams);
+  };
+
+  const handlePageChange = (
+    e: MouseEvent<HTMLButtonElement> | null, 
+    newPage: number
+  ) => {
     setPage(newPage);
     searchParams.set('page', `${newPage + 1}`)
     setSearchParams(searchParams);
   };
-
-  // useEffect(() => {
-  //   const params = Object.fromEntries(searchParams);
-  //   if(params.page) {
-  //     setPage(+params.page);
-  //   }
-  // }, [searchParams]);
 
   return (
     <Paper>
@@ -49,7 +68,15 @@ export const DataTable = <T,>({ data, count, columns }: TableProps<T>) => {
             <TableRow>
               {columns.map(({ key, header, isSortable }) => (
                 <TableCell key={crypto.randomUUID()}>
-                  {header}
+                  {isSortable ? (
+                    <TableSortLabel
+                      active={orderBy === key}
+                      direction={orderBy === key ? orderDirection : 'desc'}
+                      onClick={() => handleSortColumn(key.toString())}
+                    >
+                      {header}
+                    </TableSortLabel>
+                  ) : <span>{header}</span>}
                 </TableCell>
               ))}
             </TableRow>
@@ -71,8 +98,9 @@ export const DataTable = <T,>({ data, count, columns }: TableProps<T>) => {
         component='div'
         count={count}
         page={page}
-        rowsPerPage={10}
-        rowsPerPageOptions={[10, 15, 20]}
+        rowsPerPage={itemsPerPage}
+        rowsPerPageOptions={itemsPerPageOptions}
+        onRowsPerPageChange={handleRowsPerPageChange}
         onPageChange={handlePageChange}
       />
     </Paper>
