@@ -18,22 +18,20 @@ export const getProperties = async ({
     ...filters,
   });
 
-  console.log('SERVICE QUERY', query)
-
-  const order = !sortParams || sortParams.order === "desc" ? -1 : 1;
-  const sortIndicator = sortParams ? sortParams.indicator : 'createdAt';
-
   const properties = await PropertyModel
     .find(query)
     .populate('author', '_id name email profilePhoto')
-    .sort({
-      [sortIndicator]: order,
-    })
+    .sort(sortParams)
     .skip((page - 1) * itemsPerPage)
     .limit(itemsPerPage)
     .exec();
+  
+  const count = await PropertyModel.countDocuments(query);
 
-  return properties;
+  return { 
+    properties, 
+    count, 
+  };
 };
 
 export type CreatePropertyParams = {

@@ -2,9 +2,6 @@ import { propertySchema } from "../schemas/property.schema";
 import catchErrors from "../utils/catchErrors";
 import { OK } from "../constants/http";
 import { createProperty, getProperties } from "../services/property.service";
-import { removeFalseyFields } from "../utils/removeFlaseyFields";
-
-import PropertyModel from '../models/property.model'
 
 type FiltersType = {
   price?: {
@@ -21,11 +18,6 @@ type FiltersType = {
 };
 
 export const getPropertiesHandler = catchErrors(async (req, res) => {
-  // PARAMS: page, itemsPerPage, filters(optional), sortParams(optional), userId(optional)
-  // FILTERS: priceFrom, priceTo, city, adType, roomsNumber, propertyType, yearBuilt, area, withRenovation
-  // SORT PARAMS: indicators(price, roomsNumber, yearBuilt, area), order(desc, asc)
-  console.log('GET PROPERTIES', req.query)
-
   const filters: FiltersType = {};
 
   if(req.query.priceFrom || req.query.priceTo) {
@@ -48,10 +40,20 @@ export const getPropertiesHandler = catchErrors(async (req, res) => {
   if(req.query.yearBuilt) filters['overview.yearBuilt'] = +req.query.yearBuilt;
   if(req.query.withRenovation) filters['overview.withRenovation'] = req.query.withRenovation.toString();
 
+  const orderBy = req.query.orderBy 
+    ? req.query.orderBy.toString() 
+    : 'createdAt';
+  const order = !req.query.order 
+    ? -1 
+    : req.query.order.toString() === 'desc' 
+      ? -1 
+      : 1; 
+
   const response = await getProperties({
     page: +req.query.page!,
     itemsPerPage: +req.query.itemsPerPage!,
     filters,
+    sortParams: { [orderBy]: order },
   });
 
   return res.status(OK).json(response);
