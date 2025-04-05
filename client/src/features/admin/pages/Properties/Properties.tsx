@@ -36,7 +36,7 @@ const columns = [
   },
   {
     key: 'overview.propertyType',
-    header: 'Property type',
+    header: 'Type',
     render: (item: any) => item.overview.propertyType,
   }
 ]

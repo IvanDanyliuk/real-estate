@@ -1,3 +1,4 @@
+import { MouseEvent, ReactNode, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { 
   Paper, 
@@ -9,7 +10,6 @@ import {
   TablePagination, 
   TableRow 
 } from '@mui/material';
-import { ReactNode } from 'react';
 
 type TableProps<T> = {
   data: T[],
@@ -20,12 +20,26 @@ type TableProps<T> = {
     isSortable?: boolean,
     render?: (item: T) => ReactNode,
   }[],
-}
+};
 
 export const DataTable = <T,>({ data, count, columns }: TableProps<T>) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [page, setPage] = useState<number>(0);
 
-  console.log('TABLE SEARCH PARAMS', searchParams)
+  // console.log('TABLE SEARCH PARAMS', Object.fromEntries(searchParams));
+
+  const handlePageChange = (e: MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+    setPage(newPage);
+    searchParams.set('page', `${newPage + 1}`)
+    setSearchParams(searchParams);
+  };
+
+  // useEffect(() => {
+  //   const params = Object.fromEntries(searchParams);
+  //   if(params.page) {
+  //     setPage(+params.page);
+  //   }
+  // }, [searchParams]);
 
   return (
     <Paper>
@@ -56,10 +70,10 @@ export const DataTable = <T,>({ data, count, columns }: TableProps<T>) => {
       <TablePagination 
         component='div'
         count={count}
-        page={0}
+        page={page}
         rowsPerPage={10}
         rowsPerPageOptions={[10, 15, 20]}
-        onPageChange={() => {}}
+        onPageChange={handlePageChange}
       />
     </Paper>
   );
