@@ -29,23 +29,23 @@ export const getPropertiesHandler = catchErrors(async (req, res) => {
   }
 
   if(req.query.city) {
-    filters['location.city'] = req.query.city.toString();
+    filters["location.city"] = req.query.city.toString();
   }
 
   if(req.query.adType) filters.adType = req.query.adType.toString();
 
-  if(req.query.area) filters['overview.area'] = +req.query.area;
-  if(req.query.roomsNumber) filters['overview.roomsNumber'] = +req.query.roomsNumber;
-  if(req.query.propertyType) filters['overview.propertyType'] = req.query.propertyType.toString();
-  if(req.query.yearBuilt) filters['overview.yearBuilt'] = +req.query.yearBuilt;
-  if(req.query.withRenovation) filters['overview.withRenovation'] = req.query.withRenovation.toString();
+  if(req.query.area) filters["overview.area"] = +req.query.area;
+  if(req.query.roomsNumber) filters["overview.roomsNumber"] = +req.query.roomsNumber;
+  if(req.query.propertyType) filters["overview.propertyType"] = req.query.propertyType.toString();
+  if(req.query.yearBuilt) filters["overview.yearBuilt"] = +req.query.yearBuilt;
+  if(req.query.withRenovation) filters["overview.withRenovation"] = req.query.withRenovation.toString();
 
   const orderBy = req.query.orderBy 
     ? req.query.orderBy.toString() 
-    : 'createdAt';
+    : "createdAt";
   const order = !req.query.order 
     ? -1 
-    : req.query.order.toString() === 'desc' 
+    : req.query.order.toString() === "desc" 
       ? -1 
       : 1; 
 
@@ -60,7 +60,7 @@ export const getPropertiesHandler = catchErrors(async (req, res) => {
 });
 
 export const getPropertyByIdHandler = catchErrors(async (req, res) => {
-  console.log('GET PROPERTY BY ID', req)
+  console.log("GET PROPERTY BY ID", req)
 });
 
 export const createPropertyHandler = catchErrors(async (req, res) => {
@@ -78,12 +78,12 @@ export const createPropertyHandler = catchErrors(async (req, res) => {
 
   return res.status(OK).json({
     payload: response,
-    message: 'New property has been successfully created!',
+    message: "New property has been successfully created!",
   });
 });
 
 export const updatePropertyHandler = catchErrors(async (req, res) => {
-  console.log('UPDATE PROPERTY', req)
+  console.log("UPDATE PROPERTY", req)
 });
 
 export const deletePropertyHandler = catchErrors(async (req, res) => {

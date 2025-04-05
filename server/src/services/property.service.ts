@@ -20,7 +20,7 @@ export const getProperties = async ({
 
   const properties = await PropertyModel
     .find(query)
-    .populate('author', '_id name email profilePhoto')
+    .populate("author", "_id name email profilePhoto")
     .sort(sortParams)
     .skip((page - 1) * itemsPerPage)
     .limit(itemsPerPage)
