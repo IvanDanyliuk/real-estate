@@ -11,6 +11,7 @@ import {
   TableRow, 
   TableSortLabel
 } from '@mui/material';
+import { TableActionButtons } from '../TableActionButtons/TableActionButtons';
 
 type TableProps<T extends { _id: string }> = {
   data: T[],
@@ -21,6 +22,8 @@ type TableProps<T extends { _id: string }> = {
     isSortable?: boolean,
     render?: (item: T) => ReactNode,
   }[],
+  onUpdateItemHandler?: (id: string) => void;
+  onDeleteItemHandler: (id: string) => void;
 };
 
 type OrderDirection = 'asc' | 'desc';
@@ -61,6 +64,14 @@ export const DataTable = <T extends { _id: string }>({ data, count, columns }: T
     setSearchParams(searchParams);
   };
 
+  const handleUpdateElement = (id: string) => {
+    console.log('UPDATE', id);
+  };
+
+  const handleDeleteElement = (id: string) => {
+    console.log('DELETE', id);
+  };
+
   return (
     <Paper>
       <TableContainer>
@@ -80,6 +91,7 @@ export const DataTable = <T extends { _id: string }>({ data, count, columns }: T
                   ) : <span>{header}</span>}
                 </TableCell>
               ))}
+              <TableCell />
             </TableRow>
           </TableHead>
           <TableBody>
@@ -90,6 +102,12 @@ export const DataTable = <T extends { _id: string }>({ data, count, columns }: T
                     {render ? render(item) : `${item[key as keyof T]}`}
                   </TableCell>
                 ))}
+                <TableCell>
+                  <TableActionButtons 
+                    onUpdate={() => handleUpdateElement(item._id)} 
+                    onDelete={() => handleDeleteElement(item._id)} 
+                  />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

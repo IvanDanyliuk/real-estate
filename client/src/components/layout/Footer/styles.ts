@@ -33,5 +33,5 @@ export const styles: StyleProps = {
   listItem: {
     margin: 0,
     padding: 0,
-  }
-}
+  },
+};
