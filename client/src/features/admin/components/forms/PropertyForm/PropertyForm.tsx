@@ -206,9 +206,9 @@ export const PropertyForm: React.FC = () => {
                 error={!!errors.adType}
                 {...register('adType')}
               >
-                {AD_TYPES.map(({ value, label }) => (
+                {AD_TYPES.map(({ value, label }, i) => (
                   <MenuItem 
-                    key={crypto.randomUUID()} 
+                    key={`${value}-${i}`} 
                     value={value}
                   >
                     {label}
@@ -221,9 +221,9 @@ export const PropertyForm: React.FC = () => {
                 error={!!errors.overview?.propertyType}
                 {...register('overview.propertyType')}
               >
-                {PROPERTY_TYPES.map(({ value, label }) => (
+                {PROPERTY_TYPES.map(({ value, label }, i) => (
                   <MenuItem 
-                    key={crypto.randomUUID()} 
+                    key={`${value}-${i}`} 
                     value={value}
                   >
                     {label}
@@ -322,7 +322,7 @@ export const PropertyForm: React.FC = () => {
               </Button>
               <List sx={styles.amenitiesList}>
                 {fields.map((field, index) => (
-                  <ListItem key={crypto.randomUUID()} sx={styles.amenitiesListItem}>
+                  <ListItem key={`${field}-${index}`} sx={styles.amenitiesListItem}>
                     <Typography>
                       {`${field.object} - ${field.distanceTo}m`}
                     </Typography>

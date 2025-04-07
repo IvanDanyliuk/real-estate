@@ -7,9 +7,9 @@ export const Navbar: React.FC = () => {
   return (
     <Box component='nav'>
       <Box component='ul' sx={styles.navList}>
-        {NAV_LINKS.map(({ href, label }) => (
+        {NAV_LINKS.map(({ href, label }, i) => (
           <Box 
-            key={crypto.randomUUID()} 
+            key={`${href}-${i}`} 
             component='li' 
             sx={styles.navListItem}
           >

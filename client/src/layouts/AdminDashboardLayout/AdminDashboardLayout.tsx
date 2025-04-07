@@ -35,9 +35,9 @@ const AdminDashboardLayout: React.FC = () => {
       <Container contentStyles={styles.mainContainer}>
         <Box component='nav'>
           <List sx={styles.navList}>
-            {ADMIN_DASHBOARD_NAV_LINKS.map(({ href, label, icon }) => (
+            {ADMIN_DASHBOARD_NAV_LINKS.map(({ href, label, icon }, i) => (
               <ListItem 
-                key={crypto.randomUUID()} 
+                key={`${href}-${i}`} 
                 sx={styles.navListItem}
               >
                 <NavLink 

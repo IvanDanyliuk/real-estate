@@ -12,7 +12,7 @@ import {
   TableSortLabel
 } from '@mui/material';
 
-type TableProps<T> = {
+type TableProps<T extends { _id: string }> = {
   data: T[],
   count: number,
   columns: {
@@ -27,7 +27,7 @@ type OrderDirection = 'asc' | 'desc';
 
 const itemsPerPageOptions = [10, 15, 20];
 
-export const DataTable = <T,>({ data, count, columns }: TableProps<T>) => {
+export const DataTable = <T extends { _id: string }>({ data, count, columns }: TableProps<T>) => {
   const [searchParams, setSearchParams] = useSearchParams();
   
   const [page, setPage] = useState<number>(0);
@@ -68,7 +68,7 @@ export const DataTable = <T,>({ data, count, columns }: TableProps<T>) => {
           <TableHead>
             <TableRow>
               {columns.map(({ key, header, isSortable }) => (
-                <TableCell key={crypto.randomUUID()}>
+                <TableCell key={key.toString()}>
                   {isSortable ? (
                     <TableSortLabel
                       active={orderBy === key}
@@ -84,9 +84,9 @@ export const DataTable = <T,>({ data, count, columns }: TableProps<T>) => {
           </TableHead>
           <TableBody>
             {data.map(item => (
-              <TableRow key={crypto.randomUUID()}>
-                {columns.map(({ key, render }) => (
-                  <TableCell key={crypto.randomUUID()}>
+              <TableRow key={item._id}>
+                {columns.map(({ key, render }, i) => (
+                  <TableCell key={`${item._id}-${i}`}>
                     {render ? render(item) : `${item[key as keyof T]}`}
                   </TableCell>
                 ))}

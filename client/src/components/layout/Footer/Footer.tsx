@@ -15,8 +15,8 @@ const LinkList = ({ links }: {
 }) => {
   return (
     <List sx={styles.list}>
-      {links.map(({ href, label }) => (
-        <ListItem key={crypto.randomUUID()} sx={styles.listItem}>
+      {links.map(({ href, label }, i) => (
+        <ListItem key={`${href}-${i}`} sx={styles.listItem}>
           <NavLink to={href}>
             {label}
           </NavLink>

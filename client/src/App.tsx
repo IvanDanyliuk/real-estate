@@ -8,9 +8,9 @@ import { useAppDispatch } from './hooks/useAppDispatch';
 import { NAV_ROUTES, NavRoute } from './constants/navRoutesPaths';
 
 const renderRoutes = (routes: NavRoute[]) => {
-  return routes.map(route => (
+  return routes.map((route, i) => (
     <Route 
-      key={crypto.randomUUID()} 
+      key={`${route.path}-${i}`} 
       path={route.path || undefined} 
       element={<route.element />}
     >
