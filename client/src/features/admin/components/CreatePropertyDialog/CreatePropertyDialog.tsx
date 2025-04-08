@@ -6,6 +6,8 @@ import { useCreatePropertyMutation } from '../../../properties/state/propertyApi
 import { PropertyForm } from '../forms/PropertyForm/PropertyForm';
 import { statusToast } from '../../../../components/toast/toast';
 import { styles } from './styles';
+import { useAppDispatch } from '../../../../hooks/useAppDispatch';
+import { addProperty } from '../../../properties/state/propertySlice';
 
 
 const initialState: PropertyDataType = {
@@ -36,6 +38,8 @@ const initialState: PropertyDataType = {
 
 
 export const CreatePropertyDialog: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [createProperty, { isLoading }] = useCreatePropertyMutation();
 
@@ -45,8 +49,8 @@ export const CreatePropertyDialog: React.FC = () => {
 
   const handleCreateProperty = async (propertyData: FormData) => {
     const { data, error } = await createProperty(propertyData);
-    // TODO: Set response to the state
-    console.log('CREATE')
+    
+    if(data) dispatch(addProperty(data.payload));
 
     if(data && data.payload) {
       statusToast({ 

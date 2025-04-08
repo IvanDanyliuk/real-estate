@@ -35,7 +35,7 @@ export interface PropertyType extends PropertyFormData {
 };
 
 export interface CreatePropertyResponse {
-  payload: PropertyFormData;
+  payload: PropertyType;
   message: string;
 };
 

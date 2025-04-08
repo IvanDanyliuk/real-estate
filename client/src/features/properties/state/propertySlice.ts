@@ -18,7 +18,7 @@ const propertySlice = createSlice({
     },
     addProperty: (state, action: PayloadAction<PropertyType>) => {
       state.properties.pop();
-      state.properties.push(action.payload);
+      state.properties.unshift(action.payload);
     },
     updateProperty: (state, action: PayloadAction<PropertyType>) => {
       state.properties = state.properties.map(property => property._id === action.payload._id 

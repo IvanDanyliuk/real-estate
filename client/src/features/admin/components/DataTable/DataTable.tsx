@@ -38,6 +38,10 @@ export const DataTable = <T extends { _id: string }>({ data, count, columns }: T
   const [orderBy, setOrderBy] = useState<string | null>(null);
   const [orderDirection, setOrderDirection] = useState<OrderDirection>('desc');  
 
+  console.log('DATA TABLE', {
+    data, columns
+  })
+
   const handleSortColumn = (property: string) => {
     const isDesc = property && orderDirection === 'desc';
     setOrderDirection(isDesc ? 'asc' : 'desc');
