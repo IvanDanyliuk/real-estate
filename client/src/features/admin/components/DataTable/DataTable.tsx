@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent, ReactNode, useState } from 'react';
+import { ChangeEvent, MouseEvent, ReactNode, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { 
   Paper, 
@@ -71,6 +71,12 @@ export const DataTable = <T extends { _id: string }>({ data, count, columns }: T
   const handleDeleteElement = (id: string) => {
     console.log('DELETE', id);
   };
+
+  useEffect(() => {
+    const params = Object.fromEntries(searchParams);
+    if(params.page) setPage(+params.page - 1);
+    if(params.itemsPerPage) setItemsPerPage(+params.itemsPerPage);
+  }, [page, itemsPerPage, searchParams]);
 
   return (
     <Paper>
