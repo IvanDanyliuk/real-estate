@@ -1,4 +1,4 @@
-import { uploadToCloudinary } from "./cloudinary.service";
+import { deleteFromCloudinary, uploadToCloudinary } from "./cloudinary.service";
 import PropertyModel from "../models/property.model";
 import { removeFalseyFields } from "../utils/removeFlaseyFields";
 
@@ -34,7 +34,7 @@ export const getProperties = async ({
   };
 };
 
-export type CreatePropertyParams = {
+export interface CreatePropertyParams {
   title: string;
   price: number;
   location: {
@@ -74,5 +74,27 @@ export const createProperty = async (data: CreatePropertyParams) => {
     images: uploadedImagePaths
   });
 
-  return newProperty;
+  return newProperty.populate('author');
+};
+
+export interface UpdatePropertyParams extends CreatePropertyParams {
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export const updateProperty = async (propertyToUpdate: UpdatePropertyParams) => {
+  console.log('UPDATE PROPERTY SERVICE', propertyToUpdate)
+};
+
+export const deleteProperty = async (id: string) => {
+  const propertyToDelete = await PropertyModel.findByIdAndDelete(id);
+  
+  if(propertyToDelete) {
+    await deleteFromCloudinary(propertyToDelete.images);
+  }
+
+  return {
+    message: 'Property has been successfully deleted!',
+  };
 };

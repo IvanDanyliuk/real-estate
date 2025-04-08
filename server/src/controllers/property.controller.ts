@@ -1,7 +1,7 @@
 import { propertySchema } from "../schemas/property.schema";
 import catchErrors from "../utils/catchErrors";
 import { OK } from "../constants/http";
-import { createProperty, getProperties } from "../services/property.service";
+import { createProperty, deleteProperty, getProperties } from "../services/property.service";
 
 type FiltersType = {
   price?: {
@@ -87,5 +87,6 @@ export const updatePropertyHandler = catchErrors(async (req, res) => {
 });
 
 export const deletePropertyHandler = catchErrors(async (req, res) => {
-
+  const response = await deleteProperty(req.params.id);
+  return res.status(OK).json(response);
 });
