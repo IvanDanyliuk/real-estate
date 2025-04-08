@@ -73,8 +73,10 @@ const PropertiesPage = () => {
   }, []);
 
   useEffect(() => {
-    if(isSuccess) dispatch(setProperties(data.properties));
-  }, [isSuccess, dispatch])
+    if(data && data.properties) {
+      dispatch(setProperties(data.properties));
+    }
+  }, [isSuccess, dispatch, searchParams, data]);
 
   return (
     <AdminPageContainer 
