@@ -28,6 +28,12 @@ export interface PropertyFormData {
   }[];
 };
 
+export interface PropertyType extends PropertyFormData {
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export interface CreatePropertyResponse {
   payload: PropertyFormData;
   message: string;

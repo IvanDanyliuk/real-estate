@@ -1,46 +1,26 @@
 import { ChangeEvent, useState } from 'react';
+import { 
+  Box, Button, IconButton, List, ListItem, 
+  MenuItem, Select, TextField, Typography 
+} from '@mui/material';
+import Close from '@mui/icons-material/Close';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { 
-  Box, Button, Dialog, DialogContent, DialogTitle, IconButton, List, 
-  ListItem, MenuItem, Select, TextField, Tooltip, Typography 
-} from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import Close from '@mui/icons-material/Close';
 import { FileInput } from '../../../../../components/inputs/FileInput/FileInput';
-import { statusToast } from '../../../../../components/toast/toast';
 import { useAppDispatch } from '../../../../../hooks/useAppDispatch';
 import { useAppSelector } from '../../../../../hooks/useAppSelector';
 import { PropertyDataType, propertySchema } from '../../../data-models';
-import { useCreatePropertyMutation } from '../../../../properties/state/propertyApi';
 import { removeFalseyFields } from '../../../../../utils/helpers';
 import { AD_TYPES, PROPERTY_TYPES } from '../../../../../constants/main';
 import { styles } from './styles';
 
-const initialState: PropertyDataType = {
-  title: '',
-  price: 0,
-  location: {
-    city: '',
-    address: '',
-    mapCoords: {
-      lat: 0,
-      lng: 0,
-    },
-  },
-  adType: '',
-  description: '',
-  images: undefined,
-  overview: {
-    roomsNumber: 0,
-    propertyType: '',
-    yearBuilt: new Date().getFullYear(),
-    floor: 0,
-    numberOfFloors: 1,
-    area: 0,
-    withRenovation: 'yes',
-  },
-  nearbyAmenities: [],
+
+interface PropertyInitialData extends PropertyDataType {
+  _id?: string;
+};
+interface PropertyFormProps {
+  onSubmit: (data: FormData) => Promise<any>;
+  initialData: PropertyInitialData;
 };
 
 const amenityInitialValue = {
@@ -48,22 +28,21 @@ const amenityInitialValue = {
   distanceTo: 0,
 };
 
-export const PropertyForm: React.FC = () => {
+
+export const PropertyForm: React.FC<PropertyFormProps> = ({ initialData, onSubmit }) => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.user);
-
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [amenity, setAmenity] = useState(amenityInitialValue);
-
+  
   const {
     register,
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { isSubmitting, errors },
     setValue,
     reset,
   } = useForm<PropertyDataType>({
-    defaultValues: initialState,
+    defaultValues: initialData,
     resolver: zodResolver(propertySchema)
   });
 
@@ -72,21 +51,15 @@ export const PropertyForm: React.FC = () => {
     name: 'nearbyAmenities',
   });
 
-  const [createProperty, { isLoading }] = useCreatePropertyMutation();
-
-  const handleMenuOpen = () => {
-    setIsOpen(!isOpen);
-  };
-
   const handleAmenityChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setAmenity({ 
-      ...amenity, 
-      [e.target.name]: e.target.name === 'distanceTo' 
-        ? +e.target.value 
-        : e.target.value 
-    });
-  };
-
+      setAmenity({ 
+        ...amenity, 
+        [e.target.name]: e.target.name === 'distanceTo' 
+          ? +e.target.value 
+          : e.target.value 
+      });
+    };
+  
   const handleAddAmenity = () => {
     if(amenity.object.trim() !== '' && amenity.distanceTo >= 0) {
       append(amenity);
@@ -94,7 +67,7 @@ export const PropertyForm: React.FC = () => {
     }
   };
 
-  const onSubmit: SubmitHandler<PropertyDataType> = async (propertyData) => {
+  const onHandleSubmit: SubmitHandler<PropertyDataType> = async (propertyData) => {
     const formData = new FormData();
     formData.append('title', propertyData.title);
     formData.append('price', +propertyData.price as any);
@@ -127,220 +100,192 @@ export const PropertyForm: React.FC = () => {
     })));
     formData.append('nearbyAmenities', JSON.stringify(propertyData.nearbyAmenities));
 
-    const { data, error } = await createProperty(formData);
-
-    // TODO: Set response to the state
-
-    if(data && data.payload) {
-      statusToast({ 
-        type: 'success', 
-        message: data.message 
-      });
-    }
-    if(error) {
-      statusToast({
-        type: 'error',
-        message: 'Failed to create a new property',
-      });
-    }
+    await onSubmit(formData);
     reset();
-    setIsOpen(false);
   };
 
   return (
-    <>
-      <Tooltip title='Create a new property'>
-        <IconButton onClick={handleMenuOpen} sx={styles.openBtn}>
-          <AddIcon />
-        </IconButton>
-      </Tooltip>
-      <Dialog open={isOpen} onClose={handleMenuOpen} maxWidth='xl'>
-        <DialogTitle sx={styles.dialogHeading}>Create a new property</DialogTitle>
-        <DialogContent>
-          <Box component='form' onSubmit={handleSubmit(onSubmit)} sx={styles.form}>
-            <Box component='fieldset' sx={styles.fieldset}>
-              <TextField 
-                label='Title'
-                fullWidth 
-                error={!!errors.title}
-                helperText={errors.title?.message}
-                {...register('title')} 
-              />
-              <TextField 
-                label='Price'
-                type='number'
-                fullWidth 
-                error={!!errors.price}
-                helperText={errors.price?.message}
-                {...register('price', { valueAsNumber: true })} 
-              />
-              <TextField 
-                label='City'
-                fullWidth 
-                error={!!errors.location?.city}
-                helperText={errors.location?.city?.message}
-                {...register('location.city')} 
-              />
-              <TextField 
-                label='Address'
-                fullWidth 
-                error={!!errors.location?.address}
-                helperText={errors.location?.address?.message}
-                {...register('location.address')} 
-              />
-              {/* TODO: Add a map to pick the coordinates */}
-              <TextField 
-                label='Description'
-                fullWidth 
-                multiline
-                rows={11}
-                error={!!errors.description}
-                helperText={errors.description?.message}
-                {...register('description')} 
-              />
-            </Box>
-            <Box component='fieldset' sx={styles.fieldset}>
-              <Select
-                label='Ad type'
-                fullWidth
-                error={!!errors.adType}
-                {...register('adType')}
-              >
-                {AD_TYPES.map(({ value, label }, i) => (
-                  <MenuItem 
-                    key={`${value}-${i}`} 
-                    value={value}
-                  >
-                    {label}
-                  </MenuItem>
-                ))}
-              </Select>
-              <Select
-                label='Property type'
-                fullWidth
-                error={!!errors.overview?.propertyType}
-                {...register('overview.propertyType')}
-              >
-                {PROPERTY_TYPES.map(({ value, label }, i) => (
-                  <MenuItem 
-                    key={`${value}-${i}`} 
-                    value={value}
-                  >
-                    {label}
-                  </MenuItem>
-                ))}
-              </Select>
-              <TextField 
-                label='Rooms number'
-                type='number'
-                fullWidth 
-                error={!!errors.overview?.roomsNumber}
-                helperText={errors.overview?.roomsNumber?.message}
-                {...register('overview.roomsNumber', { valueAsNumber: true })} 
-              />
-              <TextField 
-                label='Year built'
-                type='number'
-                fullWidth 
-                error={!!errors.overview?.yearBuilt}
-                helperText={errors.overview?.yearBuilt?.message}
-                {...register('overview.yearBuilt', { valueAsNumber: true })} 
-              />
-              <TextField 
-                label='Floor'
-                type='number'
-                fullWidth 
-                error={!!errors.overview?.floor}
-                helperText={errors.overview?.floor?.message}
-                {...register('overview.floor', { valueAsNumber: true })} 
-              />
-              <TextField 
-                label='Number of floors'
-                type='number'
-                fullWidth 
-                error={!!errors.overview?.numberOfFloors}
-                helperText={errors.overview?.numberOfFloors?.message}
-                {...register('overview.numberOfFloors', { valueAsNumber: true })} 
-              />
-              <TextField 
-                label='Area'
-                type='number'
-                fullWidth 
-                error={!!errors.overview?.area}
-                helperText={errors.overview?.area?.message}
-                {...register('overview.area', { valueAsNumber: true })} 
-              />
-              <Select
-                label='With renovation'
-                fullWidth
-                defaultValue='yes'
-                error={!!errors.overview?.withRenovation}
-                {...register('overview.withRenovation')}
-              >
-                <MenuItem 
-                  value='yes'
-                >
-                  Yes
-                </MenuItem>
-                <MenuItem 
-                  value='no'
-                >
-                  No
-                </MenuItem>
-              </Select>
-              <FileInput 
-                name='images'
-                label='Images'
-                title='Upload images'
-                register={register}
-                setValue={setValue}
-                multiple
-                error={!!errors.images}
-                helperText={errors.images?.message}
-              />
-            </Box>
-            <Box component='fieldset' sx={styles.fieldset}>
-              <Typography variant='h6'>
-                Nearby amenities
+    <Box component='form' onSubmit={handleSubmit(onHandleSubmit)} sx={styles.form}>
+      <Box component='fieldset' sx={styles.fieldset}>
+        <TextField 
+          label='Title'
+          fullWidth 
+          error={!!errors.title}
+          helperText={errors.title?.message}
+          {...register('title')} 
+        />
+        <TextField 
+          label='Price'
+          type='number'
+          fullWidth 
+          error={!!errors.price}
+          helperText={errors.price?.message}
+          {...register('price', { valueAsNumber: true })} 
+        />
+        <TextField 
+          label='City'
+          fullWidth 
+          error={!!errors.location?.city}
+          helperText={errors.location?.city?.message}
+          {...register('location.city')} 
+        />
+        <TextField 
+          label='Address'
+          fullWidth 
+          error={!!errors.location?.address}
+          helperText={errors.location?.address?.message}
+          {...register('location.address')} 
+        />
+        {/* TODO: Add a map to pick the coordinates */}
+        <TextField 
+          label='Description'
+          fullWidth 
+          multiline
+          rows={11}
+          error={!!errors.description}
+          helperText={errors.description?.message}
+          {...register('description')} 
+        />
+      </Box>
+      <Box component='fieldset' sx={styles.fieldset}>
+        <Select
+          label='Ad type'
+          fullWidth
+          error={!!errors.adType}
+          {...register('adType')}
+        >
+          {AD_TYPES.map(({ value, label }, i) => (
+            <MenuItem 
+              key={`${value}-${i}`} 
+              value={value}
+            >
+              {label}
+            </MenuItem>
+          ))}
+        </Select>
+        <Select
+          label='Property type'
+          fullWidth
+          error={!!errors.overview?.propertyType}
+          {...register('overview.propertyType')}
+        >
+          {PROPERTY_TYPES.map(({ value, label }, i) => (
+            <MenuItem 
+              key={`${value}-${i}`} 
+              value={value}
+            >
+              {label}
+            </MenuItem>
+          ))}
+        </Select>
+        <TextField 
+          label='Rooms number'
+          type='number'
+          fullWidth 
+          error={!!errors.overview?.roomsNumber}
+          helperText={errors.overview?.roomsNumber?.message}
+          {...register('overview.roomsNumber', { valueAsNumber: true })} 
+        />
+        <TextField 
+          label='Year built'
+          type='number'
+          fullWidth 
+          error={!!errors.overview?.yearBuilt}
+          helperText={errors.overview?.yearBuilt?.message}
+          {...register('overview.yearBuilt', { valueAsNumber: true })} 
+        />
+        <TextField 
+          label='Floor'
+          type='number'
+          fullWidth 
+          error={!!errors.overview?.floor}
+          helperText={errors.overview?.floor?.message}
+          {...register('overview.floor', { valueAsNumber: true })} 
+        />
+        <TextField 
+          label='Number of floors'
+          type='number'
+          fullWidth 
+          error={!!errors.overview?.numberOfFloors}
+          helperText={errors.overview?.numberOfFloors?.message}
+          {...register('overview.numberOfFloors', { valueAsNumber: true })} 
+        />
+        <TextField 
+          label='Area'
+          type='number'
+          fullWidth 
+          error={!!errors.overview?.area}
+          helperText={errors.overview?.area?.message}
+          {...register('overview.area', { valueAsNumber: true })} 
+        />
+        <Select
+          label='With renovation'
+          fullWidth
+          defaultValue='yes'
+          error={!!errors.overview?.withRenovation}
+          {...register('overview.withRenovation')}
+        >
+          <MenuItem 
+            value='yes'
+          >
+            Yes
+          </MenuItem>
+          <MenuItem 
+            value='no'
+          >
+            No
+          </MenuItem>
+        </Select>
+        <FileInput 
+          name='images'
+          label='Images'
+          title='Upload images'
+          register={register}
+          setValue={setValue}
+          multiple
+          error={!!errors.images}
+          helperText={errors.images?.message}
+        />
+      </Box>
+      <Box component='fieldset' sx={styles.fieldset}>
+        <Typography variant='h6'>
+          Nearby amenities
+        </Typography>
+        <TextField 
+          name='object'
+          label='Object name'
+          fullWidth 
+          value={amenity.object}
+          onChange={handleAmenityChange}
+        />
+        <TextField 
+          name='distanceTo'
+          label='Distance to object'
+          fullWidth 
+          value={amenity.distanceTo}
+          onChange={handleAmenityChange}
+        />
+        <Button type='button' onClick={handleAddAmenity}>
+          Add a new amenity
+        </Button>
+        <List sx={styles.amenitiesList}>
+          {fields.map((field, index) => (
+            <ListItem key={`${field}-${index}`} sx={styles.amenitiesListItem}>
+              <Typography>
+                {`${field.object} - ${field.distanceTo}m`}
               </Typography>
-              <TextField 
-                name='object'
-                label='Object name'
-                fullWidth 
-                value={amenity.object}
-                onChange={handleAmenityChange}
-              />
-              <TextField 
-                name='distanceTo'
-                label='Distance to object'
-                fullWidth 
-                value={amenity.distanceTo}
-                onChange={handleAmenityChange}
-              />
-              <Button type='button' onClick={handleAddAmenity}>
-                Add a new amenity
-              </Button>
-              <List sx={styles.amenitiesList}>
-                {fields.map((field, index) => (
-                  <ListItem key={`${field}-${index}`} sx={styles.amenitiesListItem}>
-                    <Typography>
-                      {`${field.object} - ${field.distanceTo}m`}
-                    </Typography>
-                    <IconButton onClick={() => remove(index)}>
-                      <Close />
-                    </IconButton>
-                  </ListItem>
-                ))}
-              </List>
-            </Box>
-            <Box sx={styles.submitBtnContainer}>
-              <Button type='submit' disabled={isLoading} sx={styles.submitBtn}>
-                {isLoading ? 'Loading...' : 'Create'}
-              </Button>
-            </Box>
-          </Box>
-        </DialogContent>
-      </Dialog>
-    </>
+              <IconButton onClick={() => remove(index)}>
+                <Close />
+              </IconButton>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
+      <Box sx={styles.submitBtnContainer}>
+        <Button type='submit' disabled={isSubmitting} sx={styles.submitBtn}>
+          {isSubmitting ? 'Loading...' : 'Create'}
+        </Button>
+      </Box>
+    </Box>
   );
 };

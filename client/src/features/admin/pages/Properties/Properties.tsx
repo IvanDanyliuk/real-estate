@@ -1,9 +1,12 @@
 import { useSearchParams } from 'react-router-dom';
 import { AdminPageContainer } from '../../components/AdminPageContainer/AdminPageContainer';
-import { PropertyForm } from '../../components/forms/PropertyForm/PropertyForm';
+import { CreatePropertyDialog } from '../../components/CreatePropertyDialog/CreatePropertyDialog';
 import { DataTable } from '../../components/DataTable/DataTable';
 import { Loader } from '../../../../components/layout/Loader/Loader';
 import { useGetPropertiesQuery } from '../../../properties/state/propertyApi';
+import { useCallback } from 'react';
+import { useAppDispatch } from '../../../../hooks/useAppDispatch';
+import { setProperties } from '../../../properties/state/propertySlice';
 
 const columns = [
   {
@@ -42,6 +45,7 @@ const columns = [
 ];
 
 const PropertiesPage = () => {
+  const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const query = Object.fromEntries(searchParams);
 
@@ -51,16 +55,20 @@ const PropertiesPage = () => {
     ...query,
   });
 
+  if(isSuccess) dispatch(setProperties(data.properties));
+
   return (
     <AdminPageContainer 
       heading='Properties' 
-      actionComponent={<PropertyForm />} 
+      actionComponent={<CreatePropertyDialog />} 
     >
       {isSuccess ? (
         <DataTable 
           data={data.properties} 
           count={data.count} 
           columns={columns} 
+          onUpdateItemHandler={() => {}}
+          onDeleteItemHandler={() => {}}
         />
       ): (
         <Loader />
