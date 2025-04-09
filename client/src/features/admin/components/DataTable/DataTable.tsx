@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import { TableActionButtons } from '../TableActionButtons/TableActionButtons';
 
+
 type TableProps<T extends { _id: string }> = {
   data: T[],
   count: number,
@@ -30,7 +31,14 @@ type OrderDirection = 'asc' | 'desc';
 
 const itemsPerPageOptions = [10, 15, 20];
 
-export const DataTable = <T extends { _id: string }>({ data, count, columns }: TableProps<T>) => {
+
+export const DataTable = <T extends { _id: string }>({ 
+  data, 
+  count, 
+  columns, 
+  onUpdateItemHandler, 
+  onDeleteItemHandler 
+}: TableProps<T>) => {
   const [searchParams, setSearchParams] = useSearchParams();
   
   const [page, setPage] = useState<number>(0);
@@ -62,14 +70,6 @@ export const DataTable = <T extends { _id: string }>({ data, count, columns }: T
     setPage(newPage);
     searchParams.set('page', `${newPage + 1}`)
     setSearchParams(searchParams);
-  };
-
-  const handleUpdateElement = (id: string) => {
-    console.log('UPDATE', id);
-  };
-
-  const handleDeleteElement = (id: string) => {
-    console.log('DELETE', id);
   };
 
   useEffect(() => {
@@ -108,12 +108,16 @@ export const DataTable = <T extends { _id: string }>({ data, count, columns }: T
                     {render ? render(item) : `${item[key as keyof T]}`}
                   </TableCell>
                 ))}
-                <TableCell>
-                  <TableActionButtons 
-                    onUpdate={() => handleUpdateElement(item._id)} 
-                    onDelete={() => handleDeleteElement(item._id)} 
-                  />
-                </TableCell>
+                {
+                  onUpdateItemHandler && onDeleteItemHandler && (
+                    <TableCell>
+                      <TableActionButtons 
+                        onUpdate={() => onUpdateItemHandler(item._id)} 
+                        onDelete={() => onDeleteItemHandler(item._id)} 
+                      />
+                    </TableCell>
+                  )
+                }
               </TableRow>
             ))}
           </TableBody>

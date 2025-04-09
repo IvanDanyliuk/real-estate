@@ -4,7 +4,7 @@ import { AdminPageContainer } from '../../components/AdminPageContainer/AdminPag
 import { CreatePropertyDialog } from '../../components/CreatePropertyDialog/CreatePropertyDialog';
 import { DataTable } from '../../components/DataTable/DataTable';
 import { Loader } from '../../../../components/layout/Loader/Loader';
-import { useGetPropertiesQuery } from '../../../properties/state/propertyApi';
+import { useDeletePropertyMutation, useLazyGetPropertiesQuery } from '../../../properties/state/propertyApi';
 import { setProperties } from '../../../properties/state/propertySlice';
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
 import { useAppSelector } from '../../../../hooks/useAppSelector';
@@ -62,15 +62,25 @@ const PropertiesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = Object.fromEntries(searchParams);
 
-  const { data, isSuccess } = useGetPropertiesQuery({
-    page: +query.page || 1,
-    itemsPerPage: +query.itemsPerPage || 10,
-    ...query,
-  });
+  const [getProperties, { data, isSuccess }] = useLazyGetPropertiesQuery();
+
+  const [deleteProperty, { isSuccess: isDeleteSuccess }] = useDeletePropertyMutation();
 
   const handlePropertyUpdate = useCallback(async (id: string) => {
-    console.log('UPDATE PROPERTY')
+    console.log('UPDATE PROPERTY', id)
   }, []);
+
+  const handlePropertyDelete = useCallback(async (id: string) => {
+    await deleteProperty(id);
+  }, [deleteProperty]);
+
+  useEffect(() => {
+    getProperties({
+      page: +query.page || 1,
+      itemsPerPage: +query.itemsPerPage || 10,
+      ...query,
+    });
+  }, [searchParams, isDeleteSuccess])
 
   useEffect(() => {
     if(data && data.properties) {
@@ -83,13 +93,13 @@ const PropertiesPage = () => {
       heading='Properties' 
       actionComponent={<CreatePropertyDialog />} 
     >
-      {isSuccess ? (
+      {isSuccess || isDeleteSuccess ? (
         <DataTable 
           data={properties} 
           count={data.count} 
           columns={columns} 
-          onUpdateItemHandler={() => {}}
-          onDeleteItemHandler={() => {}}
+          onUpdateItemHandler={handlePropertyUpdate}
+          onDeleteItemHandler={handlePropertyDelete}
         />
       ): (
         <Loader />
