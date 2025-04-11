@@ -91,8 +91,7 @@ export const updateProperty = async (propertyToUpdate: UpdatePropertyParams) => 
   const updatedProperty = await PropertyModel.findByIdAndUpdate(propertyToUpdate._id, {
     ...propertyToUpdate,
     images: uploadedImages || existingProperty!.images,
-  });
-  console.log('UPDATE PROPERTY SERVICE', updatedProperty)
+  }, { new: true });
 
   return updatedProperty;
 };
