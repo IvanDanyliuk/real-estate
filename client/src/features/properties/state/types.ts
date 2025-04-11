@@ -9,7 +9,7 @@ export interface PropertyFormData {
       lng: number;
     };
   };
-  adType: string;
+  type: string;
   author: string;
   description: string;
   images: any[];

@@ -1,4 +1,10 @@
-import { ChangeEvent, MouseEvent, ReactNode, useEffect, useState } from 'react';
+import { 
+  ChangeEvent, 
+  MouseEvent, 
+  ReactNode, 
+  useEffect, 
+  useState 
+} from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { 
   Paper, 
@@ -23,8 +29,8 @@ type TableProps<T extends { _id: string }> = {
     isSortable?: boolean,
     render?: (item: T) => ReactNode,
   }[],
-  onUpdateItemHandler?: (id: string) => void;
-  onDeleteItemHandler: (id: string) => void;
+  onUpdateItem?: (property: any) => void,
+  onDeleteItem: (id: string) => void,
 };
 
 type OrderDirection = 'asc' | 'desc';
@@ -36,15 +42,15 @@ export const DataTable = <T extends { _id: string }>({
   data, 
   count, 
   columns, 
-  onUpdateItemHandler, 
-  onDeleteItemHandler 
+  onUpdateItem, 
+  onDeleteItem 
 }: TableProps<T>) => {
   const [searchParams, setSearchParams] = useSearchParams();
   
   const [page, setPage] = useState<number>(0);
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [orderBy, setOrderBy] = useState<string | null>(null);
-  const [orderDirection, setOrderDirection] = useState<OrderDirection>('desc');  
+  const [orderDirection, setOrderDirection] = useState<OrderDirection>('desc');
 
   const handleSortColumn = (property: string) => {
     const isDesc = property && orderDirection === 'desc';
@@ -109,13 +115,15 @@ export const DataTable = <T extends { _id: string }>({
                   </TableCell>
                 ))}
                 {
-                  onUpdateItemHandler && onDeleteItemHandler && (
-                    <TableCell>
-                      <TableActionButtons 
-                        onUpdate={() => onUpdateItemHandler(item._id)} 
-                        onDelete={() => onDeleteItemHandler(item._id)} 
-                      />
-                    </TableCell>
+                  onUpdateItem && onDeleteItem && (
+                    <>
+                      <TableCell>
+                        <TableActionButtons 
+                          onUpdate={() => onUpdateItem(item)}
+                          onDelete={() => onDeleteItem(item._id)} 
+                        />
+                      </TableCell>
+                    </>
                   )
                 }
               </TableRow>

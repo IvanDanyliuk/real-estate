@@ -12,9 +12,10 @@ export const propertySchema = zod.object({
       lng: zod.number(),
     }).optional(),
   }),
-  adType: zod.string().min(1).max(255),
+  type: zod.string().min(1).max(255),
   description: zod.string().min(1).max(1000),
-  images: zod
+  images: zod.union([
+    zod
     .custom<FileList>((fileList) => fileList instanceof FileList, {
       message: "Property photos are required!",
     })
@@ -23,8 +24,14 @@ export const propertySchema = zod.object({
     })
     .refine((fileList) => ACCEPTED_IMAGE_TYPES.includes(fileList[0].type), {
       message: "Invalid file format. Only PNG, JPEG, and SVG are allowed.",
-    })
-    .optional(),
+    }),
+    zod.array(
+      zod
+        .string()
+        .url()
+        .min(1, { message: 'At least one image URL is required!' })
+    ),
+  ]),
   overview: zod.object({
     roomsNumber: zod.number().gte(0),
     propertyType: zod.string().min(1).max(255),

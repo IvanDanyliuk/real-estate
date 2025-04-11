@@ -28,8 +28,8 @@ export const propertyApi = createApi({
       }),
     }),
     updateProperty: builder.mutation({
-      query: ({ updatedProperty, id }) => ({
-        url: `/properties/${id}`,
+      query: (updatedProperty) => ({
+        url: `/properties`,
         method: REQUEST_METHODS.patch,
         body: updatedProperty,
       }),

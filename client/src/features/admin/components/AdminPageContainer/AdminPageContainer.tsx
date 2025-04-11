@@ -1,16 +1,21 @@
 import { ReactNode } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, IconButton, Tooltip, Typography } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import { styles } from './styles';
+
 
 interface AdminPageContainerProps {
   heading: string;
-  actionComponent?: ReactNode;
+  actionBtnTooltipText?: string;
+  action?: () => void;
   children: ReactNode;
 };
 
+
 export const AdminPageContainer: React.FC<AdminPageContainerProps> = ({
   heading,
-  actionComponent,
+  actionBtnTooltipText,
+  action,
   children,
 }) => {
   return (
@@ -19,7 +24,13 @@ export const AdminPageContainer: React.FC<AdminPageContainerProps> = ({
         <Typography variant='h1'>
           {heading}
         </Typography>
-        {actionComponent}
+        {action && (
+          <Tooltip title={actionBtnTooltipText || 'Create new'}>
+            <IconButton onClick={action} sx={styles.openBtn}>
+              <AddIcon />
+            </IconButton>
+          </Tooltip>
+        )}
       </Box>
       <Box>
         {children}

@@ -10,12 +10,13 @@ interface TableActionButtons {
   onDelete: () => void;
 };
 
+
 export const TableActionButtons: React.FC<TableActionButtons> = ({
   onUpdate,
-  onDelete
+  onDelete,
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const isOpen = Boolean(anchorEl)
+  const isOpen = Boolean(anchorEl);
 
   const handleMenuOpen = (e: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(e.currentTarget);

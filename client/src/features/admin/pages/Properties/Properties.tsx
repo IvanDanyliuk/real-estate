@@ -1,17 +1,21 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { IconButton, Tooltip } from '@mui/material';
 import { AdminPageContainer } from '../../components/AdminPageContainer/AdminPageContainer';
-import { CreateEntityDialog } from '../../components/CreateEntityDialog/CreateEntityDialog';
 import { DataTable } from '../../components/DataTable/DataTable';
 import { Loader } from '../../../../components/layout/Loader/Loader';
-import { useCreatePropertyMutation, useDeletePropertyMutation, useLazyGetPropertiesQuery } from '../../../properties/state/propertyApi';
-import { addProperty, setProperties } from '../../../properties/state/propertySlice';
-import { useAppDispatch } from '../../../../hooks/useAppDispatch';
-import { useAppSelector } from '../../../../hooks/useAppSelector';
-import { PropertyType } from '../../../properties/state/types';
 import { statusToast } from '../../../../components/toast/toast';
 import { PropertyForm } from '../../components/forms/PropertyForm/PropertyForm';
+import { 
+  useCreatePropertyMutation, useDeletePropertyMutation, 
+  useLazyGetPropertiesQuery, useUpdatePropertyMutation 
+} from '../../../properties/state/propertyApi';
+import { useAppDispatch } from '../../../../hooks/useAppDispatch';
+import { useAppSelector } from '../../../../hooks/useAppSelector';
+import { addProperty, setProperties, updateProperty } from '../../../properties/state/propertySlice';
+import { PropertyType } from '../../../properties/state/types';
 import { PropertyDataType } from '../../data-models';
+import { styles } from './styles';
 
 
 type ColumnType = {
@@ -57,7 +61,7 @@ const columns: ColumnType[] = [
   },
 ];
 
-const newPropertyInitialState: PropertyDataType = {
+const newPropertyEmptyState: PropertyDataType = {
   title: '',
   price: 0,
   location: {
@@ -68,9 +72,9 @@ const newPropertyInitialState: PropertyDataType = {
       lng: 0,
     },
   },
-  adType: '',
+  type: '',
   description: '',
-  images: undefined,
+  images: [],
   overview: {
     roomsNumber: 0,
     propertyType: '',
@@ -85,6 +89,10 @@ const newPropertyInitialState: PropertyDataType = {
 
 
 const PropertiesPage = () => {
+  const [propertyFormOpen, setPropertyFormOpen] = useState<boolean>(false);
+  const [formMode, setFormMode] = useState<'create' | 'update'>('create');
+  const [propertyFormInitialState, setPropertyFormInitialState] = useState<any>(newPropertyEmptyState);
+
   const dispatch = useAppDispatch();
   const { properties } = useAppSelector((state) => state.properties);
 
@@ -92,13 +100,24 @@ const PropertiesPage = () => {
   const query = Object.fromEntries(searchParams);
 
   const [getProperties, { data, isSuccess }] = useLazyGetPropertiesQuery();
-  const [createProperty, { isLoading, isSuccess: isCreateSuccess }] = useCreatePropertyMutation();
+  const [createProperty] = useCreatePropertyMutation();
+  const [updateExistingProperty] = useUpdatePropertyMutation();
   const [deleteProperty, { isSuccess: isDeleteSuccess }] = useDeletePropertyMutation();
 
-  const handleCreateProperty = async (propertyData: FormData) => {
+  const handleNewPropertyFormOpen = () => {
+    setFormMode('create');
+    setPropertyFormInitialState(newPropertyEmptyState);
+    setPropertyFormOpen(!propertyFormOpen);
+  };
+
+  const handleCreateProperty = useCallback(async (propertyData: FormData) => {
     const { data, error } = await createProperty(propertyData);
     
-    if(data) dispatch(addProperty(data.payload));
+    if(data) {
+      dispatch(addProperty(data.payload));
+      setPropertyFormOpen(false);
+      setPropertyFormInitialState(newPropertyEmptyState);
+    }
 
     if(data && data.payload) {
       statusToast({ 
@@ -112,28 +131,39 @@ const PropertiesPage = () => {
         message: 'Failed to create a new property',
       });
     }
-  };
+  }, [createProperty, dispatch]);
 
-  const handlePropertyUpdate = useCallback(async (id: string) => {
-    console.log('UPDATE PROPERTY', id)
+  const handleUpdateProperty = useCallback(async (propertyData: FormData) => {
+    const { data, error } = await updateExistingProperty(propertyData);
+
+    if(data) {
+      console.log('UPDATE PROPERTY', data.payload)
+      dispatch(updateProperty(data.payload));
+    }
+
+    if(data && data.payload) {
+      statusToast({ 
+        type: 'success', 
+        message: data.message 
+      });
+    }
+    if(error) {
+      statusToast({
+        type: 'error',
+        message: 'Failed to create a new property',
+      });
+    }
+  }, []);
+
+  const handleSetPropertyToUpdate = useCallback((property: any) => {
+    setFormMode('update');
+    setPropertyFormOpen(true);
+    setPropertyFormInitialState(property);
   }, []);
 
   const handlePropertyDelete = useCallback(async (id: string) => {
     await deleteProperty(id);
   }, [deleteProperty]);
-
-  const createNewProperty = (
-    <CreateEntityDialog 
-      title='Create a new property' 
-      tooltipText='Create a new property' 
-      isSuccess={isCreateSuccess}
-    >
-      <PropertyForm 
-        initialData={newPropertyInitialState} 
-        onSubmit={handleCreateProperty} 
-      />
-    </CreateEntityDialog>
-  )
 
   useEffect(() => {
     getProperties({
@@ -151,20 +181,28 @@ const PropertiesPage = () => {
 
   return (
     <AdminPageContainer 
-      heading='Properties' 
-      actionComponent={createNewProperty} 
+      heading='Properties'
+      actionBtnTooltipText='Create a new property' 
+      action={handleNewPropertyFormOpen} 
     >
       {isSuccess || isDeleteSuccess ? (
         <DataTable 
           data={properties} 
           count={data.count} 
           columns={columns} 
-          onUpdateItemHandler={handlePropertyUpdate}
-          onDeleteItemHandler={handlePropertyDelete}
+          onUpdateItem={handleSetPropertyToUpdate}
+          onDeleteItem={handlePropertyDelete}
         />
       ): (
         <Loader />
       )}
+      <PropertyForm 
+        open={propertyFormOpen} 
+        title='Property' 
+        initialData={propertyFormInitialState} 
+        onClose={() => setPropertyFormOpen(false)} 
+        onSubmit={formMode === 'create' ? handleCreateProperty : handleUpdateProperty} 
+      />
     </AdminPageContainer>
   );
 };

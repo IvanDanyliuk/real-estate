@@ -8,4 +8,16 @@ export const styles: StyleProps = {
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  openBtn: {
+    padding: '0.8rem',
+    backgroundColor: 'primary.main',
+    color: 'primary.light',
+    borderWidth: '3px',
+    borderStyle: 'solid',
+    borderColor: 'primary.main',
+    '&:hover': {
+      backgroundColor: 'primary.light',
+      color: 'primary.main',
+    },
+  },
 };
