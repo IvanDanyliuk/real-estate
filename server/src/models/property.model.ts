@@ -11,6 +11,7 @@ const propertySchema = new Schema({
       lng: { type: Number },
     },
   },
+  type: { type: String },
   author: { type: Schema.Types.ObjectId, ref: "User" },
   description: { type: String },
   images: [{ type: String }],

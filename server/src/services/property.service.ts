@@ -46,7 +46,7 @@ export interface CreatePropertyParams {
     };
   };
   author: string;
-  adType: string;
+  type: string;
   description: string;
   images?: any;
   overview: {
@@ -79,12 +79,22 @@ export const createProperty = async (data: CreatePropertyParams) => {
 
 export interface UpdatePropertyParams extends CreatePropertyParams {
   _id: string;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export const updateProperty = async (propertyToUpdate: UpdatePropertyParams) => {
-  console.log('UPDATE PROPERTY SERVICE', propertyToUpdate)
+  const existingProperty = await PropertyModel.findById(propertyToUpdate._id);
+
+  const uploadedImages = propertyToUpdate.images && propertyToUpdate.images.length > 0  
+  ? await Promise.all(propertyToUpdate.images.map((item: any) => uploadToCloudinary(item.buffer))) 
+  : null;
+
+  const updatedProperty = await PropertyModel.findByIdAndUpdate(propertyToUpdate._id, {
+    ...propertyToUpdate,
+    images: uploadedImages || existingProperty!.images,
+  });
+  console.log('UPDATE PROPERTY SERVICE', updatedProperty)
+
+  return updatedProperty;
 };
 
 export const deleteProperty = async (id: string) => {

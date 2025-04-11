@@ -14,7 +14,7 @@ const propertyRoutes = Router();
 propertyRoutes.get('/', getPropertiesHandler);
 propertyRoutes.get('/:id', getPropertyByIdHandler);
 propertyRoutes.post('/', upload.array('images'), createPropertyHandler);
-propertyRoutes.patch('/:id', updatePropertyHandler);
+propertyRoutes.patch('/', upload.array('images'), updatePropertyHandler);
 propertyRoutes.delete('/:id', deletePropertyHandler);
 
 export default propertyRoutes;

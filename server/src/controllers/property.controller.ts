@@ -1,7 +1,7 @@
 import { propertySchema } from "../schemas/property.schema";
 import catchErrors from "../utils/catchErrors";
 import { OK } from "../constants/http";
-import { createProperty, deleteProperty, getProperties } from "../services/property.service";
+import { createProperty, deleteProperty, getProperties, updateProperty } from "../services/property.service";
 
 type FiltersType = {
   price?: {
@@ -83,7 +83,25 @@ export const createPropertyHandler = catchErrors(async (req, res) => {
 });
 
 export const updatePropertyHandler = catchErrors(async (req, res) => {
-  console.log("UPDATE PROPERTY", req)
+  const transformedBody = {
+    ...req.body,
+    price: +req.body.price,
+    images: req.files,
+    location: JSON.parse(req.body.location),
+    overview: JSON.parse(req.body.overview),
+    nearbyAmenities: JSON.parse(req.body.nearbyAmenities),
+  };
+
+  const request = propertySchema.parse(transformedBody);
+  const updatedProperty = await updateProperty({
+    _id: req.body._id,
+    ...request
+  });
+
+  return res.status(OK).json({ 
+    payload: updatedProperty, 
+    message: 'Property has been successfully updated!' 
+  });
 });
 
 export const deletePropertyHandler = catchErrors(async (req, res) => {
