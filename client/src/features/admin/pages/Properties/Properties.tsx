@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { IconButton, Tooltip } from '@mui/material';
 import { AdminPageContainer } from '../../components/AdminPageContainer/AdminPageContainer';
 import { DataTable } from '../../components/DataTable/DataTable';
 import { Loader } from '../../../../components/layout/Loader/Loader';
@@ -10,12 +9,8 @@ import {
   useCreatePropertyMutation, useDeletePropertyMutation, 
   useLazyGetPropertiesQuery, useUpdatePropertyMutation 
 } from '../../../properties/state/propertyApi';
-import { useAppDispatch } from '../../../../hooks/useAppDispatch';
-import { useAppSelector } from '../../../../hooks/useAppSelector';
-import { addProperty, setProperties, updateProperty } from '../../../properties/state/propertySlice';
 import { PropertyType } from '../../../properties/state/types';
 import { PropertyDataType } from '../../data-models';
-import { styles } from './styles';
 
 
 type ColumnType = {
@@ -93,15 +88,12 @@ const PropertiesPage = () => {
   const [formMode, setFormMode] = useState<'create' | 'update'>('create');
   const [propertyFormInitialState, setPropertyFormInitialState] = useState<any>(newPropertyEmptyState);
 
-  const dispatch = useAppDispatch();
-  const { properties } = useAppSelector((state) => state.properties);
-
   const [searchParams, setSearchParams] = useSearchParams();
   const query = Object.fromEntries(searchParams);
 
   const [getProperties, { data, isSuccess }] = useLazyGetPropertiesQuery();
-  const [createProperty] = useCreatePropertyMutation();
-  const [updateExistingProperty] = useUpdatePropertyMutation();
+  const [createProperty, { isSuccess: isCreateSuccess }] = useCreatePropertyMutation();
+  const [updateExistingProperty, { isSuccess: isUpdateSuccess }] = useUpdatePropertyMutation();
   const [deleteProperty, { isSuccess: isDeleteSuccess }] = useDeletePropertyMutation();
 
   const handleNewPropertyFormOpen = () => {
@@ -114,7 +106,6 @@ const PropertiesPage = () => {
     const { data, error } = await createProperty(propertyData);
     
     if(data) {
-      dispatch(addProperty(data.payload));
       setPropertyFormOpen(false);
       setPropertyFormInitialState(newPropertyEmptyState);
     }
@@ -131,14 +122,14 @@ const PropertiesPage = () => {
         message: 'Failed to create a new property',
       });
     }
-  }, [createProperty, dispatch]);
+  }, [createProperty]);
 
   const handleUpdateProperty = useCallback(async (propertyData: FormData) => {
     const { data, error } = await updateExistingProperty(propertyData);
 
     if(data) {
-      console.log('UPDATE PROPERTY', data.payload)
-      dispatch(updateProperty(data.payload));
+      setPropertyFormOpen(false);
+      setPropertyFormInitialState(newPropertyEmptyState);
     }
 
     if(data && data.payload) {
@@ -171,13 +162,7 @@ const PropertiesPage = () => {
       itemsPerPage: +query.itemsPerPage || 10,
       ...query,
     });
-  }, [searchParams, isDeleteSuccess])
-
-  useEffect(() => {
-    if(data && data.properties) {
-      dispatch(setProperties(data.properties));
-    }
-  }, [isSuccess, dispatch, searchParams, data]);
+  }, [searchParams, isCreateSuccess, isUpdateSuccess, isDeleteSuccess]);
 
   return (
     <AdminPageContainer 
@@ -187,7 +172,7 @@ const PropertiesPage = () => {
     >
       {isSuccess || isDeleteSuccess ? (
         <DataTable 
-          data={properties} 
+          data={data.properties} 
           count={data.count} 
           columns={columns} 
           onUpdateItem={handleSetPropertyToUpdate}
