@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import connectDB from "./config/db";
 import authRoutes from "./routes/auth.route";
 import userRoutes from "./routes/user.route";
+import blogRoutes from "./routes/blog.routes";
 import propertyRoutes from "./routes/property.route";
 import errorHandler from "./middleware/errorHandler";
 import { APP_ORIGIN, PORT } from "./constants/env";
@@ -24,6 +25,7 @@ app.use(cookieParser());
 
 app.use("/auth", authRoutes);
 app.use("/properties", propertyRoutes);
+app.use("/blog", blogRoutes);
 
 // protected routes
 app.use("/user", authenticate, userRoutes);

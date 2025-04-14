@@ -1,5 +1,5 @@
 import { deleteFromCloudinary, uploadToCloudinary } from "./cloudinary.service";
-import ArticleModel from "../models/article.schema";
+import ArticleModel from "../models/blog.schema";
 
 export type GetPropertiesParams = {
   page: number,
@@ -20,6 +20,11 @@ export const getArticles = async ({ page, itemsPerPage }: GetPropertiesParams) =
     articles,
     count,
   };
+};
+
+export const getArticle = async (id: string) => {
+  const article = await ArticleModel.findById(id);
+  return article;
 };
 
 interface NewArticleParams {
@@ -45,7 +50,7 @@ interface UpdateArticleParams  extends NewArticleParams {
   _id: string;
 }
 
-export const updateExistingArticle = async (articleToUpdate: UpdateArticleParams) => {
+export const updateArticle = async (articleToUpdate: UpdateArticleParams) => {
   const existingArticle = await ArticleModel.findById(articleToUpdate._id);
 
   const updatedImages = articleToUpdate.images && articleToUpdate.images.length > 0 
@@ -60,7 +65,7 @@ export const updateExistingArticle = async (articleToUpdate: UpdateArticleParams
   return updatedArticle;
 };
 
-export const deleteProperty = async (id: string) => {
+export const deleteArticle = async (id: string) => {
   const deletedArticle = await ArticleModel.findByIdAndDelete(id);
 
   if(deletedArticle) {
