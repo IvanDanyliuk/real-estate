@@ -5,6 +5,30 @@ import { PostForm } from '../../components/forms/PostForm/PostForm';
 import { Loader } from '../../../../components/layout/Loader/Loader';
 import { useCreatePostMutation, useDeletePostMutation, useLazyGetPostsQuery, useUpdatePostMutation } from '../../../blog/state/blogApi';
 import { statusToast } from '../../../../components/toast/toast';
+import { PostType } from '../../../blog/state/types';
+import { DataTable } from '../../components/DataTable/DataTable';
+
+type ColumnType = {
+  key: keyof PostType,
+  header: string,
+  // isSortable?: boolean,
+  render?: (item: any) => string,
+};
+
+const columns: ColumnType[] = [
+  {
+    key: '_id',
+    header: 'ID',
+  },
+  {
+    key: 'title',
+    header: 'Title',
+  },
+  {
+    key: 'createdAt',
+    header: 'Creation Date',
+  },
+]
 
 const newPostEmptyState = {
   title: '',
@@ -57,6 +81,30 @@ const BlogPage = () => {
     setPostFormInitialState(post);
   }, []);
 
+  const handleUpdatePost = useCallback(async (postToUpdate: FormData) => {
+    const { data, error } = await updatePost(postToUpdate);
+
+    if(data && data.payload) {
+      setPostFormOpen(false);
+      setPostFormInitialState(newPostEmptyState);
+      statusToast({ 
+        type: 'success', 
+        message: data.message 
+      });
+    }
+
+    if(error) {
+      statusToast({
+        type: 'error',
+        message: 'Failed to create a new property',
+      });
+    }
+  }, []);
+
+  const handlePropertyDelete = useCallback(async (id: string) => {
+    await deletePost(id);
+  }, [deletePost]);
+
   useEffect(() => {
     getPosts({
       page: +query.page || 1,
@@ -71,7 +119,13 @@ const BlogPage = () => {
       action={handleNewPostFormOpen}
     >
       {isSuccess || deletePostSuccess ? (
-        <div>Data will be here...</div>
+        <DataTable 
+          columns={columns}
+          data={data.articles}
+          count={data.count}
+          onUpdateItem={handleSetPostToUpdate}
+          onDeleteItem={handlePropertyDelete}
+        />
       ) : (
         <Loader />
       )}
@@ -80,7 +134,7 @@ const BlogPage = () => {
         title='Post'
         initialData={postFormInitialState}
         onClose={handleNewPostFormOpen}
-        onSubmit={handleCreateNewPost}
+        onSubmit={formMode === 'create' ? handleCreateNewPost : handleUpdatePost}
       />
     </AdminPageContainer>
   );

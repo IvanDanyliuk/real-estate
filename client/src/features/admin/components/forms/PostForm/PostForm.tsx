@@ -1,8 +1,8 @@
-import { Box, Button, Dialog, DialogContent, DialogTitle, TextField } from "@mui/material"
-import { PostDataType, postSchema } from "../validationSchemas/post.schema";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { Box, Button, Dialog, DialogContent, DialogTitle, TextField } from "@mui/material"
+import { PostDataType, postSchema } from "../validationSchemas/post.schema";
 import { FileInput } from "../../../../../components/inputs/FileInput/FileInput";
 import { styles } from "./styles";
 
@@ -28,7 +28,6 @@ export const PostForm: React.FC<PostFormProps> = ({
 }) => {
   const {
     register,
-    control,
     handleSubmit,
     formState: { isSubmitting, errors },
     setValue,
@@ -66,7 +65,6 @@ export const PostForm: React.FC<PostFormProps> = ({
     <Dialog 
       open={open} 
       onClose={onClose} 
-      // maxWidth='xl'
     >
       <DialogTitle>
         {title}
