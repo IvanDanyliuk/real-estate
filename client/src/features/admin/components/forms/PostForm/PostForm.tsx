@@ -1,9 +1,10 @@
-import { Box, Dialog, DialogContent, DialogTitle, TextField } from "@mui/material"
+import { Box, Button, Dialog, DialogContent, DialogTitle, TextField } from "@mui/material"
 import { PostDataType, postSchema } from "../validationSchemas/post.schema";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { FileInput } from "../../../../../components/inputs/FileInput/FileInput";
+import { styles } from "./styles";
 
 
 interface PostInitialData extends PostDataType {
@@ -65,15 +66,16 @@ export const PostForm: React.FC<PostFormProps> = ({
     <Dialog 
       open={open} 
       onClose={onClose} 
-      maxWidth='xl'
+      // maxWidth='xl'
     >
       <DialogTitle>
-
+        {title}
       </DialogTitle>
       <DialogContent>
         <Box 
           component='form' 
           onSubmit={handleSubmit(handleFormSubmit)}
+          sx={styles.form}
         >
           <TextField 
             label='Title'
@@ -94,11 +96,19 @@ export const PostForm: React.FC<PostFormProps> = ({
           <TextField 
             label='Content'
             fullWidth 
-            error={!!errors.title}
-            helperText={errors.title?.message}
+            multiline
             rows={12}
-            {...register('title')} 
+            error={!!errors.content}
+            helperText={errors.content?.message}
+            {...register('content')} 
           />
+          <Button 
+            type='submit' 
+            disabled={isSubmitting} 
+            sx={styles.submitBtn}
+          >
+            {isSubmitting ? 'Loading...' : 'Submit'}
+          </Button>
         </Box>
       </DialogContent>
     </Dialog>
