@@ -8,7 +8,7 @@ export type GetPropertiesParams = {
 
 export const getArticles = async ({ page, itemsPerPage }: GetPropertiesParams) => {
   const articles = await ArticleModel
-    .find({ page, itemsPerPage })
+    .find()
     .sort({ "createdAt": -1 })
     .skip((page - 1) * itemsPerPage)
     .limit(itemsPerPage)
@@ -34,6 +34,7 @@ interface NewArticleParams {
 };
 
 export const createArticle = async (data: NewArticleParams) => {
+  console.log('CREATE ARTICLE SERVICE', data)
   const uploadedImages = data.images && data.images.length > 0 
     ? await Promise.all(data.images.map((image: any) => uploadToCloudinary(image.buffer))) 
     : [];
