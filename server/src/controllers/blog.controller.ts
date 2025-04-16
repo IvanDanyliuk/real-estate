@@ -4,7 +4,6 @@ import { createArticle, deleteArticle, getArticle, getArticles, updateArticle } 
 import catchErrors from "../utils/catchErrors";
 
 export const getArticlesHandler = catchErrors(async (req, res) => {
-  console.log('GET ARTICLES CONTROLLER')
   const response = await getArticles({ 
     page: +req.query.page!, 
     itemsPerPage: +req.query.itemsPerPage! 
@@ -31,7 +30,10 @@ export const addArticleHandler = catchErrors(async (req, res) => {
 });
 
 export const updateArticleHandler = catchErrors(async (req, res) => {
-  const request = articleSchema.parse(req.body);
+  const request = articleSchema.parse({
+    ...req.body,
+    images: req.files,
+  });
   const updatedArticle = await updateArticle({
     _id: req.body._id,
     ...request

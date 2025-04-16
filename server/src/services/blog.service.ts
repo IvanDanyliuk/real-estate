@@ -34,7 +34,6 @@ interface NewArticleParams {
 };
 
 export const createArticle = async (data: NewArticleParams) => {
-  console.log('CREATE ARTICLE SERVICE', data)
   const uploadedImages = data.images && data.images.length > 0 
     ? await Promise.all(data.images.map((image: any) => uploadToCloudinary(image.buffer))) 
     : [];
