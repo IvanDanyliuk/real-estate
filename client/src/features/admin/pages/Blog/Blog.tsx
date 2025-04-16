@@ -11,7 +11,6 @@ import { DataTable } from '../../components/DataTable/DataTable';
 type ColumnType = {
   key: keyof PostType,
   header: string,
-  // isSortable?: boolean,
   render?: (item: any) => string,
 };
 

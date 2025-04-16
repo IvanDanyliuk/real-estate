@@ -12,3 +12,8 @@ export interface User {
   updatedAt?: string;
   __v?: number;
 };
+
+export interface GetUsersQuery { 
+  page: number; 
+  itemsPerPage: number; 
+};
