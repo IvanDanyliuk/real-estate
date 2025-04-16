@@ -7,6 +7,7 @@ import {
 } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { 
+  IconButton,
   Paper, 
   Table, 
   TableBody, 
@@ -17,6 +18,7 @@ import {
   TableRow, 
   TableSortLabel
 } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { TableActionButtons } from '../TableActionButtons/TableActionButtons';
 
 
@@ -114,18 +116,20 @@ export const DataTable = <T extends { _id: string }>({
                     {render ? render(item) : `${item[key as keyof T]}`}
                   </TableCell>
                 ))}
-                {
-                  onUpdateItem && onDeleteItem && (
-                    <>
-                      <TableCell>
-                        <TableActionButtons 
-                          onUpdate={() => onUpdateItem(item)}
-                          onDelete={() => onDeleteItem(item._id)} 
-                        />
-                      </TableCell>
-                    </>
-                  )
-                }
+                <TableCell>
+                  {
+                    onUpdateItem && onDeleteItem ? (
+                      <TableActionButtons 
+                            onUpdate={() => onUpdateItem(item)}
+                            onDelete={() => onDeleteItem(item._id)} 
+                          />
+                    ) : (
+                      <IconButton onClick={() => onDeleteItem(item._id)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    )
+                  }
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

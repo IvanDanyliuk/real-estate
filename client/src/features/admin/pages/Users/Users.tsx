@@ -1,10 +1,11 @@
 import { useSearchParams } from 'react-router-dom';
 import { useLazyGetUsersQuery } from '../../../users/state/userApi';
 import { AdminPageContainer } from '../../components/AdminPageContainer/AdminPageContainer';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { User } from '../../../users/state/types';
 import { DataTable } from '../../components/DataTable/DataTable';
 import { Loader } from '../../../../components/layout/Loader/Loader';
+import { useDeletePostMutation } from '../../../blog/state/blogApi';
 
 type ColumnType = {
   key: keyof User,
@@ -44,22 +45,27 @@ const UsersPage = () => {
   const query = Object.fromEntries(searchParams);
 
   const [getUsers, { data, isSuccess }] = useLazyGetUsersQuery();
+  const [deleteUser, { isSuccess: isDeleteSuccess }] = useDeletePostMutation();
+
+  const handleUserDelete = useCallback(async (id: string) => {
+    await deleteUser(id);
+  }, [deleteUser]);
 
   useEffect(() => {
     getUsers({
       page: +query.page || 1,
       itemsPerPage: +query.itemsPerPage || 10,
     });
-  }, [searchParams, getUsers]);
+  }, [searchParams, isSuccess, isDeleteSuccess]);
 
   return (
     <AdminPageContainer heading='Users'>
-      {isSuccess ? (
+      {isSuccess || isDeleteSuccess ? (
         <DataTable 
           columns={columns}
           data={data.users}
           count={data.count}
-          onDeleteItem={() => {}}
+          onDeleteItem={handleUserDelete}
         />
       ) : (
         <Loader />
