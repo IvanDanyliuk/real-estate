@@ -10,7 +10,7 @@ import {
   useLazyGetPropertiesQuery, useUpdatePropertyMutation 
 } from '../../../properties/state/propertyApi';
 import { PropertyType } from '../../../properties/state/types';
-import { PropertyDataType } from '../../data-models';
+import { PropertyDataType } from '../../components/forms/validationSchemas/property.schema';
 
 
 type ColumnType = {

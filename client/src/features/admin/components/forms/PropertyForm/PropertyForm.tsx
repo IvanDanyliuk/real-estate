@@ -8,7 +8,7 @@ import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FileInput } from '../../../../../components/inputs/FileInput/FileInput';
 import { useAppSelector } from '../../../../../hooks/useAppSelector';
-import { PropertyDataType, propertySchema } from '../../../data-models';
+import { PropertyDataType, propertySchema } from '../validationSchemas/property.schema';
 import { removeFalseyFields } from '../../../../../utils/helpers';
 import { AD_TYPES, PROPERTY_TYPES } from '../../../../../constants/main';
 import { styles } from './styles';
@@ -31,7 +31,13 @@ const amenityInitialValue = {
 };
 
 
-export const PropertyForm: React.FC<PropertyFormProps> = ({ open, title, onClose, initialData, onSubmit }) => {
+export const PropertyForm: React.FC<PropertyFormProps> = ({ 
+  open, 
+  title, 
+  onClose, 
+  initialData, 
+  onSubmit 
+}) => {
   const { user } = useAppSelector((state) => state.user);
   const [amenity, setAmenity] = useState(amenityInitialValue);
 
@@ -122,7 +128,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({ open, title, onClose
     if(open && initialData) {
       reset(initialData);
     }
-  }, [open, initialData, reset])
+  }, [open, initialData, reset]);
 
   return (
     <Dialog 

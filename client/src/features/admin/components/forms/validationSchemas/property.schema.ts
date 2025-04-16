@@ -1,5 +1,5 @@
 import { z as zod } from 'zod';
-import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE } from '../../constants/main';
+import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE } from '../../../../../constants/main';
 
 export const propertySchema = zod.object({
   title: zod.string().min(1).max(255),
