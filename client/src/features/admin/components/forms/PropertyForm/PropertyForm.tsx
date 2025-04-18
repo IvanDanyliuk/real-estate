@@ -13,6 +13,7 @@ import { removeFalseyFields } from '../../../../../utils/helpers';
 import { AD_TYPES, PROPERTY_TYPES } from '../../../../../constants/main';
 import { styles } from './styles';
 import { MapInput } from '../../../../../components/inputs/MapInput/MapInput';
+import { REGIONS } from '../../../../../constants/geoData';
 
 
 interface PropertyInitialData extends PropertyDataType {
@@ -81,6 +82,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
     formData.append('title', propertyData.title);
     formData.append('price', +propertyData.price as any);
     formData.append('location', JSON.stringify(removeFalseyFields({
+      region: propertyData.location.region,
       city: propertyData.location.city,
       address: propertyData.location.address,
       mapCoords: propertyData.location.mapCoords && propertyData.location.mapCoords.lat && propertyData.location.mapCoords.lng 
@@ -308,6 +310,22 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
             </List>
           </Box>
           <Box component='fieldset' sx={styles.fieldset}>
+            <Select
+              label='Region'
+              fullWidth
+              defaultValue={initialData.location.region}
+              error={!!errors.location?.region}
+              {...register('location.region')}
+            >
+              {REGIONS.map(({ value, label }, i) => (
+                <MenuItem 
+                  key={`${value}-${i}`} 
+                  value={value}
+                >
+                  {label}
+                </MenuItem>
+              ))}
+            </Select>
             <TextField 
               label='City'
               fullWidth 

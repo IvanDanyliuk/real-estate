@@ -35,6 +35,11 @@ const columns: ColumnType[] = [
     isSortable: true,
   },
   {
+    key: 'location.region' as keyof PropertyType,
+    header: 'Region',
+    render: (item: any) => item.location.region,
+  },
+  {
     key: 'location.city' as keyof PropertyType,
     header: 'City',
     render: (item: any) => item.location.city,
@@ -60,6 +65,7 @@ const newPropertyEmptyState: PropertyDataType = {
   title: '',
   price: 0,
   location: {
+    region: '',
     city: '',
     address: '',
     mapCoords: {

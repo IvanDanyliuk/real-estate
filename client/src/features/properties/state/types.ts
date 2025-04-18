@@ -2,6 +2,7 @@ export interface PropertyFormData {
   title: string;
   price: number;
   location: {
+    region: string;
     city: string;
     address: string;
     mapCoords: {
