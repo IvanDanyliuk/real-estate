@@ -6,6 +6,8 @@ import { useGetUserQuery } from './features/users/state/userApi';
 import { setUser } from './features/users/state/userSlice';
 import { useAppDispatch } from './hooks/useAppDispatch';
 import { NAV_ROUTES, NavRoute } from './constants/navRoutesPaths';
+import 'leaflet/dist/leaflet.css';
+
 
 const renderRoutes = (routes: NavRoute[]) => {
   return routes.map((route, i) => (
@@ -18,6 +20,7 @@ const renderRoutes = (routes: NavRoute[]) => {
     </Route>
   ));
 };
+
 
 function App() {
   const dispatch = useAppDispatch();

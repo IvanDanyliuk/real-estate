@@ -12,6 +12,7 @@ import { PropertyDataType, propertySchema } from '../validationSchemas/property.
 import { removeFalseyFields } from '../../../../../utils/helpers';
 import { AD_TYPES, PROPERTY_TYPES } from '../../../../../constants/main';
 import { styles } from './styles';
+import { MapInput } from '../../../../../components/inputs/MapInput/MapInput';
 
 
 interface PropertyInitialData extends PropertyDataType {
@@ -162,21 +163,6 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
               {...register('price', { valueAsNumber: true })} 
             />
             <TextField 
-              label='City'
-              fullWidth 
-              error={!!errors.location?.city}
-              helperText={errors.location?.city?.message}
-              {...register('location.city')} 
-            />
-            <TextField 
-              label='Address'
-              fullWidth 
-              error={!!errors.location?.address}
-              helperText={errors.location?.address?.message}
-              {...register('location.address')} 
-            />
-            {/* TODO: Add a map to pick the coordinates */}
-            <TextField 
               label='Description'
               fullWidth 
               multiline
@@ -320,6 +306,26 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
                 </ListItem>
               ))}
             </List>
+          </Box>
+          <Box component='fieldset' sx={styles.fieldset}>
+            <TextField 
+              label='City'
+              fullWidth 
+              error={!!errors.location?.city}
+              helperText={errors.location?.city?.message}
+              {...register('location.city')} 
+            />
+            <TextField 
+              label='Address'
+              fullWidth 
+              error={!!errors.location?.address}
+              helperText={errors.location?.address?.message}
+              {...register('location.address')} 
+            />
+            <MapInput 
+              center={{ lat: 48.3794, lng: 31.1656 }} 
+              onSelectLocation={(coords) => setValue('location.mapCoords', coords)} 
+            />
           </Box>
           <Box sx={styles.submitBtnContainer}>
             <Button 
