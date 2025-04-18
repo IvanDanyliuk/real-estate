@@ -4,6 +4,7 @@ export const propertySchema = zod.object({
   title: zod.string().min(1).max(255),
   price: zod.number().gte(0),
   location: zod.object({
+    region: zod.string().min(1),
     city: zod.string().min(1).max(255),
     address: zod.string().min(1).max(255),
     mapCoords: zod.object({

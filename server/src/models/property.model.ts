@@ -4,6 +4,7 @@ const propertySchema = new Schema({
   title: { type: String, required: true },
   price: { type: Number, required: true },
   location: {
+    region: { type: String, required: true },
     city: { type: String, required: true },
     address: { type: String, requried: true },
     mapCoords: {
