@@ -1,8 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MapContainer, Marker, TileLayer, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-// import 'leaflet-defaulticon-compatibility';
-// import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'; 
 
 
 type MapCoorsType = { 
@@ -10,45 +8,52 @@ type MapCoorsType = {
   lng: number 
 };
 
-interface LocationPointProps {
-  onSelectLocation: (coords: MapCoorsType) => void;
-}
-
-interface MapInputProps extends LocationPointProps {
-  center: {
+interface MapInputProps {
+  coords: {
     lat: number;
     lng: number;
   };
+  onSelectLocation: (coords: MapCoorsType) => void;
 };
 
-const LocationPoint: React.FC<LocationPointProps> = ({ onSelectLocation }) => {
+
+export const MapInput: React.FC<MapInputProps> = ({ coords, onSelectLocation }) => {
   const [position, setPosition] = useState<MapCoorsType | null>(null);
 
-  useMapEvents({
-    click(e: any) {
-      const location = e.latlng;
-      setPosition(location);
-      onSelectLocation(location);
+  const MapEvents = () => {
+    useMapEvents({
+      click(e: any) {
+        const location = e.latlng;
+        setPosition(location);
+        onSelectLocation(location);
+      }
+    });
+    return null;
+  };
+
+  useEffect(() => {
+    if(coords) {
+      setPosition(coords);
     }
-  });
-
-  return position 
-    ? <Marker position={position} /> 
-    : null;
-};
-
-export const MapInput: React.FC<MapInputProps> = ({ center, onSelectLocation }) => {
-  return (
-    <MapContainer
-      center={[center.lat, center.lng]}
-      zoom={6}
-      style={{ width: '100%', height: '100%' }}
-    >
-      <TileLayer
-        // attribution='<a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <LocationPoint onSelectLocation={onSelectLocation} />
-    </MapContainer>
-  );
+  }, [coords]);
+  
+  if(position) {
+    return (
+      <MapContainer
+        center={coords}
+        zoom={6}
+        scrollWheelZoom={true}
+        style={{ width: '100%', height: '100%' }}
+      >
+        <TileLayer
+          attribution='<a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={position} />
+        <MapEvents />
+      </MapContainer>
+    );
+  } else {
+    return <div>Loading...</div>;
+  }
 };

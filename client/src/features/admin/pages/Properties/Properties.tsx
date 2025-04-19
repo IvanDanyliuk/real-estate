@@ -68,9 +68,9 @@ const newPropertyEmptyState: PropertyDataType = {
     region: '',
     city: '',
     address: '',
-    mapCoords: {
-      lat: 0,
-      lng: 0,
+    mapCoords: { 
+      lat: 48.3794, 
+      lng: 31.1656 
     },
   },
   type: '',

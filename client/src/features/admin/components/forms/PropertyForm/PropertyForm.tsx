@@ -48,8 +48,10 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
     control,
     handleSubmit,
     formState: { isSubmitting, errors },
+    getValues,
     setValue,
     reset,
+    watch,
   } = useForm<PropertyDataType>({
     defaultValues: initialData,
     resolver: zodResolver(propertySchema)
@@ -122,10 +124,13 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
       formData.append('_id', initialData._id);
     }
 
-    await onSubmit(formData);
+    console.log('LOCATION', getValues('location.mapCoords'))
+    // await onSubmit(formData);
     reset();
     onClose();
   };
+
+  const propertyCoords = watch('location.mapCoords');
 
   useEffect(() => {
     if(open && initialData) {
@@ -341,7 +346,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
               {...register('location.address')} 
             />
             <MapInput 
-              center={{ lat: 48.3794, lng: 31.1656 }} 
+              coords={propertyCoords!} 
               onSelectLocation={(coords) => setValue('location.mapCoords', coords)} 
             />
           </Box>
