@@ -20,6 +20,7 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { TableActionButtons } from '../TableActionButtons/TableActionButtons';
+import { useTranslation } from 'react-i18next';
 
 
 type TableProps<T extends { _id: string }> = {
@@ -47,6 +48,7 @@ export const DataTable = <T extends { _id: string }>({
   onUpdateItem, 
   onDeleteItem 
 }: TableProps<T>) => {
+  const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   
   const [page, setPage] = useState<number>(0);
@@ -100,9 +102,9 @@ export const DataTable = <T extends { _id: string }>({
                       direction={orderBy === key ? orderDirection : 'desc'}
                       onClick={() => handleSortColumn(key.toString())}
                     >
-                      {header}
+                      {t(header)}
                     </TableSortLabel>
-                  ) : <span>{header}</span>}
+                  ) : <span>{t(header)}</span>}
                 </TableCell>
               ))}
               <TableCell />

@@ -1,0 +1,141 @@
+{
+  "constants": {
+
+  },
+  "admin_dashboard": {
+    "properties_page": {
+      "heading": "Нерухомість",
+      "addNewPropertyBtnTooltip": "Створити новий об'єкт",
+      "propertiesTable": {
+        "columns": {
+          "id": "ID",
+          "title": "Заголовок",
+          "price": "Ціна",
+          "region": "Область",
+          "city": "Місто",
+          "address": "Адреса",
+          "author": "Автор",
+          "type": "Тип"
+        },
+        "rowActions": {
+          "update": "Оновити",
+          "delete": "Видалити"
+        }
+      },
+      "propertyForm": {
+        "title": "Нерухомість",
+        "fields": {
+          "title": {
+            "label": "Заголовок",
+            "errors": {
+              "required": "Заголовок є обов'язковим"
+            }
+          },
+          "price": {
+            "label": "Ціна",
+            "errors": {
+              "required": "Ціна є обов'язковою"
+            }
+          },
+          "description": {
+            "label": "Опис",
+            "errors": {
+              "required": "Опис є обов'язковим"
+            }
+          },
+          "adType": {
+            "label": "Тип оголошення",
+            "errors": {
+              "required": "Тип оголошення є обов'язковим"
+            }
+          },
+          "propertyType": {
+            "label": "Тип об'єкта",
+            "errors": {
+              "required": "Тип об'єкта є обов'язковим"
+            }
+          },
+          "roomsNumber": {
+            "label": "Кількість кімнат",
+            "errors": {
+              "required": "Вкажіть кількість кімнат"
+            }
+          },
+          "yearBuilt": {
+            "label": "Рік будівництва",
+            "errors": {
+              "required": "Вкажіть рік будівництва"
+            }
+          },
+          "floor": {
+            "label": "Поверх",
+            "errors": {
+              "required": "Вкажіть поверх"
+            }
+          },
+          "numberOfFloors": {
+            "label": "Кількість поверхів",
+            "errors": {
+              "required": "Вкажіть кількість поверхів"
+            }
+          },
+          "area": {
+            "label": "Площа",
+            "errors": {
+              "required": "Вкажіть пложу об'єкта"
+            }
+          },
+          "withRenovation": {
+            "label": "З ремонтом",
+            "values": {
+              "yes": "Так",
+              "no": "Ні"
+            }
+          },
+          "images": {
+            "label": "Завантажити фото",
+            "errors": {
+              "required": "Фото об'єкта є обов'язковими",
+              "fileSizeExceeded": "Розмір фото не має перевищувати 5Мб",
+              "invalidFormat": "Невірний формат фото. Дозволено тільки PNG, JPEG, and SVG."
+            }
+          },
+          "nearbyAmenities": {
+            "title": "Зручності поруч",
+            "label1": "Назва об'єкта",
+            "label2": "Відстань до об'єкта",
+            "addBtnLabel": "Додати"
+          },
+          "region": {
+            "label": "Область",
+            "errors": {
+              "required": "Вкажіть область"
+            }
+          },
+          "city": {
+            "label": "Місто",
+            "errors": {
+              "required": "Вкажіть місто"
+            }
+          },
+          "address": {
+            "label": "Адреса",
+            "errors": {
+              "required": "Вкажіть адресу"
+            }
+          }
+        },
+        "submitBtn": {
+          "default": "Створити",
+          "loading": "Завантаження..."
+        },
+        "status": {
+          "createSuccess": "Новий об'єкт нерухомості успішно створений",
+          "updateSuccess": "Об'єкт нерухомості успішно оновлено",
+          "createFailed": "Не вдалося створити новий об'єкт нерухомості",
+          "updateFailed": "Не вдалося оновити об'єкт нерухомості"
+        }
+      }
+    }
+  }
+}

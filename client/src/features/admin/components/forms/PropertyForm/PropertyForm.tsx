@@ -4,6 +4,7 @@ import {
   List, ListItem, MenuItem, Select, TextField, Typography 
 } from '@mui/material';
 import Close from '@mui/icons-material/Close';
+import { useTranslation } from 'react-i18next';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FileInput } from '../../../../../components/inputs/FileInput/FileInput';
@@ -40,6 +41,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
   initialData, 
   onSubmit 
 }) => {
+  const { t } = useTranslation();
   const { user } = useAppSelector((state) => state.user);
   const [amenity, setAmenity] = useState(amenityInitialValue);
 
@@ -48,7 +50,6 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
     control,
     handleSubmit,
     formState: { isSubmitting, errors },
-    getValues,
     setValue,
     reset,
     watch,
@@ -124,8 +125,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
       formData.append('_id', initialData._id);
     }
 
-    console.log('LOCATION', getValues('location.mapCoords'))
-    // await onSubmit(formData);
+    await onSubmit(formData);
     reset();
     onClose();
   };
@@ -145,7 +145,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
       maxWidth='xl'
     >
       <DialogTitle sx={styles.dialogHeading}>
-        {title}
+        {t(title)}
       </DialogTitle>
       <DialogContent>
         <Box 
@@ -155,14 +155,14 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
         >
           <Box component='fieldset' sx={styles.fieldset}>
             <TextField 
-              label='Title'
+              label={t('admin_dashboard.properties_page.propertyForm.fields.title.label')}
               fullWidth 
               error={!!errors.title}
               helperText={errors.title?.message}
               {...register('title')} 
             />
             <TextField 
-              label='Price'
+              label={t('admin_dashboard.properties_page.propertyForm.fields.price.label')}
               type='number'
               fullWidth 
               error={!!errors.price}
@@ -170,7 +170,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
               {...register('price', { valueAsNumber: true })} 
             />
             <TextField 
-              label='Description'
+              label={t('admin_dashboard.properties_page.propertyForm.fields.description.label')}
               fullWidth 
               multiline
               rows={11}
@@ -181,7 +181,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
           </Box>
           <Box component='fieldset' sx={styles.fieldset}>
             <Select
-              label='Ad type'
+              label={t('admin_dashboard.properties_page.propertyForm.fields.adType.label')}
               fullWidth
               error={!!errors.type}
               defaultValue={initialData.type}
@@ -197,7 +197,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
               ))}
             </Select>
             <Select
-              label='Property type'
+              label={t('admin_dashboard.properties_page.propertyForm.fields.propertyType.label')}
               fullWidth
               defaultValue={initialData.overview.propertyType}
               error={!!errors.overview?.propertyType}
@@ -213,7 +213,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
               ))}
             </Select>
             <TextField 
-              label='Rooms number'
+              label={t('admin_dashboard.properties_page.propertyForm.fields.roomsNumber.label')}
               type='number'
               fullWidth 
               error={!!errors.overview?.roomsNumber}
@@ -221,7 +221,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
               {...register('overview.roomsNumber', { valueAsNumber: true })} 
             />
             <TextField 
-              label='Year built'
+              label={t('admin_dashboard.properties_page.propertyForm.fields.yearBuilt.label')}
               type='number'
               fullWidth 
               error={!!errors.overview?.yearBuilt}
@@ -229,7 +229,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
               {...register('overview.yearBuilt', { valueAsNumber: true })} 
             />
             <TextField 
-              label='Floor'
+              label={t('admin_dashboard.properties_page.propertyForm.fields.floor.label')}
               type='number'
               fullWidth 
               error={!!errors.overview?.floor}
@@ -237,7 +237,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
               {...register('overview.floor', { valueAsNumber: true })} 
             />
             <TextField 
-              label='Number of floors'
+              label={t('admin_dashboard.properties_page.propertyForm.fields.numberOfFloors.label')}
               type='number'
               fullWidth 
               error={!!errors.overview?.numberOfFloors}
@@ -245,7 +245,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
               {...register('overview.numberOfFloors', { valueAsNumber: true })} 
             />
             <TextField 
-              label='Area'
+              label={t('admin_dashboard.properties_page.propertyForm.fields.area.label')}
               type='number'
               fullWidth 
               error={!!errors.overview?.area}
@@ -253,7 +253,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
               {...register('overview.area', { valueAsNumber: true })} 
             />
             <Select
-              label='With renovation'
+              label={t('admin_dashboard.properties_page.propertyForm.fields.withRenovation.label')}
               fullWidth
               defaultValue='yes'
               error={!!errors.overview?.withRenovation}
@@ -262,17 +262,17 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
               <MenuItem 
                 value='yes'
               >
-                Yes
+                {t('admin_dashboard.properties_page.propertyForm.fields.withRenovation.values.yes')}
               </MenuItem>
               <MenuItem 
                 value='no'
               >
-                No
+                {t('admin_dashboard.properties_page.propertyForm.fields.withRenovation.values.no')}
               </MenuItem>
             </Select>
             <FileInput 
               name='images'
-              title='Upload images'
+              title={t('admin_dashboard.properties_page.propertyForm.fields.images.label')}
               register={register}
               setValue={setValue}
               multiple
@@ -282,24 +282,24 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
           </Box>
           <Box component='fieldset' sx={styles.fieldset}>
             <Typography variant='h6'>
-              Nearby amenities
+              {t('admin_dashboard.properties_page.propertyForm.fields.nearbyAmenities.title')}
             </Typography>
             <TextField 
               name='object'
-              label='Object name'
+              label={t('admin_dashboard.properties_page.propertyForm.fields.nearbyAmenities.label1')}
               fullWidth 
               value={amenity.object}
               onChange={handleAmenityChange}
             />
             <TextField 
               name='distanceTo'
-              label='Distance to object'
+              label={t('admin_dashboard.properties_page.propertyForm.fields.nearbyAmenities.label2')}
               fullWidth 
               value={amenity.distanceTo}
               onChange={handleAmenityChange}
             />
             <Button type='button' onClick={handleAddAmenity}>
-              Add a new amenity
+              {t('admin_dashboard.properties_page.propertyForm.fields.nearbyAmenities.addBtnLabel')}
             </Button>
             <List sx={styles.amenitiesList}>
               {fields.map((field, index) => (
@@ -316,7 +316,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
           </Box>
           <Box component='fieldset' sx={styles.fieldset}>
             <Select
-              label='Region'
+              label={t('admin_dashboard.properties_page.propertyForm.fields.region.label')}
               fullWidth
               defaultValue={initialData.location.region}
               error={!!errors.location?.region}
@@ -332,14 +332,14 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
               ))}
             </Select>
             <TextField 
-              label='City'
+              label={t('admin_dashboard.properties_page.propertyForm.fields.city.label')}
               fullWidth 
               error={!!errors.location?.city}
               helperText={errors.location?.city?.message}
               {...register('location.city')} 
             />
             <TextField 
-              label='Address'
+              label={t('admin_dashboard.properties_page.propertyForm.fields.address.label')}
               fullWidth 
               error={!!errors.location?.address}
               helperText={errors.location?.address?.message}
@@ -356,7 +356,10 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
               disabled={isSubmitting} 
               sx={styles.submitBtn}
             >
-              {isSubmitting ? 'Loading...' : 'Submit'}
+              {isSubmitting 
+                ? t('admin_dashboard.properties_page.propertyForm.submitBtn.loading') 
+                : t('admin_dashboard.properties_page.propertyForm.submitBtn.default')
+              }
             </Button>
           </Box>
         </Box>

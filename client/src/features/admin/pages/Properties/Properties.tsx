@@ -11,6 +11,7 @@ import {
 } from '../../../properties/state/propertyApi';
 import { PropertyType } from '../../../properties/state/types';
 import { PropertyDataType } from '../../components/forms/validationSchemas/property.schema';
+import { useTranslation } from 'react-i18next';
 
 
 type ColumnType = {
@@ -23,40 +24,40 @@ type ColumnType = {
 const columns: ColumnType[] = [
   {
     key: '_id',
-    header: 'ID',
+    header: 'admin_dashboard.properties_page.propertiesTable.columns.id',
   },
   {
     key: 'title',
-    header: 'Title',
+    header: 'admin_dashboard.properties_page.propertiesTable.columns.title',
   },
   {
     key: 'price',
-    header: 'Price',
+    header: 'admin_dashboard.properties_page.propertiesTable.columns.price',
     isSortable: true,
   },
   {
     key: 'location.region' as keyof PropertyType,
-    header: 'Region',
+    header: 'admin_dashboard.properties_page.propertiesTable.columns.region',
     render: (item: any) => item.location.region,
   },
   {
     key: 'location.city' as keyof PropertyType,
-    header: 'City',
+    header: 'admin_dashboard.properties_page.propertiesTable.columns.city',
     render: (item: any) => item.location.city,
   },
   {
     key: 'location.address' as keyof PropertyType,
-    header: 'Address',
+    header: 'admin_dashboard.properties_page.propertiesTable.columns.address',
     render: (item: any) => item.location.address,
   },
   {
     key: 'author.name' as keyof PropertyType,
-    header: 'Author',
+    header: 'admin_dashboard.properties_page.propertiesTable.columns.author',
     render: (item: any) => item.author.name,
   },
   {
     key: 'overview.propertyType' as keyof PropertyType,
-    header: 'Type',
+    header: 'admin_dashboard.properties_page.propertiesTable.columns.type',
     render: (item: any) => item.overview.propertyType,
   },
 ];
@@ -90,6 +91,7 @@ const newPropertyEmptyState: PropertyDataType = {
 
 
 const PropertiesPage = () => {
+  const { t } = useTranslation()
   const [propertyFormOpen, setPropertyFormOpen] = useState<boolean>(false);
   const [formMode, setFormMode] = useState<'create' | 'update'>('create');
   const [propertyFormInitialState, setPropertyFormInitialState] = useState<any>(newPropertyEmptyState);
@@ -125,7 +127,7 @@ const PropertiesPage = () => {
     if(error) {
       statusToast({
         type: 'error',
-        message: 'Failed to create a new property',
+        message: t('admin_dashboard.properties_page.propertyForm.status.createFailed'),
       });
     }
   }, [createProperty]);
@@ -147,7 +149,7 @@ const PropertiesPage = () => {
     if(error) {
       statusToast({
         type: 'error',
-        message: 'Failed to create a new property',
+        message: t('admin_dashboard.properties_page.propertyForm.status.updateFailed'),
       });
     }
   }, []);
@@ -172,8 +174,8 @@ const PropertiesPage = () => {
 
   return (
     <AdminPageContainer 
-      heading='Properties'
-      actionBtnTooltipText='Create a new property' 
+      heading={t('admin_dashboard.properties_page.heading')}
+      actionBtnTooltipText={t('admin_dashboard.properties_page.addNewPropertyBtnTooltip')} 
       action={handleNewPropertyFormOpen} 
     >
       {isSuccess || isDeleteSuccess ? (
@@ -189,7 +191,7 @@ const PropertiesPage = () => {
       )}
       <PropertyForm 
         open={propertyFormOpen} 
-        title='Property' 
+        title='admin_dashboard.properties_page.propertyForm.title' 
         initialData={propertyFormInitialState} 
         onClose={() => setPropertyFormOpen(false)} 
         onSubmit={formMode === 'create' ? handleCreateProperty : handleUpdateProperty} 

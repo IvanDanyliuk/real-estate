@@ -1,0 +1,141 @@
+{
+  "constants": {
+
+  },
+  "admin_dashboard": {
+    "properties_page": {
+      "heading": "Properties",
+      "addNewPropertyBtnTooltip": "Create a new property",
+      "propertiesTable": {
+        "columns": {
+          "id": "ID",
+          "title": "Title",
+          "price": "Price",
+          "region": "Region",
+          "city": "City",
+          "address": "Address",
+          "author": "Author",
+          "type": "Type"
+        },
+        "rowActions": {
+          "update": "Update",
+          "delete": "Delete"
+        }
+      },
+      "propertyForm": {
+        "title": "Property",
+        "fields": {
+          "title": {
+            "label": "Title",
+            "errors": {
+              "required": "Title is required"
+            }
+          },
+          "price": {
+            "label": "Price",
+            "errors": {
+              "required": "Price is required"
+            }
+          },
+          "description": {
+            "label": "Description",
+            "errors": {
+              "required": "Description is required"
+            }
+          },
+          "adType": {
+            "label": "Ad type",
+            "errors": {
+              "required": "Ad type is required"
+            }
+          },
+          "propertyType": {
+            "label": "Property type",
+            "errors": {
+              "required": "Property type is required"
+            }
+          },
+          "roomsNumber": {
+            "label": "Rooms number",
+            "errors": {
+              "required": "Pass a number of rooms is required"
+            }
+          },
+          "yearBuilt": {
+            "label": "Year built",
+            "errors": {
+              "required": "Pass property's year built"
+            }
+          },
+          "floor": {
+            "label": "Floor",
+            "errors": {
+              "required": "Pass a floor number is required"
+            }
+          },
+          "numberOfFloors": {
+            "label": "Number of floors",
+            "errors": {
+              "required": "Pass a number of floors"
+            }
+          },
+          "area": {
+            "label": "Area",
+            "errors": {
+              "required": "Area is required"
+            }
+          },
+          "withRenovation": {
+            "label": "With renovation",
+            "values": {
+              "yes": "Yes",
+              "no": "No"
+            }
+          },
+          "images": {
+            "label": "Upload images",
+            "errors": {
+              "required": "Property photos are required!",
+              "fileSizeExceeded": "File size must be less than 5MB",
+              "invalidFormat": "Invalid file format. Only PNG, JPEG, and SVG are allowed."
+            }
+          },
+          "nearbyAmenities": {
+            "title": "Nearby amenities",
+            "label1": "Object name",
+            "label2": "Distance to object",
+            "addBtnLabel": "Add a new amenity"
+          },
+          "region": {
+            "label": "Region",
+            "errors": {
+              "required": "Region is required"
+            }
+          },
+          "city": {
+            "label": "City",
+            "errors": {
+              "required": "City is required"
+            }
+          },
+          "address": {
+            "label": "Address",
+            "errors": {
+              "required": "Address is required"
+            }
+          }
+        },
+        "submitBtn": {
+          "default": "Submit",
+          "loading": "Loading..."
+        },
+        "status": {
+          "createSuccess": "New property has been successfully created",
+          "updateSuccess": "New property has been successfully updated",
+          "createFailed": "Failed to create a new property",
+          "updateFailed": "Failed to update the property"
+        }
+      }
+    }
+  }
+}

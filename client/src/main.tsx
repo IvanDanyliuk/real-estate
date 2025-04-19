@@ -7,6 +7,7 @@ import { store } from './store/store.ts'
 import { BrowserRouter } from 'react-router-dom'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { theme } from './config/theme.ts'
+import { LocaleProvider } from './config/i18/LocaleProvider.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -14,7 +15,9 @@ createRoot(document.getElementById('root')!).render(
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <App />
+          <LocaleProvider>
+            <App />
+          </LocaleProvider>
         </ThemeProvider>
       </Provider>
     </BrowserRouter>
