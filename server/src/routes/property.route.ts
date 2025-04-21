@@ -2,6 +2,7 @@ import { Router } from "express";
 import { 
   createPropertyHandler, 
   deletePropertyHandler, 
+  getGeneralStatsHandler, 
   getPropertiesHandler, 
   getPropertyByIdHandler, 
   updatePropertyHandler 
@@ -12,6 +13,7 @@ import { upload } from "../middleware/multer";
 const propertyRoutes = Router();
 
 propertyRoutes.get('/', getPropertiesHandler);
+propertyRoutes.get('/stats', getGeneralStatsHandler);
 propertyRoutes.get('/:id', getPropertyByIdHandler);
 propertyRoutes.post('/', upload.array('images'), createPropertyHandler);
 propertyRoutes.patch('/', upload.array('images'), updatePropertyHandler);

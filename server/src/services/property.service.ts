@@ -107,3 +107,45 @@ export const deleteProperty = async (id: string) => {
     message: 'Property has been successfully deleted!',
   };
 };
+
+export const getGeneralStats = async () => {
+  const totalPropertyCount = await PropertyModel.countDocuments();
+
+  const topPropertyNumberRegion = await PropertyModel.aggregate([
+    {
+      $group: {
+        _id: "$location.region",
+        count: { $sum: 1 },
+      }
+    },
+    { $sort: { count: -1 } },
+    { $limit: 1 },
+  ]);
+
+  const averageBuyingPrice = await PropertyModel.aggregate([
+    { $match: { type: "for_sale" } },
+    {
+      $group: {
+        _id: "$market",
+        avgPrice: { $avg: "$price" }
+      }
+    }
+  ]);
+
+  const averageRentPrice = await PropertyModel.aggregate([
+    { $match: { type: "for_rent" } },
+    {
+      $group: {
+        _id: "$market",
+        avgPrice: { $avg: "$price" }
+      }
+    }
+  ])
+
+  return {
+    totalPropertyCount, 
+    topPropertyNumberRegion, 
+    averageBuyingPrice,
+    averageRentPrice,
+  };
+};

@@ -13,6 +13,7 @@ const propertySchema = new Schema({
     },
   },
   type: { type: String },
+  market: { type: String },
   author: { type: Schema.Types.ObjectId, ref: "User" },
   description: { type: String },
   images: [{ type: String }],
