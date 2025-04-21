@@ -149,3 +149,45 @@ export const getGeneralStats = async () => {
     averageRentPrice,
   };
 };
+
+export type GetMonthlyPropertyStats = {
+  type: "for_sale" | "for_rent",
+};
+
+export const getMonthlyPropertyStats = async ({ type }: GetMonthlyPropertyStats) => {
+  const addedPropertiesByMonth = await PropertyModel.aggregate([
+    {
+      $match: {
+        market: { $in: ["primary", "secondary"] },
+        type
+      }
+    },
+    {
+      $group: {
+        _id: {
+          year: { $year: "$createdAt" },
+          month: { $month: "$createdAt" }
+        },
+        primaryCount: {
+          $sum: {
+            $cond: [{ $eq: ["$market", "primary"] }, 1, 0]
+          }
+        },
+        secondaryCount: {
+          $sum: {
+            $cond: [{ $eq: ["$market", "secondary"] }, 1, 0]
+          }
+        }
+      }
+    },
+    {
+      $sort: {
+        "_id.year": 1,
+        "_id.month": 1
+      }
+    }
+  ]);
+  return {
+    addedPropertiesByMonth,
+  };
+};

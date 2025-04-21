@@ -3,6 +3,7 @@ import {
   createPropertyHandler, 
   deletePropertyHandler, 
   getGeneralStatsHandler, 
+  getMonthlyPropertyStatsHandler, 
   getPropertiesHandler, 
   getPropertyByIdHandler, 
   updatePropertyHandler 
@@ -13,7 +14,8 @@ import { upload } from "../middleware/multer";
 const propertyRoutes = Router();
 
 propertyRoutes.get('/', getPropertiesHandler);
-propertyRoutes.get('/stats', getGeneralStatsHandler);
+propertyRoutes.get('/stats/general', getGeneralStatsHandler);
+propertyRoutes.get('/stats/monthly', getMonthlyPropertyStatsHandler);
 propertyRoutes.get('/:id', getPropertyByIdHandler);
 propertyRoutes.post('/', upload.array('images'), createPropertyHandler);
 propertyRoutes.patch('/', upload.array('images'), updatePropertyHandler);
