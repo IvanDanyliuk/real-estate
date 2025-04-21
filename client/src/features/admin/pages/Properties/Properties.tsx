@@ -60,6 +60,11 @@ const columns: ColumnType[] = [
     header: 'admin_dashboard.properties_page.propertiesTable.columns.type',
     render: (item: any) => item.overview.propertyType,
   },
+  {
+    key: 'overview.propertyType' as keyof PropertyType,
+    header: 'admin_dashboard.properties_page.propertiesTable.columns.market',
+    render: (item: any) => item.market,
+  },
 ];
 
 const newPropertyEmptyState: PropertyDataType = {
@@ -75,6 +80,7 @@ const newPropertyEmptyState: PropertyDataType = {
     },
   },
   type: '',
+  market: 'secondary',
   description: '',
   images: [],
   overview: {

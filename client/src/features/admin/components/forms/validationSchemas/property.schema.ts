@@ -14,6 +14,7 @@ export const propertySchema = zod.object({
     }).optional(),
   }),
   type: zod.string().min(1).max(255),
+  market: zod.enum(['primary', 'secondary']),
   description: zod.string().min(1).max(1000),
   images: zod.union([
     zod

@@ -15,7 +15,8 @@
           "city": "City",
           "address": "Address",
           "author": "Author",
-          "type": "Type"
+          "type": "Type",
+          "market": "Market"
         },
         "rowActions": {
           "update": "Update",
@@ -47,6 +48,16 @@
             "label": "Ad type",
             "errors": {
               "required": "Ad type is required"
+            }
+          },
+          "market": {
+            "label": "Market",
+            "values": {
+              "primary": "Primary",
+              "secondary": "Secondary"
+            },
+            "errors": {
+              "required": "Select a market type"
             }
           },
           "propertyType": {

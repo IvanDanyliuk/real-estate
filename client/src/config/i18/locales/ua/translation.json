@@ -15,7 +15,8 @@
           "city": "Місто",
           "address": "Адреса",
           "author": "Автор",
-          "type": "Тип"
+          "type": "Тип",
+          "market": "Ринок"
         },
         "rowActions": {
           "update": "Оновити",
@@ -47,6 +48,16 @@
             "label": "Тип оголошення",
             "errors": {
               "required": "Тип оголошення є обов'язковим"
+            }
+          },
+          "market": {
+            "label": "Ринок",
+            "values": {
+              "primary": "Первинний",
+              "secondary": "Вторинний"
+            },
+            "errors": {
+              "required": "Оберіть тип ринку"
             }
           },
           "propertyType": {

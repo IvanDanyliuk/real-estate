@@ -96,6 +96,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
         : undefined,
     })));
     formData.append('type', propertyData.type);
+    formData.append('market', propertyData.market);
     formData.append('description', propertyData.description);
     formData.append('overview', JSON.stringify(removeFalseyFields({
       roomsNumber: propertyData.overview.roomsNumber,
@@ -169,6 +170,24 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
               helperText={errors.price?.message}
               {...register('price', { valueAsNumber: true })} 
             />
+            <Select
+              label={t('admin_dashboard.properties_page.propertyForm.fields.market.label')}
+              fullWidth
+              defaultValue='primary'
+              error={!!errors.overview?.withRenovation}
+              {...register('overview.withRenovation')}
+            >
+              <MenuItem 
+                value='primary'
+              >
+                {t('admin_dashboard.properties_page.propertyForm.fields.market.values.primary')}
+              </MenuItem>
+              <MenuItem 
+                value='secondary'
+              >
+                {t('admin_dashboard.properties_page.propertyForm.fields.market.values.secondary')}
+              </MenuItem>
+            </Select>
             <TextField 
               label={t('admin_dashboard.properties_page.propertyForm.fields.description.label')}
               fullWidth 

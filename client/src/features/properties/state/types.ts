@@ -11,6 +11,7 @@ export interface PropertyFormData {
     };
   };
   type: string;
+  market: string;
   author: string;
   description: string;
   images: any[];

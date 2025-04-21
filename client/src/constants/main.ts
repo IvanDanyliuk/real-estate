@@ -3,6 +3,11 @@ export enum USER_ROLES {
   Admin = 'admin',
 };
 
+export enum MARKET_TYPE {
+  Primary = 'primary',
+  Secondary = 'secondary',
+};
+
 export const MAX_IMAGE_FILE_SIZE = 5000000;
 export const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 
@@ -14,6 +19,17 @@ export const AD_TYPES = [
   {
     value: 'for_rent',
     label: 'For rent',
+  },
+];
+
+export const MARKET_TYPES = [
+  {
+    value: MARKET_TYPE.Primary,
+    label: 'Primary',
+  },
+  {
+    value: MARKET_TYPE.Secondary,
+    label: 'Secondary',
   },
 ];
 
