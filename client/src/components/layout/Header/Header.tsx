@@ -6,6 +6,8 @@ import { Navbar } from '../Navbar/Navbar';
 import { Logo } from '../Logo/Logo';
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { Link } from 'react-router';
+import { Box } from '@mui/material';
+import { LanguageSelect } from '../LanguageSelect/LanguageSelect';
 
 export const Header: React.FC = () => {
   const { user } = useAppSelector((state) => state.user);
@@ -18,10 +20,13 @@ export const Header: React.FC = () => {
     >
       <Logo />
       <Navbar />
-      {user 
-        ? <UserMenu user={user} /> 
-        : <Link to='/login'>Sign in</Link>
-      }
+      <Box sx={styles.preferences}>
+        <LanguageSelect />
+        {user 
+          ? <UserMenu user={user} /> 
+          : <Link to='/login'>Sign in</Link>
+        }
+      </Box>
     </Container>
   );
 };

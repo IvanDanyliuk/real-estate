@@ -12,8 +12,8 @@ i18n
       en: { translation: translationEn },
       ua: { translation: translationUa },
     },
-    lng: 'ua',
-    fallbackLng: 'ua',
+    lng: localStorage.getItem('lang') || 'ua',
+    fallbackLng: localStorage.getItem('lang') || 'ua',
     interpolation: {
       escapeValue: false,
     },

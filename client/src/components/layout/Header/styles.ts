@@ -10,4 +10,8 @@ export const styles: StyleProps = {
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  preferences: {
+    display: 'flex',
+    gap: 2,
+  },
 };
