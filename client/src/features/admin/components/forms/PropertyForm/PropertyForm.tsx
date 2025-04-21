@@ -173,9 +173,9 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
             <Select
               label={t('admin_dashboard.properties_page.propertyForm.fields.market.label')}
               fullWidth
-              defaultValue='primary'
-              error={!!errors.overview?.withRenovation}
-              {...register('overview.withRenovation')}
+              defaultValue={initialData.market}
+              error={!!errors.market}
+              {...register('market')}
             >
               <MenuItem 
                 value='primary'
