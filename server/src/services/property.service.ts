@@ -187,7 +187,41 @@ export const getMonthlyPropertyStats = async ({ type }: GetMonthlyPropertyStats)
       }
     }
   ]);
-  return {
-    addedPropertiesByMonth,
-  };
+  return addedPropertiesByMonth;
+};
+
+export type GetPropertyStatsByRegion = {
+  type: "for_sale" | "for_rent",
+};
+
+export const getPropertyStatsByRegion = async ({ type }: GetPropertyStatsByRegion) => {
+  const propertyStatsByRegion = await PropertyModel.aggregate([
+    {
+      $match: {
+        market: { $in: ["primary", "secondary"] },
+        type
+      }
+    },
+    {
+      $group: {
+        _id: "$location.region",
+        primaryCount: {
+          $sum: {
+            $cond: [{ $eq: ["$market", "primary"] }, 1, 0]
+          }
+        },
+        secondaryCount: {
+          $sum: {
+            $cond: [{ $eq: ["$market", "secondary"] }, 1, 0]
+          }
+        }
+      }
+    },
+    {
+      $sort: {
+        "location.region": 1
+      }
+    }
+  ]);
+  return propertyStatsByRegion;
 };

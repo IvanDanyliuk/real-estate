@@ -1,7 +1,7 @@
 import { propertySchema } from "../schemas/property.schema";
 import catchErrors from "../utils/catchErrors";
 import { OK } from "../constants/http";
-import { createProperty, deleteProperty, getGeneralStats, getMonthlyPropertyStats, getProperties, updateProperty } from "../services/property.service";
+import { createProperty, deleteProperty, getGeneralStats, getMonthlyPropertyStats, getProperties, getPropertyStatsByRegion, updateProperty } from "../services/property.service";
 
 type FiltersType = {
   price?: {
@@ -116,5 +116,10 @@ export const getGeneralStatsHandler = catchErrors(async (req, res) => {
 
 export const getMonthlyPropertyStatsHandler = catchErrors(async (req, res) => {
   const response = await getMonthlyPropertyStats(req.body);
+  return res.status(OK).json(response);
+});
+
+export const getPropertyStatsByRegionHandler = catchErrors(async (req, res) => {
+  const response = await getPropertyStatsByRegion(req.body);
   return res.status(OK).json(response);
 });
