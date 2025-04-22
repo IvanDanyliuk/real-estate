@@ -115,16 +115,28 @@ export const getGeneralStatsHandler = catchErrors(async (req, res) => {
 });
 
 export const getMonthlyPropertyStatsHandler = catchErrors(async (req, res) => {
-  const response = await getMonthlyPropertyStats(req.body);
+  const type = req.query.type 
+    ? req.query.type.toString() 
+    : 'for_sale';
+
+  const response = await getMonthlyPropertyStats({ type });
   return res.status(OK).json(response);
 });
 
 export const getPropertyStatsByRegionHandler = catchErrors(async (req, res) => {
-  const response = await getPropertyStatsByRegion(req.body);
+  const type = req.query.type 
+    ? req.query.type.toString() 
+    : 'for_sale';
+
+  const response = await getPropertyStatsByRegion({ type });
   return res.status(OK).json(response);
 });
 
 export const getMonthlyAveragePriceStatsHandler = catchErrors(async (req, res) => {
-  const response = await getMonthlyPriceStats(req.body);
+  const region = req.query.region 
+    ? req.query.region.toString() 
+    : 'All';
+
+  const response = await getMonthlyPriceStats({ region });
   return res.status(OK).json(response);
 });

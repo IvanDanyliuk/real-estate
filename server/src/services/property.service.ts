@@ -150,11 +150,11 @@ export const getGeneralStats = async () => {
   };
 };
 
-export type GetMonthlyPropertyStats = {
-  type: "for_sale" | "for_rent",
+export type GetMonthlyPropertyStatsParams = {
+  type: string,
 };
 
-export const getMonthlyPropertyStats = async ({ type }: GetMonthlyPropertyStats) => {
+export const getMonthlyPropertyStats = async ({ type }: GetMonthlyPropertyStatsParams) => {
   const addedPropertiesByMonth = await PropertyModel.aggregate([
     {
       $match: {
@@ -191,7 +191,7 @@ export const getMonthlyPropertyStats = async ({ type }: GetMonthlyPropertyStats)
 };
 
 export type GetPropertyStatsByRegion = {
-  type: "for_sale" | "for_rent",
+  type: string,
 };
 
 export const getPropertyStatsByRegion = async ({ type }: GetPropertyStatsByRegion) => {
@@ -268,6 +268,6 @@ export const getMonthlyPriceStats = async ({ region }: GetMonthlyPriceStats) => 
       }
     }
   ]);
-  
+
   return monthlyPriceStats;
 };
