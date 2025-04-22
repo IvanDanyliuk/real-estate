@@ -225,3 +225,49 @@ export const getPropertyStatsByRegion = async ({ type }: GetPropertyStatsByRegio
   ]);
   return propertyStatsByRegion;
 };
+
+export type GetMonthlyPriceStats = {
+  region: string;
+};
+
+export const getMonthlyPriceStats = async ({ region }: GetMonthlyPriceStats) => {
+  const matchStage: any = {
+    market: { $in: ["primary", "secondary"] }
+  };
+
+  if(region !== "All") {
+    matchStage["location.region"] = region;
+  };
+
+  const monthlyPriceStats = await PropertyModel.aggregate([
+    {
+      $match: matchStage
+    },
+    {
+      $group: {
+        _id: {
+          year: { $year: "$createdAt" },
+          month: { $month: "$createdAt" }
+        },
+        primaryAvgPrice: {
+          $avg: {
+            $cond: [{ $eq: ["$market", "primary"] }, "$price", null]
+          }
+        },
+        secondaryAvgPrice: {
+          $avg: {
+            $cond: [{ $eq: ["$market", "secondary"] }, "$price", null]
+          }
+        }
+      }
+    },
+    {
+      $sort: {
+        "_id.year": 1,
+        "_id.month": 1
+      }
+    }
+  ]);
+  
+  return monthlyPriceStats;
+};
