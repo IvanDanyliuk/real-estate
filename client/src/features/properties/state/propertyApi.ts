@@ -38,7 +38,30 @@ export const propertyApi = createApi({
         url: `/properties/${id}`,
         method: REQUEST_METHODS.delete,
       })
-    })
+    }),
+    getGeneralStats: builder.query({
+      query: () => ({
+        url: '/properties/stats/general'
+      })
+    }),
+    getMonthlyPropertyStats: builder.query({
+      query: (params) => ({
+        url: '/properties/stats/monthly',
+        params,
+      })
+    }),
+    getPropertyStatsByRegion: builder.query({
+      query: (params) => ({
+        url: '/properties/stats/regions',
+        params,
+      })
+    }),
+    getMonthlyAveragePriceStats: builder.query({
+      query: (params) => ({
+        url: '/properties/stats/prices',
+        params,
+      })
+    }),
   }),
 });
 
@@ -47,5 +70,9 @@ export const {
   useGetPropertyByIdQuery, 
   useCreatePropertyMutation, 
   useUpdatePropertyMutation, 
-  useDeletePropertyMutation 
+  useDeletePropertyMutation, 
+  useGetGeneralStatsQuery,
+  useLazyGetMonthlyPropertyStatsQuery, 
+  useLazyGetPropertyStatsByRegionQuery,
+  useLazyGetMonthlyAveragePriceStatsQuery, 
 } = propertyApi;
