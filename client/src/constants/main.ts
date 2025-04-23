@@ -11,6 +11,11 @@ export enum MARKET_TYPE {
 export const MAX_IMAGE_FILE_SIZE = 5000000;
 export const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 
+export const MONTHS = [
+  'January', 'February', 'March', 'April', 'May', 'June', 
+  'July', 'August', 'September', 'October', 'November', 'December',
+];
+
 export const AD_TYPES = [
   {
     value: 'for_sale',
