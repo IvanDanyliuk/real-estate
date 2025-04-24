@@ -5,8 +5,9 @@ import { GeneralStats } from '../../components/GeneralStats/GeneralStats';
 import { SectionSkeleton } from '../../skeletons/SectionSkeleton/SectionSkeleton';
 import { Box } from '@mui/material';
 import { styles } from './styles';
-import { BarChart } from '../../components/charts/BarChart';
+import { BarChart } from '../../components/charts/BarChart/BarChart';
 import { MONTHS } from '../../../../constants/main';
+import { useTranslation } from 'react-i18next';
 
 
 enum AdType {
@@ -22,6 +23,7 @@ type ChartDataParams = {
 
 
 const DashboardPage = () => {
+  const { t } = useTranslation();
   const [addedPropertiesChartFilterValue, setAddedPropertiesChartFilterValue] = useState<string>(AdType.ForSale);
   const [addedPropertiesByRegionChartFilterValue, setAddedPropertiesByRegionChartFilterValue] = useState<string>(AdType.ForSale);
   const [priceDynamicRegionChartFilterValue, setPriceDynamicRegionChartFilterValue] = useState<string>('All');
@@ -88,7 +90,7 @@ const DashboardPage = () => {
         {isGetMonthlyPropertyStatsSuccess ? (
           <BarChart 
             data={monthlyPropertyStats} 
-            nameExtractor={(item) => MONTHS[item._id.month - 1]} 
+            nameExtractor={(item) => t(MONTHS[item._id - 1])} 
             value1='primaryCount' 
             value2='secondaryCount' 
           />
@@ -98,7 +100,7 @@ const DashboardPage = () => {
         {isGetPropertyStatsByRegion ? (
           <BarChart 
             data={propertyStatsByRegion} 
-            nameExtractor={(item) => item._id} 
+            nameExtractor={(item) => t(`constants.regions.${item._id}`)} 
             value1='primaryCount' 
             value2='secondaryCount' 
           />

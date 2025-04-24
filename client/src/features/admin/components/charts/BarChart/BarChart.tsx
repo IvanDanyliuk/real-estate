@@ -21,7 +21,7 @@ export const BarChart: React.FC<BarChartProps> = ({
     value1: item[value1],
     value2: item[value2],
   }));
-
+  console.log('BAR CHART', data)
   return (
     <Box>
       <Chart width={800} height={500} data={transformedData}>

@@ -1,6 +1,46 @@
 {
   "constants": {
-
+    "months": {
+      "jan": "Січень",
+      "feb": "Лютий",
+      "mar": "Березень",
+      "apr": "Квітень",
+      "may": "Травень",
+      "jun": "Червень",
+      "jul": "Липень",
+      "aug": "Серпень",
+      "sep": "Вересень",
+      "oct": "Жовтень",
+      "nov": "Листопад",
+      "dec": "Грудень"
+    },
+    "regions": {
+      "Crimea": "Автономна Республіка Крим",
+      "Vinnytsia": "Вінницька",
+      "Volyn": "Волинська",
+      "Dnipropetrovsk": "Дніпропетровська",
+      "Donetsk": "Донецька",
+      "Zhytomyr": "Житомирська",
+      "Zakarpattia": "Закарпатська",
+      "Zaporizhzhia": "Запорізька",
+      "Ivano-Frankivsk": "Івано-Франківська",
+      "Kyiv": "Київська",
+      "Kirovohrad": "Кіровоградська",
+      "Luhansk": "Луганська",
+      "Lviv": "Львівська",
+      "Mykolaiv": "Миколаївська",
+      "Odesa": "Одеська",
+      "Poltava": "Полтавська",
+      "Rivne": "Рівненська",
+      "Sumy": "Сумська",
+      "Ternopil": "Тернопільська",
+      "Kharkiv": "Харківська",
+      "Kherson": "Херсонська",
+      "Khmelnytskiy": "Хмельницька",
+      "Cherkasy": "Черкаська",
+      "Chernivtsi": "Чернівецька",
+      "Chernihiv": "Чернігівська"
+    }
   },
   "admin_dashboard": {
     "properties_page": {

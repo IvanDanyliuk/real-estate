@@ -12,8 +12,9 @@ export const MAX_IMAGE_FILE_SIZE = 5000000;
 export const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 
 export const MONTHS = [
-  'January', 'February', 'March', 'April', 'May', 'June', 
-  'July', 'August', 'September', 'October', 'November', 'December',
+  'constants.months.jan', 'constants.months.feb', 'constants.months.mar', 'constants.months.apr', 
+  'constants.months.may', 'constants.months.jun', 'constants.months.jul', 'constants.months.aug', 
+  'constants.months.sep', 'constants.months.oct', 'constants.months.nov', 'constants.months.dec',
 ];
 
 export const AD_TYPES = [
