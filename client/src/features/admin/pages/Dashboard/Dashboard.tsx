@@ -8,6 +8,9 @@ import { styles } from './styles';
 import { BarChart } from '../../components/charts/BarChart/BarChart';
 import { MONTHS } from '../../../../constants/main';
 import { useTranslation } from 'react-i18next';
+import { LineChart } from '../../components/charts/LineChart/LineChart';
+import { fillEmptyArrayData } from '../../../../utils/helpers';
+import { REGIONS } from '../../../../constants/geoData';
 
 
 enum AdType {
@@ -87,31 +90,38 @@ const DashboardPage = () => {
         ) : (
           <SectionSkeleton numberOfItems={4} />
         )}
-        {isGetMonthlyPropertyStatsSuccess ? (
+        {/* {isGetMonthlyPropertyStatsSuccess ? (
           <BarChart 
-            data={monthlyPropertyStats} 
-            nameExtractor={(item) => t(MONTHS[item._id - 1])} 
-            value1='primaryCount' 
-            value2='secondaryCount' 
+            data={fillEmptyArrayData(monthlyPropertyStats, MONTHS)} 
+            primaryKey='primaryCount' 
+            secondaryKey='secondaryCount' 
           />
         ) : (
           <SectionSkeleton numberOfItems={1} />
         )}
         {isGetPropertyStatsByRegion ? (
           <BarChart 
-            data={propertyStatsByRegion} 
-            nameExtractor={(item) => t(`constants.regions.${item._id}`)} 
-            value1='primaryCount' 
-            value2='secondaryCount' 
+            data={fillEmptyArrayData(propertyStatsByRegion, REGIONS)} 
+            primaryKey='primaryCount' 
+            secondaryKey='secondaryCount' 
+          />
+        ) : (
+          <SectionSkeleton numberOfItems={1} />
+        )} */}
+        {isGetMonthlyAveragePriceStatsSuccess ? (
+          <LineChart 
+            data={fillEmptyArrayData(monthlyAveragePriceStats, MONTHS)}
+            primaryKey='primaryAvgPrice'
+            secondaryKey='secondaryAvgPrice'
           />
         ) : (
           <SectionSkeleton numberOfItems={1} />
         )}
-        {isGetMonthlyAveragePriceStatsSuccess ? (
-          <div>{JSON.stringify(monthlyAveragePriceStats)}</div>
-        ) : (
-          <SectionSkeleton numberOfItems={1} />
-        )}
+        {/* {isGetMonthlyAveragePriceStatsSuccess && (
+          <>
+            {JSON.stringify(fillEmptyArrayData(monthlyAveragePriceStats, MONTHS))}
+          </>
+        )} */}
       </Box>
     </AdminPageContainer>
   );

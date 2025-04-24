@@ -12,9 +12,18 @@ export const MAX_IMAGE_FILE_SIZE = 5000000;
 export const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 
 export const MONTHS = [
-  'constants.months.jan', 'constants.months.feb', 'constants.months.mar', 'constants.months.apr', 
-  'constants.months.may', 'constants.months.jun', 'constants.months.jul', 'constants.months.aug', 
-  'constants.months.sep', 'constants.months.oct', 'constants.months.nov', 'constants.months.dec',
+  { label: 'constants.months.jan', value: 1 }, 
+  { label: 'constants.months.feb', value: 2 }, 
+  { label: 'constants.months.mar', value: 3 }, 
+  { label: 'constants.months.apr', value: 4 }, 
+  { label: 'constants.months.may', value: 5 }, 
+  { label: 'constants.months.jun', value: 6 }, 
+  { label: 'constants.months.jul', value: 7 }, 
+  { label: 'constants.months.aug', value: 8 }, 
+  { label: 'constants.months.sep', value: 9 }, 
+  { label: 'constants.months.oct', value: 10 }, 
+  { label: 'constants.months.nov', value: 11 }, 
+  { label: 'constants.months.dec', value: 12 },
 ];
 
 export const AD_TYPES = [
