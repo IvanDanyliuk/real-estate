@@ -34,7 +34,12 @@ type InitialData = {
   secondaryKey: number,
 };
 
-export const fillEmptyArrayData = (initialData: InitialData[], options: {label: string; value: string | number;}[]) => {
+type Options = {
+  label: string, 
+  value: string | number,
+};
+
+export const fillEmptyArrayData = (initialData: InitialData[], options: Options[]) => {
   const dataMap = new Map(initialData.map(item => [item._id, item]));
   const filledData = options.map(item => {
     const itemFound = dataMap.get(item.value);
@@ -48,4 +53,4 @@ export const fillEmptyArrayData = (initialData: InitialData[], options: {label: 
     }
   });
   return filledData;
-}
+};

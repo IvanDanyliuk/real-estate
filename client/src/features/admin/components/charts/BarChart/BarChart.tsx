@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { BarChart as Chart, XAxis, YAxis, Bar, ResponsiveContainer } from 'recharts';
 
 
@@ -13,19 +14,20 @@ export const BarChart: React.FC<BarChartProps> = ({
   primaryKey,
   secondaryKey
 }) => {
+  const { t } = useTranslation();
+
   const transformedData = data.map((item) => ({
-    name: item._id,
-    primaryKey: item[primaryKey],
-    secondaryKey: item[secondaryKey],
+    ...item,
+    _id: t(item._id),
   }));
 
   return (
     <ResponsiveContainer width='100%' height={400}>
       <Chart data={transformedData}>
-        <XAxis dataKey='name' />
+        <XAxis dataKey='_id' />
         <YAxis />
-        <Bar dataKey='primaryKey' fill='#8884d8' />
-        <Bar dataKey='secondaryKey' fill='#271fba' />
+        <Bar dataKey={primaryKey} fill='#8884d8' />
+        <Bar dataKey={secondaryKey} fill='#271fba' />
       </Chart>
     </ResponsiveContainer>
   );

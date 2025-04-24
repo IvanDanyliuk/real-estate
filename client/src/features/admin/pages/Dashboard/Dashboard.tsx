@@ -18,12 +18,6 @@ enum AdType {
   ForRent = 'for_rent'
 };
 
-type ChartDataParams = {
-  name: string,
-  primary: number,
-  secondary: number
-}
-
 
 const DashboardPage = () => {
   const { t } = useTranslation();
@@ -90,7 +84,7 @@ const DashboardPage = () => {
         ) : (
           <SectionSkeleton numberOfItems={4} />
         )}
-        {/* {isGetMonthlyPropertyStatsSuccess ? (
+        {isGetMonthlyPropertyStatsSuccess ? (
           <BarChart 
             data={fillEmptyArrayData(monthlyPropertyStats, MONTHS)} 
             primaryKey='primaryCount' 
@@ -107,7 +101,7 @@ const DashboardPage = () => {
           />
         ) : (
           <SectionSkeleton numberOfItems={1} />
-        )} */}
+        )}
         {isGetMonthlyAveragePriceStatsSuccess ? (
           <LineChart 
             data={fillEmptyArrayData(monthlyAveragePriceStats, MONTHS)}
@@ -117,11 +111,6 @@ const DashboardPage = () => {
         ) : (
           <SectionSkeleton numberOfItems={1} />
         )}
-        {/* {isGetMonthlyAveragePriceStatsSuccess && (
-          <>
-            {JSON.stringify(fillEmptyArrayData(monthlyAveragePriceStats, MONTHS))}
-          </>
-        )} */}
       </Box>
     </AdminPageContainer>
   );

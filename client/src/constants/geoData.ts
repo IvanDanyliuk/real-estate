@@ -1,111 +1,103 @@
 export const REGIONS = [
   {
-    label: 'Autonomous Republic of Crimea',
+    label: 'constants.regions.Crimea',
     value: 'Crimea',
   },
   {
-    label: 'Vinnytsia Oblast',
+    label: 'constants.regions.Vinnytsia',
     value: 'Vinnytsia',
   },
   {
-    label: 'Volyn Oblast',
+    label: 'constants.regions.Volyn',
     value: 'Volyn',
   },
   {
-    label: 'Dnipropetrovsk Oblast',
+    label: 'constants.regions.Dnipropetrovsk',
     value: 'Dnipropetrovsk',
   },
   {
-    label: 'Donetsk Oblast',
+    label: 'constants.regions.Donetsk',
     value: 'Donetsk',
   },
   {
-    label: 'Zhytomyr Oblast',
+    label: 'constants.regions.Zhytomyr',
     value: 'Zhytomyr',
   },
   {
-    label: 'Zakarpattia Oblast',
+    label: 'constants.regions.Zakarpattia',
     value: 'Zakarpattia',
   },
   {
-    label: 'Zaporizhzhia Oblast',
+    label: 'constants.regions.Zaporizhzhia',
     value: 'Zaporizhzhia',
   },
   {
-    label: 'Ivano-Frankivsk Oblast',
+    label: 'constants.regions.Ivano-Frankivsk',
     value: 'Ivano-Frankivsk',
   },
   {
-    label: 'Kyiv Oblast',
+    label: 'constants.regions.Kyiv',
     value: 'Kyiv',
   },
   {
-    label: 'Kirovohrad Oblast',
+    label: 'constants.regions.Kirovohrad',
     value: 'Kirovohrad',
   },
   {
-    label: 'Luhansk Oblast',
+    label: 'constants.regions.Luhansk',
     value: 'Luhansk',
   },
   {
-    label: 'Lviv Oblast',
+    label: 'constants.regions.Lviv',
     value: 'Lviv',
   },
   {
-    label: 'Mykolaiv Oblast',
+    label: 'constants.regions.Mykolaiv',
     value: 'Mykolaiv',
   },
   {
-    label: 'Odesa Oblast',
+    label: 'constants.regions.Odesa',
     value: 'Odesa',
   },
   {
-    label: 'Poltava Oblast',
+    label: 'constants.regions.Poltava',
     value: 'Poltava',
   },
   {
-    label: 'Rivne Oblast',
+    label: 'constants.regions.Rivne',
     value: 'Rivne',
   },
   {
-    label: 'Sumy Oblast',
+    label: 'constants.regions.Sumy',
     value: 'Sumy',
   },
   {
-    label: 'Ternopil Oblast',
+    label: 'constants.regions.Ternopil',
     value: 'Ternopil',
   },
   {
-    label: 'Kharkiv Oblast',
+    label: 'constants.regions.Kharkiv',
     value: 'Kharkiv',
   },
   {
-    label: 'Kherson Oblast',
+    label: 'constants.regions.Kherson',
     value: 'Kherson',
   },
   {
-    label: 'Khmelnytskiy Oblast',
+    label: 'constants.regions.Khmelnytskiy',
     value: 'Khmelnytskiy',
   },
   {
-    label: 'Cherkasy Oblast',
+    label: 'constants.regions.Cherkasy',
     value: 'Cherkasy',
   },
   {
-    label: 'Chernivtsi Oblast',
+    label: 'constants.regions.Chernivtsi',
     value: 'Chernivtsi',
   },
   {
-    label: 'Chernihiv Oblast',
+    label: 'constants.regions.Chernihiv',
     value: 'Chernihiv',
-  },
-  {
-    label: 'Kyiv',
-    value: 'Kyiv',
-  },
-  {
-    label: 'Sevastopol',
-    value: 'Sevastopol',
   },
 ];
 
@@ -285,32 +277,4 @@ export const ADMINISTRATIVE_CENTERS = [
       lng: 34.1024,
     },
   },
-];
-
-export const ALL_REGIONS = [
-  'Crimea',
-  'Vinnytsia',
-  'Volyn',
-  'Dnipropetrovsk',
-  'Donetsk',
-  'Zhytomyr',
-  'Zakarpattia',
-  'Zaporizhzhia',
-  'Ivano-Frankivsk',
-  'Kyiv',
-  'Kirovohrad',
-  'Luhansk',
-  'Lviv',
-  'Mykolaiv',
-  'Odesa',
-  'Poltava',
-  'Rivne',
-  'Sumy',
-  'Ternopil',
-  'Kharkiv',
-  'Kherson',
-  'Khmelnytskiy',
-  'Cherkasy',
-  'Chernivtsi',
-  'Chernihiv',
 ];
