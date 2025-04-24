@@ -168,10 +168,6 @@ export const getMonthlyPropertyStats = async ({ type, year }: GetMonthlyProperty
     },
     {
       $group: {
-        // _id: {
-        //   year: { $year: "$createdAt" },
-        //   month: { $month: "$createdAt" }
-        // },
         _id: { $month: "$createdAt" },
         primaryCount: {
           $sum: {
@@ -187,8 +183,8 @@ export const getMonthlyPropertyStats = async ({ type, year }: GetMonthlyProperty
     },
     {
       $sort: {
-        "_id.year": 1,
-        "_id.month": 1
+        "_id.month": 1,
+        _id: 1
       }
     }
   ]);
@@ -259,10 +255,7 @@ export const getMonthlyPriceStats = async ({ region, year }: GetMonthlyPriceStat
     },
     {
       $group: {
-        _id: {
-          year: { $year: "$createdAt" },
-          month: { $month: "$createdAt" }
-        },
+        _id: { $month: "$createdAt" },
         primaryAvgPrice: {
           $avg: {
             $cond: [{ $eq: ["$market", "primary"] }, "$price", null]
@@ -277,8 +270,8 @@ export const getMonthlyPriceStats = async ({ region, year }: GetMonthlyPriceStat
     },
     {
       $sort: {
-        "_id.year": 1,
-        "_id.month": 1
+        "_id.month": 1,
+        _id: 1
       }
     }
   ]);
