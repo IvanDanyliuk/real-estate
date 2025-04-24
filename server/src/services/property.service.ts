@@ -152,22 +152,27 @@ export const getGeneralStats = async () => {
 
 export type GetMonthlyPropertyStatsParams = {
   type: string,
+  year: number,
 };
 
-export const getMonthlyPropertyStats = async ({ type }: GetMonthlyPropertyStatsParams) => {
+export const getMonthlyPropertyStats = async ({ type, year }: GetMonthlyPropertyStatsParams) => {
   const addedPropertiesByMonth = await PropertyModel.aggregate([
     {
       $match: {
         market: { $in: ["primary", "secondary"] },
-        type
+        type,
+        $expr: {
+          $eq: [{ $year: "$createdAt" }, year]
+        }
       }
     },
     {
       $group: {
-        _id: {
-          year: { $year: "$createdAt" },
-          month: { $month: "$createdAt" }
-        },
+        // _id: {
+        //   year: { $year: "$createdAt" },
+        //   month: { $month: "$createdAt" }
+        // },
+        _id: { $month: "$createdAt" },
         primaryCount: {
           $sum: {
             $cond: [{ $eq: ["$market", "primary"] }, 1, 0]
@@ -192,14 +197,18 @@ export const getMonthlyPropertyStats = async ({ type }: GetMonthlyPropertyStatsP
 
 export type GetPropertyStatsByRegion = {
   type: string,
+  year: number,
 };
 
-export const getPropertyStatsByRegion = async ({ type }: GetPropertyStatsByRegion) => {
+export const getPropertyStatsByRegion = async ({ type, year }: GetPropertyStatsByRegion) => {
   const propertyStatsByRegion = await PropertyModel.aggregate([
     {
       $match: {
         market: { $in: ["primary", "secondary"] },
-        type
+        type,
+        $expr: {
+          $eq: [{ $year: "$createdAt" }, year]
+        }
       }
     },
     {
@@ -219,7 +228,8 @@ export const getPropertyStatsByRegion = async ({ type }: GetPropertyStatsByRegio
     },
     {
       $sort: {
-        "location.region": 1
+        "location.region": 1,
+        _id: 1
       }
     }
   ]);
@@ -227,12 +237,16 @@ export const getPropertyStatsByRegion = async ({ type }: GetPropertyStatsByRegio
 };
 
 export type GetMonthlyPriceStats = {
-  region: string;
+  region: string,
+  year: number,
 };
 
-export const getMonthlyPriceStats = async ({ region }: GetMonthlyPriceStats) => {
+export const getMonthlyPriceStats = async ({ region, year }: GetMonthlyPriceStats) => {
   const matchStage: any = {
-    market: { $in: ["primary", "secondary"] }
+    market: { $in: ["primary", "secondary"] },
+    $expr: {
+      $eq: [{ $year: "$createdAt" }, year]
+    }
   };
 
   if(region !== "All") {

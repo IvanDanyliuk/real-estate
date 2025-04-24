@@ -118,8 +118,10 @@ export const getMonthlyPropertyStatsHandler = catchErrors(async (req, res) => {
   const type = req.query.type 
     ? req.query.type.toString() 
     : 'for_sale';
+  const currentYear = new Date().getFullYear();
+  const year = req.query.year ? +req.query.year : currentYear;
 
-  const response = await getMonthlyPropertyStats({ type });
+  const response = await getMonthlyPropertyStats({ type, year });
   return res.status(OK).json(response);
 });
 
@@ -127,8 +129,10 @@ export const getPropertyStatsByRegionHandler = catchErrors(async (req, res) => {
   const type = req.query.type 
     ? req.query.type.toString() 
     : 'for_sale';
+  const currentYear = new Date().getFullYear();
+  const year = req.query.year ? +req.query.year : currentYear;
 
-  const response = await getPropertyStatsByRegion({ type });
+  const response = await getPropertyStatsByRegion({ type, year });
   return res.status(OK).json(response);
 });
 
@@ -136,7 +140,9 @@ export const getMonthlyAveragePriceStatsHandler = catchErrors(async (req, res) =
   const region = req.query.region 
     ? req.query.region.toString() 
     : 'All';
+  const currentYear = new Date().getFullYear();
+  const year = req.query.year ? +req.query.year : currentYear;
 
-  const response = await getMonthlyPriceStats({ region });
+  const response = await getMonthlyPriceStats({ region, year });
   return res.status(OK).json(response);
 });
