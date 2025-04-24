@@ -43,6 +43,24 @@
     }
   },
   "admin_dashboard": {
+    "analytics_page": {
+      "heading": "Аналітика",
+      "sections": {
+        "general": {
+          "totalProperties": "Всього об'єктів",
+          "topRegion": "Регіон з найбільшою кількістю об'єктів",
+          "averageSellPrice": {
+            "title": "Середня ціна за 1 кв. м",
+            "primary": "Первинний ринок",
+            "secondary": "Вторинний ринок"
+          },
+          "averageRentPrice": "Середня ціна оренди"
+        },
+        "addedProperties": "Всього об'єктів",
+        "addedPropertiesByRegion": "Всього об'єктів по регіонах",
+        "priceDynamics": "Динаміка цін"
+      }
+    },
     "properties_page": {
       "heading": "Нерухомість",
       "addNewPropertyBtnTooltip": "Створити новий об'єкт",

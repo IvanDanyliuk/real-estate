@@ -12,10 +12,6 @@ export const styles: StyleProps = {
     alignItems: 'center',
     gap: 1,
     flex: 1,
-    // '& span': {
-    //   textAlign: 'center',
-    //   fontSize: '0.7rem',
-    // }
   },
   label: {
     fontWeight: 500,

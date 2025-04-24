@@ -43,6 +43,24 @@
     }
   },
   "admin_dashboard": {
+    "analytics_page": {
+      "heading": "Analytics",
+      "sections": {
+        "general": {
+          "totalProperties": "Total properties added",
+          "topRegion": "Region that has the largest amount of properties",
+          "averageSellPrice": {
+            "title": "Average price for 1 sqrt.m",
+            "primary": "Primary market",
+            "secondary": "Secondary market"
+          },
+          "averageRentPrice": "Average rent price"
+        },
+        "addedProperties": "Added properties",
+        "addedPropertiesByRegion": "Added properties by regions",
+        "priceDynamics": "Price dynamics"
+      }
+    },
     "properties_page": {
       "heading": "Properties",
       "addNewPropertyBtnTooltip": "Create a new property",

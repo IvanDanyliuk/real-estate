@@ -1,5 +1,6 @@
 import { Box, Card, Typography } from '@mui/material';
 import { styles } from './styles';
+import { useTranslation } from 'react-i18next';
 
 
 interface GeneralStatsProps {
@@ -19,11 +20,13 @@ export const GeneralStats: React.FC<GeneralStatsProps> = ({
   averageBuyingPrices, 
   averageRentPrice
 }) => {
+  const { t } = useTranslation();
+
   return (
     <Box sx={styles.container}>
       <Card sx={styles.item}>
         <Typography variant='body1' sx={styles.label}>
-          Total properties added
+          {t('admin_dashboard.analytics_page.sections.general.totalProperties')}
         </Typography>
         <Typography variant='body2' sx={styles.value}>
           {propertiesCount}
@@ -31,7 +34,7 @@ export const GeneralStats: React.FC<GeneralStatsProps> = ({
       </Card>
       <Card sx={styles.item}>
         <Typography variant='body1' sx={styles.label}>
-          Region that has the largest amount of properties
+          {t('admin_dashboard.analytics_page.sections.general.topRegion')}
         </Typography>
         <Typography variant='body2' sx={styles.value}>
           {topPropertiesCountRegion}
@@ -39,7 +42,7 @@ export const GeneralStats: React.FC<GeneralStatsProps> = ({
       </Card>
       <Card sx={styles.item}>
         <Typography variant='body1' sx={styles.label}>
-          Average price for 1 sqrt.m
+          {t('admin_dashboard.analytics_page.sections.general.averageSellPrice.title')}
         </Typography>
         <Box sx={styles.avgPriceValues}>
           <Box sx={styles.avgPriceSubItems}>
@@ -47,7 +50,7 @@ export const GeneralStats: React.FC<GeneralStatsProps> = ({
               {averageBuyingPrices.primary}
             </Typography>
             <Typography variant='caption'>
-              Primary market
+              {t('admin_dashboard.analytics_page.sections.general.averageSellPrice.primary')}
             </Typography>
           </Box>
           <Box>
@@ -55,14 +58,14 @@ export const GeneralStats: React.FC<GeneralStatsProps> = ({
               {averageBuyingPrices.secondary}
             </Typography>
             <Typography variant='caption'>
-              Secondary market
+              {t('admin_dashboard.analytics_page.sections.general.averageSellPrice.secondary')}
             </Typography>
           </Box>
         </Box>
       </Card>
       <Card sx={styles.item}>
         <Typography variant='body1' sx={styles.label}>
-          Average rent price
+          {t('admin_dashboard.analytics_page.sections.general.averageRentPrice')}
         </Typography>
         <Typography variant='body2' sx={styles.value}>
           {averageRentPrice}

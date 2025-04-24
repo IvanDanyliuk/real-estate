@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
-import { useGetGeneralStatsQuery, useLazyGetMonthlyAveragePriceStatsQuery, useLazyGetMonthlyPropertyStatsQuery, useLazyGetPropertyStatsByRegionQuery } from '../../../properties/state/propertyApi';
+import { useTranslation } from 'react-i18next';
+import { Box, Paper, SelectChangeEvent } from '@mui/material';
+import { 
+  useGetGeneralStatsQuery, useLazyGetMonthlyAveragePriceStatsQuery, 
+  useLazyGetMonthlyPropertyStatsQuery, useLazyGetPropertyStatsByRegionQuery 
+} from '../../../properties/state/propertyApi';
 import { AdminPageContainer } from '../../components/AdminPageContainer/AdminPageContainer';
 import { GeneralStats } from '../../components/GeneralStats/GeneralStats';
 import { SectionSkeleton } from '../../skeletons/SectionSkeleton/SectionSkeleton';
-import { Box } from '@mui/material';
-import { styles } from './styles';
 import { BarChart } from '../../components/charts/BarChart/BarChart';
-import { MONTHS } from '../../../../constants/main';
-import { useTranslation } from 'react-i18next';
 import { LineChart } from '../../components/charts/LineChart/LineChart';
 import { fillEmptyArrayData } from '../../../../utils/helpers';
+import { AD_TYPES, MONTHS } from '../../../../constants/main';
 import { REGIONS } from '../../../../constants/geoData';
+import { styles } from './styles';
+import { ChartContainer } from '../../components/ChartContainer/ChartContainer';
 
 
 enum AdType {
@@ -26,6 +30,14 @@ const DashboardPage = () => {
   const [priceDynamicRegionChartFilterValue, setPriceDynamicRegionChartFilterValue] = useState<string>('All');
 
   const year = new Date().getFullYear();
+
+  const enhancedRegionsList = [
+    ...REGIONS,
+    {
+      label: 'All',
+      value: 'All',
+    }
+  ];
 
   const {
     data: generalStats, 
@@ -56,6 +68,18 @@ const DashboardPage = () => {
     }
   ] = useLazyGetMonthlyAveragePriceStatsQuery();
 
+  const handleAddedPropertiesFilterChange = (e: SelectChangeEvent) => {
+    setAddedPropertiesChartFilterValue(e.target.value);
+  };
+
+  const handleAddedPropertiesByRegionFilterChange = (e: SelectChangeEvent) => {
+    setAddedPropertiesByRegionChartFilterValue(e.target.value);
+  };
+
+  const handlePriceDynamicFilterChange = (e: SelectChangeEvent) => {
+    setPriceDynamicRegionChartFilterValue(e.target.value);
+  };
+
   useEffect(() => {
     getMonthlyPropertyStats({ type: addedPropertiesChartFilterValue, year });
   }, [addedPropertiesChartFilterValue, getMonthlyPropertyStats]);
@@ -69,7 +93,7 @@ const DashboardPage = () => {
   }, [priceDynamicRegionChartFilterValue, getMonthlyAveragePriceStats]);
 
   return (
-    <AdminPageContainer heading='Dashboard'>
+    <AdminPageContainer heading={t('admin_dashboard.analytics_page.heading')}>
       <Box sx={styles.container}>
         {isGetGeneralStatsSuccess ? (
           <GeneralStats 
@@ -85,29 +109,50 @@ const DashboardPage = () => {
           <SectionSkeleton numberOfItems={4} />
         )}
         {isGetMonthlyPropertyStatsSuccess ? (
-          <BarChart 
-            data={fillEmptyArrayData(monthlyPropertyStats, MONTHS)} 
-            primaryKey='primaryCount' 
-            secondaryKey='secondaryCount' 
-          />
+          <ChartContainer 
+            title={t('admin_dashboard.analytics_page.sections.addedProperties')} 
+            defaultValue={addedPropertiesChartFilterValue} 
+            controlOptions={AD_TYPES}
+            onChange={handleAddedPropertiesFilterChange}
+          >
+            <BarChart 
+              data={fillEmptyArrayData(monthlyPropertyStats, MONTHS)} 
+              primaryKey='primaryCount' 
+              secondaryKey='secondaryCount' 
+            />
+          </ChartContainer>
         ) : (
           <SectionSkeleton numberOfItems={1} />
         )}
         {isGetPropertyStatsByRegion ? (
-          <BarChart 
-            data={fillEmptyArrayData(propertyStatsByRegion, REGIONS)} 
-            primaryKey='primaryCount' 
-            secondaryKey='secondaryCount' 
-          />
+          <ChartContainer 
+            title={t('admin_dashboard.analytics_page.sections.addedPropertiesByRegion')}  
+            defaultValue={addedPropertiesByRegionChartFilterValue} 
+            controlOptions={AD_TYPES}
+            onChange={handleAddedPropertiesByRegionFilterChange}
+          >
+            <BarChart 
+              data={fillEmptyArrayData(propertyStatsByRegion, REGIONS)} 
+              primaryKey='primaryCount' 
+              secondaryKey='secondaryCount' 
+            />
+          </ChartContainer>
         ) : (
           <SectionSkeleton numberOfItems={1} />
         )}
         {isGetMonthlyAveragePriceStatsSuccess ? (
-          <LineChart 
-            data={fillEmptyArrayData(monthlyAveragePriceStats, MONTHS)}
-            primaryKey='primaryAvgPrice'
-            secondaryKey='secondaryAvgPrice'
-          />
+          <ChartContainer 
+            title={t('admin_dashboard.analytics_page.sections.priceDynamics')} 
+            defaultValue={priceDynamicRegionChartFilterValue} 
+            controlOptions={enhancedRegionsList}
+            onChange={handlePriceDynamicFilterChange}
+          >
+            <LineChart 
+              data={fillEmptyArrayData(monthlyAveragePriceStats, MONTHS)}
+              primaryKey='primaryAvgPrice'
+              secondaryKey='secondaryAvgPrice'
+            />
+          </ChartContainer>
         ) : (
           <SectionSkeleton numberOfItems={1} />
         )}
