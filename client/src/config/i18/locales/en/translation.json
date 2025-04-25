@@ -43,6 +43,12 @@
     }
   },
   "admin_dashboard": {
+    "navMenu": {
+      "analytics": "Analytics",
+      "properties": "Properties",
+      "blog": "Blog",
+      "users": "Users"
+    },
     "analytics_page": {
       "heading": "Analytics",
       "sections": {

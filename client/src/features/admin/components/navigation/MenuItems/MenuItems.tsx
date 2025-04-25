@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { List, ListItem, SvgIcon } from '@mui/material';
 import { ADMIN_DASHBOARD_NAV_LINKS } from '../../../../../constants/navLinks';
 import { styles } from './styles';
@@ -10,6 +11,8 @@ interface MenuItemsProps {
 
 
 export const MenuItems: React.FC<MenuItemsProps> = ({ onClose }) => {
+  const { t } = useTranslation();
+
   return (
     <List sx={styles.navList}>
       {ADMIN_DASHBOARD_NAV_LINKS.map(({ href, label, icon }, i) => (
@@ -23,7 +26,7 @@ export const MenuItems: React.FC<MenuItemsProps> = ({ onClose }) => {
             onClick={onClose}
           >
             <SvgIcon component={icon} />
-            {label}
+            {t(label)}
           </NavLink>
         </ListItem>
       ))}

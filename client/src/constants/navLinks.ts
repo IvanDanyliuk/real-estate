@@ -29,22 +29,22 @@ export const NAV_LINKS = [
 export const ADMIN_DASHBOARD_NAV_LINKS = [
   {
     href: '/admin',
-    label: 'Dashboard',
+    label: 'admin_dashboard.navMenu.analytics',
     icon: Dashboard,
   },
   {
     href: '/admin/properties',
-    label: 'Properties',
+    label: 'admin_dashboard.navMenu.properties',
     icon: Properties,
   },
   {
     href: '/admin/blog',
-    label: 'Blog',
+    label: 'admin_dashboard.navMenu.blog',
     icon: Blog,
   },
   {
     href: '/admin/users',
-    label: 'Users',
+    label: 'admin_dashboard.navMenu.users',
     icon: Users,
   },
 ];

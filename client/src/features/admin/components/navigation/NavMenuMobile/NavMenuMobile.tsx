@@ -24,7 +24,7 @@ export const NavMenuMobile: React.FC = () => {
       <Drawer
         anchor='top'
         open={isMenuOpen}
-        onClose={handleMenuOpen}
+        onClose={handleMenuClose}
         slotProps={{
           paper: {
             sx: styles.mobileMenuContainer

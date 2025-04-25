@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Paper, SelectChangeEvent } from '@mui/material';
+import { Box, SelectChangeEvent } from '@mui/material';
 import { 
   useGetGeneralStatsQuery, useLazyGetMonthlyAveragePriceStatsQuery, 
   useLazyGetMonthlyPropertyStatsQuery, useLazyGetPropertyStatsByRegionQuery 
 } from '../../../properties/state/propertyApi';
 import { AdminPageContainer } from '../../components/AdminPageContainer/AdminPageContainer';
+import { ChartContainer } from '../../components/ChartContainer/ChartContainer';
 import { GeneralStats } from '../../components/GeneralStats/GeneralStats';
 import { SectionSkeleton } from '../../skeletons/SectionSkeleton/SectionSkeleton';
 import { BarChart } from '../../components/charts/BarChart/BarChart';
@@ -14,7 +15,6 @@ import { fillEmptyArrayData } from '../../../../utils/helpers';
 import { AD_TYPES, MONTHS } from '../../../../constants/main';
 import { REGIONS } from '../../../../constants/geoData';
 import { styles } from './styles';
-import { ChartContainer } from '../../components/ChartContainer/ChartContainer';
 
 
 enum AdType {

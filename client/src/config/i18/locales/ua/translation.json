@@ -43,6 +43,12 @@
     }
   },
   "admin_dashboard": {
+    "navMenu": {
+      "analytics": "Аналітика",
+      "properties": "Нерухомість",
+      "blog": "Блог",
+      "users": "Користувачі"
+    },
     "analytics_page": {
       "heading": "Аналітика",
       "sections": {
