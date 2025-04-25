@@ -24,7 +24,7 @@ export const GeneralStats: React.FC<GeneralStatsProps> = ({
 
   return (
     <Box sx={styles.container}>
-      <Card sx={styles.item}>
+      <Card sx={styles.item} elevation={3}>
         <Typography variant='body1' sx={styles.label}>
           {t('admin_dashboard.analytics_page.sections.general.totalProperties')}
         </Typography>
@@ -32,7 +32,7 @@ export const GeneralStats: React.FC<GeneralStatsProps> = ({
           {propertiesCount}
         </Typography>
       </Card>
-      <Card sx={styles.item}>
+      <Card sx={styles.item} elevation={3}>
         <Typography variant='body1' sx={styles.label}>
           {t('admin_dashboard.analytics_page.sections.general.topRegion')}
         </Typography>
@@ -40,7 +40,7 @@ export const GeneralStats: React.FC<GeneralStatsProps> = ({
           {topPropertiesCountRegion}
         </Typography>
       </Card>
-      <Card sx={styles.item}>
+      <Card sx={styles.item} elevation={3}>
         <Typography variant='body1' sx={styles.label}>
           {t('admin_dashboard.analytics_page.sections.general.averageSellPrice.title')}
         </Typography>
@@ -63,7 +63,7 @@ export const GeneralStats: React.FC<GeneralStatsProps> = ({
           </Box>
         </Box>
       </Card>
-      <Card sx={styles.item}>
+      <Card sx={styles.item} elevation={3}>
         <Typography variant='body1' sx={styles.label}>
           {t('admin_dashboard.analytics_page.sections.general.averageRentPrice')}
         </Typography>

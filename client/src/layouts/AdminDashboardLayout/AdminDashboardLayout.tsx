@@ -1,17 +1,21 @@
-import { Link, Navigate, NavLink, Outlet } from 'react-router';
-import { Box, List, ListItem, SvgIcon } from '@mui/material';
+import { Link, Navigate, Outlet } from 'react-router';
+import { Box, useMediaQuery } from '@mui/material';
 import ArrowBack from '@mui/icons-material/ArrowBack';
+import { NavMenuMobile } from '../../features/admin/components/navigation/NavMenuMobile/NavMenuMobile';
+import { MenuItems } from '../../features/admin/components/navigation/MenuItems/MenuItems';
 import { Logo } from '../../components/layout/Logo/Logo';
 import { Loader } from '../../components/layout/Loader/Loader';
 import { USER_ROLES } from '../../constants/main';
 import { Container } from '../../components/layout/Container/Container';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { styles } from './styles';
-import { ADMIN_DASHBOARD_NAV_LINKS } from '../../constants/navLinks';
+
 
 const AdminDashboardLayout: React.FC = () => {
   const { user } = useAppSelector((state) => state.user);
 
+  const isMobile = useMediaQuery('(max-width:599px)');
+  
   if(!user) {
     return <Loader />
   }
@@ -33,24 +37,13 @@ const AdminDashboardLayout: React.FC = () => {
         </Link>
       </Container>
       <Container contentStyles={styles.mainContainer}>
-        <Box component='nav'>
-          <List sx={styles.navList}>
-            {ADMIN_DASHBOARD_NAV_LINKS.map(({ href, label, icon }, i) => (
-              <ListItem 
-                key={`${href}-${i}`} 
-                sx={styles.navListItem}
-              >
-                <NavLink 
-                  to={href} 
-                  end={href === ADMIN_DASHBOARD_NAV_LINKS[0].href}
-                >
-                  <SvgIcon component={icon} />
-                  {label}
-                </NavLink>
-              </ListItem>
-            ))}
-          </List>
-        </Box>
+        {isMobile ? (
+          <NavMenuMobile />
+        ) : (
+          <Box component='nav'>
+            <MenuItems />
+          </Box>
+        )}
         <Box 
           component='main' 
           sx={styles.contenSection}

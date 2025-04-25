@@ -1,7 +1,7 @@
 import { ReactNode, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Box, MenuItem, Paper, Select, SelectChangeEvent, Typography } from '@mui/material';
 import { styles } from './styles';
-import { useTranslation } from 'react-i18next';
 
 
 interface ChartContainerProps {
@@ -25,22 +25,24 @@ export const ChartContainer: React.FC<ChartContainerProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const id = useMemo(() => crypto.randomUUID(), []);
+  const controlOptionsWithIds = useMemo(() => controlOptions.map(option => ({
+    ...option,
+    id: crypto.randomUUID(),
+  })), [controlOptions]);
 
   return (
-    <Paper component='section' sx={styles.container}>
+    <Paper component='section' elevation={3} sx={styles.container}>
       <Box sx={styles.header}>
         <Typography variant='h3' sx={styles.title}>
           {title}
         </Typography>
         <Select 
-          id={id} 
           defaultValue={defaultValue} 
           onChange={onChange}
         >
-          {controlOptions.map((option, i) => (
-            <MenuItem key={`${id}-${i}`} value={option.value}>
-              {t(option.label)}
+          {controlOptionsWithIds.map(({ id, label, value }) => (
+            <MenuItem key={id} value={value}>
+              {t(label)}
             </MenuItem>
           ))}
         </Select>

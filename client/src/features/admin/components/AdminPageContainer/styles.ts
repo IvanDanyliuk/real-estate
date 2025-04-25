@@ -20,4 +20,7 @@ export const styles: StyleProps = {
       color: 'primary.main',
     },
   },
+  content: {
+    marginBottom: 3,
+  },
 };

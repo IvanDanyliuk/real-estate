@@ -32,7 +32,7 @@ export const AdminPageContainer: React.FC<AdminPageContainerProps> = ({
           </Tooltip>
         )}
       </Box>
-      <Box>
+      <Box sx={styles.content}>
         {children}
       </Box>
     </>
