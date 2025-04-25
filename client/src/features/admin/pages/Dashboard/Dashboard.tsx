@@ -25,9 +25,18 @@ enum AdType {
 
 const DashboardPage = () => {
   const { t } = useTranslation();
-  const [addedPropertiesChartFilterValue, setAddedPropertiesChartFilterValue] = useState<string>(AdType.ForSale);
-  const [addedPropertiesByRegionChartFilterValue, setAddedPropertiesByRegionChartFilterValue] = useState<string>(AdType.ForSale);
-  const [priceDynamicRegionChartFilterValue, setPriceDynamicRegionChartFilterValue] = useState<string>('All');
+
+  const [
+    addedPropertiesChartFilterValue, setAddedPropertiesChartFilterValue
+  ] = useState<string>(AdType.ForSale);
+
+  const [
+    addedPropertiesByRegionChartFilterValue, setAddedPropertiesByRegionChartFilterValue
+  ] = useState<string>(AdType.ForSale);
+
+  const [
+    priceDynamicRegionChartFilterValue, setPriceDynamicRegionChartFilterValue
+  ] = useState<string>('All');
 
   const year = new Date().getFullYear();
 

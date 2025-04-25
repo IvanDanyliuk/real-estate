@@ -3,7 +3,11 @@ import { StyleProps } from '../../../../components/types';
 export const styles: StyleProps = {
   container: {
     display: 'flex',
+    flexDirection: 'column',
     gap: 3,
+    '@media(min-width:600px)': {
+      flexDirection: 'row',
+    },
   },
   item: {
     padding: 3,
