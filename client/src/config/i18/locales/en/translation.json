@@ -40,6 +40,12 @@
       "Cherkasy": "Cherkasy",
       "Chernivtsi": "Chernivtsi",
       "Chernihiv": "Chernihiv"
+    },
+    "chartDataKeys": {
+      "primaryCount": "Primary market",
+      "secondaryCount": "Secondary market",
+      "primaryAvgPrice": "Primary market",
+      "secondaryAvgPrice": "Secondary market"
     }
   },
   "admin_dashboard": {

@@ -40,6 +40,12 @@
       "Cherkasy": "Черкаська",
       "Chernivtsi": "Чернівецька",
       "Chernihiv": "Чернігівська"
+    },
+    "chartDataKeys": {
+      "primaryCount": "Первинний ринок",
+      "secondaryCount": "Вторинний ринок",
+      "primaryAvgPrice": "Первинний ринок",
+      "secondaryAvgPrice": "Вторинний ринок"
     }
   },
   "admin_dashboard": {

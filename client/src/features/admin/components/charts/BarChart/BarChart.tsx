@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { BarChart as Chart, XAxis, YAxis, Bar, ResponsiveContainer } from 'recharts';
+import { BarChart as Chart, XAxis, YAxis, Bar, ResponsiveContainer, Tooltip } from 'recharts';
+import { CustomTooltip } from '../CustomTooltip/CustomTooltip';
 
 
 interface BarChartProps {
@@ -26,6 +27,7 @@ export const BarChart: React.FC<BarChartProps> = ({
       <Chart data={transformedData}>
         <XAxis dataKey='_id' />
         <YAxis />
+        <Tooltip content={<CustomTooltip />} />
         <Bar dataKey={primaryKey} fill='#8884d8' />
         <Bar dataKey={secondaryKey} fill='#271fba' />
       </Chart>

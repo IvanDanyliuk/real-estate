@@ -1,5 +1,6 @@
-import { LineChart as Chart, Line, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import { LineChart as Chart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useTranslation } from 'react-i18next';
+import { CustomTooltip } from '../CustomTooltip/CustomTooltip';
 
 
 interface LineChartProps {
@@ -24,6 +25,7 @@ export const LineChart: React.FC<LineChartProps> = ({
       <Chart data={transformedData}>
         <XAxis dataKey='_id' />
         <YAxis />
+        <Tooltip content={<CustomTooltip />} />
         <Line type='monotone' dataKey={primaryKey} stroke='#8884d8' />
         <Line type='monotone' dataKey={secondaryKey} stroke='#271fba' />
       </Chart>
