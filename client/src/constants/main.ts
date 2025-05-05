@@ -29,11 +29,11 @@ export const MONTHS = [
 export const AD_TYPES = [
   {
     value: 'for_sale',
-    label: 'For sale',
+    label: 'constants.adTypes.for_sale',
   },
   {
     value: 'for_rent',
-    label: 'For rent',
+    label: 'constants.adTypes.for_rent',
   },
 ];
 

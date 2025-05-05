@@ -14,7 +14,12 @@
       "nov": "Листопад",
       "dec": "Грудень"
     },
+    "adTypes": {
+      "for_sale": "Продаж",
+      "for_rent": "Оренда"
+    },
     "regions": {
+      "All": "Всі",
       "Crimea": "АР Крим",
       "Vinnytsia": "Вінницька",
       "Volyn": "Волинська",
@@ -49,11 +54,14 @@
     }
   },
   "admin_dashboard": {
-    "navMenu": {
-      "analytics": "Аналітика",
-      "properties": "Нерухомість",
-      "blog": "Блог",
-      "users": "Користувачі"
+    "layout": {
+      "goBackBtn": "На головну",
+      "navMenu": {
+        "analytics": "Аналітика",
+        "properties": "Нерухомість",
+        "blog": "Блог",
+        "users": "Користувачі"
+      }
     },
     "analytics_page": {
       "heading": "Аналітика",

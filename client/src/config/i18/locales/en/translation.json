@@ -14,7 +14,12 @@
       "nov": "November",
       "dec": "December"
     },
+    "adTypes": {
+      "for_sale": "For sale",
+      "for_rent": "For rent"
+    },
     "regions": {
+      "All": "All",
       "Crimea": "AR of Crimea",
       "Vinnytsia": "Vinnytsia",
       "Volyn": "Volyn",
@@ -49,11 +54,14 @@
     }
   },
   "admin_dashboard": {
-    "navMenu": {
-      "analytics": "Analytics",
-      "properties": "Properties",
-      "blog": "Blog",
-      "users": "Users"
+    "layout": {
+      "goBackBtn": "Go back",
+      "navMenu": {
+        "analytics": "Analytics",
+        "properties": "Properties",
+        "blog": "Blog",
+        "users": "Users"
+      }
     },
     "analytics_page": {
       "heading": "Analytics",

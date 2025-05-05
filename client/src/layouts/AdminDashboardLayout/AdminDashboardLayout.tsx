@@ -9,9 +9,11 @@ import { USER_ROLES } from '../../constants/main';
 import { Container } from '../../components/layout/Container/Container';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { styles } from './styles';
+import { useTranslation } from 'react-i18next';
 
 
 const AdminDashboardLayout: React.FC = () => {
+  const { t } = useTranslation();
   const { user } = useAppSelector((state) => state.user);
 
   const isMobile = useMediaQuery('(max-width:599px)');
@@ -33,7 +35,7 @@ const AdminDashboardLayout: React.FC = () => {
         <Logo />
         <Link to='/'>
           <ArrowBack />
-          Go back
+          {t('admin_dashboard.layout.goBackBtn')}
         </Link>
       </Container>
       <Container contentStyles={styles.mainContainer}>

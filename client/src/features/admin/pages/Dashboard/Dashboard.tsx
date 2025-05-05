@@ -43,7 +43,7 @@ const DashboardPage = () => {
   const enhancedRegionsList = [
     ...REGIONS,
     {
-      label: 'All',
+      label: 'constants.regions.All',
       value: 'All',
     }
   ];
