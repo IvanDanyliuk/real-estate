@@ -6,23 +6,23 @@ import Users from '@mui/icons-material/People';
 export const NAV_LINKS = [
   {
     href: '/',
-    label: 'Home',
+    label: 'main_layout.navMenuLinks.home',
   },
   {
     href: '/property',
-    label: 'Property',
+    label: 'main_layout.navMenuLinks.property',
   },
   {
     href: '/about',
-    label: 'About us',
+    label: 'main_layout.navMenuLinks.about',
   },
   {
     href: '/blog',
-    label: 'Blog',
+    label: 'main_layout.navMenuLinks.blog',
   },
   {
     href: '/contact',
-    label: 'Contact',
+    label: 'main_layout.navMenuLinks.contact',
   },
 ];
 

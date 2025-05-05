@@ -53,6 +53,15 @@
       "secondaryAvgPrice": "Secondary market"
     }
   },
+  "main_layout": {
+    "navMenuLinks": {
+      "home": "Home",
+      "property": "Property",
+      "about": "About us",
+      "blog": "Blog",
+      "contact": "Contact"
+    }
+  },
   "admin_dashboard": {
     "layout": {
       "goBackBtn": "Go back",

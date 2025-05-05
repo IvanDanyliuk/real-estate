@@ -53,6 +53,15 @@
       "secondaryAvgPrice": "Вторинний ринок"
     }
   },
+  "main_layout": {
+    "navMenuLinks": {
+      "home": "Головна",
+      "property": "Нерухомість",
+      "about": "Про нас",
+      "blog": "Блог",
+      "contact": "Контакти"
+    }
+  },
   "admin_dashboard": {
     "layout": {
       "goBackBtn": "На головну",
