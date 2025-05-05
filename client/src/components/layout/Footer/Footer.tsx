@@ -6,6 +6,7 @@ import { SocialMediaLinks } from '../SocialMediaLinks/SocialMediaLinks';
 import { styles } from './styles';
 import { FOOTER_LINKS } from '../../../constants/footerLinks';
 import { SubscriptionForm } from '../SubscriptionForm/SubscriptionForm';
+import { useTranslation } from 'react-i18next';
 
 const LinkList = ({ links }: { 
   links: { 
@@ -13,12 +14,13 @@ const LinkList = ({ links }: {
     label: string; 
   }[] 
 }) => {
+  const { t } = useTranslation();
   return (
     <List sx={styles.list}>
       {links.map(({ href, label }, i) => (
         <ListItem key={`${href}-${i}`} sx={styles.listItem}>
           <NavLink to={href}>
-            {label}
+            {t(label)}
           </NavLink>
         </ListItem>
       ))}
@@ -27,6 +29,8 @@ const LinkList = ({ links }: {
 };
 
 export const Footer: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <Container 
       componentType='footer' 
@@ -46,19 +50,19 @@ export const Footer: React.FC = () => {
       </Box>
       <Box sx={styles.column}>
         <Typography variant='h4'>
-          Pages
+          {t('main_layout.additionalFooterLinks.pagesSectionHeading')}
         </Typography>
         <LinkList links={FOOTER_LINKS.pages} />
       </Box>
       <Box sx={styles.column}>
         <Typography variant='h4'>
-          Support
+          {t('main_layout.additionalFooterLinks.supportSectionHeading')}
         </Typography>
         <LinkList links={FOOTER_LINKS.support} />
       </Box>
       <Box sx={styles.column}>
         <Typography variant='h4'>
-          Get latest updates
+          {t('main_layout.additionalFooterLinks.getUpdatedForm.heading')}
         </Typography>
         <SubscriptionForm />
       </Box>

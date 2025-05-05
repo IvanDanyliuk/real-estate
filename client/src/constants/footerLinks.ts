@@ -5,15 +5,15 @@ export const FOOTER_LINKS = {
   support: [
     {
       href: '/faq',
-      label: 'FAQ',
+      label: 'main_layout.additionalFooterLinks.faq',
     },
     {
       href: '/contact',
-      label: 'Contact',
+      label: 'main_layout.additionalFooterLinks.contact',
     },
     {
       href: '/about',
-      label: 'About us',
+      label: 'main_layout.additionalFooterLinks.about',
     },
   ],
 };

@@ -60,6 +60,17 @@
       "about": "Про нас",
       "blog": "Блог",
       "contact": "Контакти"
+    },
+    "additionalFooterLinks": {
+      "pagesSectionHeading": "Розділи",
+      "supportSectionHeading": "Підтримка",
+      "getUpdatedForm": {
+        "heading": "Отримувати актуальну інформацію",
+        "placeholder": "Ваша ел. пошта"
+      },
+      "faq": "FAQ",
+      "contact": "Контакти",
+      "about": "Про нас"
     }
   },
   "admin_dashboard": {

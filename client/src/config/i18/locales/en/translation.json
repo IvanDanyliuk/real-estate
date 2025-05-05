@@ -60,6 +60,17 @@
       "about": "About us",
       "blog": "Blog",
       "contact": "Contact"
+    },
+    "additionalFooterLinks": {
+      "pagesSectionHeading": "Pages",
+      "supportSectionHeading": "Support",
+      "getUpdatedForm": {
+        "heading": "Get latest updates",
+        "placeholder": "Your email address"
+      },
+      "faq": "FAQ",
+      "contact": "Contact",
+      "about": "About us"
     }
   },
   "admin_dashboard": {
