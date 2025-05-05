@@ -1,12 +1,13 @@
 import { NavLink } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { Box, List, ListItem, Typography } from '@mui/material';
 import { Container } from '../Container/Container';
 import { Logo } from '../Logo/Logo';
 import { SocialMediaLinks } from '../SocialMediaLinks/SocialMediaLinks';
-import { styles } from './styles';
-import { FOOTER_LINKS } from '../../../constants/footerLinks';
 import { SubscriptionForm } from '../SubscriptionForm/SubscriptionForm';
-import { useTranslation } from 'react-i18next';
+import { FOOTER_LINKS } from '../../../constants/footerLinks';
+import { styles } from './styles';
+
 
 const LinkList = ({ links }: { 
   links: { 
