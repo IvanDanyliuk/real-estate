@@ -6,6 +6,8 @@ import { styles } from './styles';
 
 export const LanguageSelect: React.FC = () => {
   const { i18n } = useTranslation();
+  const currentLanguage = localStorage.getItem('lang');
+
   const changeLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
     localStorage.setItem('lang', lang);
@@ -16,6 +18,7 @@ export const LanguageSelect: React.FC = () => {
       <Tooltip title='English'>
         <Box 
           component='button'
+          disabled={currentLanguage === 'en'}
           onClick={() => changeLanguage('en')} 
           sx={styles.button}
         >
@@ -25,6 +28,7 @@ export const LanguageSelect: React.FC = () => {
       <Tooltip title='Українська'>
         <Box 
           component='button'
+          disabled={currentLanguage === 'ua'}
           onClick={() => changeLanguage('ua')} 
           sx={styles.button}
         >

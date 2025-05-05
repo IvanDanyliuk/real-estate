@@ -27,15 +27,18 @@ const DashboardPage = () => {
   const { t } = useTranslation();
 
   const [
-    addedPropertiesChartFilterValue, setAddedPropertiesChartFilterValue
+    addedPropertiesChartFilterValue, 
+    setAddedPropertiesChartFilterValue
   ] = useState<string>(AdType.ForSale);
 
   const [
-    addedPropertiesByRegionChartFilterValue, setAddedPropertiesByRegionChartFilterValue
+    addedPropertiesByRegionChartFilterValue, 
+    setAddedPropertiesByRegionChartFilterValue
   ] = useState<string>(AdType.ForSale);
 
   const [
-    priceDynamicRegionChartFilterValue, setPriceDynamicRegionChartFilterValue
+    priceDynamicRegionChartFilterValue, 
+    setPriceDynamicRegionChartFilterValue
   ] = useState<string>('All');
 
   const year = new Date().getFullYear();

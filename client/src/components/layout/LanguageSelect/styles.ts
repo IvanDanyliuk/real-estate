@@ -1,4 +1,4 @@
-import { StyleProps } from "../../types";
+import { StyleProps } from '../../types';
 
 export const styles: StyleProps = {
   container: {
@@ -7,7 +7,8 @@ export const styles: StyleProps = {
     gap: 1,
   },
   button: {
-    cursor: 'pointer', 
+    cursor: 'pointer',
+    position: 'relative', 
     padding: 0,
     display: 'flex',
     width: '30px',
@@ -19,6 +20,15 @@ export const styles: StyleProps = {
       height: 'auto',
       flex: 1,
       objectFit: 'cover',
-    }
+    },
+    '&:not(:disabled)': {
+      '&:before': {
+        content: '""',
+        position: 'absolute',
+        inset: 0,
+        background: '#000000',
+        opacity: 0.4,
+      },
+    },
   },
 };
