@@ -1,13 +1,13 @@
-import { render, screen } from '@testing-library/react';
-import { Header } from './Header';
 import { MemoryRouter } from 'react-router-dom';
-import '@testing-library/jest-dom';
-import * as reactRedux from '../../../hooks/useAppSelector';
-import * as mui from '@mui/material';
 import { I18nextProvider } from 'react-i18next';
+import { screen } from '@testing-library/react';
+import * as mui from '@mui/material';
 import { vi } from 'vitest';
+import { Header } from './Header';
+import * as reactRedux from '../../../hooks/useAppSelector';
 import i18n from '../../../config/tests/i18nTestConfig'; // assuming you have a test i18n config
 import { renderWithProviders } from '../../../config/tests/renderWithProvider';
+import '@testing-library/jest-dom';
 
 
 vi.mock('../../../hooks/useAppSelector', () => ({
