@@ -30,32 +30,29 @@ export const NavbarMobile: React.FC<NavbarMobileProps> = ({ user }) => {
       <Drawer 
         open={isOpen} 
         anchor='right' 
-        onClose={handleMenuOpen} 
-        slotProps={{
-          paper: {
-            sx: styles.container
-          }
-        }}
+        onClose={handleMenuOpen}
       >
-        <Box>
-          {user 
-            ? <UserMenu user={user} /> 
-            : <Link to='/login'>Sign in</Link>
-          }
-        </Box>
-        <Box component='nav' sx={styles.nav}>
-          <Box component='ul' sx={styles.navList}>
-            {NAV_LINKS.map(({ href, label }, i) => (
-              <Box 
-                key={`${href}-${i}`} 
-                component='li' 
-                sx={styles.navListItem}
-              >
-                <NavLink to={href}>
-                  {t(label)}
-                </NavLink>
-              </Box>
-            ))}
+        <Box sx={styles.container}>
+          <Box>
+            {user 
+              ? <UserMenu user={user} /> 
+              : <Link to='/login'>Sign in</Link>
+            }
+          </Box>
+          <Box component='nav' sx={styles.nav}>
+            <Box component='ul' sx={styles.navList}>
+              {NAV_LINKS.map(({ href, label }, i) => (
+                <Box 
+                  key={`${href}-${i}`} 
+                  component='li' 
+                  sx={styles.navListItem}
+                >
+                  <NavLink to={href}>
+                    {t(label)}
+                  </NavLink>
+                </Box>
+              ))}
+            </Box>
           </Box>
         </Box>
       </Drawer>
