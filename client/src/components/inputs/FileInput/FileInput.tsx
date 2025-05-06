@@ -75,6 +75,7 @@ export const FileInput: React.FC<FileInputProps> = ({
       )}
 
       <input 
+        data-testid='file-input'
         type='file' 
         multiple={multiple} 
         {...register(name)} 
