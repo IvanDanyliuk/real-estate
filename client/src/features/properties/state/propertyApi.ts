@@ -1,6 +1,6 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { CreatePropertyResponse, GetPropertiesQuery } from "./types";
-import { REQUEST_METHODS } from "../../../constants/requestMethods";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { CreatePropertyResponse, GetPropertiesQuery } from './types';
+import { REQUEST_METHODS } from '../../../constants/requestMethods';
 
 
 export const propertyApi = createApi({

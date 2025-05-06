@@ -1,18 +1,17 @@
-
+import { Link } from 'react-router';
+import { Box, useMediaQuery } from '@mui/material';
 import { UserMenu } from '../UserMenu/UserMenu';
-import { styles } from './styles';
 import { Container } from '../Container/Container';
 import { Navbar } from '../Navbar/Navbar';
 import { Logo } from '../Logo/Logo';
-import { useAppSelector } from '../../../hooks/useAppSelector';
-import { Link } from 'react-router';
-import { Box, useMediaQuery } from '@mui/material';
 import { LanguageSelect } from '../LanguageSelect/LanguageSelect';
 import { NavbarMobile } from '../NavbarMobile/NavbarMobile';
+import { useAppSelector } from '../../../hooks/useAppSelector';
+import { styles } from './styles';
+
 
 export const Header: React.FC = () => {
   const { user } = useAppSelector((state) => state.user);
-
   const isMobile = useMediaQuery('(max-width:599px)');
 
   return (

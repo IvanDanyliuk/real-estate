@@ -1,17 +1,17 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { AdminPageContainer } from '../../components/AdminPageContainer/AdminPageContainer';
 import { DataTable } from '../../components/DataTable/DataTable';
 import { Loader } from '../../../../components/layout/Loader/Loader';
 import { statusToast } from '../../../../components/toast/toast';
 import { PropertyForm } from '../../components/forms/PropertyForm/PropertyForm';
+import { PropertyDataType } from '../../components/forms/validationSchemas/property.schema';
 import { 
   useCreatePropertyMutation, useDeletePropertyMutation, 
   useLazyGetPropertiesQuery, useUpdatePropertyMutation 
 } from '../../../properties/state/propertyApi';
 import { PropertyType } from '../../../properties/state/types';
-import { PropertyDataType } from '../../components/forms/validationSchemas/property.schema';
-import { useTranslation } from 'react-i18next';
 
 
 type ColumnType = {
