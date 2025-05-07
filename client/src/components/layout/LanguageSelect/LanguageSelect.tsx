@@ -4,6 +4,7 @@ import EnIcon from '../../../assets/images/united-kingdom-flag-icon.svg';
 import UaIcon from '../../../assets/images/ukraine-flag-icon.svg';
 import { styles } from './styles';
 
+
 export const LanguageSelect: React.FC = () => {
   const { i18n } = useTranslation();
   const currentLanguage = localStorage.getItem('lang');

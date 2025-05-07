@@ -11,7 +11,7 @@ import { styles } from './styles';
 
 interface NavbarMobileProps {
   user: User | null;
-}
+};
 
 
 export const NavbarMobile: React.FC<NavbarMobileProps> = ({ user }) => {

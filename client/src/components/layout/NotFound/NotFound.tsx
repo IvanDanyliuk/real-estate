@@ -2,10 +2,12 @@ import { Link } from 'react-router';
 import { Box, Typography } from '@mui/material';
 import { styles } from './styles';
 
+
 interface NotFoundProps {
   title: string;
   message?: string;
 };
+
 
 export const NotFound: React.FC<NotFoundProps> = ({ 
   title = 'Page not found', 
