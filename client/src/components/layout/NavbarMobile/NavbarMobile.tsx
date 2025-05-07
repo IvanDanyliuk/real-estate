@@ -24,7 +24,11 @@ export const NavbarMobile: React.FC<NavbarMobileProps> = ({ user }) => {
 
   return (
     <>
-      <IconButton onClick={handleMenuOpen}>
+      <IconButton 
+        onClick={handleMenuOpen} 
+        area-label='open menu' 
+        data-testid='menu-btn'
+      >
         <MenuIcon />
       </IconButton>
       <Drawer 
