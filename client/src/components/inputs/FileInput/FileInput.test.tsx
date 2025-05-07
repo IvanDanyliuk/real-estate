@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { useForm } from 'react-hook-form';
 import { FileInput } from './FileInput';
 import '@testing-library/jest-dom';
-import { useForm } from 'react-hook-form';
 
 
 type InputWrapperProps = { 

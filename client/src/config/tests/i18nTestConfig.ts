@@ -8,7 +8,6 @@ i18n.use(initReactI18next).init({
   resources: {
     en: {
       translation: {
-        // Optional: define dummy keys used in tests
         'main_layout.additionalFooterLinks.pagesSectionHeading': 'Pages',
         'main_layout.additionalFooterLinks.supportSectionHeading': 'Support',
         'main_layout.additionalFooterLinks.getUpdatedForm.heading': 'Stay Updated',

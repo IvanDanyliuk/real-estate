@@ -57,5 +57,5 @@ export const NavbarMobile: React.FC<NavbarMobileProps> = ({ user }) => {
         </Box>
       </Drawer>
     </>
-  )
-}
+  );
+};
