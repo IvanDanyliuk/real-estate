@@ -37,6 +37,7 @@ export const ChartContainer: React.FC<ChartContainerProps> = ({
           {title}
         </Typography>
         <Select 
+          aria-label="Chart option select"
           defaultValue={defaultValue} 
           onChange={onChange}
         >

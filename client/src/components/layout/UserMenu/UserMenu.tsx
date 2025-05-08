@@ -2,11 +2,12 @@ import { Avatar, Box, Menu, MenuItem, Typography } from '@mui/material';
 import { User } from '../../../features/users/state/types';
 import { MouseEvent, useState } from 'react';
 import { Link } from 'react-router';
-import { styles } from './styles';
-import { USER_ROLES } from '../../../constants/main';
 import { useLogoutMutation } from '../../../features/auth/state/authApi';
-import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { setUser } from '../../../features/users/state/userSlice';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { USER_ROLES } from '../../../constants/main';
+import { styles } from './styles';
+
 
 interface UserMenuProps {
   user: User;

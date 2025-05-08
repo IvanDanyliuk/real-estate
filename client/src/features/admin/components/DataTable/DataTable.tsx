@@ -101,6 +101,7 @@ export const DataTable = <T extends { _id: string }>({
                       active={orderBy === key}
                       direction={orderBy === key ? orderDirection : 'desc'}
                       onClick={() => handleSortColumn(key.toString())}
+                      aria-sort={orderBy === key ? (orderDirection === 'asc' ? 'ascending' : 'descending') : undefined}
                     >
                       {t(header)}
                     </TableSortLabel>
@@ -126,7 +127,7 @@ export const DataTable = <T extends { _id: string }>({
                             onDelete={() => onDeleteItem(item._id)} 
                           />
                     ) : (
-                      <IconButton onClick={() => onDeleteItem(item._id)}>
+                      <IconButton data-testid={`delete-button-${item._id}`} onClick={() => onDeleteItem(item._id)}>
                         <DeleteIcon />
                       </IconButton>
                     )
