@@ -156,6 +156,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
         >
           <Box component='fieldset' sx={styles.fieldset}>
             <TextField 
+              data-testid='title'
               label={t('admin_dashboard.properties_page.propertyForm.fields.title.label')}
               fullWidth 
               error={!!errors.title}
@@ -335,6 +336,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
           </Box>
           <Box component='fieldset' sx={styles.fieldset}>
             <Select
+              data-testid='region-field'
               label={t('admin_dashboard.properties_page.propertyForm.fields.region.label')}
               fullWidth
               defaultValue={initialData.location.region}
