@@ -1,0 +1,250 @@
+{
+  "constants": {
+    "months": {
+      "jan": "January",
+      "feb": "February",
+      "mar": "March",
+      "apr": "April",
+      "may": "May",
+      "jun": "June",
+      "jul": "July",
+      "aug": "August",
+      "sep": "September",
+      "oct": "October",
+      "nov": "November",
+      "dec": "December"
+    },
+    "adTypes": {
+      "for_sale": "For sale",
+      "for_rent": "For rent"
+    },
+    "regions": {
+      "All": "All",
+      "Crimea": "AR of Crimea",
+      "Vinnytsia": "Vinnytsia",
+      "Volyn": "Volyn",
+      "Dnipropetrovsk": "Dnipropetrovsk",
+      "Donetsk": "Donetsk",
+      "Zhytomyr": "Zhytomyr",
+      "Zakarpattia": "Zakarpattia",
+      "Zaporizhzhia": "Zaporizhzhia",
+      "Ivano-Frankivsk": "Ivano-Frankivsk",
+      "Kyiv": "Kyiv",
+      "Kirovohrad": "Kirovohrad",
+      "Luhansk": "Luhansk",
+      "Lviv": "Lviv",
+      "Mykolaiv": "Mykolaiv",
+      "Odesa": "Odesa",
+      "Poltava": "Poltava",
+      "Rivne": "Rivne",
+      "Sumy": "Sumy",
+      "Ternopil": "Ternopil",
+      "Kharkiv": "Kharkiv",
+      "Kherson": "Kherson",
+      "Khmelnytskiy": "Khmelnytskiy",
+      "Cherkasy": "Cherkasy",
+      "Chernivtsi": "Chernivtsi",
+      "Chernihiv": "Chernihiv"
+    },
+    "chartDataKeys": {
+      "primaryCount": "Primary market",
+      "secondaryCount": "Secondary market",
+      "primaryAvgPrice": "Primary market",
+      "secondaryAvgPrice": "Secondary market"
+    }
+  },
+  "main_layout": {
+    "navMenuLinks": {
+      "home": "Home",
+      "property": "Property",
+      "about": "About us",
+      "blog": "Blog",
+      "contact": "Contact"
+    },
+    "additionalFooterLinks": {
+      "pagesSectionHeading": "Pages",
+      "supportSectionHeading": "Support",
+      "getUpdatedForm": {
+        "heading": "Get latest updates",
+        "placeholder": "Your email address"
+      },
+      "faq": "FAQ",
+      "contact": "Contact",
+      "about": "About us"
+    }
+  },
+  "admin_dashboard": {
+    "layout": {
+      "goBackBtn": "Go back",
+      "navMenu": {
+        "analytics": "Analytics",
+        "properties": "Properties",
+        "blog": "Blog",
+        "users": "Users"
+      }
+    },
+    "analytics_page": {
+      "heading": "Analytics",
+      "sections": {
+        "general": {
+          "totalProperties": "Total properties added",
+          "topRegion": "Region that has the largest amount of properties",
+          "averageSellPrice": {
+            "title": "Average price for 1 sqrt.m",
+            "primary": "Primary market",
+            "secondary": "Secondary market"
+          },
+          "averageRentPrice": "Average rent price"
+        },
+        "addedProperties": "Added properties",
+        "addedPropertiesByRegion": "Added properties by regions",
+        "priceDynamics": "Price dynamics"
+      }
+    },
+    "properties_page": {
+      "heading": "Properties",
+      "addNewPropertyBtnTooltip": "Create a new property",
+      "propertiesTable": {
+        "columns": {
+          "id": "ID",
+          "title": "Title",
+          "price": "Price",
+          "region": "Region",
+          "city": "City",
+          "address": "Address",
+          "author": "Author",
+          "type": "Type",
+          "market": "Market"
+        },
+        "rowActions": {
+          "update": "Update",
+          "delete": "Delete"
+        }
+      },
+      "propertyForm": {
+        "title": "Property",
+        "fields": {
+          "title": {
+            "label": "Title",
+            "errors": {
+              "required": "Title is required"
+            }
+          },
+          "price": {
+            "label": "Price",
+            "errors": {
+              "required": "Price is required"
+            }
+          },
+          "description": {
+            "label": "Description",
+            "errors": {
+              "required": "Description is required"
+            }
+          },
+          "adType": {
+            "label": "Ad type",
+            "errors": {
+              "required": "Ad type is required"
+            }
+          },
+          "market": {
+            "label": "Market",
+            "values": {
+              "primary": "Primary",
+              "secondary": "Secondary"
+            },
+            "errors": {
+              "required": "Select a market type"
+            }
+          },
+          "propertyType": {
+            "label": "Property type",
+            "errors": {
+              "required": "Property type is required"
+            }
+          },
+          "roomsNumber": {
+            "label": "Rooms number",
+            "errors": {
+              "required": "Pass a number of rooms is required"
+            }
+          },
+          "yearBuilt": {
+            "label": "Year built",
+            "errors": {
+              "required": "Pass property's year built"
+            }
+          },
+          "floor": {
+            "label": "Floor",
+            "errors": {
+              "required": "Pass a floor number is required"
+            }
+          },
+          "numberOfFloors": {
+            "label": "Number of floors",
+            "errors": {
+              "required": "Pass a number of floors"
+            }
+          },
+          "area": {
+            "label": "Area",
+            "errors": {
+              "required": "Area is required"
+            }
+          },
+          "withRenovation": {
+            "label": "With renovation",
+            "values": {
+              "yes": "Yes",
+              "no": "No"
+            }
+          },
+          "images": {
+            "label": "Upload images",
+            "errors": {
+              "required": "Property photos are required!",
+              "fileSizeExceeded": "File size must be less than 5MB",
+              "invalidFormat": "Invalid file format. Only PNG, JPEG, and SVG are allowed."
+            }
+          },
+          "nearbyAmenities": {
+            "title": "Nearby amenities",
+            "label1": "Object name",
+            "label2": "Distance to object",
+            "addBtnLabel": "Add a new amenity"
+          },
+          "region": {
+            "label": "Region",
+            "errors": {
+              "required": "Region is required"
+            }
+          },
+          "city": {
+            "label": "City",
+            "errors": {
+              "required": "City is required"
+            }
+          },
+          "address": {
+            "label": "Address",
+            "errors": {
+              "required": "Address is required"
+            }
+          }
+        },
+        "submitBtn": {
+          "default": "Submit",
+          "loading": "Loading..."
+        },
+        "status": {
+          "createSuccess": "New property has been successfully created",
+          "updateSuccess": "New property has been successfully updated",
+          "createFailed": "Failed to create a new property",
+          "updateFailed": "Failed to update the property"
+        }
+      }
+    }
+  }
+}

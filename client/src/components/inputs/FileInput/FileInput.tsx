@@ -11,7 +11,6 @@ import { styles } from './styles';
 
 interface FileInputProps {
   name: string;
-  label?: string;
   multiple?: boolean;
   title?: string;
   error?: boolean;
@@ -22,7 +21,6 @@ interface FileInputProps {
 
 export const FileInput: React.FC<FileInputProps> = ({ 
   name,
-  label, 
   multiple = false, 
   title = 'Upload', 
   error, 
@@ -56,11 +54,6 @@ export const FileInput: React.FC<FileInputProps> = ({
         >
           {title}
         </Button>
-        {/* {label && (
-          <Typography>
-            {label}
-          </Typography>
-        )} */}
         {previews.length > 0 && (
           <Box sx={styles.previewContainer}>
             <img 
@@ -82,6 +75,7 @@ export const FileInput: React.FC<FileInputProps> = ({
       )}
 
       <input 
+        data-testid='file-input'
         type='file' 
         multiple={multiple} 
         {...register(name)} 

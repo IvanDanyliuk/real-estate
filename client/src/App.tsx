@@ -1,16 +1,18 @@
 import { Suspense, useEffect } from 'react';
-import { Route, Routes } from 'react-router';
-import { NAV_ROUTES, NavRoute } from './constants/navRoutesPaths';
-import { useAppDispatch } from './hooks/useAppDispatch';
-import { useRefreshTokenQuery } from './features/auth/state/authApi';
-import { useAppSelector } from './hooks/useAppSelector';
+import { Route, Routes } from 'react-router-dom';
+import { Toaster } from 'sonner';
+import { Loader } from './components/layout/Loader/Loader';
 import { useGetUserQuery } from './features/users/state/userApi';
 import { setUser } from './features/users/state/userSlice';
+import { useAppDispatch } from './hooks/useAppDispatch';
+import { NAV_ROUTES, NavRoute } from './constants/navRoutesPaths';
+import 'leaflet/dist/leaflet.css';
+
 
 const renderRoutes = (routes: NavRoute[]) => {
-  return routes.map(route => (
+  return routes.map((route, i) => (
     <Route 
-      key={crypto.randomUUID()} 
+      key={`${route.path}-${i}`} 
       path={route.path || undefined} 
       element={<route.element />}
     >
@@ -18,6 +20,7 @@ const renderRoutes = (routes: NavRoute[]) => {
     </Route>
   ));
 };
+
 
 function App() {
   const dispatch = useAppDispatch();
@@ -30,7 +33,8 @@ function App() {
   }, [dispatch, data]);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loader />}>
+      <Toaster />
       <Routes>
         {renderRoutes(NAV_ROUTES)}
       </Routes>

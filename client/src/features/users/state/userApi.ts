@@ -1,6 +1,8 @@
 import { BaseQueryFn, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { AUTH_ROUTES, USER_ROUTES } from '../../../constants/apiRoutePaths';
 import { REQUEST_METHODS } from '../../../constants/requestMethods';
+import { GetUsersQuery } from './types';
+import { url } from 'inspector';
 
 let isRefreshing = false;
 let refreshPromise: Promise<any> | null = null;
@@ -49,7 +51,23 @@ export const userApi = createApi({
         method: REQUEST_METHODS.get,
       }),
     }),
+    getUsers: builder.query<any, GetUsersQuery>({
+      query: (params) => ({
+        url: '/user/all',
+        params,
+      }),
+    }),
+    deleteuser: builder.mutation({
+      query: (id) => ({
+        url: `/user/${id}`,
+        method: REQUEST_METHODS.delete,
+      }),
+    }),
   }),
 });
 
-export const { useGetUserQuery } = userApi;
+export const { 
+  useGetUserQuery, 
+  useLazyGetUsersQuery, 
+  useDeleteuserMutation 
+} = userApi;

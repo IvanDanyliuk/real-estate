@@ -15,6 +15,12 @@ export const theme = createTheme({
     text: {
       primary: '#222222',
       secondary: '#7B7B7B',
+    },
+    success: {
+      main: '#86DE9C',
+    },
+    error: {
+      main: '#FF4D6D',
     }
   },
   typography: {

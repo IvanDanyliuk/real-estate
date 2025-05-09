@@ -1,0 +1,250 @@
+{
+  "constants": {
+    "months": {
+      "jan": "Січень",
+      "feb": "Лютий",
+      "mar": "Березень",
+      "apr": "Квітень",
+      "may": "Травень",
+      "jun": "Червень",
+      "jul": "Липень",
+      "aug": "Серпень",
+      "sep": "Вересень",
+      "oct": "Жовтень",
+      "nov": "Листопад",
+      "dec": "Грудень"
+    },
+    "adTypes": {
+      "for_sale": "Продаж",
+      "for_rent": "Оренда"
+    },
+    "regions": {
+      "All": "Всі",
+      "Crimea": "АР Крим",
+      "Vinnytsia": "Вінницька",
+      "Volyn": "Волинська",
+      "Dnipropetrovsk": "Дніпропетровська",
+      "Donetsk": "Донецька",
+      "Zhytomyr": "Житомирська",
+      "Zakarpattia": "Закарпатська",
+      "Zaporizhzhia": "Запорізька",
+      "Ivano-Frankivsk": "Івано-Франківська",
+      "Kyiv": "Київська",
+      "Kirovohrad": "Кіровоградська",
+      "Luhansk": "Луганська",
+      "Lviv": "Львівська",
+      "Mykolaiv": "Миколаївська",
+      "Odesa": "Одеська",
+      "Poltava": "Полтавська",
+      "Rivne": "Рівненська",
+      "Sumy": "Сумська",
+      "Ternopil": "Тернопільська",
+      "Kharkiv": "Харківська",
+      "Kherson": "Херсонська",
+      "Khmelnytskiy": "Хмельницька",
+      "Cherkasy": "Черкаська",
+      "Chernivtsi": "Чернівецька",
+      "Chernihiv": "Чернігівська"
+    },
+    "chartDataKeys": {
+      "primaryCount": "Первинний ринок",
+      "secondaryCount": "Вторинний ринок",
+      "primaryAvgPrice": "Первинний ринок",
+      "secondaryAvgPrice": "Вторинний ринок"
+    }
+  },
+  "main_layout": {
+    "navMenuLinks": {
+      "home": "Головна",
+      "property": "Нерухомість",
+      "about": "Про нас",
+      "blog": "Блог",
+      "contact": "Контакти"
+    },
+    "additionalFooterLinks": {
+      "pagesSectionHeading": "Розділи",
+      "supportSectionHeading": "Підтримка",
+      "getUpdatedForm": {
+        "heading": "Отримувати актуальну інформацію",
+        "placeholder": "Ваша ел. пошта"
+      },
+      "faq": "FAQ",
+      "contact": "Контакти",
+      "about": "Про нас"
+    }
+  },
+  "admin_dashboard": {
+    "layout": {
+      "goBackBtn": "На головну",
+      "navMenu": {
+        "analytics": "Аналітика",
+        "properties": "Нерухомість",
+        "blog": "Блог",
+        "users": "Користувачі"
+      }
+    },
+    "analytics_page": {
+      "heading": "Аналітика",
+      "sections": {
+        "general": {
+          "totalProperties": "Всього об'єктів",
+          "topRegion": "Регіон з найбільшою кількістю об'єктів",
+          "averageSellPrice": {
+            "title": "Середня ціна за 1 кв. м",
+            "primary": "Первинний ринок",
+            "secondary": "Вторинний ринок"
+          },
+          "averageRentPrice": "Середня ціна оренди"
+        },
+        "addedProperties": "Всього об'єктів",
+        "addedPropertiesByRegion": "Всього об'єктів по регіонах",
+        "priceDynamics": "Динаміка цін"
+      }
+    },
+    "properties_page": {
+      "heading": "Нерухомість",
+      "addNewPropertyBtnTooltip": "Створити новий об'єкт",
+      "propertiesTable": {
+        "columns": {
+          "id": "ID",
+          "title": "Заголовок",
+          "price": "Ціна",
+          "region": "Область",
+          "city": "Місто",
+          "address": "Адреса",
+          "author": "Автор",
+          "type": "Тип",
+          "market": "Ринок"
+        },
+        "rowActions": {
+          "update": "Оновити",
+          "delete": "Видалити"
+        }
+      },
+      "propertyForm": {
+        "title": "Нерухомість",
+        "fields": {
+          "title": {
+            "label": "Заголовок",
+            "errors": {
+              "required": "Заголовок є обов'язковим"
+            }
+          },
+          "price": {
+            "label": "Ціна",
+            "errors": {
+              "required": "Ціна є обов'язковою"
+            }
+          },
+          "description": {
+            "label": "Опис",
+            "errors": {
+              "required": "Опис є обов'язковим"
+            }
+          },
+          "adType": {
+            "label": "Тип оголошення",
+            "errors": {
+              "required": "Тип оголошення є обов'язковим"
+            }
+          },
+          "market": {
+            "label": "Ринок",
+            "values": {
+              "primary": "Первинний",
+              "secondary": "Вторинний"
+            },
+            "errors": {
+              "required": "Оберіть тип ринку"
+            }
+          },
+          "propertyType": {
+            "label": "Тип об'єкта",
+            "errors": {
+              "required": "Тип об'єкта є обов'язковим"
+            }
+          },
+          "roomsNumber": {
+            "label": "Кількість кімнат",
+            "errors": {
+              "required": "Вкажіть кількість кімнат"
+            }
+          },
+          "yearBuilt": {
+            "label": "Рік будівництва",
+            "errors": {
+              "required": "Вкажіть рік будівництва"
+            }
+          },
+          "floor": {
+            "label": "Поверх",
+            "errors": {
+              "required": "Вкажіть поверх"
+            }
+          },
+          "numberOfFloors": {
+            "label": "Кількість поверхів",
+            "errors": {
+              "required": "Вкажіть кількість поверхів"
+            }
+          },
+          "area": {
+            "label": "Площа",
+            "errors": {
+              "required": "Вкажіть пложу об'єкта"
+            }
+          },
+          "withRenovation": {
+            "label": "З ремонтом",
+            "values": {
+              "yes": "Так",
+              "no": "Ні"
+            }
+          },
+          "images": {
+            "label": "Завантажити фото",
+            "errors": {
+              "required": "Фото об'єкта є обов'язковими",
+              "fileSizeExceeded": "Розмір фото не має перевищувати 5Мб",
+              "invalidFormat": "Невірний формат фото. Дозволено тільки PNG, JPEG, and SVG."
+            }
+          },
+          "nearbyAmenities": {
+            "title": "Зручності поруч",
+            "label1": "Назва об'єкта",
+            "label2": "Відстань до об'єкта",
+            "addBtnLabel": "Додати"
+          },
+          "region": {
+            "label": "Область",
+            "errors": {
+              "required": "Вкажіть область"
+            }
+          },
+          "city": {
+            "label": "Місто",
+            "errors": {
+              "required": "Вкажіть місто"
+            }
+          },
+          "address": {
+            "label": "Адреса",
+            "errors": {
+              "required": "Вкажіть адресу"
+            }
+          }
+        },
+        "submitBtn": {
+          "default": "Створити",
+          "loading": "Завантаження..."
+        },
+        "status": {
+          "createSuccess": "Новий об'єкт нерухомості успішно створений",
+          "updateSuccess": "Об'єкт нерухомості успішно оновлено",
+          "createFailed": "Не вдалося створити новий об'єкт нерухомості",
+          "updateFailed": "Не вдалося оновити об'єкт нерухомості"
+        }
+      }
+    }
+  }
+}

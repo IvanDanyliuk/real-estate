@@ -1,4 +1,6 @@
-export const styles = {
+import { StyleProps } from '../../../../components/types';
+
+export const styles: StyleProps = {
   title: {
     textAlign: 'center',
   },
@@ -13,7 +15,7 @@ export const styles = {
     textAlign: 'center',
     'a': {
       fontWeight: 500,
-      color: 'primary.main'
+      color: 'primary.main',
     },
   },
 };

@@ -1,4 +1,6 @@
-export const styles = {
+import { StyleProps } from '../../types';
+
+export const styles: StyleProps = {
   component: {
     background: 'primary.light',
   },
@@ -7,5 +9,9 @@ export const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-  }
-}
+  },
+  preferences: {
+    display: 'flex',
+    gap: 2,
+  },
+};

@@ -5,8 +5,9 @@ import cookieParser from "cookie-parser";
 import connectDB from "./config/db";
 import authRoutes from "./routes/auth.route";
 import userRoutes from "./routes/user.route";
+import blogRoutes from "./routes/blog.routes";
+import propertyRoutes from "./routes/property.route";
 import errorHandler from "./middleware/errorHandler";
-import { OK } from "./constants/http";
 import { APP_ORIGIN, PORT } from "./constants/env";
 import authenticate from "./middleware/authenticate";
 import sessionRoutes from "./routes/session.route";
@@ -22,13 +23,9 @@ app.use(cors({
 }));
 app.use(cookieParser());
 
-app.get("/", (req: any, res: any, next: any) => {
-  return res.status(OK).json({
-    message: "Hello World!"
-  });
-});
-
 app.use("/auth", authRoutes);
+app.use("/properties", propertyRoutes);
+app.use("/blog", blogRoutes);
 
 // protected routes
 app.use("/user", authenticate, userRoutes);

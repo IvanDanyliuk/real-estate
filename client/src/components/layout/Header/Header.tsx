@@ -1,14 +1,18 @@
-
+import { Link } from 'react-router';
+import { Box, useMediaQuery } from '@mui/material';
 import { UserMenu } from '../UserMenu/UserMenu';
-import { styles } from './styles';
 import { Container } from '../Container/Container';
 import { Navbar } from '../Navbar/Navbar';
 import { Logo } from '../Logo/Logo';
+import { LanguageSelect } from '../LanguageSelect/LanguageSelect';
+import { NavbarMobile } from '../NavbarMobile/NavbarMobile';
 import { useAppSelector } from '../../../hooks/useAppSelector';
-import { Link } from 'react-router';
+import { styles } from './styles';
+
 
 export const Header: React.FC = () => {
   const { user } = useAppSelector((state) => state.user);
+  const isMobile = useMediaQuery('(max-width:599px)');
 
   return (
     <Container 
@@ -17,11 +21,22 @@ export const Header: React.FC = () => {
       contentStyles={styles.container}
     >
       <Logo />
-      <Navbar />
-      {user 
-        ? <UserMenu user={user} /> 
-        : <Link to='/login'>Sign in</Link>
-      }
+      <>
+        {isMobile ? (
+          <NavbarMobile user={user} />
+        ) : (
+          <>
+            <Navbar />
+            <Box sx={styles.preferences}>
+              <LanguageSelect />
+              {user 
+                ? <UserMenu user={user} /> 
+                : <Link to='/login'>Sign in</Link>
+              }
+            </Box>
+          </>
+        )}
+      </>
     </Container>
   );
 };

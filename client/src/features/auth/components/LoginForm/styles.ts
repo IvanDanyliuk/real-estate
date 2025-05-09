@@ -1,4 +1,6 @@
-export const styles = {
+import { StyleProps } from '../../../../components/types';
+
+export const styles: StyleProps = {
   form: {
     margin: '0 auto',
     padding: '1rem 0',
