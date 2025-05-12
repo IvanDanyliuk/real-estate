@@ -1,8 +1,8 @@
-import { vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import { vi } from 'vitest';
 import { PostForm } from './PostForm';
 import { PostDataType } from '../validationSchemas/post.schema';
-import '@testing-library/jest-dom';
 
 
 describe('PostForm Component', () => {

@@ -1,8 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { ChartContainer } from './ChartContainer';
 import '@testing-library/jest-dom';
 import { SelectChangeEvent } from '@mui/material';
 import { vi } from 'vitest';
+import { ChartContainer } from './ChartContainer';
 
 
 vi.mock('react-i18next', () => ({
