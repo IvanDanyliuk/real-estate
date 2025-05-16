@@ -3,12 +3,13 @@ import { StyleProps } from '../../components/types';
 export const styles: StyleProps = {
   container: {
     margin: '0 auto',
+    minHeight: '92vh',
     position: 'relative',
   },
   hero: {
     position: 'relative',
     width: '100%',
-    height: '92vh',
+    minHeight: '100%  ',
     overflow: 'hidden',
     '&:before': {
       content: '""',
@@ -25,7 +26,7 @@ export const styles: StyleProps = {
     position: 'absolute',
     top: '10vh',
     left: 0,
-    padding: '2.5rem',
+    padding: '2rem',
     maxWidth: '35rem',
     backgroundColor: 'primary.light',
     borderRadius: '10px',

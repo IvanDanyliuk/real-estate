@@ -246,5 +246,27 @@
         }
       }
     }
+  },
+  "pages": {
+    "home": {
+      "hero": {
+        "introduction": {
+
+        },
+        "search": {
+          "searchModeBtns": {
+            "sale": "Buy",
+            "rent": "Rent"
+          },
+          "searchForm": {
+            "region": "Region",
+            "city": "City",
+            "type": "Type",
+            "price": "Price range",
+            "searchBtnLabel": "Search"
+          }
+        }
+      }
+    }
   }
 }

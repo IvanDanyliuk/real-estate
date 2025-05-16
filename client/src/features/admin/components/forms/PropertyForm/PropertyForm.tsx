@@ -12,9 +12,9 @@ import { useAppSelector } from '../../../../../hooks/useAppSelector';
 import { PropertyDataType, propertySchema } from '../validationSchemas/property.schema';
 import { removeFalseyFields } from '../../../../../utils/helpers';
 import { AD_TYPES, PROPERTY_TYPES } from '../../../../../constants/main';
-import { styles } from './styles';
 import { MapInput } from '../../../../../components/inputs/MapInput/MapInput';
 import { REGIONS } from '../../../../../constants/geoData';
+import { styles } from './styles';
 
 
 interface PropertyInitialData extends PropertyDataType {

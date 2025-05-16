@@ -8,6 +8,11 @@ export enum MARKET_TYPE {
   Secondary = 'secondary',
 };
 
+export enum AD_TYPE {
+  Sale = 'for_sale',
+  Rent = 'for_rent',
+};
+
 export const MAX_IMAGE_FILE_SIZE = 5000000;
 export const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 
@@ -28,11 +33,11 @@ export const MONTHS = [
 
 export const AD_TYPES = [
   {
-    value: 'for_sale',
+    value: AD_TYPE.Sale,
     label: 'constants.adTypes.for_sale',
   },
   {
-    value: 'for_rent',
+    value: AD_TYPE.Rent,
     label: 'constants.adTypes.for_rent',
   },
 ];

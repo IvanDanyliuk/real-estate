@@ -2,6 +2,7 @@ import { Box, Container, Typography } from '@mui/material';
 import { styles } from './styles';
 import videoBg from '../../assets/video/hero-bg.mp4'
 import { Link } from 'react-router';
+import { SearchBox } from '../../features/properties/components/SearchBox/SearchBox';
 
 const HomePage = () => {
   return (
@@ -24,7 +25,7 @@ const HomePage = () => {
         >
           <source src={videoBg} type='video/mp4' />
         </video>
-        <Container maxWidth='xl' sx={styles.container}>
+        <Container maxWidth='lg' sx={styles.container}>
           <Box sx={styles.introduction}>
             <Typography variant='h3'>
               Find your dream property easily
@@ -48,6 +49,7 @@ const HomePage = () => {
               </Typography>
             </Link>
           </Box>
+          <SearchBox />
         </Container>
       </Box>
     </Box>

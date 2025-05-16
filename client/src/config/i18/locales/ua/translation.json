@@ -246,5 +246,27 @@
         }
       }
     }
+  },
+  "pages": {
+    "home": {
+      "hero": {
+        "introduction": {
+
+        },
+        "search": {
+          "searchModeBtns": {
+            "sale": "Продаж",
+            "rent": "Оренда"
+          },
+          "searchForm": {
+            "region": "Регіон",
+            "city": "Місто",
+            "type": "Тип",
+            "price": "Ціновий діапазон",
+            "searchBtnLabel": "Пошук"
+          }
+        }
+      }
+    }
   }
 }
