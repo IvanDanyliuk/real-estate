@@ -51,7 +51,7 @@ export const SearchBox: React.FC = () => {
     if(data.priceTo) formData.append('priceTo', data.priceTo);
 
     const queryParams = new URLSearchParams();
-    queryParams.append('type', searchMode);
+    queryParams.append('adType', searchMode);
     for(const [key, value] of formData.entries()) {
       queryParams.append(key, value.toString());
     }

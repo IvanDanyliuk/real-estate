@@ -70,5 +70,31 @@ export const styles: StyleProps = {
         color: 'primary.main',
       }
     }
+  },
+  sectionHeading: {
+    '& h3': {
+      position: 'relative',
+      paddingLeft: '3.5rem',
+      fontSize: '1.4rem',
+      '&:before': {
+        content: '""',
+        position: 'absolute',
+        left: 0,
+        top: '0.7rem',
+        width: '3rem',
+        height: '3px',
+        backgroundColor: 'primary.main'
+      }
+    },
+    '& h2': {
+      display: 'inline',
+      fontSize: '2rem',
+      fontWeight: 500,
+      '& span': {
+        marginLeft: '0.5rem',
+        fontSize: 'inherit',
+        fontStyle: 'italic',
+      }
+    }
   }
 };

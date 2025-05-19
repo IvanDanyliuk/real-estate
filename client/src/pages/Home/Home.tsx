@@ -1,11 +1,15 @@
 import { Link } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { Box, Container, Typography } from '@mui/material';
 import { SearchBox } from '../../features/properties/components/SearchBox/SearchBox';
+import { PropertyTypesList } from '../../features/properties/components/PropertyTypesList/PropertyTypesList';
 import videoBg from '../../assets/video/hero-bg.mp4';
 import { styles } from './styles';
 
 
 const HomePage = () => {
+  const { t } = useTranslation();
+
   return (
     <Box>
       <Box component='section' sx={styles.hero}>
@@ -55,7 +59,7 @@ const HomePage = () => {
       </Box>
       <Box component='section'>
         <Container maxWidth='lg'>
-          <Box>
+          <Box sx={styles.sectionHeading}>
             <Typography variant='h3'>
               Property Types
             </Typography>
@@ -66,9 +70,7 @@ const HomePage = () => {
               </Typography>
             </Typography>
           </Box>
-          <Box component='ul'>
-
-          </Box>
+          <PropertyTypesList />
         </Container>
       </Box>
     </Box>
