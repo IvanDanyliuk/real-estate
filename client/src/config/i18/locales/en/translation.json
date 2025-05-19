@@ -18,6 +18,14 @@
       "for_sale": "For sale",
       "for_rent": "For rent"
     },
+    "propertyTypes": {
+      "house": "House",
+      "apartment": "Apartment",
+      "townhouse": "Townhouse",
+      "duplex": "Duplex",
+      "plot": "Land Plot",
+      "office": "Office"
+    },
     "regions": {
       "All": "All",
       "Crimea": "AR of Crimea",

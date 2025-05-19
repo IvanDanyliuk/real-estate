@@ -18,6 +18,14 @@
       "for_sale": "Продаж",
       "for_rent": "Оренда"
     },
+    "propertyTypes": {
+      "house": "Будинок",
+      "apartment": "Квартира",
+      "townhouse": "Таунхаус",
+      "duplex": "Дуплекс",
+      "plot": "Земельна ділянка",
+      "office": "Офісне приміщення"
+    },
     "regions": {
       "All": "Всі",
       "Crimea": "АР Крим",

@@ -51,10 +51,11 @@ export const SearchBox: React.FC = () => {
     if(data.priceTo) formData.append('priceTo', data.priceTo);
 
     const queryParams = new URLSearchParams();
+    queryParams.append('type', searchMode);
     for(const [key, value] of formData.entries()) {
       queryParams.append(key, value.toString());
     }
-    
+
     navigate(`/property?${queryParams.toString()}`);
   };
 

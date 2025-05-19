@@ -212,7 +212,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
                   key={`${value}-${i}`} 
                   value={value}
                 >
-                  {label}
+                  {t(label)}
                 </MenuItem>
               ))}
             </Select>
@@ -228,7 +228,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
                   key={`${value}-${i}`} 
                   value={value}
                 >
-                  {label}
+                  {t(label)}
                 </MenuItem>
               ))}
             </Select>
@@ -348,7 +348,7 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
                   key={`${value}-${i}`} 
                   value={value}
                 >
-                  {label}
+                  {t(label)}
                 </MenuItem>
               ))}
             </Select>

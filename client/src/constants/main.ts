@@ -1,3 +1,11 @@
+import HouseIcon from '@mui/icons-material/House';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import TownhouseIcon from '@mui/icons-material/HomeWork';
+import DuplexIcon from '@mui/icons-material/HolidayVillage';
+import LandPlotIcon from '@mui/icons-material/Fence';
+import OfficeIcon from '@mui/icons-material/Business';
+
+
 export enum USER_ROLES {
   User = 'user',
   Admin = 'admin',
@@ -56,19 +64,32 @@ export const MARKET_TYPES = [
 export const PROPERTY_TYPES = [
   {
     value: 'house',
-    label: 'House',
+    label: 'constants.propertyTypes.house',
+    icon: HouseIcon,
   },
   {
     value: 'apartment',
-    label: 'Apartment',
+    label: 'constants.propertyTypes.apartment',
+    icon: ApartmentIcon,
   },
   {
     value: 'townhouse',
-    label: 'Townhouse',
+    label: 'constants.propertyTypes.townhouse',
+    icon: TownhouseIcon,
   },
   {
     value: 'duplex',
-    label: 'Duplex',
+    label: 'constants.propertyTypes.duplex',
+    icon: DuplexIcon,
   },
-
+  {
+    value: 'plot',
+    label: 'constants.propertyTypes.plot',
+    icon: LandPlotIcon,
+  },
+  {
+    value: 'office',
+    label: 'constants.propertyTypes.office',
+    icon: OfficeIcon,
+  },
 ];

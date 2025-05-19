@@ -1,8 +1,9 @@
-import { Box, Container, Typography } from '@mui/material';
-import { styles } from './styles';
-import videoBg from '../../assets/video/hero-bg.mp4'
 import { Link } from 'react-router';
+import { Box, Container, Typography } from '@mui/material';
 import { SearchBox } from '../../features/properties/components/SearchBox/SearchBox';
+import videoBg from '../../assets/video/hero-bg.mp4';
+import { styles } from './styles';
+
 
 const HomePage = () => {
   return (
@@ -50,6 +51,24 @@ const HomePage = () => {
             </Link>
           </Box>
           <SearchBox />
+        </Container>
+      </Box>
+      <Box component='section'>
+        <Container maxWidth='lg'>
+          <Box>
+            <Typography variant='h3'>
+              Property Types
+            </Typography>
+            <Typography variant='h2'>
+              Explore 
+              <Typography variant='caption'>
+                Property Types
+              </Typography>
+            </Typography>
+          </Box>
+          <Box component='ul'>
+
+          </Box>
         </Container>
       </Box>
     </Box>
