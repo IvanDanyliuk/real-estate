@@ -54,6 +54,16 @@
       "Chernivtsi": "Chernivtsi",
       "Chernihiv": "Chernihiv"
     },
+    "cities": {
+      "kyiv": "Kyiv",
+      "lviv": "Lviv",
+      "dnipro": "Dnipro",
+      "kharkiv": "Kharkiv",
+      "odesa": "Odesa",
+      "uzhhorod": "Uzhhorod",
+      "lutsk": "Lutsk",
+      "vinnytsia": "Vinnytsia"
+    },
     "chartDataKeys": {
       "primaryCount": "Primary market",
       "secondaryCount": "Secondary market",
@@ -279,6 +289,16 @@
             "searchBtnLabel": "Search"
           }
         }
+      },
+      "propertyTypes": {
+        "heading": "Explore",
+        "headingCaption": "Property Types",
+        "subHeading": "Property Types"
+      },
+      "propertyLocations": {
+        "heading": "Explore",
+        "headingCaption": "Popular Locations",
+        "subHeading": "Popular Locations"
       }
     }
   }

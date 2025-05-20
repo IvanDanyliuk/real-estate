@@ -54,6 +54,16 @@
       "Chernivtsi": "Чернівецька",
       "Chernihiv": "Чернігівська"
     },
+    "cities": {
+      "kyiv": "Київ",
+      "lviv": "Львів",
+      "dnipro": "Дніпро",
+      "kharkiv": "Харків",
+      "odesa": "Одеса",
+      "uzhhorod": "Ужгород",
+      "lutsk": "Луцьк",
+      "vinnytsia": "Вінниця"
+    },
     "chartDataKeys": {
       "primaryCount": "Первинний ринок",
       "secondaryCount": "Вторинний ринок",
@@ -279,6 +289,16 @@
             "searchBtnLabel": "Пошук"
           }
         }
+      },
+      "propertyTypes": {
+        "heading": "Переглянь",
+        "headingCaption": "типи нерухомості",
+        "subHeading": "Типи нерухомості"
+      },
+      "propertyLocations": {
+        "heading": "Переглянь",
+        "headingCaption": "популярні міста",
+        "subHeading": "Популярні міста"
       }
     }
   }

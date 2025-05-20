@@ -103,7 +103,8 @@ export const styles: StyleProps = {
     flexDirection: 'column',
     alignItems: 'center',
   },
-  propertyTypesContainer: {
+  commonContainer: {
+    position: 'relative',
     padding: '3rem 0',
     display: 'flex',
     flexDirection: 'column',

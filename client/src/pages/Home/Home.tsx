@@ -6,6 +6,7 @@ import { PropertyTypesList } from '../../features/properties/components/Property
 import videoBg from '../../assets/video/hero-bg.mp4';
 import { styles } from './styles';
 import { StyleProps } from '../../components/types';
+import { PropertyLocations } from '../../features/properties/components/PropertyLocations/PropertyLocations';
 
 
 const HomePage = () => {
@@ -56,19 +57,36 @@ const HomePage = () => {
         </Container>
       </Box>
       <Box component='section'>
-        <Container maxWidth='lg' sx={styles.propertyTypesContainer}>
+        <Container maxWidth='lg' sx={styles.commonContainer}>
           <Box sx={{...styles.sectionHeading, ...styles.sectionHeadingCenterred} as StyleProps}>
             <Typography variant='h3'>
-              Property Types
+              {t('pages.home.propertyTypes.subHeading')}
             </Typography>
             <Typography variant='h2'>
-              Explore 
+              {t('pages.home.propertyTypes.heading')}
               <Typography variant='caption'>
-                Property Types
+                {t('pages.home.propertyTypes.headingCaption')}
               </Typography>
             </Typography>
           </Box>
           <PropertyTypesList />
+        </Container>
+      </Box>
+      {/* TODO: Add the Popular Properties section */}
+      <Box component='section'>
+        <Container maxWidth='lg' sx={styles.commonContainer}>
+          <Box sx={{...styles.sectionHeading, ...styles.sectionHeadingCenterred} as StyleProps}>
+            <Typography variant='h3'>
+              {t('pages.home.propertyLocations.subHeading')}
+            </Typography>
+            <Typography variant='h2'>
+              {t('pages.home.propertyLocations.heading')}
+              <Typography variant='caption'>
+                {t('pages.home.propertyLocations.headingCaption')}
+              </Typography>
+            </Typography>
+          </Box>
+          <PropertyLocations />
         </Container>
       </Box>
     </Box>

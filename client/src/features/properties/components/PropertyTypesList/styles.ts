@@ -2,11 +2,13 @@ import { StyleProps } from '../../../../components/types';
 
 export const styles: StyleProps = {
   container: {
+    padding: '1rem',
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
     gap: 2,
     '@media(min-width:600px)': {
+      padding: 0,
       flexDirection: 'row',
     }
   },

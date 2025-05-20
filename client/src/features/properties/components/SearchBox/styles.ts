@@ -23,7 +23,7 @@ export const styles: StyleProps = {
       cursor: 'pointer',
       width: '10rem',
       height: '2.5rem',
-      fontSize: '1.1rem',
+      fontSize: '1rem',
       border: 'none',
       backgroundColor: 'primary.light',
       '&:disabled': {
