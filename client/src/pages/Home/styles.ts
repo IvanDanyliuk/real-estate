@@ -1,7 +1,7 @@
 import { StyleProps } from '../../components/types';
 
 export const styles: StyleProps = {
-  container: {
+  heroContainer: {
     margin: '0 auto',
     minHeight: '92vh',
     position: 'relative',
@@ -75,6 +75,7 @@ export const styles: StyleProps = {
     '& h3': {
       position: 'relative',
       paddingLeft: '3.5rem',
+      width: 'content-fit',
       fontSize: '1.4rem',
       '&:before': {
         content: '""',
@@ -96,5 +97,17 @@ export const styles: StyleProps = {
         fontStyle: 'italic',
       }
     }
+  },
+  sectionHeadingCenterred: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  propertyTypesContainer: {
+    padding: '3rem 0',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '3rem'
   }
 };

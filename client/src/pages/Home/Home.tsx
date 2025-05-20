@@ -5,6 +5,7 @@ import { SearchBox } from '../../features/properties/components/SearchBox/Search
 import { PropertyTypesList } from '../../features/properties/components/PropertyTypesList/PropertyTypesList';
 import videoBg from '../../assets/video/hero-bg.mp4';
 import { styles } from './styles';
+import { StyleProps } from '../../components/types';
 
 
 const HomePage = () => {
@@ -30,27 +31,24 @@ const HomePage = () => {
         >
           <source src={videoBg} type='video/mp4' />
         </video>
-        <Container maxWidth='lg' sx={styles.container}>
+        <Container maxWidth='lg' sx={styles.heroContainer}>
           <Box sx={styles.introduction}>
             <Typography variant='h3'>
-              Find your dream property easily
+              {t('pages.home.hero.introduction.subTitle')}
             </Typography>
             <Typography variant='h1'>
-              Instant Property Deals:
+              {t('pages.home.hero.introduction.mainTitle')}
               <Typography variant='caption'>
-                Buy, Rent, and Rent
+                {t('pages.home.hero.introduction.mainTitleCaption')}
               </Typography>
             </Typography>
             <Typography variant='body1'>
-              Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit 
-              amet. Lorem ipsum dolor sit amet  Lorem ipsum dolor sit amet Lorem ipsum 
-              dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem 
-              ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.
+              {t('pages.home.hero.introduction.text')}
             </Typography>
             <Link to='/property'>
-              Let's find your
+              {t('pages.home.hero.introduction.linkMain')}
               <Typography variant='caption'>
-                Dream Property
+                {t('pages.home.hero.introduction.linkCaption')}
               </Typography>
             </Link>
           </Box>
@@ -58,8 +56,8 @@ const HomePage = () => {
         </Container>
       </Box>
       <Box component='section'>
-        <Container maxWidth='lg'>
-          <Box sx={styles.sectionHeading}>
+        <Container maxWidth='lg' sx={styles.propertyTypesContainer}>
+          <Box sx={{...styles.sectionHeading, ...styles.sectionHeadingCenterred} as StyleProps}>
             <Typography variant='h3'>
               Property Types
             </Typography>

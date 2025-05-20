@@ -259,7 +259,12 @@
     "home": {
       "hero": {
         "introduction": {
-
+          "mainTitle": "Instant Property Deals:",
+          "mainTitleCaption": "Buy, Rent, and Rent",
+          "subTitle": "Find your dream property easily",
+          "text": "Finding your dream property means discovering a perfect place that feels like home—where comfort, style, and location align. It’s about fulfilling your vision and creating lasting memories every day.",
+          "linkMain": "Let's find your",
+          "linkCaption": "Dream Property"
         },
         "search": {
           "searchModeBtns": {
