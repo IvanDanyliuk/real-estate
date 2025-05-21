@@ -295,6 +295,12 @@
         "headingCaption": "Property Types",
         "subHeading": "Property Types"
       },
+      "popularProperties": {
+        "heading": "Discover",
+        "headingCaption": "Popular Properties",
+        "subHeading": "Popular Properties",
+        "link": "View all properties"
+      },
       "propertyLocations": {
         "heading": "Explore",
         "headingCaption": "Popular Locations",

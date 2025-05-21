@@ -295,6 +295,12 @@
         "headingCaption": "типи нерухомості",
         "subHeading": "Типи нерухомості"
       },
+      "popularProperties": {
+        "heading": "Дізнайся про",
+        "headingCaption": "популярні пропозиції",
+        "subHeading": "Популярні об'єкти",
+        "link": "Дивитись всі об'єкти"
+      },
       "propertyLocations": {
         "heading": "Переглянь",
         "headingCaption": "популярні міста",

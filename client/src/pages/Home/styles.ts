@@ -110,5 +110,27 @@ export const styles: StyleProps = {
     flexDirection: 'column',
     alignItems: 'center',
     gap: '3rem'
+  },
+  popularPropertiesSection: {
+    backgroundColor: 'secondary.light'
+  },
+  popularPropertiesHeadingContainer: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  viewAllLink: {
+    padding: '0 1.5rem',
+    height: '2rem',
+    display: 'flex',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: 'primary.main',
+    color: 'primary.light',
+    borderRadius: '1rem',
+    '&:hover': {
+      opacity: 0.8,
+    },
   }
 };

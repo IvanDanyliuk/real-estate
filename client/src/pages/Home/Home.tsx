@@ -3,10 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { Box, Container, Typography } from '@mui/material';
 import { SearchBox } from '../../features/properties/components/SearchBox/SearchBox';
 import { PropertyTypesList } from '../../features/properties/components/PropertyTypesList/PropertyTypesList';
-import videoBg from '../../assets/video/hero-bg.mp4';
-import { styles } from './styles';
-import { StyleProps } from '../../components/types';
 import { PropertyLocations } from '../../features/properties/components/PropertyLocations/PropertyLocations';
+import { StyleProps } from '../../components/types';
+import videoBg from '../../assets/video/hero-bg.mp4';
+import Arrow from '@mui/icons-material/East';
+import { styles } from './styles';
+import { CSSProperties } from 'react';
 
 
 const HomePage = () => {
@@ -58,7 +60,12 @@ const HomePage = () => {
       </Box>
       <Box component='section'>
         <Container maxWidth='lg' sx={styles.commonContainer}>
-          <Box sx={{...styles.sectionHeading, ...styles.sectionHeadingCenterred} as StyleProps}>
+          <Box sx={
+            {
+              ...styles.sectionHeading, 
+              ...styles.sectionHeadingCenterred
+            } as StyleProps
+          }>
             <Typography variant='h3'>
               {t('pages.home.propertyTypes.subHeading')}
             </Typography>
@@ -72,10 +79,40 @@ const HomePage = () => {
           <PropertyTypesList />
         </Container>
       </Box>
-      {/* TODO: Add the Popular Properties section */}
+      <Box component='section' sx={styles.popularPropertiesSection}>
+        <Container maxWidth='lg' sx={styles.commonContainer}>
+          <Box sx={styles.popularPropertiesHeadingContainer}>
+            <Box sx={styles.sectionHeading}>
+              <Typography variant='h3'>
+                {t('pages.home.popularProperties.subHeading')}
+              </Typography>
+              <Typography variant='h2'>
+                {t('pages.home.popularProperties.heading')}
+                <Typography variant='caption'>
+                  {t('pages.home.popularProperties.headingCaption')}
+                </Typography>
+              </Typography>
+            </Box>
+            <Link to='/property'>
+              <Box sx={styles.viewAllLink}>
+                <Typography>
+                  {t('pages.home.popularProperties.link')}
+                </Typography>
+                <Arrow />
+              </Box>
+            </Link>
+          </Box>
+          
+        </Container>
+      </Box>
       <Box component='section'>
         <Container maxWidth='lg' sx={styles.commonContainer}>
-          <Box sx={{...styles.sectionHeading, ...styles.sectionHeadingCenterred} as StyleProps}>
+          <Box sx={
+            {
+              ...styles.sectionHeading, 
+              ...styles.sectionHeadingCenterred
+            } as StyleProps
+          }>
             <Typography variant='h3'>
               {t('pages.home.propertyLocations.subHeading')}
             </Typography>
