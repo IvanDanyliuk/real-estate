@@ -1,7 +1,7 @@
 import { propertySchema } from "../schemas/property.schema";
 import catchErrors from "../utils/catchErrors";
 import { OK } from "../constants/http";
-import { createProperty, deleteProperty, getGeneralStats, getMonthlyPriceStats, getMonthlyPropertyStats, getProperties, getPropertyStatsByRegion, updateProperty } from "../services/property.service";
+import { createProperty, deleteProperty, getGeneralStats, getMonthlyPriceStats, getMonthlyPropertyStats, getPopularProperties, getProperties, getPropertyById, getPropertyStatsByRegion, updateProperty } from "../services/property.service";
 
 type FiltersType = {
   price?: {
@@ -60,7 +60,16 @@ export const getPropertiesHandler = catchErrors(async (req, res) => {
 });
 
 export const getPropertyByIdHandler = catchErrors(async (req, res) => {
-  console.log("GET PROPERTY BY ID", req)
+  console.log('GET PROPERTY BY ID', req)
+  // const response = await getPropertyById()
+});
+
+export const getPopularPropertiesHandler = catchErrors(async (req, res) => {
+  const { limit } = req.query;
+  const limitValue = limit ? +limit : 8;
+
+  const response = await getPopularProperties(limitValue);
+  return res.status(OK).json(response);
 });
 
 export const createPropertyHandler = catchErrors(async (req, res) => {

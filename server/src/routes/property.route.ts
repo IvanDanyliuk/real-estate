@@ -5,6 +5,7 @@ import {
   getGeneralStatsHandler, 
   getMonthlyAveragePriceStatsHandler, 
   getMonthlyPropertyStatsHandler, 
+  getPopularPropertiesHandler, 
   getPropertiesHandler, 
   getPropertyByIdHandler, 
   getPropertyStatsByRegionHandler, 
@@ -20,6 +21,7 @@ propertyRoutes.get('/stats/general', getGeneralStatsHandler);
 propertyRoutes.get('/stats/monthly', getMonthlyPropertyStatsHandler);
 propertyRoutes.get('/stats/regions', getPropertyStatsByRegionHandler);
 propertyRoutes.get('/stats/prices', getMonthlyAveragePriceStatsHandler);
+propertyRoutes.get('/popular', getPopularPropertiesHandler);
 propertyRoutes.get('/:id', getPropertyByIdHandler);
 propertyRoutes.post('/', upload.array('images'), createPropertyHandler);
 propertyRoutes.patch('/', upload.array('images'), updatePropertyHandler);

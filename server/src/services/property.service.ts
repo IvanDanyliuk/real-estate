@@ -34,6 +34,20 @@ export const getProperties = async ({
   };
 };
 
+export const getPropertyById = async (id: string) => {
+  const property = await PropertyModel.findById(id);
+  return property;
+};
+
+export const getPopularProperties = async (limit: number) => {
+  const properties = await PropertyModel
+    .find()
+    .sort({ likes: -1 })
+    .limit(limit);
+
+  return properties;
+};
+
 export interface CreatePropertyParams {
   title: string;
   price: number;

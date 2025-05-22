@@ -31,6 +31,7 @@ const propertySchema = new Schema({
     distanceTo: { type: Number },
   }],
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+  likes: { type: Number },
 }, {
   timestamps: true,
 });
