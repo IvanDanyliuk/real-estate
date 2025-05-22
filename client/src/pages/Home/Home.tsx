@@ -7,12 +7,23 @@ import { PropertyLocations } from '../../features/properties/components/Property
 import { StyleProps } from '../../components/types';
 import videoBg from '../../assets/video/hero-bg.mp4';
 import Arrow from '@mui/icons-material/East';
+import { useGetPopularPropertiesQuery } from '../../features/properties/state/propertyApi';
 import { styles } from './styles';
-import { CSSProperties } from 'react';
+import { PropertyList } from '../../features/properties/components/PropertyList/PropertyList';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 
 const HomePage = () => {
   const { t } = useTranslation();
+  const { data, isSuccess } = useGetPopularPropertiesQuery({ limit: 8 });
+
+  const { user } = useAppSelector(state => state.user)
+  
+  const handleLikeProperty = (id: string) => {
+    console.log('Like', id)
+  };
+
+  console.log('USER', user)
 
   return (
     <Box>
@@ -102,7 +113,14 @@ const HomePage = () => {
               </Box>
             </Link>
           </Box>
-          
+          {isSuccess ? (
+            <PropertyList 
+              data={data} 
+              onLike={handleLikeProperty} 
+            />
+          ) : (
+            <div>Loading...</div>
+          )}
         </Container>
       </Box>
       <Box component='section'>

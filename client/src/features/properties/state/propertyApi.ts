@@ -19,6 +19,12 @@ export const propertyApi = createApi({
     getPropertyById: builder.query({
       query: (id) => `/properties/${id}`,
     }),
+    getPopularProperties: builder.query({
+      query: (params) => ({
+        url: '/properties/popular',
+        params,
+      }),
+    }),
     createProperty: builder.mutation<CreatePropertyResponse, FormData>({
       query: (newProperty) => ({
         url: '/properties',
@@ -68,6 +74,7 @@ export const propertyApi = createApi({
 export const { 
   useLazyGetPropertiesQuery, 
   useGetPropertyByIdQuery, 
+  useGetPopularPropertiesQuery,
   useCreatePropertyMutation, 
   useUpdatePropertyMutation, 
   useDeletePropertyMutation, 

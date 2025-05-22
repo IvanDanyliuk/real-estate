@@ -72,6 +72,7 @@ export const styles: StyleProps = {
     }
   },
   sectionHeading: {
+    padding: '1rem',
     '& h3': {
       position: 'relative',
       paddingLeft: '3.5rem',
@@ -96,6 +97,9 @@ export const styles: StyleProps = {
         fontSize: 'inherit',
         fontStyle: 'italic',
       }
+    },
+    '@media(min-width: 600px)': {
+      padding: 0,
     }
   },
   sectionHeadingCenterred: {
@@ -129,6 +133,7 @@ export const styles: StyleProps = {
     backgroundColor: 'primary.main',
     color: 'primary.light',
     borderRadius: '1rem',
+    transition: 'ease-in-out all 0.5s',
     '&:hover': {
       opacity: 0.8,
     },
