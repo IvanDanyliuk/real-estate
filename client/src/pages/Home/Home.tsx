@@ -7,23 +7,69 @@ import { PropertyLocations } from '../../features/properties/components/Property
 import { StyleProps } from '../../components/types';
 import videoBg from '../../assets/video/hero-bg.mp4';
 import Arrow from '@mui/icons-material/East';
-import { useGetPopularPropertiesQuery } from '../../features/properties/state/propertyApi';
+import { useLazyGetPopularPropertiesQuery, useUpdatePropertyMutation } from '../../features/properties/state/propertyApi';
 import { styles } from './styles';
 import { PropertyList } from '../../features/properties/components/PropertyList/PropertyList';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import { useCallback, useEffect } from 'react';
+import { useUpdateUserMutation } from '../../features/users/state/userApi';
+import { PropertyType } from '../../features/properties/state/types';
 
 
 const HomePage = () => {
   const { t } = useTranslation();
-  const { data, isSuccess } = useGetPopularPropertiesQuery({ limit: 8 });
 
+  const [ getProperties, { data, isSuccess: isGetPropertiesSuccess } ] = useLazyGetPopularPropertiesQuery();
+  const [updateExistingProperty, { isSuccess: isUpdatePropertySuccess }] = useUpdatePropertyMutation();
+  const [updateUser, { isSuccess: isUpdateUserSuccess }] = useUpdateUserMutation();
+  
   const { user } = useAppSelector(state => state.user)
   
-  const handleLikeProperty = (id: string) => {
-    console.log('Like', id)
-  };
+  const handleLikeProperty = useCallback(async (property: PropertyType) => {
+    if(user) {
+      const isPropertyLiked = user.likedProperties.find(propertyId => propertyId === property._id);
+      if(isPropertyLiked) {
+        await updateExistingProperty({
+          ...property,
+          location: JSON.stringify(property.location),
+          overview: JSON.stringify(property.overview),
+          nearbyAmenities: JSON.stringify(property.nearbyAmenities),
+          likes: property.likes.filter((userId: string) => userId !== user._id)
+        });
+        const updatedLikeProperties = user.likedProperties.filter(propertyId => propertyId !== property._id);
+        await updateUser({
+          ...user,
+          likedProperties: updatedLikeProperties
+        })
+      } else {
+        console.log({
+          updatedProperty: {
+            ...property,
+            likes: [...property.likes, user._id]
+          },
+          updatedUser: {
+            ...user,
+            likedProperties: [...user.likedProperties, property._id]
+          }
+        })
+        await updateExistingProperty({
+          ...property,
+          location: JSON.stringify(property.location),
+          overview: JSON.stringify(property.overview),
+          nearbyAmenities: JSON.stringify(property.nearbyAmenities),
+          likes: [...property.likes, user._id]
+        });
+        await updateUser({
+          ...user,
+          likedProperties: [...user.likedProperties, property._id]
+        })
+      }
+    }
+  }, []);
 
-  console.log('USER', user)
+  useEffect(() => {
+    getProperties({ limit: 8 });
+  }, [getProperties, isUpdatePropertySuccess, isUpdateUserSuccess]);
 
   return (
     <Box>
@@ -113,9 +159,10 @@ const HomePage = () => {
               </Box>
             </Link>
           </Box>
-          {isSuccess ? (
+          {isGetPropertiesSuccess || isUpdatePropertySuccess ? (
             <PropertyList 
               data={data} 
+              userId={user?._id}
               onLike={handleLikeProperty} 
             />
           ) : (

@@ -32,6 +32,7 @@ export interface PropertyFormData {
 
 export interface PropertyType extends PropertyFormData {
   _id: string;
+  likes: string[];
   createdAt: string;
   updatedAt: string;
 };

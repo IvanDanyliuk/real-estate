@@ -57,6 +57,13 @@ export const userApi = createApi({
         params,
       }),
     }),
+    updateUser: builder.mutation({
+      query: (data) => ({
+        url: '/user',
+        method: REQUEST_METHODS.patch,
+        body: data,
+      }),
+    }),
     deleteuser: builder.mutation({
       query: (id) => ({
         url: `/user/${id}`,
@@ -69,5 +76,6 @@ export const userApi = createApi({
 export const { 
   useGetUserQuery, 
   useLazyGetUsersQuery, 
+  useUpdateUserMutation, 
   useDeleteuserMutation 
 } = userApi;

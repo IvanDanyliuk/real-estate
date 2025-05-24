@@ -1,37 +1,43 @@
-import { Box, Card, IconButton, Typography } from '@mui/material';
-import { PropertyType } from '../../state/types';
 import { Link } from 'react-router';
-import { styles } from './styles';
 import { useTranslation } from 'react-i18next';
-import PlaceIcon from '@mui/icons-material/Place';
-import RoomsNumberIcon from '@mui/icons-material/MeetingRoom';
-import AreaIcon from '@mui/icons-material/SelectAll';
-import YearIcon from '@mui/icons-material/CalendarMonth';
-import StarIcon from '@mui/icons-material/StarBorder';
+import { Box, Card, IconButton, Typography } from '@mui/material';
+import { Place, MeetingRoom, SelectAll, CalendarMonth, StarBorder } from '@mui/icons-material';
+import { PropertyType } from '../../state/types';
+import { styles } from './styles';
+
 
 
 interface PropertyListProps {
   data: PropertyType[];
-  onLike: (id: string) => void;
+  userId?: string;
+  onLike: (property: PropertyType) => void;
 };
 
 
-export const PropertyList: React.FC<PropertyListProps> = ({ data, onLike }) => {
+export const PropertyList: React.FC<PropertyListProps> = ({ data, userId, onLike }) => {
   const { t } = useTranslation();
 
   return (
     <Box component='ul' sx={styles.container}>
       {data.map(property => (
         <Card 
-          key={property._id} 
+          key={`property_${property._id}`} 
           component='li' 
           sx={styles.card}
         >
           <IconButton 
-            onClick={() => onLike(property._id)} 
-            sx={styles.likeBtn}
+            onClick={() => onLike(property)} 
+            sx={{
+              ...styles.likeBtn, 
+              backgroundColor: userId && property.likes.includes(userId) ? 
+                'primary.main' : 
+                'primary.light', 
+              color: userId && property.likes.includes(userId) ? 
+                'primary.light' : 
+                'primary.main',
+            }}
           >
-            <StarIcon />
+            <StarBorder />
           </IconButton>
           <Link to={`/property/${property._id}`}>
             <Box sx={styles.imageContainer}>
@@ -57,7 +63,7 @@ export const PropertyList: React.FC<PropertyListProps> = ({ data, onLike }) => {
                   {property.title}
                 </Typography>
                 <Box sx={styles.address}>
-                  <PlaceIcon />
+                  <Place />
                   <Typography>
                     {property.location.address}
                   </Typography>
@@ -65,19 +71,19 @@ export const PropertyList: React.FC<PropertyListProps> = ({ data, onLike }) => {
               </Box>
               <Box sx={styles.overview}>
                 <Box sx={styles.overviewItem}>
-                  <RoomsNumberIcon />
+                  <MeetingRoom />
                   <Typography>
                     {property.overview.roomsNumber}
                   </Typography>
                 </Box>
                 <Box sx={styles.overviewItem}>
-                  <AreaIcon />
+                  <SelectAll />
                   <Typography>
                     {property.overview.area}
                   </Typography>
                 </Box>
                 <Box sx={styles.overviewItem}>
-                  <YearIcon />
+                  <CalendarMonth />
                   <Typography>
                     {property.overview.yearBuilt}
                   </Typography>

@@ -74,7 +74,7 @@ export const propertyApi = createApi({
 export const { 
   useLazyGetPropertiesQuery, 
   useGetPropertyByIdQuery, 
-  useGetPopularPropertiesQuery,
+  useLazyGetPopularPropertiesQuery,
   useCreatePropertyMutation, 
   useUpdatePropertyMutation, 
   useDeletePropertyMutation, 

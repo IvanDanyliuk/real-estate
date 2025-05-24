@@ -69,7 +69,7 @@ export const PropertyLocations: React.FC = () => {
     <Box component='ul' sx={styles.list}>
       {locations.map(({ label, value, image }) => (
         <Card 
-          key='value' 
+          key={value} 
           component='li' 
           onClick={() => setLocationParams(value)}
           sx={{ 
