@@ -21,7 +21,7 @@ const propertySchema = new Schema({
     roomsNumber: { type: Number, required: true },
     propertyType: { type: String, requried: true },
     yearBuilt: { type: Number, requried: true },
-    floor: { type: String },
+    floor: { type: Number },
     numberOfFloors: { type: Number },
     area: { type: Number, required: true },
     withRenovation: { type: String },
@@ -31,7 +31,7 @@ const propertySchema = new Schema({
     distanceTo: { type: Number },
   }],
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
-  likes: { type: Number },
+  likes: [{ type: Schema.Types.ObjectId, ref: "User" }],
 }, {
   timestamps: true,
 });

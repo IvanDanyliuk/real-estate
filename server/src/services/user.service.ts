@@ -1,5 +1,5 @@
 import UserDocument from "../models/user.model"
-import { deleteFromCloudinary } from "./cloudinary.service";
+import { deleteFromCloudinary, uploadToCloudinary } from "./cloudinary.service";
 
 export type GetUsersParams = {
   page: number,
@@ -20,6 +20,21 @@ export const getUsers = async ({ page, itemsPerPage }: GetUsersParams) => {
     users, 
     count,
   };
+};
+
+export const updateUser = async (userToUpdate: any) => {
+  const existingUser = await UserDocument.findById(userToUpdate._id);
+  
+  const uploadedImage = userToUpdate.profilePhoto && typeof userToUpdate.profilePhoto !== 'string'   
+  ? await uploadToCloudinary(userToUpdate.profilePhoto.buffer)
+  : null;
+
+  const updatedUser = await UserDocument.findByIdAndUpdate(userToUpdate._id, {
+    ...userToUpdate,
+    profilePhoto: uploadedImage || existingUser!.profilePhoto,
+  }, { new: true });
+
+  return updatedUser;
 };
 
 export const deleteUser = async (id: string) => {

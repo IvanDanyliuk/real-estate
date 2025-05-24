@@ -17,6 +17,7 @@ export const propertySchema = zod.object({
   author: zod.string().min(1),
   description: zod.string().min(1).max(1000),
   images: zod.any().optional(),
+  likes: zod.array(zod.string()).optional(),
   overview: zod.object({
     roomsNumber: zod.number().gte(0),
     propertyType: zod.string().min(1).max(255),

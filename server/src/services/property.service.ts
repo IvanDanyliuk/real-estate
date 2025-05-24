@@ -40,10 +40,26 @@ export const getPropertyById = async (id: string) => {
 };
 
 export const getPopularProperties = async (limit: number) => {
-  const properties = await PropertyModel
-    .find()
-    .sort({ likes: -1 })
-    .limit(limit);
+  // const properties = await PropertyModel
+  //   .find()
+  //   .sort({ likes: -1 })
+  //   .limit(limit);
+
+  const properties = await PropertyModel.aggregate([
+    {
+      $addFields: {
+        likesCount: { $size: "$likes" }
+      }
+    },
+    {
+      $sort: {
+        likesCount: -1
+      }
+    },
+    {
+      $limit: limit
+    }
+  ])
 
   return properties;
 };
