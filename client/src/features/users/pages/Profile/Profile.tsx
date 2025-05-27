@@ -1,12 +1,12 @@
-import { Box } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import { styles } from './styles';
 
 
 const ProfilePage = () => {
   return (
-    <Box>
+    <Paper>
       Profile page
-    </Box>
+    </Paper>
   );
 };
 

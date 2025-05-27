@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
 import { NavLink } from 'react-router';
-import { Box, SvgIcon, Typography } from '@mui/material';
+import { Box, List, ListItem, SvgIcon, Typography } from '@mui/material';
 import { AssignmentInd, HomeWork } from '@mui/icons-material';
 import { styles } from './styles';
 
@@ -21,19 +21,17 @@ const navLinks = [
 
 export const ProfileNavMenu: React.FC = () => {
   return (
-    <Box sx={styles.list}>
+    <List sx={styles.list}>
       {navLinks.map(({ value, label, icon }) => (
-        <NavLink 
-          key={`profile_nav_links_${value}`} 
-          to={value} 
-          style={styles.listItem as CSSProperties}
-        >
-          <SvgIcon component={icon} />
-          <Typography variant='caption'>
-            {label}
-          </Typography>
-        </NavLink>
+        <ListItem key={`profile_nav_links_${value}`} sx={styles.listItem}>
+          <NavLink to={value}>
+            <SvgIcon component={icon} />
+            <Typography variant='caption'>
+              {label}
+            </Typography>
+          </NavLink>
+        </ListItem>
       ))}
-    </Box>
+    </List>
   );
 };
