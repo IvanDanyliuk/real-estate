@@ -64,7 +64,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
         onClose={handleCloseMenu}
       >
         <MenuItem sx={styles.menuItem}>
-          <Link to='/profile'>Profile</Link>
+          <Link to={`/profile/${user._id}`}>Profile</Link>
         </MenuItem>
         {role === USER_ROLES.Admin && (
           <MenuItem sx={styles.menuItem}>

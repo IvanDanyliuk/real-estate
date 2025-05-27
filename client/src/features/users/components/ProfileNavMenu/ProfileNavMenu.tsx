@@ -4,7 +4,11 @@ import { PROFILE_NAV_LINKS } from '../../../../constants/navLinks';
 import { styles } from './styles';
 
 
-export const ProfileNavMenu: React.FC = () => {
+interface ProfileMenuProps {
+  userId: string;
+}
+
+export const ProfileNavMenu: React.FC<ProfileMenuProps> = ({ userId }) => {
   const isMobile = useMediaQuery('(max-width:599px)');
   
   return (
@@ -15,7 +19,7 @@ export const ProfileNavMenu: React.FC = () => {
           sx={styles.listItem}
         >
           <NavLink 
-            to={value} 
+            to={value.replace(/:id/, userId)} 
             end={value === PROFILE_NAV_LINKS[0].value}
           >
             <SvgIcon component={icon} />

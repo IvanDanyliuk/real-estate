@@ -112,15 +112,15 @@ export const NAV_ROUTES: NavRoute[] = [
     element: ProfileLayout,
     children: [
       {
-        path: '/profile',
+        path: '/profile/:id',
         element: Profile,
       },
       {
-        path: '/profile/my-properties',
+        path: '/profile/:id/my-properties',
         element: MyProperties,
       },
       {
-        path: '/profile/liked-properties',
+        path: '/profile/:id/liked-properties',
         element: LikedProperties,
       },
     ],

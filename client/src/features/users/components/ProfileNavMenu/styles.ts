@@ -30,6 +30,6 @@ export const styles: StyleProps = {
     '& a.active, & a:hover': {
       backgroundColor: 'primary.main',
       color: 'primary.light',
-    }
+    },
   },
 };
