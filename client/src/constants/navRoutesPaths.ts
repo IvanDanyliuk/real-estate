@@ -24,6 +24,7 @@ const AdminUsers = lazy(() => import('../features/admin/pages/Users/Users'));
 
 const Profile = lazy(() => import('../features/users/pages/Profile/Profile'));
 const MyProperties = lazy(() => import('../features/users/pages/MyProperties/MyProperties'));
+const LikedProperties = lazy(() => import('../features/users/pages/LikedProperties/LikedProperties'));
 
 
 export interface NavRoute {
@@ -115,8 +116,12 @@ export const NAV_ROUTES: NavRoute[] = [
         element: Profile,
       },
       {
-        path: '/profile/properties',
+        path: '/profile/my-properties',
         element: MyProperties,
+      },
+      {
+        path: '/profile/liked-properties',
+        element: LikedProperties,
       },
     ],
   },

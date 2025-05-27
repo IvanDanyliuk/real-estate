@@ -27,7 +27,7 @@ export const styles: StyleProps = {
         fontWeight: 500,
       }
     },
-    '& a.active, a:hover': {
+    '& a.active, & a:hover': {
       backgroundColor: 'primary.main',
       color: 'primary.light',
     }
