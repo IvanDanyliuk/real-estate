@@ -2,6 +2,8 @@ import { ComponentType, lazy } from 'react';
 import MainLayout from '../layouts/MainLayout/MainLayout';
 import AuthLayout from '../layouts/AuthLayout/AuthLayout';
 import AdminDashboardLayout from '../layouts/AdminDashboardLayout/AdminDashboardLayout';
+import { ProfileLayout } from '../layouts/ProfileLayout/ProfileLayout';
+
 
 const Home = lazy(() => import('../pages/Home/Home'));
 const About = lazy(() => import('../pages/About/About'));
@@ -20,12 +22,17 @@ const AdminProperties = lazy(() => import('../features/admin/pages/Properties/Pr
 const AdminBlog = lazy(() => import('../features/admin/pages/Blog/Blog'));
 const AdminUsers = lazy(() => import('../features/admin/pages/Users/Users'));
 
+const Profile = lazy(() => import('../features/users/pages/Profile/Profile'));
+const MyProperties = lazy(() => import('../features/users/pages/MyProperties/MyProperties'));
+
+
 export interface NavRoute {
   element: ComponentType;
   path?: string;
   isIndex?: boolean;
   children?: NavRoute[];
 };
+
 
 export const NAV_ROUTES: NavRoute[] = [
   {
@@ -97,6 +104,19 @@ export const NAV_ROUTES: NavRoute[] = [
       {
         path: '/admin/users',
         element: AdminUsers,
+      },
+    ],
+  },
+  {
+    element: ProfileLayout,
+    children: [
+      {
+        path: '/profile',
+        element: Profile,
+      },
+      {
+        path: '/profile/properties',
+        element: MyProperties,
       },
     ],
   },

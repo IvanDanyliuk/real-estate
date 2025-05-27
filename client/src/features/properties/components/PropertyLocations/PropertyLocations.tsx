@@ -1,6 +1,7 @@
+import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { Box, Card, IconButton, Typography } from '@mui/material';
 import Arrow from '@mui/icons-material/ArrowForward';
-import { useTranslation } from 'react-i18next';
 import Kyiv from '../../../../assets/images/locations/kyiv.jpg';
 import Lviv from '../../../../assets/images/locations/lviv.jpg';
 import Dnipro from '../../../../assets/images/locations/dnipro.jpg';
@@ -10,7 +11,6 @@ import Uzhhorod from '../../../../assets/images/locations/uzhhorod.jpg';
 import Lutsk from '../../../../assets/images/locations/lutsk.jpg';
 import Vinnytsia from '../../../../assets/images/locations/vinnytsia.jpg';
 import { styles } from './styles';
-import { useNavigate } from 'react-router';
 
 
 const locations = [

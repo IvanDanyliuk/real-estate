@@ -6,7 +6,6 @@ import { PropertyType } from '../../state/types';
 import { styles } from './styles';
 
 
-
 interface PropertyListProps {
   data: PropertyType[];
   userId?: string;
