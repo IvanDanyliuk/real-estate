@@ -1,0 +1,104 @@
+import { Box, Button, Dialog, DialogContent, DialogTitle, IconButton, TextField } from '@mui/material';
+import { EditNote } from '@mui/icons-material';
+import { User } from '../../../state/types';
+import { useTranslation } from 'react-i18next';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { UserDataType, userSchema } from '../../../../admin/components/forms/validationSchemas/property.schema';
+import { styles } from './styles';
+
+
+interface UpdatePersonalDataFormProps {
+  open: boolean;
+  user: User;
+  onSubmit: (data: FormData) => Promise<any>;
+  onHandleOpen: () => void;
+};
+
+
+export const UpdatePersonalDataForm: React.FC<UpdatePersonalDataFormProps> = ({ 
+  open, 
+  user, 
+  onSubmit, 
+  onHandleOpen 
+}) => {
+  const { t } = useTranslation();
+
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { isSubmitting, errors },
+    setValue,
+    reset,
+    watch,
+  } = useForm<UserDataType>({
+    defaultValues: {
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      location: user.location,
+    },
+    resolver: zodResolver(userSchema)
+  });
+
+  const onHandleFormSubmit: SubmitHandler<UserDataType> = (data) => {
+    const formData = new FormData();
+    if(data.name) formData.append('name', data.name);
+    if(data.email) formData.append('email', data.email);
+    if(data.phone) formData.append('phone', data.phone);
+    if(data.location) formData.append('location', data.location);
+
+    console.log('USER DATA', data)
+  };
+
+  return (
+    <>
+      <IconButton onClick={onHandleOpen}>
+        <EditNote />
+      </IconButton>
+      <Dialog 
+        open={open} 
+        maxWidth='lg' 
+        onClose={onHandleOpen}
+      >
+        <DialogTitle>Update user data</DialogTitle>
+        <DialogContent sx={styles.container}>
+          <Box 
+            component='form' 
+            onSubmit={handleSubmit(onHandleFormSubmit)}
+            sx={styles.form}
+          >
+            <TextField 
+              label='Name' 
+              fullWidth
+              error={!!errors.name} 
+              {...register('name')} 
+            />
+            <TextField 
+              label='Email' 
+              fullWidth
+              error={!!errors.email} 
+              {...register('email')} 
+            />
+            <TextField 
+              label='Phone' 
+              fullWidth
+              error={!!errors.phone} 
+              {...register('phone')} 
+            />
+            <TextField 
+              label='Address' 
+              fullWidth
+              error={!!errors.location} 
+              {...register('location')} 
+            />
+            <Button type='submit'>
+              Submit
+            </Button>
+          </Box>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+};

@@ -4,10 +4,20 @@ import { useAppSelector } from '../../../../hooks/useAppSelector';
 import { styles } from './styles';
 import { StyleProps } from '../../../../components/types';
 import { SectionSkeleton } from '../../../admin/skeletons/SectionSkeleton/SectionSkeleton';
+import { UpdatePersonalDataForm } from '../../components/forms/UpdatePersonalDataForm/UpdatePersonalDataForm';
+import { useCallback, useState } from 'react';
 
 
 const ProfilePage = () => {
   const { user } = useAppSelector(state => state.user);
+
+  const [isUserFormOpen, setIsUserFormOpen] = useState<boolean>(false);
+
+  const handleUserFormOpen = () => setIsUserFormOpen(!isUserFormOpen)
+
+  const handleUpdateUserDataSubmit = useCallback(async (data: FormData) => {
+    
+  }, []);
 
   if(!user) {
     return (
@@ -35,9 +45,12 @@ const ProfilePage = () => {
           <Typography variant='h3'>
             Personal Information
           </Typography>
-          <IconButton>
-            <EditNote />
-          </IconButton>
+          <UpdatePersonalDataForm 
+            open={isUserFormOpen} 
+            user={user} 
+            onSubmit={handleUpdateUserDataSubmit} 
+            onHandleOpen={handleUserFormOpen} 
+          />
         </Box>
         <Table>
           <TableRow>
