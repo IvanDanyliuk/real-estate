@@ -306,6 +306,16 @@
         "headingCaption": "популярні міста",
         "subHeading": "Популярні міста"
       }
+    },
+    "profile": {
+      "profileForm": {
+        "title": "Оновити дані користувача",
+        "nameLabel": "Ім'я",
+        "emailLabel": "Ел. пошта",
+        "phoneLabel": "Телефон",
+        "locationLabel": "Локація",
+        "submitBtn": "ПІдтвердити"
+      }
     }
   }
 }

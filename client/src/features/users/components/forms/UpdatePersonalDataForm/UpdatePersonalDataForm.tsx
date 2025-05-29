@@ -62,7 +62,9 @@ export const UpdatePersonalDataForm: React.FC<UpdatePersonalDataFormProps> = ({
         maxWidth='lg' 
         onClose={onHandleOpen}
       >
-        <DialogTitle>Update user data</DialogTitle>
+        <DialogTitle>
+          {t('pages.profile.profileForm.title')}
+        </DialogTitle>
         <DialogContent sx={styles.container}>
           <Box 
             component='form' 
@@ -70,31 +72,31 @@ export const UpdatePersonalDataForm: React.FC<UpdatePersonalDataFormProps> = ({
             sx={styles.form}
           >
             <TextField 
-              label='Name' 
+              label={t('pages.profile.profileForm.nameLabel')} 
               fullWidth
               error={!!errors.name} 
               {...register('name')} 
             />
             <TextField 
-              label='Email' 
+              label={t('pages.profile.profileForm.emailLabel')} 
               fullWidth
               error={!!errors.email} 
               {...register('email')} 
             />
             <TextField 
-              label='Phone' 
+              label={t('pages.profile.profileForm.phoneLabel')} 
               fullWidth
               error={!!errors.phone} 
               {...register('phone')} 
             />
             <TextField 
-              label='Address' 
+              label={t('pages.profile.profileForm.locationLabel')} 
               fullWidth
               error={!!errors.location} 
               {...register('location')} 
             />
             <Button type='submit'>
-              Submit
+              {t('pages.profile.profileForm.submitBtn')}
             </Button>
           </Box>
         </DialogContent>

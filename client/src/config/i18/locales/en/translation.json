@@ -307,5 +307,15 @@
         "subHeading": "Popular Locations"
       }
     }
+  },
+  "profile": {
+    "profileForm": {
+      "title": "Update user data",
+      "nameLabel": "Name",
+      "emailLabel": "Email",
+      "phoneLabel": "Phone",
+      "locationLabel": "Location",
+      "submitBtn": "Submit"
+    }
   }
 }
