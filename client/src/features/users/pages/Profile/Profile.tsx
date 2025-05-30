@@ -1,11 +1,12 @@
-import { Avatar, Box, Button, IconButton, Paper, Table, TableCell, TableRow, Typography } from '@mui/material';
-import { EditNote } from '@mui/icons-material';
-import { useAppSelector } from '../../../../hooks/useAppSelector';
-import { styles } from './styles';
-import { StyleProps } from '../../../../components/types';
-import { SectionSkeleton } from '../../../admin/skeletons/SectionSkeleton/SectionSkeleton';
-import { UpdatePersonalDataForm } from '../../components/forms/UpdatePersonalDataForm/UpdatePersonalDataForm';
 import { useCallback, useState } from 'react';
+import { Avatar, Box, Button, Paper, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material';
+import { useUpdateUserMutation } from '../../state/userApi';
+import { useAppSelector } from '../../../../hooks/useAppSelector';
+import { StyleProps } from '../../../../components/types';
+import { SectionSkeleton } from '../../../../components/layout/skeletons/SectionSkeleton/SectionSkeleton';
+import { UpdatePersonalDataForm } from '../../components/forms/UpdatePersonalDataForm/UpdatePersonalDataForm';
+import { statusToast } from '../../../../components/toast/toast';
+import { styles } from './styles';
 
 
 const ProfilePage = () => {
@@ -13,11 +14,20 @@ const ProfilePage = () => {
 
   const [isUserFormOpen, setIsUserFormOpen] = useState<boolean>(false);
 
+  const [updateUser, { isSuccess }] = useUpdateUserMutation();
+
   const handleUserFormOpen = () => setIsUserFormOpen(!isUserFormOpen)
 
   const handleUpdateUserDataSubmit = useCallback(async (data: FormData) => {
-    
-  }, []);
+
+    const { data: updatedUser, error } = await updateUser(data);
+    console.log('UPDATED USER DATA', updatedUser)
+
+    if(!error) {
+      statusToast({ type: 'success', message: updatedUser.message });
+      setIsUserFormOpen(false);
+    }
+  }, [updateUser]);
 
   if(!user) {
     return (
@@ -53,22 +63,24 @@ const ProfilePage = () => {
           />
         </Box>
         <Table>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>{user.name}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>E-mail</TableCell>
-            <TableCell>{user.email}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Phone</TableCell>
-            <TableCell>{user.phone}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Address</TableCell>
-            <TableCell>{user.location}</TableCell>
-          </TableRow>
+          <TableBody>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>{user.name}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>E-mail</TableCell>
+              <TableCell>{user.email}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Phone</TableCell>
+              <TableCell>{user.phone}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Address</TableCell>
+              <TableCell>{user.location}</TableCell>
+            </TableRow>
+          </TableBody>
         </Table>
       </Paper>
       <Paper sx={styles.card}>

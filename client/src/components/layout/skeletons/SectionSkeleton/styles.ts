@@ -1,4 +1,4 @@
-import { StyleProps } from '../../../../components/types';
+import { StyleProps } from '../../../types';
 
 export const styles: StyleProps = {
   container: { 

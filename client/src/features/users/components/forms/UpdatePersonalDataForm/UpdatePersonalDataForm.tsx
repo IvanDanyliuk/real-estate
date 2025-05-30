@@ -1,10 +1,10 @@
 import { Box, Button, Dialog, DialogContent, DialogTitle, IconButton, TextField } from '@mui/material';
 import { EditNote } from '@mui/icons-material';
-import { User } from '../../../state/types';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { UserDataType, userSchema } from '../../../../admin/components/forms/validationSchemas/property.schema';
+import { UserDataType, userSchema } from '../../../../admin/components/forms/validationSchemas/user.schema';
+import { User } from '../../../state/types';
 import { styles } from './styles';
 
 
@@ -50,6 +50,7 @@ export const UpdatePersonalDataForm: React.FC<UpdatePersonalDataFormProps> = ({
     if(data.location) formData.append('location', data.location);
 
     console.log('USER DATA', data)
+    onSubmit(formData);
   };
 
   return (
