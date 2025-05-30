@@ -329,6 +329,12 @@
         "phoneLabel": "Телефон",
         "locationLabel": "Локація",
         "submitBtn": "ПІдтвердити"
+      },
+      "profilePhotoForm": {
+        "openBtn": "Оновити фото",
+        "title": "Оновити фото профілю",
+        "uploadBtn": "Завантажити фото",
+        "submitBtn": "Підтвердити"
       }
     }
   }

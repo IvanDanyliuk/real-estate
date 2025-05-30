@@ -10,6 +10,7 @@ import { UpdatePersonalDataForm } from '../../components/forms/UpdatePersonalDat
 import { statusToast } from '../../../../components/toast/toast';
 import { setUser } from '../../state/userSlice';
 import { styles } from './styles';
+import { UpdateProfilePhotoForm } from '../../components/forms/UpdateProfilePhoto/UpdateProfilePhotoForm';
 
 
 const ProfilePage = () => {
@@ -18,11 +19,16 @@ const ProfilePage = () => {
   const { user } = useAppSelector(state => state.user);
 
   const [isUserFormOpen, setIsUserFormOpen] = useState<boolean>(false);
+  const [isUpdatePhotoFormOpen, setIsUpdatePhotoFormOpen] = useState<boolean>(false);
 
   const [updateUser, { isSuccess }] = useUpdateUserMutation();
 
   const handleUserFormOpen = () => {
     setIsUserFormOpen(!isUserFormOpen);
+  };
+
+  const handlePhotoFormOpen = () => {
+    setIsUpdatePhotoFormOpen(!isUpdatePhotoFormOpen);
   };
 
   const handleUpdateUserDataSubmit = useCallback(async (data: FormData) => {
@@ -53,9 +59,12 @@ const ProfilePage = () => {
           alt={user.name} 
           sx={styles.photo} 
         />
-        <Button>
-          Update Profile photo
-        </Button>
+        <UpdateProfilePhotoForm 
+          open={isUpdatePhotoFormOpen} 
+          currentPhotoUrl={user.profilePhoto} 
+          onHandleOpen={handlePhotoFormOpen} 
+          onSubmit={handleUpdateUserDataSubmit} 
+        />
       </Paper>
       <Paper sx={styles.card}>
         <Box sx={styles.cardHeader}>

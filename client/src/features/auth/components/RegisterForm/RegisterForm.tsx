@@ -100,13 +100,11 @@ export const RegisterForm: React.FC = () => {
       />
       <FileInput 
         name='profilePhoto'
-        label='Photo' 
         title='Upload a profile photo'
         error={!!errors.profilePhoto} 
         helperText={errors.profilePhoto?.message} 
         register={register}
         setValue={setValue}
-        // multiple
       />
       <Button type='submit' sx={styles.submitBtn}>
         {isSubmitting ? 'Loading' : 'Submit'}

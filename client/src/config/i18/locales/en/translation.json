@@ -329,6 +329,12 @@
         "phoneLabel": "Phone",
         "locationLabel": "Location",
         "submitBtn": "Submit"
+      },
+      "profilePhotoForm": {
+        "openBtn": "Update photo",
+        "title": "Update profile photo",
+        "uploadBtn": "Upload photo",
+        "submitBtn": "Submit"
       }
     }
   }

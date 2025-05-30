@@ -2,10 +2,10 @@ import { z as zod } from 'zod';
 import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE } from '../../../../../constants/main';
 
 export const userSchema = zod.object({
-  name: zod.string(),
-  email: zod.string(),
-  phone: zod.string(),
-  location: zod.string(),
+  name: zod.string().min(1, 'Name is required!').optional(),
+  email: zod.string().min(1, 'Email is required!').optional(),
+  phone: zod.string().min(1, 'Phone number is required!').optional(),
+  location: zod.string().min(1, 'Location is required!').optional(),
   profilePhoto: zod.union([
     zod
     .custom<FileList>((fileList) => fileList instanceof FileList, {
