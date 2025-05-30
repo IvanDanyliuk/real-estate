@@ -26,12 +26,8 @@ export const UpdatePersonalDataForm: React.FC<UpdatePersonalDataFormProps> = ({
 
   const {
     register,
-    control,
     handleSubmit,
     formState: { isSubmitting, errors },
-    setValue,
-    reset,
-    watch,
   } = useForm<UserDataType>({
     defaultValues: {
       name: user.name,
@@ -44,12 +40,13 @@ export const UpdatePersonalDataForm: React.FC<UpdatePersonalDataFormProps> = ({
 
   const onHandleFormSubmit: SubmitHandler<UserDataType> = (data) => {
     const formData = new FormData();
+
+    formData.append('_id', user._id);
     if(data.name) formData.append('name', data.name);
     if(data.email) formData.append('email', data.email);
     if(data.phone) formData.append('phone', data.phone);
     if(data.location) formData.append('location', data.location);
 
-    console.log('USER DATA', data)
     onSubmit(formData);
   };
 

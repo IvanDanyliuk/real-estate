@@ -7,9 +7,12 @@ import { SectionSkeleton } from '../../../../components/layout/skeletons/Section
 import { UpdatePersonalDataForm } from '../../components/forms/UpdatePersonalDataForm/UpdatePersonalDataForm';
 import { statusToast } from '../../../../components/toast/toast';
 import { styles } from './styles';
+import { useAppDispatch } from '../../../../hooks/useAppDispatch';
+import { setUser } from '../../state/userSlice';
 
 
 const ProfilePage = () => {
+  const dispatch = useAppDispatch();
   const { user } = useAppSelector(state => state.user);
 
   const [isUserFormOpen, setIsUserFormOpen] = useState<boolean>(false);
@@ -26,8 +29,11 @@ const ProfilePage = () => {
     if(!error) {
       statusToast({ type: 'success', message: updatedUser.message });
       setIsUserFormOpen(false);
+      dispatch(setUser(updatedUser.payload));
+    } else {
+      statusToast({ type: 'error', message: 'Failed to update the user data' });
     }
-  }, [updateUser]);
+  }, [dispatch, updateUser]);
 
   if(!user) {
     return (

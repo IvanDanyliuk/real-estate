@@ -9,7 +9,7 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 
 export const ProfileLayout: React.FC = () => {
   const { user } = useAppSelector((state) => state.user);
-  const params = useParams()
+  const params = useParams();
     
   if(!user) {
     return <Loader />;

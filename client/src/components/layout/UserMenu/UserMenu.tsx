@@ -1,7 +1,7 @@
 import { Avatar, Box, Menu, MenuItem, Typography } from '@mui/material';
 import { User } from '../../../features/users/state/types';
 import { MouseEvent, useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { useLogoutMutation } from '../../../features/auth/state/authApi';
 import { setUser } from '../../../features/users/state/userSlice';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
@@ -18,6 +18,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
   const { name, email, role, profilePhoto } = user;
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -35,6 +36,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
   const handleLogout = async () => {
     await logout(null);
     dispatch(setUser(null));
+    navigate('/login', { replace: true })
   };
 
   return (
