@@ -306,16 +306,30 @@
         "headingCaption": "Popular Locations",
         "subHeading": "Popular Locations"
       }
-    }
-  },
-  "profile": {
-    "profileForm": {
-      "title": "Update user data",
-      "nameLabel": "Name",
-      "emailLabel": "Email",
-      "phoneLabel": "Phone",
-      "locationLabel": "Location",
-      "submitBtn": "Submit"
+    },
+    "profile": {
+      "navMenu": {
+        "personalInfo": "Personal Information",
+        "myProperties": "My Properties",
+        "likedProperties": "Liked Properties"
+      },
+      "pageSections": {
+        "userData": {
+          "title": "Personal Information",
+          "nameLabel": "Name",
+          "emailLabel": "Email",
+          "phoneLabel": "Phone",
+          "addressLabel": "Address"
+        }
+      },
+      "profileForm": {
+        "title": "Update user data",
+        "nameLabel": "Name",
+        "emailLabel": "Email",
+        "phoneLabel": "Phone",
+        "locationLabel": "Location",
+        "submitBtn": "Submit"
+      }
     }
   }
 }

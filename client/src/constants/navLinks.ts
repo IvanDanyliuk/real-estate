@@ -51,17 +51,17 @@ export const ADMIN_DASHBOARD_NAV_LINKS = [
 export const PROFILE_NAV_LINKS = [
   {
     value: '/profile/:id',
-    label: 'Personal Info',
+    label: 'pages.profile.navMenu.personalInfo',
     icon: AssignmentInd,
   },
   {
     value: '/profile/:id/my-properties',
-    label: 'My properties',
+    label: 'pages.profile.navMenu.myProperties',
     icon: HomeWork,
   },
   {
     value: '/profile/:id/liked-properties',
-    label: 'Liked properties',
+    label: 'pages.profile.navMenu.likedProperties',
     icon: FavoriteBorder,
   },
 ];

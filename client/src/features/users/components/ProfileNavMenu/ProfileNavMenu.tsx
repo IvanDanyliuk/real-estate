@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { List, ListItem, SvgIcon, Typography, useMediaQuery } from '@mui/material';
 import { PROFILE_NAV_LINKS } from '../../../../constants/navLinks';
 import { styles } from './styles';
@@ -9,6 +10,7 @@ interface ProfileMenuProps {
 }
 
 export const ProfileNavMenu: React.FC<ProfileMenuProps> = ({ userId }) => {
+  const { t } = useTranslation();
   const isMobile = useMediaQuery('(max-width:599px)');
   
   return (
@@ -25,7 +27,7 @@ export const ProfileNavMenu: React.FC<ProfileMenuProps> = ({ userId }) => {
             <SvgIcon component={icon} />
             {!isMobile && (
               <Typography variant='caption'>
-                {label}
+                {t(label)}
               </Typography>
             )}
           </NavLink>
