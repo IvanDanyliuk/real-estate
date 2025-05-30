@@ -4,6 +4,7 @@ import { userSchema } from "../schemas/user.schema";
 import { deleteUser, getUsers, updateUser } from "../services/user.service";
 import appAssert from "../utils/appAssert";
 import catchErrors from "../utils/catchErrors";
+import { setAuthCookies } from "../utils/cookies";
 
 
 export const getUserHandler = catchErrors(async (req, res) => {
@@ -20,13 +21,14 @@ export const getUsersHandler = catchErrors(async (req, res) => {
 
 export const updateUserHandler = catchErrors(async (req, res) => {
   const data = userSchema.parse(req.body);
-  const updatedUser = await updateUser({
+  
+  const { user } = await updateUser({
     _id: req.body._id,
-    ...data,
+    ...data 
   });
 
   return res.status(OK).json({
-    payload: updatedUser,
+    payload: user,
     message: "User has been successfully updated!",
   });
 });
