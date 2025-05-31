@@ -20,7 +20,12 @@ export const getUsersHandler = catchErrors(async (req, res) => {
 });
 
 export const updateUserHandler = catchErrors(async (req, res) => {
-  const data = userSchema.parse(req.body);
+  const files = req.files as any[];
+  const rawData = files && files.length > 0 ? {
+    ...req.body,
+    profilePhoto: files[0]
+  } : req.body;
+  const data = userSchema.parse(rawData);
   
   const { user } = await updateUser({
     _id: req.body._id,

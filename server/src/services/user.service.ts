@@ -26,8 +26,12 @@ export const updateUser = async (userToUpdate: any) => {
   const existingUser = await UserDocument.findById(userToUpdate._id);
   
   const uploadedImage = userToUpdate.profilePhoto && typeof userToUpdate.profilePhoto !== 'string'   
-  ? await uploadToCloudinary(userToUpdate.profilePhoto.buffer)
-  : null;
+    ? await uploadToCloudinary(userToUpdate.profilePhoto.buffer)
+    : null;
+
+  if(uploadedImage && existingUser && existingUser.profilePhoto) {
+    await deleteFromCloudinary([existingUser.profilePhoto]);
+  }
 
   const updatedUser = await UserDocument.findByIdAndUpdate(existingUser!._id, {
     ...userToUpdate,
