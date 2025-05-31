@@ -10,6 +10,7 @@ import { useSignUpMutation } from '../../state/authApi';
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
 import { setUser } from '../../../users/state/userSlice';
 
+
 export const RegisterForm: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();

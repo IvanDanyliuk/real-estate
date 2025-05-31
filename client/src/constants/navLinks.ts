@@ -1,5 +1,7 @@
-import Dashboard from '@mui/icons-material/Dashboard';
-import { AssignmentInd, FavoriteBorder, Feed, HomeWork, MapsHomeWork, People } from '@mui/icons-material';
+import { 
+  AssignmentInd, Dashboard, FavoriteBorder, 
+  Feed, HomeWork, MapsHomeWork, People 
+} from '@mui/icons-material';
 
 
 export const NAV_LINKS = [

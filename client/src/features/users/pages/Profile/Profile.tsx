@@ -1,16 +1,16 @@
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Avatar, Box, Button, Paper, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material';
+import { Avatar, Box, Paper, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material';
 import { useUpdateUserMutation } from '../../state/userApi';
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
 import { useAppSelector } from '../../../../hooks/useAppSelector';
 import { StyleProps } from '../../../../components/types';
 import { SectionSkeleton } from '../../../../components/layout/skeletons/SectionSkeleton/SectionSkeleton';
 import { UpdatePersonalDataForm } from '../../components/forms/UpdatePersonalDataForm/UpdatePersonalDataForm';
+import { UpdateProfilePhotoForm } from '../../components/forms/UpdateProfilePhoto/UpdateProfilePhotoForm';
 import { statusToast } from '../../../../components/toast/toast';
 import { setUser } from '../../state/userSlice';
 import { styles } from './styles';
-import { UpdateProfilePhotoForm } from '../../components/forms/UpdateProfilePhoto/UpdateProfilePhotoForm';
 
 
 const ProfilePage = () => {
@@ -21,7 +21,7 @@ const ProfilePage = () => {
   const [isUserFormOpen, setIsUserFormOpen] = useState<boolean>(false);
   const [isUpdatePhotoFormOpen, setIsUpdatePhotoFormOpen] = useState<boolean>(false);
 
-  const [updateUser, { isSuccess }] = useUpdateUserMutation();
+  const [updateUser, { isLoading }] = useUpdateUserMutation();
 
   const handleUserFormOpen = () => {
     setIsUserFormOpen(!isUserFormOpen);
@@ -36,6 +36,7 @@ const ProfilePage = () => {
     if(!error) {
       statusToast({ type: 'success', message: updatedUser.message });
       setIsUserFormOpen(false);
+      setIsUpdatePhotoFormOpen(false);
       dispatch(setUser(updatedUser.payload));
     } else {
       statusToast({ type: 'error', message: 'Failed to update the user data' });
@@ -61,7 +62,8 @@ const ProfilePage = () => {
         />
         <UpdateProfilePhotoForm 
           open={isUpdatePhotoFormOpen} 
-          currentPhotoUrl={user.profilePhoto} 
+          userId={user._id} 
+          isLoading={isLoading}
           onHandleOpen={handlePhotoFormOpen} 
           onSubmit={handleUpdateUserDataSubmit} 
         />

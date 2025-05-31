@@ -18,7 +18,6 @@ export const styles: StyleProps = {
     minHeight: '5rem',
     display: 'flex',
     flexDirection: 'column',
-    // alignItems: 'center',
     gap: 2,
     '& h3': {
       fontSize: '1.5rem',

@@ -1,6 +1,7 @@
 import { z as zod } from 'zod';
 import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE } from '../../../../../constants/main';
 
+
 export const userSchema = zod.object({
   name: zod.string().min(1, 'Name is required!').optional(),
   email: zod.string().min(1, 'Email is required!').optional(),
@@ -25,5 +26,6 @@ export const userSchema = zod.object({
     )
     .optional(),
   ]),
-})
+});
+
 export type UserDataType = zod.infer<typeof userSchema>;

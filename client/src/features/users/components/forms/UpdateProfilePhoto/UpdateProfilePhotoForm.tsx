@@ -5,12 +5,12 @@ import { UserDataType, userSchema } from '../../../../admin/components/forms/val
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FileInput } from '../../../../../components/inputs/FileInput/FileInput';
 import { styles } from './styles';
-import { useEffect } from 'react';
 
 
 interface UpdateProflePhotoFormProps {
   open: boolean;
-  currentPhotoUrl?: string;
+  userId: string;
+  isLoading: boolean;
   onSubmit: (data: FormData) => Promise<any>;
   onHandleOpen: () => void;
 };
@@ -18,7 +18,8 @@ interface UpdateProflePhotoFormProps {
 
 export const UpdateProfilePhotoForm: React.FC<UpdateProflePhotoFormProps> = ({
   open, 
-  currentPhotoUrl, 
+  userId, 
+  isLoading, 
   onSubmit, 
   onHandleOpen
 }) => {
@@ -27,7 +28,7 @@ export const UpdateProfilePhotoForm: React.FC<UpdateProflePhotoFormProps> = ({
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting, errors },
+    formState: { errors },
     setValue,
   } = useForm<UserDataType>({
     defaultValues: {
@@ -38,18 +39,14 @@ export const UpdateProfilePhotoForm: React.FC<UpdateProflePhotoFormProps> = ({
 
   const handlePhotoUpload: SubmitHandler<UserDataType> = (data) => {
     const formData = new FormData();
+    formData.append('_id', userId);
     if(data.profilePhoto) {
       for (const file of data.profilePhoto) {
         formData.append('profilePhoto', file);
       }
     }
-
-    console.log('UPDATE PROFILE PHOTO HANDLER', data)
+    onSubmit(formData);
   };
-
-  useEffect(() => {
-    console.log(errors)
-  }, [errors])
   
   return (
     <>
@@ -61,18 +58,27 @@ export const UpdateProfilePhotoForm: React.FC<UpdateProflePhotoFormProps> = ({
           {t('pages.profile.profilePhotoForm.title')}
         </DialogTitle>
         <DialogContent>
-          <Box component='form' onSubmit={handleSubmit(handlePhotoUpload)} sx={styles.form}>
+          <Box 
+            component='form' 
+            onSubmit={handleSubmit(handlePhotoUpload)} 
+            sx={styles.form}
+          >
             <FileInput 
               name='profilePhoto'
-              // label='Photo' 
               title={t('pages.profile.profilePhotoForm.uploadBtn')}
               error={!!errors.profilePhoto} 
               helperText={errors.profilePhoto?.message} 
               register={register}
               setValue={setValue}
             />
-            <Button type='submit'>
-              {t('pages.profile.profilePhotoForm.submitBtn')}
+            <Button 
+              type='submit' 
+              disabled={isLoading}
+            >
+              {t(isLoading 
+                ? 'pages.profile.profilePhotoForm.loading' 
+                : 'pages.profile.profilePhotoForm.submitBtn'
+              )}
             </Button>
           </Box>
         </DialogContent>
