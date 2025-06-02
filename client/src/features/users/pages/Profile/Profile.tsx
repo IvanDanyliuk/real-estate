@@ -1,13 +1,16 @@
 import { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { Avatar, Box, Paper, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material';
-import { useUpdateUserMutation } from '../../state/userApi';
+import { useDeleteUserMutation, useUpdateUserMutation } from '../../state/userApi';
+import { useLogoutMutation } from '../../../auth/state/authApi';
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
 import { useAppSelector } from '../../../../hooks/useAppSelector';
 import { StyleProps } from '../../../../components/types';
 import { SectionSkeleton } from '../../../../components/layout/skeletons/SectionSkeleton/SectionSkeleton';
 import { UpdatePersonalDataForm } from '../../components/forms/UpdatePersonalDataForm/UpdatePersonalDataForm';
 import { UpdateProfilePhotoForm } from '../../components/forms/UpdateProfilePhoto/UpdateProfilePhotoForm';
+import { DeleteUserBtn } from '../../components/DeleteUserBtn/DeleteUserBtn';
 import { statusToast } from '../../../../components/toast/toast';
 import { setUser } from '../../state/userSlice';
 import { styles } from './styles';
@@ -15,33 +18,50 @@ import { styles } from './styles';
 
 const ProfilePage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(state => state.user);
 
-  const [isUserFormOpen, setIsUserFormOpen] = useState<boolean>(false);
-  const [isUpdatePhotoFormOpen, setIsUpdatePhotoFormOpen] = useState<boolean>(false);
+  const [anchor, setAnchor] = useState<string | null>(null);
 
-  const [updateUser, { isLoading }] = useUpdateUserMutation();
+  const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
+  const [deleteUser, { isLoading: isDeleting }] = useDeleteUserMutation();
+  const [logout] = useLogoutMutation();
 
-  const handleUserFormOpen = () => {
-    setIsUserFormOpen(!isUserFormOpen);
-  };
-
-  const handlePhotoFormOpen = () => {
-    setIsUpdatePhotoFormOpen(!isUpdatePhotoFormOpen);
+  const handleDialogOpen = (anchorValue: string | null) => {
+    if(!anchor) {
+      setAnchor(anchorValue);
+    } else {
+      setAnchor(null);
+    }
   };
 
   const handleUpdateUserDataSubmit = useCallback(async (data: FormData) => {
     const { data: updatedUser, error } = await updateUser(data);
     if(!error) {
       statusToast({ type: 'success', message: updatedUser.message });
-      setIsUserFormOpen(false);
-      setIsUpdatePhotoFormOpen(false);
+      setAnchor(null);
       dispatch(setUser(updatedUser.payload));
     } else {
       statusToast({ type: 'error', message: 'Failed to update the user data' });
     }
   }, [dispatch, updateUser]);
+
+  const handleUserDelete = useCallback(async () => {
+    if(user) {
+      const { data: deletedAccountResponse, error } = await deleteUser(user._id);
+
+      if(!error) {
+        statusToast({ type: 'success', message: deletedAccountResponse.message });
+        await logout(null);
+        dispatch(setUser(null));
+        navigate('/login', { replace: true });
+      } else {
+        statusToast({ type: 'error', message: 'Failed to delete a user' });
+      }
+    }
+  }, []);
 
   if(!user) {
     return (
@@ -61,10 +81,10 @@ const ProfilePage = () => {
           sx={styles.photo} 
         />
         <UpdateProfilePhotoForm 
-          open={isUpdatePhotoFormOpen} 
+          open={anchor === 'update_profile_photo'}
           userId={user._id} 
-          isLoading={isLoading}
-          onHandleOpen={handlePhotoFormOpen} 
+          isLoading={isUpdating}
+          onHandleOpen={() => handleDialogOpen('update_profile_photo')}
           onSubmit={handleUpdateUserDataSubmit} 
         />
       </Paper>
@@ -74,10 +94,10 @@ const ProfilePage = () => {
             {t('pages.profile.pageSections.userData.title')}
           </Typography>
           <UpdatePersonalDataForm 
-            open={isUserFormOpen} 
+            open={anchor === 'update_personal_data'}
             user={user} 
             onSubmit={handleUpdateUserDataSubmit} 
-            onHandleOpen={handleUserFormOpen} 
+            onHandleOpen={() => handleDialogOpen('update_personal_data')}
           />
         </Box>
         <Table>
@@ -118,7 +138,12 @@ const ProfilePage = () => {
         </Table>
       </Paper>
       <Paper sx={styles.card}>
-        Actions: Reset Password, Delete account
+        <DeleteUserBtn 
+          open={anchor === 'delete_user'} 
+          isLoading={isDeleting}
+          onHandleOpen={() => handleDialogOpen('delete_user')} 
+          onSubmit={handleUserDelete} 
+        />
       </Paper>
     </Box>
   );

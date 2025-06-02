@@ -28,4 +28,10 @@ export const userSchema = zod.object({
   ]),
 });
 
+export const passwordSchema = zod.object({
+  prevPassword: zod.string().min(6, 'The password must include at least 6 characters').max(255),
+  newPassowrd: zod.string().min(6, 'The password must include at least 6 characters').max(255),
+  confirmNewPassword: zod.string().min(6, 'The password must include at least 6 characters').max(255),
+})
+
 export type UserDataType = zod.infer<typeof userSchema>;
