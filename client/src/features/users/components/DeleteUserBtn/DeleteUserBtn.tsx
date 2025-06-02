@@ -1,5 +1,7 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material"
-import { styles } from "./styles";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
+import { useTranslation } from 'react-i18next';
+import { Loader } from '../../../../components/layout/Loader/Loader';
+import { styles } from './styles';
 
 
 interface DeleteUserBtnProps {
@@ -16,22 +18,35 @@ export const DeleteUserBtn: React.FC<DeleteUserBtnProps> = ({
   onSubmit, 
   onHandleOpen 
 }) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <Button onClick={onHandleOpen} sx={styles.deleteBtn}>
-        Delete account
+        {t('pages.profile.deleteAccount.triggerBtn')}
       </Button>
       <Dialog open={open} onClose={onHandleOpen}>
-        <DialogTitle>
-          Are you sure you want to delete your account?
+        <DialogTitle sx={styles.title}>
+          {t('pages.profile.deleteAccount.title')}
         </DialogTitle>
         <DialogContent>
           <DialogActions sx={styles.actionBtns}>
-            <Button onClick={onSubmit} sx={styles.actionBtnSubmit}>
-              Yes
+            <Button 
+              disabled={isLoading} 
+              onClick={onSubmit} 
+              sx={styles.actionBtnSubmit}
+            >
+              {isLoading 
+                ? <Loader /> 
+                : t('pages.profile.deleteAccount.acceptBtn')
+              }
             </Button>
-            <Button onClick={onHandleOpen} sx={styles.actionBtnCancel}>
-              No
+            <Button 
+              disabled={isLoading} 
+              onClick={onHandleOpen} 
+              sx={styles.actionBtnCancel}
+            >
+              {t('pages.profile.deleteAccount.cancelBtn')}
             </Button>
           </DialogActions>
         </DialogContent>

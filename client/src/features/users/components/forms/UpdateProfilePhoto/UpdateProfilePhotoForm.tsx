@@ -50,7 +50,7 @@ export const UpdateProfilePhotoForm: React.FC<UpdateProflePhotoFormProps> = ({
   
   return (
     <>
-      <Button onClick={onHandleOpen}>
+      <Button onClick={onHandleOpen} sx={styles.triggerBtn}>
         {t('pages.profile.profilePhotoForm.openBtn')}
       </Button>
       <Dialog open={open} onClose={onHandleOpen}>

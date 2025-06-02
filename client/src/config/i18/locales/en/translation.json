@@ -336,6 +336,12 @@
         "uploadBtn": "Upload photo",
         "submitBtn": "Submit",
         "loading": "Loading..."
+      },
+      "deleteAccount": {
+        "triggerBtn": "Delete account",
+        "title": "Are you sure you want to delete your account?",
+        "acceptBtn": "Yes",
+        "cancelBtn": "No"
       }
     }
   }

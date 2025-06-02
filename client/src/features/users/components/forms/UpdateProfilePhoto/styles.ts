@@ -5,5 +5,8 @@ export const styles: StyleProps = {
     display: 'flex',
     flexDirection: 'column',
     gap: 2
+  },
+  triggerBtn: {
+    padding: '0 1rem',
   }
 }
