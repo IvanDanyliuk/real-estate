@@ -42,5 +42,10 @@ export const styles: StyleProps = {
     display: 'flex',
     flexDirection: 'column',
     gap: 1
+  },
+  actions: {
+    minHeight: '5rem',
+    display: 'flex',
+    gap: 2,
   }
 };

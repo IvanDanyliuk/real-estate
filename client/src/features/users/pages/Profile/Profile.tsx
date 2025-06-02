@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { CSSProperties, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { Avatar, Box, Paper, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material';
@@ -14,6 +14,7 @@ import { DeleteUserBtn } from '../../components/DeleteUserBtn/DeleteUserBtn';
 import { statusToast } from '../../../../components/toast/toast';
 import { setUser } from '../../state/userSlice';
 import { styles } from './styles';
+import { ChangePasswordForm } from '../../components/forms/ChangePasswordForm/ChangePasswordForm';
 
 
 const ProfilePage = () => {
@@ -47,6 +48,10 @@ const ProfilePage = () => {
       statusToast({ type: 'error', message: 'Failed to update the user data' });
     }
   }, [dispatch, updateUser]);
+
+  const handleChangePasswordSubmit = useCallback(async (data: FormData) => {
+
+  }, []);
 
   const handleUserDelete = useCallback(async () => {
     if(user) {
@@ -138,12 +143,23 @@ const ProfilePage = () => {
         </Table>
       </Paper>
       <Paper sx={styles.card}>
-        <DeleteUserBtn 
-          open={anchor === 'delete_user'} 
-          isLoading={isDeleting}
-          onHandleOpen={() => handleDialogOpen('delete_user')} 
-          onSubmit={handleUserDelete} 
-        />
+        <Typography variant='h3'>
+          {t('pages.profile.pageSections.actions.title')}
+        </Typography>
+        <Box sx={styles.actions}>
+          <DeleteUserBtn 
+            open={anchor === 'delete_user'} 
+            isLoading={isDeleting}
+            onHandleOpen={() => handleDialogOpen('delete_user')} 
+            onSubmit={handleUserDelete} 
+          />
+          <ChangePasswordForm 
+            open={anchor === 'change_password'} 
+            user={user}
+            onSubmit={handleChangePasswordSubmit} 
+            onHandleOpen={() => handleDialogOpen('change_password')} 
+          />
+        </Box>
       </Paper>
     </Box>
   );

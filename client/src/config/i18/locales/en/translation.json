@@ -320,6 +320,9 @@
           "emailLabel": "Email",
           "phoneLabel": "Phone",
           "addressLabel": "Address"
+        },
+        "actions": {
+          "title": "Actions"
         }
       },
       "profileForm": {
@@ -336,6 +339,14 @@
         "uploadBtn": "Upload photo",
         "submitBtn": "Submit",
         "loading": "Loading..."
+      },
+      "updatePassword": {
+        "triggerBtn": "Change password",
+        "title": "Update password",
+        "prevPasswordLabel": "Current password",
+        "newPasswordLabel": "New password",
+        "confirmNewPassword": "Confirm new password",
+        "submitBtn": "Submit"
       },
       "deleteAccount": {
         "triggerBtn": "Delete account",
