@@ -47,10 +47,16 @@ export const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({
 
   return (
     <>
-      <Button sx={styles.triggerBtn}>
+      <Button 
+        onClick={onHandleOpen} 
+        sx={styles.triggerBtn}
+      >
         {t('pages.profile.updatePassword.triggerBtn')}
       </Button>
-      <Dialog open={open} onClose={onHandleOpen}>
+      <Dialog 
+        open={open} 
+        onClose={onHandleOpen}
+      >
         <DialogTitle>
           {t('pages.profile.updatePassword.title')}
         </DialogTitle>
@@ -58,6 +64,7 @@ export const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({
           <Box 
             component='form' 
             onSubmit={handleSubmit(handleFormSubmit)}
+            sx={styles.form}
           >
             <TextField 
               type='password' 
