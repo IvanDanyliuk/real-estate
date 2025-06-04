@@ -9,7 +9,7 @@ import { styles } from './styles';
 interface PropertyListProps {
   data: PropertyType[];
   userId?: string;
-  onLike: (property: PropertyType) => void;
+  onLike?: (property: PropertyType) => void;
 };
 
 
@@ -24,20 +24,22 @@ export const PropertyList: React.FC<PropertyListProps> = ({ data, userId, onLike
           component='li' 
           sx={styles.card}
         >
-          <IconButton 
-            onClick={() => onLike(property)} 
-            sx={{
-              ...styles.likeBtn, 
-              backgroundColor: userId && property.likes.includes(userId) ? 
-                'primary.main' : 
-                'primary.light', 
-              color: userId && property.likes.includes(userId) ? 
-                'primary.light' : 
-                'primary.main',
-            }}
-          >
-            <StarBorder />
-          </IconButton>
+          {onLike && (
+            <IconButton 
+              onClick={() => onLike(property)} 
+              sx={{
+                ...styles.likeBtn, 
+                backgroundColor: userId && property.likes.includes(userId) ? 
+                  'primary.main' : 
+                  'primary.light', 
+                color: userId && property.likes.includes(userId) ? 
+                  'primary.light' : 
+                  'primary.main',
+              }}
+            >
+              <StarBorder />
+            </IconButton>
+          )}
           <Link to={`/property/${property._id}`}>
             <Box sx={styles.imageContainer}>
               <img 

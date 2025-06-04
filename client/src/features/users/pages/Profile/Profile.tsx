@@ -12,7 +12,6 @@ import { SectionSkeleton } from '../../../../components/layout/skeletons/Section
 import { UpdatePersonalDataForm } from '../../components/forms/UpdatePersonalDataForm/UpdatePersonalDataForm';
 import { UpdateProfilePhotoForm } from '../../components/forms/UpdateProfilePhoto/UpdateProfilePhotoForm';
 import { DeleteUserBtn } from '../../components/DeleteUserBtn/DeleteUserBtn';
-import { ChangePasswordForm } from '../../components/forms/ChangePasswordForm/ChangePasswordForm';
 import { statusToast } from '../../../../components/toast/toast';
 import { setUser } from '../../state/userSlice';
 import { styles } from './styles';
