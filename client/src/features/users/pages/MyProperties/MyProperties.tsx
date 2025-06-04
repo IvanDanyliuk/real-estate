@@ -1,6 +1,6 @@
-import { ChangeEvent, MouseEvent, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Box, Button, IconButton, TablePagination, Tooltip } from '@mui/material';
+import { Box, Button, IconButton, MenuItem, Select, SelectChangeEvent, Tooltip } from '@mui/material';
 import { Add, East, West } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useCreatePropertyMutation, useLazyGetPropertiesQuery } from '../../../properties/state/propertyApi';
@@ -42,7 +42,20 @@ const propertyFormInitialData = {
   nearbyAmenities: [],
 };
 
-const itemsPerPageOptions = [8, 16, 20];
+const itemsPerPageOptions = [
+  {
+    label: '8 items per page',
+    value: 8,
+  },
+  {
+    label: '16 items per page',
+    value: 16,
+  },
+  {
+    label: '20 items per page',
+    value: 20,
+  },
+];
 
 
 const MyPropertiesPage = () => {
@@ -85,11 +98,11 @@ const MyPropertiesPage = () => {
     }
   }, [createProperty]);
 
-  const handleRowsPerPageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setItemsPerPage(parseInt(e.target.value, 10));
+  const handleItemsPerPageChange = (e: SelectChangeEvent<number>) => {
+    setItemsPerPage(parseInt(e.target.value.toString(), 10));
     setPage(0);
     searchParams.set('page', '1');
-    searchParams.set('itemsPerPage', parseInt(e.target.value, 10).toString())
+    searchParams.set('itemsPerPage', parseInt(e.target.value.toString(), 10).toString())
     setSearchParams(searchParams);
   };
 
@@ -140,9 +153,21 @@ const MyPropertiesPage = () => {
       </Tooltip>
       {isSuccess ? (
         <>
-          <PropertyList data={data.properties} userId={user._id} />
+          <PropertyList 
+            data={data.properties} 
+            userId={user._id} 
+          />
           <Box sx={styles.footer}>
-            <Box>Item per page</Box>
+            <Select defaultValue={8} onChange={handleItemsPerPageChange}>
+              {itemsPerPageOptions.map(({ label, value }) => (
+                <MenuItem 
+                  key={`${value}_items_per_page`} 
+                  value={value}
+                >
+                  {t(label)}
+                </MenuItem>
+              ))}
+            </Select>
             <Box sx={styles.navBtns}>
               <Button 
                 disabled={page === 1} 

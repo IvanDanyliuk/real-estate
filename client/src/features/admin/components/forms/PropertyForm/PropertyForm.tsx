@@ -20,6 +20,7 @@ import { styles } from './styles';
 interface PropertyInitialData extends PropertyDataType {
   _id?: string;
 };
+
 interface PropertyFormProps {
   open: boolean;
   title: string;
