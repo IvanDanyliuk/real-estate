@@ -80,6 +80,7 @@ export const RegisterForm: React.FC = () => {
       />
       <TextField 
         label='Password' 
+        type='password' 
         fullWidth 
         error={!!errors.password}
         helperText={errors.password?.message}
@@ -87,6 +88,7 @@ export const RegisterForm: React.FC = () => {
       />
       <TextField 
         label='Confirm password' 
+        type='password' 
         fullWidth 
         error={!!errors.confirmPassword}
         helperText={errors.confirmPassword?.message}

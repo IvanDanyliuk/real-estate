@@ -1,7 +1,8 @@
-import { CSSProperties, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { Avatar, Box, Paper, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material';
+import { CheckCircleOutline, ErrorOutline } from '@mui/icons-material';
 import { useDeleteUserMutation, useUpdateUserMutation } from '../../state/userApi';
 import { useLogoutMutation } from '../../../auth/state/authApi';
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
@@ -11,10 +12,10 @@ import { SectionSkeleton } from '../../../../components/layout/skeletons/Section
 import { UpdatePersonalDataForm } from '../../components/forms/UpdatePersonalDataForm/UpdatePersonalDataForm';
 import { UpdateProfilePhotoForm } from '../../components/forms/UpdateProfilePhoto/UpdateProfilePhotoForm';
 import { DeleteUserBtn } from '../../components/DeleteUserBtn/DeleteUserBtn';
+import { ChangePasswordForm } from '../../components/forms/ChangePasswordForm/ChangePasswordForm';
 import { statusToast } from '../../../../components/toast/toast';
 import { setUser } from '../../state/userSlice';
 import { styles } from './styles';
-import { ChangePasswordForm } from '../../components/forms/ChangePasswordForm/ChangePasswordForm';
 
 
 const ProfilePage = () => {
@@ -80,6 +81,18 @@ const ProfilePage = () => {
   return (
     <Box sx={styles.container}>
       <Paper sx={{...styles.card, ...styles.centerred} as StyleProps}>
+        {user && user.verified && (
+          <Typography sx={styles.verificationStatusSuccess}>
+            <CheckCircleOutline />
+            Verified
+          </Typography>
+        )}
+        {user && !user.verified && (
+          <Typography sx={styles.verificationStatusNotVerified}>
+            <ErrorOutline />
+            You have not verified your email yet. Please, check your email!
+          </Typography>
+        )}
         <Avatar 
           src={user.profilePhoto} 
           alt={user.name} 

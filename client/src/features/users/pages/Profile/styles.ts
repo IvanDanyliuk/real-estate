@@ -47,5 +47,32 @@ export const styles: StyleProps = {
     minHeight: '5rem',
     display: 'flex',
     gap: 2,
+  },
+  verifyAccountBtn: {
+    padding: '1rem',
+    borderColor: 'success.main',
+    backgroundColor: 'success.main',
+    '&:hover': {
+      color: 'success.main',
+    },
+  },
+  verificationStatusSuccess: {
+    position: 'absolute',
+    top: '1rem',
+    right: '1rem',
+    padding: '0.3rem 0.5rem', 
+    display: 'flex',
+    alignItems: 'center',
+    gap: 0.5,
+    backgroundColor: 'success.main',
+    color: 'primary.light',
+    borderRadius: '1rem',
+  },
+  verificationStatusNotVerified: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 0.5,
+    fontSize: '0.8rem',
+    color: 'error.main'
   }
 };
