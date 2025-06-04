@@ -340,6 +340,9 @@
         "submitBtn": "Submit",
         "loading": "Loading..."
       },
+      "resetPasswordBtn": {
+        "label": "Reset password"
+      },
       "updatePassword": {
         "triggerBtn": "Change password",
         "title": "Update password",

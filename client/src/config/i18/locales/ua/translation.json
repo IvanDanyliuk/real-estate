@@ -340,6 +340,9 @@
         "submitBtn": "Підтвердити",
         "loading": "Завантаження..."
       },
+      "resetPasswordBtn": {
+        "label": "Скинути пароль"
+      },
       "updatePassword": {
         "triggerBtn": "Змінити пароль",
         "title": "Оновити пароль",

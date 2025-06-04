@@ -48,6 +48,9 @@ export const styles: StyleProps = {
     display: 'flex',
     gap: 2,
   },
+  resetPasswordBtn: {
+    padding: '1rem',
+  },
   verifyAccountBtn: {
     padding: '1rem',
     borderColor: 'success.main',

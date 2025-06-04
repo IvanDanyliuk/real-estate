@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { Avatar, Box, Paper, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material';
+import { Avatar, Box, Button, Paper, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material';
 import { CheckCircleOutline, ErrorOutline } from '@mui/icons-material';
 import { useDeleteUserMutation, useUpdateUserMutation } from '../../state/userApi';
-import { useLogoutMutation } from '../../../auth/state/authApi';
+import { useLogoutMutation, useResetPasswordMutation } from '../../../auth/state/authApi';
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
 import { useAppSelector } from '../../../../hooks/useAppSelector';
 import { StyleProps } from '../../../../components/types';
@@ -29,6 +29,7 @@ const ProfilePage = () => {
 
   const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
   const [deleteUser, { isLoading: isDeleting }] = useDeleteUserMutation();
+  const [resetPassword, { isLoading: isResetingPassword }] = useResetPasswordMutation();
   const [logout] = useLogoutMutation();
 
   const handleDialogOpen = (anchorValue: string | null) => {
@@ -50,8 +51,13 @@ const ProfilePage = () => {
     }
   }, [dispatch, updateUser]);
 
-  const handleChangePasswordSubmit = useCallback(async (data: FormData) => {
-
+  const handleResetPassword = useCallback(async () => {
+    const { data: resetPasswordData, error } = await resetPassword({ email: user?.email });
+    if(!error) {
+      statusToast({ type: 'success', message: resetPasswordData.message });
+    } else {
+      statusToast({ type: 'error', message: 'Failed to reset password' });
+    }
   }, []);
 
   const handleUserDelete = useCallback(async () => {
@@ -166,12 +172,9 @@ const ProfilePage = () => {
             onHandleOpen={() => handleDialogOpen('delete_user')} 
             onSubmit={handleUserDelete} 
           />
-          <ChangePasswordForm 
-            open={anchor === 'change_password'} 
-            user={user}
-            onSubmit={handleChangePasswordSubmit} 
-            onHandleOpen={() => handleDialogOpen('change_password')} 
-          />
+          <Button onClick={handleResetPassword} sx={styles.resetPasswordBtn}>
+            {t('pages.profile.resetPasswordBtn.label')}
+          </Button>
         </Box>
       </Paper>
     </Box>
