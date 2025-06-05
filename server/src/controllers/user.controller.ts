@@ -1,7 +1,7 @@
 import { NOT_FOUND, OK } from "../constants/http";
 import UserModel from "../models/user.model";
 import { userSchema } from "../schemas/user.schema";
-import { deleteUser, getUsers, updateUser } from "../services/user.service";
+import { deleteUser, getUser, getUsers, updateUser } from "../services/user.service";
 import appAssert from "../utils/appAssert";
 import catchErrors from "../utils/catchErrors";
 import { setAuthCookies } from "../utils/cookies";
@@ -9,9 +9,9 @@ import { setAuthCookies } from "../utils/cookies";
 
 export const getUserHandler = catchErrors(async (req, res) => {
   //@ts-ignore
-  const user = await UserModel.findById(req.userId);
-  appAssert(user, NOT_FOUND, "User not found");
-  return res.status(OK).json(user.omitPassword());
+  const response = await getUser(req.userId);
+  appAssert(response, NOT_FOUND, "User not found");
+  return res.status(OK).json(response.omitPassword());
 });
 
 export const getUsersHandler = catchErrors(async (req, res) => {

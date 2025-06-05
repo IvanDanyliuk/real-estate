@@ -22,6 +22,11 @@ export const getUsers = async ({ page, itemsPerPage }: GetUsersParams) => {
   };
 };
 
+export const getUser = async (id: string) => {
+  const user = await UserDocument.findById(id).populate("likedProperties");
+  return user;
+}
+
 export const updateUser = async (userToUpdate: any) => {
   const existingUser = await UserDocument.findById(userToUpdate._id);
   

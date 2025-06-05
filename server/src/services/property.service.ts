@@ -64,6 +64,27 @@ export const getPopularProperties = async (limit: number) => {
   return properties;
 };
 
+export interface GetUserPropertiesParams {
+  email: string;
+  itemsPerPage: number;
+  page: number;
+};
+
+export const getUserProperties = async ({ email, itemsPerPage, page }: GetUserPropertiesParams) => {
+  const properties = await PropertyModel
+    .find({ email })
+    .skip((page - 1) * itemsPerPage)
+    .limit(itemsPerPage)
+    .exec();
+
+  const count = await PropertyModel.countDocuments({ email });
+
+  return {
+    properties,
+    count
+  };
+}
+
 export interface CreatePropertyParams {
   title: string;
   price: number;
