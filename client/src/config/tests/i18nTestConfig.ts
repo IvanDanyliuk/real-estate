@@ -11,6 +11,11 @@ i18n.use(initReactI18next).init({
         'main_layout.additionalFooterLinks.pagesSectionHeading': 'Pages',
         'main_layout.additionalFooterLinks.supportSectionHeading': 'Support',
         'main_layout.additionalFooterLinks.getUpdatedForm.heading': 'Stay Updated',
+        'constants.regions.Kyiv': 'Kyiv',
+        'pages.profile.deleteAccount.triggerBtn': 'Delete Account',
+        'pages.profile.deleteAccount.title': 'Are you sure you want to delete your account?',
+        'pages.profile.deleteAccount.acceptBtn': 'Confirm',
+        'pages.profile.deleteAccount.cancelBtn': 'Cancel'
       },
     },
   },

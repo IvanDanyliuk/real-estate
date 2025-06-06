@@ -2,14 +2,14 @@ import { useCallback, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Box } from '@mui/material'
 import { PropertyList } from '../../../properties/components/PropertyList/PropertyList';
+import { Loader } from '../../../../components/layout/Loader/Loader';
+import { ListPagination } from '../../../../components/layout/ListPagination/ListPagination';
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
 import { useAppSelector } from '../../../../hooks/useAppSelector';
-import { Loader } from '../../../../components/layout/Loader/Loader';
 import { useLazyGetLikedPropertiesQuery, useUpdatePropertyMutation } from '../../../properties/state/propertyApi';
 import { useUpdateUserMutation } from '../../state/userApi';
 import { setUser } from '../../state/userSlice';
 import { PropertyType } from '../../../properties/state/types';
-import { ListPagination } from '../../../../components/layout/ListPagination/ListPagination';
 import { styles } from './styles';
 
 
