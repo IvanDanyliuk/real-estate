@@ -15,7 +15,10 @@ i18n.use(initReactI18next).init({
         'pages.profile.deleteAccount.triggerBtn': 'Delete Account',
         'pages.profile.deleteAccount.title': 'Are you sure you want to delete your account?',
         'pages.profile.deleteAccount.acceptBtn': 'Confirm',
-        'pages.profile.deleteAccount.cancelBtn': 'Cancel'
+        'pages.profile.deleteAccount.cancelBtn': 'Cancel',
+        'pages.profile.navMenu.personalInfo': 'Personal Info',
+        'pages.profile.navMenu.myProperties': 'My Properties',
+        'pages.profile.navMenu.likedProperties': 'Liked Properties',
       },
     },
   },
