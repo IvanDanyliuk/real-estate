@@ -121,7 +121,7 @@ export type LoginParams = {
 
 export const loginUser = async ({ email, password, userAgent }: LoginParams) => {
   // get user by email
-  const user = await UserModel.findOne({ email }).populate("likedProperties");
+  const user = await UserModel.findOne({ email });
   appAssert(user, UNAUTHORIZED, "Invalid email or password");
 
   // validate password from the request

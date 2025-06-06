@@ -3,6 +3,7 @@ import {
   createPropertyHandler, 
   deletePropertyHandler, 
   getGeneralStatsHandler, 
+  getLikedPropertiesByUserHandler, 
   getMonthlyAveragePriceStatsHandler, 
   getMonthlyPropertyStatsHandler, 
   getPopularPropertiesHandler, 
@@ -24,6 +25,7 @@ propertyRoutes.get('/stats/regions', getPropertyStatsByRegionHandler);
 propertyRoutes.get('/stats/prices', getMonthlyAveragePriceStatsHandler);
 propertyRoutes.get('/popular', getPopularPropertiesHandler);
 propertyRoutes.get('/own', getUserPropertiesHandler);
+propertyRoutes.get('/liked', getLikedPropertiesByUserHandler);
 propertyRoutes.get('/:id', getPropertyByIdHandler);
 propertyRoutes.post('/', upload.array('images'), createPropertyHandler);
 propertyRoutes.patch('/', upload.array('images'), updatePropertyHandler);

@@ -23,7 +23,7 @@ export const getUsers = async ({ page, itemsPerPage }: GetUsersParams) => {
 };
 
 export const getUser = async (id: string) => {
-  const user = await UserDocument.findById(id).populate("likedProperties");
+  const user = await UserDocument.findById(id);
   return user;
 }
 
