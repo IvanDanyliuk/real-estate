@@ -1,14 +1,15 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Box, Button, IconButton, MenuItem, Select, SelectChangeEvent, Tooltip } from '@mui/material';
-import { Add, East, West } from '@mui/icons-material';
+import { Box, IconButton, Tooltip } from '@mui/material';
+import { Add } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useCreatePropertyMutation, useLazyGetPropertiesQuery } from '../../../properties/state/propertyApi';
 import { useAppSelector } from '../../../../hooks/useAppSelector';
 import { SectionSkeleton } from '../../../../components/layout/skeletons/SectionSkeleton/SectionSkeleton';
 import { PropertyForm } from '../../../admin/components/forms/PropertyForm/PropertyForm';
-import { statusToast } from '../../../../components/toast/toast';
+import { ListPagination } from '../../../../components/layout/ListPagination/ListPagination';
 import { Loader } from '../../../../components/layout/Loader/Loader';
+import { statusToast } from '../../../../components/toast/toast';
 import { PropertyList } from '../../../properties/components/PropertyList/PropertyList';
 import { MARKET_TYPE } from '../../../../constants/main';
 import { styles } from './styles';
@@ -41,21 +42,6 @@ const propertyFormInitialData = {
   },
   nearbyAmenities: [],
 };
-
-const itemsPerPageOptions = [
-  {
-    label: '8 items per page',
-    value: 8,
-  },
-  {
-    label: '16 items per page',
-    value: 16,
-  },
-  {
-    label: '20 items per page',
-    value: 20,
-  },
-];
 
 
 const MyPropertiesPage = () => {
@@ -98,27 +84,6 @@ const MyPropertiesPage = () => {
     }
   }, [createProperty]);
 
-  const handleItemsPerPageChange = (e: SelectChangeEvent<number>) => {
-    setItemsPerPage(parseInt(e.target.value.toString(), 10));
-    setPage(0);
-    searchParams.set('page', '1');
-    searchParams.set('itemsPerPage', parseInt(e.target.value.toString(), 10).toString())
-    setSearchParams(searchParams);
-  };
-
-  const handlePageChange = ({
-    variant
-  }: { variant: 'prev' | 'next' }) => {
-    if(variant === 'prev') {
-      setPage(page);
-      searchParams.set('page', `${page - 1}`);
-    } else {
-      setPage(page);
-      searchParams.set('page', `${page + 1}`);
-    }
-    setSearchParams(searchParams);
-  };
-
   useEffect(() => {
     const params = Object.fromEntries(searchParams);
     if(params.page) setPage(+params.page);
@@ -157,35 +122,7 @@ const MyPropertiesPage = () => {
             data={data.properties} 
             userId={user._id} 
           />
-          <Box sx={styles.footer}>
-            <Select defaultValue={8} onChange={handleItemsPerPageChange}>
-              {itemsPerPageOptions.map(({ label, value }) => (
-                <MenuItem 
-                  key={`${value}_items_per_page`} 
-                  value={value}
-                >
-                  {t(label)}
-                </MenuItem>
-              ))}
-            </Select>
-            <Box sx={styles.navBtns}>
-              <Button 
-                disabled={page === 1} 
-                onClick={() => handlePageChange({ variant: 'prev' })} 
-                sx={styles.navBtn}
-              >
-                <West />
-                Prev
-              </Button>
-              <Button 
-                disabled={page >= Math.round(data.count / itemsPerPage) + 1} 
-                onClick={() => handlePageChange({ variant: 'next' })} 
-                sx={styles.navBtn}>
-                Next
-                <East />
-              </Button>
-            </Box>
-          </Box>
+          <ListPagination count={data.count} />
         </>
       ) : (
         <>
