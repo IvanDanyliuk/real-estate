@@ -1,11 +1,11 @@
+import { MemoryRouter } from 'react-router';
 import { render, screen } from '@testing-library/react';
-import { ProfileNavMenu } from './ProfileNavMenu';
 import { vi } from 'vitest';
+import { useMediaQuery } from '@mui/material';
 import { I18nextProvider } from 'react-i18next';
+import { ProfileNavMenu } from './ProfileNavMenu';
 import i18n from '../../../../config/tests/i18nTestConfig';
 import { PROFILE_NAV_LINKS } from '../../../../constants/navLinks';
-import { useMediaQuery } from '@mui/material';
-import { MemoryRouter } from 'react-router';
 
 
 vi.mock('react-router', async () => {
@@ -33,6 +33,7 @@ vi.mock('@mui/icons-material/HomeWork', () => ({
 vi.mock('@mui/icons-material/FavoriteBorder', () => ({
   default: () => <svg data-testid="FavoriteBorder" />,
 }));
+
 
 describe('ProfileNavMenu', () => {
   const userId = '123';
