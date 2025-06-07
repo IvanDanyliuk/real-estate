@@ -102,7 +102,7 @@ const MyPropertiesPage = () => {
 
   if(!user) {
     return (
-      <Box sx={styles.skeleton}>
+      <Box sx={styles.skeleton} data-testid='skeleton'>
         <SectionSkeleton numberOfItems={4} />
         <SectionSkeleton numberOfItems={4} />
       </Box>
