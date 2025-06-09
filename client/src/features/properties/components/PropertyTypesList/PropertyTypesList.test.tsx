@@ -4,14 +4,14 @@ import { vi } from 'vitest';
 import { BrowserRouter } from 'react-router-dom';
 import { PROPERTY_TYPES } from '../../../../constants/main';
 
-// Mock useTranslation
+
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: (key: string) => key,
   }),
 }));
 
-// Mock useNavigate
+
 const mockedNavigate = vi.fn();
 vi.mock('react-router', async () => {
   const actual = await vi.importActual<typeof import('react-router')>('react-router');
@@ -24,6 +24,7 @@ vi.mock('react-router', async () => {
 const renderWithRouter = (ui: React.ReactElement) => {
   return render(<BrowserRouter>{ui}</BrowserRouter>);
 };
+
 
 describe('PropertyTypesList component', () => {
   beforeEach(() => {

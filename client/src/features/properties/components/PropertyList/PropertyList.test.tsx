@@ -5,7 +5,7 @@ import { PropertyType } from '../../state/types';
 import { vi } from 'vitest';
 import { MARKET_TYPE } from '../../../../constants/main';
 
-// Mock i18n translation hook
+
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: (key: string) => key,
@@ -50,6 +50,7 @@ const mockProperties: PropertyType[] = [
     updatedAt: '',
   },
 ];
+
 
 describe('PropertyList component', () => {
   it('renders property details correctly', () => {

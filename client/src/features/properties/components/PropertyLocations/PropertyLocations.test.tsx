@@ -3,14 +3,14 @@ import { PropertyLocations } from './PropertyLocations';
 import { vi } from 'vitest';
 import { BrowserRouter } from 'react-router-dom';
 
-// Mock i18next
+
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: (key: string) => key, // Just return the key
   }),
 }));
 
-// Mock useNavigate from react-router
+
 const mockedNavigate = vi.fn();
 vi.mock('react-router', async () => {
   const actual = await vi.importActual<typeof import('react-router')>('react-router');
@@ -32,7 +32,7 @@ describe('PropertyLocations component', () => {
   it('renders all location cards', () => {
     renderWithRouter(<PropertyLocations />);
     const cards = screen.getAllByRole('listitem');
-    expect(cards).toHaveLength(8); // Based on your locations array
+    expect(cards).toHaveLength(8);
   });
 
   it('displays translated labels', () => {
