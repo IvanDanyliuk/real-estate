@@ -106,7 +106,7 @@
       "sections": {
         "general": {
           "totalProperties": "Всього об'єктів",
-          "topRegion": "Регіон з найбільшою кількістю об'єктів",
+          "topRegion": "Область з найбільшою кількістю об'єктів",
           "averageSellPrice": {
             "title": "Середня ціна за 1 кв. м",
             "primary": "Первинний ринок",
@@ -305,6 +305,57 @@
         "heading": "Переглянь",
         "headingCaption": "популярні міста",
         "subHeading": "Популярні міста"
+      }
+    },
+    "profile": {
+      "navMenu": {
+        "personalInfo": "Обліковий запис",
+        "myProperties": "Моя нерухомість",
+        "likedProperties": "Відмічені об'єкти"
+      },
+      "pageSections": {
+        "userData": {
+          "title": "Загальна інформація",
+          "nameLabel": "Ім'я",
+          "emailLabel": "Ел. пошта",
+          "phoneLabel": "Телефон",
+          "addressLabel": "Адреса"
+        },
+        "actions": {
+          "title": "Дії"
+        }
+      },
+      "profileForm": {
+        "title": "Оновити дані користувача",
+        "nameLabel": "Ім'я",
+        "emailLabel": "Ел. пошта",
+        "phoneLabel": "Телефон",
+        "locationLabel": "Локація",
+        "submitBtn": "Підтвердити"
+      },
+      "profilePhotoForm": {
+        "openBtn": "Оновити фото",
+        "title": "Оновити фото профілю",
+        "uploadBtn": "Завантажити фото",
+        "submitBtn": "Підтвердити",
+        "loading": "Завантаження..."
+      },
+      "resetPasswordBtn": {
+        "label": "Скинути пароль"
+      },
+      "updatePassword": {
+        "triggerBtn": "Змінити пароль",
+        "title": "Оновити пароль",
+        "prevPasswordLabel": "Поточний пароль",
+        "newPasswordLabel": "Новий пароль",
+        "confirmNewPassword": "Підтвердити новий пароль",
+        "submitBtn": "Підтвердити"
+      },
+      "deleteAccount": {
+        "triggerBtn": "Видалити обліковий запис",
+        "title": "Ви впевнені, що хочете видалити свій обліковий запис?",
+        "acceptBtn": "Так",
+        "cancelBtn": "Ні"
       }
     }
   }

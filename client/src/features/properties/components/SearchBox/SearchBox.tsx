@@ -130,7 +130,7 @@ export const SearchBox: React.FC = () => {
               {...register('priceTo')} 
             />
           </Box>
-          <Button type='submit' sx={styles.submitBtn}>
+          <Button type='submit' sx={styles.submitBtn} data-testid="submit-search">
             <SearchIcon />
             Search
           </Button>

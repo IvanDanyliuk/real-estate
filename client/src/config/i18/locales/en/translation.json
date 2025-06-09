@@ -306,6 +306,57 @@
         "headingCaption": "Popular Locations",
         "subHeading": "Popular Locations"
       }
+    },
+    "profile": {
+      "navMenu": {
+        "personalInfo": "Personal Information",
+        "myProperties": "My Properties",
+        "likedProperties": "Liked Properties"
+      },
+      "pageSections": {
+        "userData": {
+          "title": "Personal Information",
+          "nameLabel": "Name",
+          "emailLabel": "Email",
+          "phoneLabel": "Phone",
+          "addressLabel": "Address"
+        },
+        "actions": {
+          "title": "Actions"
+        }
+      },
+      "profileForm": {
+        "title": "Update user data",
+        "nameLabel": "Name",
+        "emailLabel": "Email",
+        "phoneLabel": "Phone",
+        "locationLabel": "Location",
+        "submitBtn": "Submit"
+      },
+      "profilePhotoForm": {
+        "openBtn": "Update photo",
+        "title": "Update profile photo",
+        "uploadBtn": "Upload photo",
+        "submitBtn": "Submit",
+        "loading": "Loading..."
+      },
+      "resetPasswordBtn": {
+        "label": "Reset password"
+      },
+      "updatePassword": {
+        "triggerBtn": "Change password",
+        "title": "Update password",
+        "prevPasswordLabel": "Current password",
+        "newPasswordLabel": "New password",
+        "confirmNewPassword": "Confirm new password",
+        "submitBtn": "Submit"
+      },
+      "deleteAccount": {
+        "triggerBtn": "Delete account",
+        "title": "Are you sure you want to delete your account?",
+        "acceptBtn": "Yes",
+        "cancelBtn": "No"
+      }
     }
   }
 }

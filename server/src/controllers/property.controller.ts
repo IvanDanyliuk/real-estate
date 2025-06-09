@@ -1,7 +1,7 @@
 import { propertySchema } from "../schemas/property.schema";
 import catchErrors from "../utils/catchErrors";
 import { OK } from "../constants/http";
-import { createProperty, deleteProperty, getGeneralStats, getMonthlyPriceStats, getMonthlyPropertyStats, getPopularProperties, getProperties, getPropertyById, getPropertyStatsByRegion, updateProperty } from "../services/property.service";
+import { createProperty, deleteProperty, getGeneralStats, getLikedPropertiesByUser, getMonthlyPriceStats, getMonthlyPropertyStats, getPopularProperties, getProperties, getPropertyById, getPropertyStatsByRegion, getUserProperties, updateProperty } from "../services/property.service";
 import { removeFalseyFields } from "../utils/removeFlaseyFields";
 
 type FiltersType = {
@@ -60,9 +60,31 @@ export const getPropertiesHandler = catchErrors(async (req, res) => {
   return res.status(OK).json(response);
 });
 
+export const getLikedPropertiesByUserHandler = catchErrors(async (req, res) => {
+  const response = await getLikedPropertiesByUser({
+    page: +req.query.page!,
+    itemsPerPage: +req.query.itemsPerPage!,
+    userId: req.query.userId!.toString(),
+  });
+
+  return res.status(OK).json(response);
+})
+
 export const getPropertyByIdHandler = catchErrors(async (req, res) => {
   console.log('GET PROPERTY BY ID', req)
   // const response = await getPropertyById()
+});
+
+export const getUserPropertiesHandler = catchErrors(async (req, res) => {
+  const { email, itemsPerPage, page } = req.query;
+  const query = {
+    email: email!.toString(),
+    itemsPerPage: +itemsPerPage!,
+    page: +page!,
+  };
+  
+  const response = await getUserProperties(query);
+  return res.status(OK).json(response);
 });
 
 export const getPopularPropertiesHandler = catchErrors(async (req, res) => {

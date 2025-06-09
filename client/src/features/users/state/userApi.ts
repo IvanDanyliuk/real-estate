@@ -64,7 +64,7 @@ export const userApi = createApi({
         body: data,
       }),
     }),
-    deleteuser: builder.mutation({
+    deleteUser: builder.mutation({
       query: (id) => ({
         url: `/user/${id}`,
         method: REQUEST_METHODS.delete,
@@ -77,5 +77,5 @@ export const {
   useGetUserQuery, 
   useLazyGetUsersQuery, 
   useUpdateUserMutation, 
-  useDeleteuserMutation 
+  useDeleteUserMutation 
 } = userApi;

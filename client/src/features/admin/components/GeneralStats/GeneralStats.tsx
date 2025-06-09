@@ -37,7 +37,7 @@ export const GeneralStats: React.FC<GeneralStatsProps> = ({
           {t('admin_dashboard.analytics_page.sections.general.topRegion')}
         </Typography>
         <Typography variant='body2' sx={styles.value}>
-          {topPropertiesCountRegion}
+          {t(`constants.regions.${topPropertiesCountRegion}`)}
         </Typography>
       </Card>
       <Card sx={styles.item} elevation={3}>

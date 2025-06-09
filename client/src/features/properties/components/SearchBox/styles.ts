@@ -2,26 +2,32 @@ import { StyleProps } from '../../../../components/types';
 
 export const styles: StyleProps = {
   container: {
-    position: 'absolute',
+    position: 'relative',
     bottom: '1rem',
     left: 0,
     width: '100%',
+    '@media(min-width:600px)': {
+      position: 'absolute',
+
+    }
   },
   searchModeSwitchContainer: {
     position: 'relative',
     width: '100%',
     display: 'flex',
-    justifyContent: 'flex-end',
+    '@media(min-width:600px)': {
+      justifyContent: 'flex-end',
+    }
   },
   searchModeSwitchBtns: {
-    width: 'content-fit',
+    width: '100%',
     backgroundColor: 'primary.light',
     borderTopLeftRadius: '10px',
     borderTopRightRadius: '10px',
     overflow: 'hidden',
     '& button': {
       cursor: 'pointer',
-      width: '10rem',
+      width: '50%',
       height: '2.5rem',
       fontSize: '1rem',
       border: 'none',
@@ -32,15 +38,24 @@ export const styles: StyleProps = {
         borderBottomStyle: 'solid',
         borderBottomColor: 'primary.main',
       }
+    },
+    '@media(min-width:600px)': {
+      width: 'auto',
+      '& button': {
+        width: '10rem',
+      }
     }
   },
   searchModeSwitchBody: {
     padding: '1rem',
     width: '100%',
     backgroundColor: 'primary.light',
-    borderTopLeftRadius: '10px',
+    borderTopLeftRadius: 0,
     borderBottomLeftRadius: '10px',
     borderBottomRightRadius: '10px',
+    '@media(min-width:600px)': {
+      borderTopLeftRadius: '10px',
+    }
   },
   form: {
     display: 'flex',
@@ -53,6 +68,7 @@ export const styles: StyleProps = {
   },
   field: {
     position: 'relative',
+    width: '100%',
     flex: 1,
     '& .MuiFormControl-root, .MuiInputBase-root': {
       width: '100%',
@@ -65,11 +81,16 @@ export const styles: StyleProps = {
     },
     '& input': {
       
-    }
+    },
   },
   submitBtn: {
+    marginTop: '1rem',
     padding: '0 1.2rem',
+    width: '100%',
     height: '3.2rem',
     fontSize: '0.8rem',
+    '@media(min-width:600px)': {
+      width: 'auto'
+    }
   }
 };

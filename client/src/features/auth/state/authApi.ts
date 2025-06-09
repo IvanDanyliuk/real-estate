@@ -36,6 +36,17 @@ export const authApi = createApi({
         method: REQUEST_METHODS.post,
       }),
     }),
+    resetPassword: builder.mutation({
+      query: () => ({
+        url: `/auth${AUTH_ROUTES.resetPassword}`,
+        method: REQUEST_METHODS.post,
+      })
+    }),
+    verifyEmail: builder.query({
+      query: (code) => ({
+        url: `/auth${AUTH_ROUTES.verifyEmail}/${code}`,
+      })
+    })
   }),
 });
 
@@ -43,5 +54,7 @@ export const {
   useSignUpMutation, 
   useLoginMutation, 
   useLogoutMutation,
-  useRefreshTokenQuery 
+  useRefreshTokenQuery, 
+  useResetPasswordMutation, 
+  useVerifyEmailQuery
 } = authApi;

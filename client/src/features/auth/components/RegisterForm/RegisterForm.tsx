@@ -4,11 +4,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Box, Button, TextField } from '@mui/material';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { RegisterDataType, registerSchema } from '../../data-models';
-import { styles } from './styles';
 import { FileInput } from '../../../../components/inputs/FileInput/FileInput';
 import { useSignUpMutation } from '../../state/authApi';
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
 import { setUser } from '../../../users/state/userSlice';
+import { styles } from './styles';
+
 
 export const RegisterForm: React.FC = () => {
   const navigate = useNavigate();
@@ -79,6 +80,7 @@ export const RegisterForm: React.FC = () => {
       />
       <TextField 
         label='Password' 
+        type='password' 
         fullWidth 
         error={!!errors.password}
         helperText={errors.password?.message}
@@ -86,6 +88,7 @@ export const RegisterForm: React.FC = () => {
       />
       <TextField 
         label='Confirm password' 
+        type='password' 
         fullWidth 
         error={!!errors.confirmPassword}
         helperText={errors.confirmPassword?.message}
@@ -100,13 +103,11 @@ export const RegisterForm: React.FC = () => {
       />
       <FileInput 
         name='profilePhoto'
-        label='Photo' 
         title='Upload a profile photo'
         error={!!errors.profilePhoto} 
         helperText={errors.profilePhoto?.message} 
         register={register}
         setValue={setValue}
-        // multiple
       />
       <Button type='submit' sx={styles.submitBtn}>
         {isSubmitting ? 'Loading' : 'Submit'}

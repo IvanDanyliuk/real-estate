@@ -25,6 +25,12 @@ export const propertyApi = createApi({
         params,
       }),
     }),
+    getLikedProperties: builder.query({
+      query: (params) => ({
+        url: '/properties/liked',
+        params,
+      }),
+    }),
     createProperty: builder.mutation<CreatePropertyResponse, FormData>({
       query: (newProperty) => ({
         url: '/properties',
@@ -75,6 +81,7 @@ export const {
   useLazyGetPropertiesQuery, 
   useGetPropertyByIdQuery, 
   useLazyGetPopularPropertiesQuery,
+  useLazyGetLikedPropertiesQuery, 
   useCreatePropertyMutation, 
   useUpdatePropertyMutation, 
   useDeletePropertyMutation, 

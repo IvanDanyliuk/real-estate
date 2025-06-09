@@ -2,13 +2,6 @@ import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 import { GeneralStats } from './GeneralStats';
 
-
-vi.mock('react-i18next', () => ({
-  useTranslation: () => ({
-    t: (key: string) => key,
-  }),
-}));
-
 describe('GeneralStats Component', () => {
   const props = {
     propertiesCount: 123,
@@ -31,7 +24,7 @@ describe('GeneralStats Component', () => {
 
   it('displays the top region', () => {
     expect(screen.getByText('admin_dashboard.analytics_page.sections.general.topRegion')).toBeInTheDocument();
-    expect(screen.getByText(props.topPropertiesCountRegion)).toBeInTheDocument();
+    expect(screen.getByText(`constants.regions.${props.topPropertiesCountRegion}`)).toBeInTheDocument();
   });
 
   it('displays the average buying prices', () => {

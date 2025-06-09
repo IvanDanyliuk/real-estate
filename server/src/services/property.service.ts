@@ -34,6 +34,31 @@ export const getProperties = async ({
   };
 };
 
+export interface GetLikedPropertiesByUser {
+  page: number;
+  itemsPerPage: number;
+  userId: string;
+};
+
+export const getLikedPropertiesByUser = async ({ page, itemsPerPage, userId }: GetLikedPropertiesByUser) => {
+  const properties = await PropertyModel
+    .find({ likes: userId })
+    .skip((page - 1) * itemsPerPage)
+    .limit(itemsPerPage)
+    .exec();
+  const count = await PropertyModel.countDocuments({ likes: userId });
+
+  console.log('GET LIKED PROPERTIES BY USER SERVICE', {
+    properties,
+    count
+  })
+
+  return {
+    properties,
+    count
+  };
+}
+
 export const getPropertyById = async (id: string) => {
   const property = await PropertyModel.findById(id);
   return property;
@@ -63,6 +88,27 @@ export const getPopularProperties = async (limit: number) => {
 
   return properties;
 };
+
+export interface GetUserPropertiesParams {
+  email: string;
+  itemsPerPage: number;
+  page: number;
+};
+
+export const getUserProperties = async ({ email, itemsPerPage, page }: GetUserPropertiesParams) => {
+  const properties = await PropertyModel
+    .find({ email })
+    .skip((page - 1) * itemsPerPage)
+    .limit(itemsPerPage)
+    .exec();
+
+  const count = await PropertyModel.countDocuments({ email });
+
+  return {
+    properties,
+    count
+  };
+}
 
 export interface CreatePropertyParams {
   title: string;

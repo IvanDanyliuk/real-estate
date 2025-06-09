@@ -1,7 +1,8 @@
-import Dashboard from '@mui/icons-material/Dashboard';
-import Properties from '@mui/icons-material/MapsHomeWork';
-import Blog from '@mui/icons-material/Feed';
-import Users from '@mui/icons-material/People';
+import { 
+  AssignmentInd, Dashboard, FavoriteBorder, 
+  Feed, HomeWork, MapsHomeWork, People 
+} from '@mui/icons-material';
+
 
 export const NAV_LINKS = [
   {
@@ -35,16 +36,34 @@ export const ADMIN_DASHBOARD_NAV_LINKS = [
   {
     href: '/admin/properties',
     label: 'admin_dashboard.layout.navMenu.properties',
-    icon: Properties,
+    icon: MapsHomeWork,
   },
   {
     href: '/admin/blog',
     label: 'admin_dashboard.layout.navMenu.blog',
-    icon: Blog,
+    icon: Feed,
   },
   {
     href: '/admin/users',
     label: 'admin_dashboard.layout.navMenu.users',
-    icon: Users,
+    icon: People,
+  },
+];
+
+export const PROFILE_NAV_LINKS = [
+  {
+    value: '/profile/:id',
+    label: 'pages.profile.navMenu.personalInfo',
+    icon: AssignmentInd,
+  },
+  {
+    value: '/profile/:id/my-properties',
+    label: 'pages.profile.navMenu.myProperties',
+    icon: HomeWork,
+  },
+  {
+    value: '/profile/:id/liked-properties',
+    label: 'pages.profile.navMenu.likedProperties',
+    icon: FavoriteBorder,
   },
 ];

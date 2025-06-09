@@ -1,16 +1,17 @@
 import { NOT_FOUND, OK } from "../constants/http";
 import UserModel from "../models/user.model";
 import { userSchema } from "../schemas/user.schema";
-import { deleteUser, getUsers, updateUser } from "../services/user.service";
+import { deleteUser, getUser, getUsers, updateUser } from "../services/user.service";
 import appAssert from "../utils/appAssert";
 import catchErrors from "../utils/catchErrors";
+import { setAuthCookies } from "../utils/cookies";
 
 
 export const getUserHandler = catchErrors(async (req, res) => {
   //@ts-ignore
-  const user = await UserModel.findById(req.userId);
-  appAssert(user, NOT_FOUND, "User not found");
-  return res.status(OK).json(user.omitPassword());
+  const response = await getUser(req.userId);
+  appAssert(response, NOT_FOUND, "User not found");
+  return res.status(OK).json(response.omitPassword());
 });
 
 export const getUsersHandler = catchErrors(async (req, res) => {
@@ -19,14 +20,20 @@ export const getUsersHandler = catchErrors(async (req, res) => {
 });
 
 export const updateUserHandler = catchErrors(async (req, res) => {
-  const data = userSchema.parse(req.body);
-  const updatedUser = await updateUser({
+  const files = req.files as any[];
+  const rawData = files && files.length > 0 ? {
+    ...req.body,
+    profilePhoto: files[0]
+  } : req.body;
+  const data = userSchema.parse(rawData);
+  
+  const { user } = await updateUser({
     _id: req.body._id,
-    ...data,
+    ...data 
   });
 
   return res.status(OK).json({
-    payload: updatedUser,
+    payload: user,
     message: "User has been successfully updated!",
   });
 });
