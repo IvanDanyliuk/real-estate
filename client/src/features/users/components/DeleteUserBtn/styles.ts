@@ -4,11 +4,14 @@ import { StyleProps } from '../../../../components/types';
 export const styles: StyleProps = {
   deleteBtn: {
     padding: '0 1rem',
-    width: 'fit-content',
+    width: '100%',
     borderColor: 'error.main', 
     backgroundColor: 'error.main',
     '&:hover': {
       color: 'error.main'
+    },
+    '@media(min-width:600px)': {
+      width: 'fit-content',
     }
   },
   title: {

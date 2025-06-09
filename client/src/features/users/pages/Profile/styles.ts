@@ -46,10 +46,14 @@ export const styles: StyleProps = {
   actions: {
     minHeight: '5rem',
     display: 'flex',
+    flexDirection: 'column',
     gap: 2,
+    '@media(min-width:600px)': {
+      flexDirection: 'row',
+    }
   },
   resetPasswordBtn: {
-    padding: '1rem',
+    padding: '0 1rem',
   },
   verifyAccountBtn: {
     padding: '1rem',
