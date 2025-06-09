@@ -357,6 +357,52 @@
         "acceptBtn": "Так",
         "cancelBtn": "Ні"
       }
+    },
+    "properties": {
+      "resultsFound": {
+        "partOne": "Представлено",
+        "partTwo": "з",
+        "partThree": "результатів"
+      },
+      "sortingMenu": {
+        "default": "За замовчуванням",
+        "price": "Ціна",
+        "area": "Площа",
+        "roomsNumber": "Кількість кімнат"
+      },
+      "filters": {
+        "title": "Знайдіть Вашу нерухомість",
+        "sections": {
+          "location": {
+            "title": "Локація",
+            "placeholder": "Оберіть локацію"
+          },
+          "propertyStatus": {
+            "title": "Тип оголошення",
+            "options": {
+              "sell": "Продаж",
+              "rent": "Оренда"
+            }
+          },
+          "propertyType": {
+            "title": "Тип об'єкта",
+            "options": {
+              "house": "Будинок",
+              "apartment": "Квартира",
+              "townhouse": "Таунхаус",
+              "Duplex": "Дуплекс",
+              "plot": "Земельна ділянка",
+              "office": "Офісне приміщення"
+            }
+          },
+          "price": {
+            "title": "Ціна"
+          },
+          "area": {
+            "title": "Площа"
+          }
+        }
+      }
     }
   }
 }

@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { PropertyTypesList } from './PropertyTypesList';
 import { vi } from 'vitest';
 import { BrowserRouter } from 'react-router-dom';
+import { PropertyTypesList } from './PropertyTypesList';
 import { PROPERTY_TYPES } from '../../../../constants/main';
 
 
@@ -33,7 +33,7 @@ describe('PropertyTypesList component', () => {
 
   it('renders all property type cards', () => {
     renderWithRouter(<PropertyTypesList />);
-    const cards = screen.getAllByRole('listitem'); // Cards are clickable
+    const cards = screen.getAllByRole('listitem');
     expect(cards.length).toBe(PROPERTY_TYPES.length);
   });
 
@@ -48,7 +48,7 @@ describe('PropertyTypesList component', () => {
     renderWithRouter(<PropertyTypesList />);
     const firstType = PROPERTY_TYPES[0];
 
-    const card = screen.getByText(firstType.label).closest('div'); // Card is the clickable div
+    const card = screen.getByText(firstType.label).closest('div');
     expect(card).toBeTruthy();
 
     fireEvent.click(card!);

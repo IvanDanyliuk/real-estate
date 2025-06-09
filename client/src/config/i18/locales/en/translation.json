@@ -357,6 +357,52 @@
         "acceptBtn": "Yes",
         "cancelBtn": "No"
       }
+    },
+    "properties": {
+      "resultsFound": {
+        "partOne": "Showing",
+        "partTwo": "of",
+        "partThree": "results"
+      },
+      "sortingMenu": {
+        "default": "Default",
+        "price": "Price",
+        "area": "Area",
+        "roomsNumber": "Rooms number"
+      },
+      "filters": {
+        "title": "Find your property",
+        "sections": {
+          "location": {
+            "title": "Location",
+            "placeholder": "Select location"
+          },
+          "propertyStatus": {
+            "title": "Property status",
+            "options": {
+              "sell": "Sell",
+              "rent": "Rent"
+            }
+          },
+          "propertyType": {
+            "title": "Property type",
+            "options": {
+              "house": "House",
+              "apartment": "Apartment",
+              "townhouse": "Townhouse",
+              "Duplex": "Duplex",
+              "plot": "Plot",
+              "office": "Office"
+            }
+          },
+          "price": {
+            "title": "Price"
+          },
+          "area": {
+            "title": "Area"
+          }
+        }
+      }
     }
   }
 }

@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { SearchBox } from './SearchBox';
+import { describe, it, expect, vi } from 'vitest';
 import { BrowserRouter } from 'react-router-dom';
+import { SearchBox } from './SearchBox';
 import { REGIONS } from '../../../../constants/geoData';
 import { AD_TYPE } from '../../../../constants/main';
 
