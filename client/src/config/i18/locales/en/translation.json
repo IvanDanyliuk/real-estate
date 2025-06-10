@@ -18,6 +18,10 @@
       "for_sale": "For sale",
       "for_rent": "For rent"
     },
+    "marketTypes": {
+      "primary": "Primary",
+      "secondary": "Secondary"
+    },
     "propertyTypes": {
       "house": "House",
       "apartment": "Apartment",
@@ -378,22 +382,13 @@
             "placeholder": "Select location"
           },
           "propertyStatus": {
-            "title": "Property status",
-            "options": {
-              "sell": "Sell",
-              "rent": "Rent"
-            }
+            "title": "Property status"
           },
-          "propertyType": {
-            "title": "Property type",
-            "options": {
-              "house": "House",
-              "apartment": "Apartment",
-              "townhouse": "Townhouse",
-              "Duplex": "Duplex",
-              "plot": "Plot",
-              "office": "Office"
-            }
+          "markertType": {
+            "title": "Market"
+          },
+          "adType": {
+            "title": "Ad type"
           },
           "price": {
             "title": "Price"

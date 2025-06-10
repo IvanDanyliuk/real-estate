@@ -8,6 +8,7 @@ import { ListPagination } from '../../../../components/layout/ListPagination/Lis
 import { Loader } from '../../../../components/layout/Loader/Loader';
 import { useLazyGetPropertiesQuery } from '../../state/propertyApi';
 import { styles } from './styles';
+import { Filters } from '../../components/Filters/Filters';
 
 
 const sortingOptions = [
@@ -60,9 +61,7 @@ const PropertiesPage = () => {
 
   return (
     <Container contentStyles={styles.container}>
-      <Box sx={styles.filters}>
-        Filters
-      </Box>
+      <Filters />
       <Box sx={styles.main}>
         <Box sx={styles.header}>
           <Box sx={styles.sortingControls}>
@@ -72,7 +71,7 @@ const PropertiesPage = () => {
             <Select defaultValue={sortingOptions[0].value}>
               {sortingOptions.map(({ value, label }, i) => (
                 <MenuItem key={`sorting_option_${i}_${value}`} value={value}>
-                  {t(`pages.properties.sortingMenu.${label  }`)}
+                  {t(`pages.properties.sortingMenu.${label}`)}
                 </MenuItem>
               ))}
             </Select>

@@ -18,6 +18,10 @@
       "for_sale": "Продаж",
       "for_rent": "Оренда"
     },
+    "marketTypes": {
+      "primary": "Первинний",
+      "secondary": "Вторинний"
+    },
     "propertyTypes": {
       "house": "Будинок",
       "apartment": "Квартира",
@@ -377,23 +381,14 @@
             "title": "Локація",
             "placeholder": "Оберіть локацію"
           },
-          "propertyStatus": {
-            "title": "Тип оголошення",
-            "options": {
-              "sell": "Продаж",
-              "rent": "Оренда"
-            }
+          "adType": {
+            "title": "Тип оголошення"
+          },
+          "marketType": {
+            "title": "Ринок"
           },
           "propertyType": {
-            "title": "Тип об'єкта",
-            "options": {
-              "house": "Будинок",
-              "apartment": "Квартира",
-              "townhouse": "Таунхаус",
-              "Duplex": "Дуплекс",
-              "plot": "Земельна ділянка",
-              "office": "Офісне приміщення"
-            }
+            "title": "Тип об'єкта"
           },
           "price": {
             "title": "Ціна"
