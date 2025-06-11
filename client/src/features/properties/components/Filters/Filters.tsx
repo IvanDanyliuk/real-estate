@@ -20,7 +20,9 @@ export const Filters: React.FC = () => {
   const propertyTypeFromParams = searchParams.get('propertyType')?.split(',') || [];
   const marketTypeFromParams = searchParams.get('marketType')?.split(',') || [];
 
-  const defaultValues: Record<string, boolean> = {};
+  const defaultValues: Record<string, boolean | string[]> = {};
+
+  defaultValues['location'] = [REGIONS_DEFAULT.value];
 
   PROPERTY_TYPES.forEach(({ value }) => {
     defaultValues[value] = propertyTypeFromParams.includes(value);
@@ -33,7 +35,8 @@ export const Filters: React.FC = () => {
   const { control } = useForm({ defaultValues });
 
   const handleInputFiltersChange = (key: string, value: string | number) => {
-    console.log('INPUT FIELD HANDLER', { key, value });
+    searchParams.set(key, value.toString());
+    setSearchParams(searchParams);
   };
 
   const handleCheckboxFiltersChange = (type: string, checked: boolean, key: FilterKey) => {
@@ -72,7 +75,9 @@ export const Filters: React.FC = () => {
             render={({ field }) => (
               <Select 
                 fullWidth 
+                multiple
                 {...field}
+                value={field.value}
                 onChange={(e) => {
                   field.onChange(e);
                   handleInputFiltersChange('location', e.target.value.toString())
@@ -105,7 +110,7 @@ export const Filters: React.FC = () => {
                   control={
                     <Checkbox 
                       {...field} 
-                      checked={field.value} 
+                      checked={Boolean(field.value)} 
                       onChange={(e) => {
                         field.onChange(e);
                         handleCheckboxFiltersChange(value, e.target.checked, 'propertyType')
@@ -133,7 +138,7 @@ export const Filters: React.FC = () => {
                   control={
                     <Checkbox 
                       {...field} 
-                      checked={field.value} 
+                      checked={Boolean(field.value)} 
                       onChange={(e) => {
                         field.onChange(e);
                         handleCheckboxFiltersChange(value, e.target.checked, 'market')
@@ -161,7 +166,7 @@ export const Filters: React.FC = () => {
                   control={
                     <Checkbox 
                       {...field} 
-                      checked={field.value} 
+                      checked={Boolean(field.value)} 
                       onChange={(e) => {
                         field.onChange(e);
                         handleCheckboxFiltersChange(value, e.target.checked, 'adType')
