@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Box, Chip, MenuItem, Select, Typography } from '@mui/material';
+import { Box, MenuItem, Select, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Container } from '../../../../components/layout/Container/Container';
 import { PropertyList } from '../../components/PropertyList/PropertyList';
 import { ListPagination } from '../../../../components/layout/ListPagination/ListPagination';
 import { Loader } from '../../../../components/layout/Loader/Loader';
+import { Filters } from '../../components/Filters/Filters';
 import { useLazyGetPropertiesQuery } from '../../state/propertyApi';
 import { styles } from './styles';
-import { Filters } from '../../components/Filters/Filters';
 
 
 const sortingOptions = [
@@ -39,12 +39,9 @@ const PropertiesPage = () => {
 
   const [page, setPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(8);
+  const [selectedFilters, setSelectedFilters] = useState([]);
 
   const [getProperties, { data, isSuccess, isLoading }] = useLazyGetPropertiesQuery();
-
-  const handleFilterLabelDelete = (id: string) => {
-
-  };
 
   useEffect(() => {
     const params = Object.fromEntries(searchParams);
@@ -64,25 +61,16 @@ const PropertiesPage = () => {
       <Filters />
       <Box sx={styles.main}>
         <Box sx={styles.header}>
-          <Box sx={styles.sortingControls}>
-            <Typography>
-              Showing 8 of 1,536 results
-            </Typography>
-            <Select defaultValue={sortingOptions[0].value}>
-              {sortingOptions.map(({ value, label }, i) => (
-                <MenuItem key={`sorting_option_${i}_${value}`} value={value}>
-                  {t(`pages.properties.sortingMenu.${label}`)}
-                </MenuItem>
-              ))}
-            </Select>
-          </Box>
-          <Box>
-            <Chip 
-              label='Apartment' 
-              onDelete={() => handleFilterLabelDelete('apartment')} 
-              sx={styles.label} 
-            />
-          </Box>
+          <Typography>
+            Showing 8 of 1,536 results
+          </Typography>
+          <Select defaultValue={sortingOptions[0].value}>
+            {sortingOptions.map(({ value, label }, i) => (
+              <MenuItem key={`sorting_option_${i}_${value}`} value={value}>
+                {t(`pages.properties.sortingMenu.${label}`)}
+              </MenuItem>
+            ))}
+          </Select>
         </Box>
         <Box sx={styles.properties}>
           {isSuccess ? (

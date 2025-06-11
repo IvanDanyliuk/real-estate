@@ -13,21 +13,10 @@ export const styles: StyleProps = {
   },
   header: {
     position: 'relative',
-  },
-  sortingControls: {
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-  },
-  labels: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 1,
-  },
-  label: {
-    backgroundColor: 'primary.main',
-    color: 'primary.light',
   },
   properties: {
     padding: '1rem 0',
