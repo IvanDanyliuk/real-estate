@@ -9,26 +9,7 @@ import { Loader } from '../../../../components/layout/Loader/Loader';
 import { Filters } from '../../components/Filters/Filters';
 import { useLazyGetPropertiesQuery } from '../../state/propertyApi';
 import { styles } from './styles';
-
-
-const sortingOptions = [
-  {
-    value: 'default',
-    label: 'default',
-  },
-  {
-    value: 'price',
-    label: 'price',
-  },
-  {
-    value: 'area',
-    label: 'area',
-  },
-  {
-    value: 'overview.roomsNumber',
-    label: 'roomsNumber'
-  },
-];
+import { Sorting } from '../../components/Sorting/Sorting';
 
 
 const PropertiesPage = () => {
@@ -50,6 +31,10 @@ const PropertiesPage = () => {
   }, [page, itemsPerPage, searchParams]);
 
   useEffect(() => {
+    console.log('SEARCH PARAMS', query)
+    const filters = {};
+    const sortParams = {};
+    
     getProperties({
       page: +query.page || 1,
       itemsPerPage: +query.itemsPerPage || 8,
@@ -62,15 +47,9 @@ const PropertiesPage = () => {
       <Box sx={styles.main}>
         <Box sx={styles.header}>
           <Typography>
-            Showing 8 of 1,536 results
+            {`Showing ${page * itemsPerPage} of 1,536 results`}
           </Typography>
-          <Select defaultValue={sortingOptions[0].value}>
-            {sortingOptions.map(({ value, label }, i) => (
-              <MenuItem key={`sorting_option_${i}_${value}`} value={value}>
-                {t(`pages.properties.sortingMenu.${label}`)}
-              </MenuItem>
-            ))}
-          </Select>
+          <Sorting />
         </Box>
         <Box sx={styles.properties}>
           {isSuccess ? (
