@@ -3,13 +3,11 @@ import { Box, Button, Checkbox, Divider, FormControlLabel, FormGroup, MenuItem, 
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { AD_TYPES, MARKET_TYPES, PROPERTY_TYPES } from '../../../../constants/main';
-import { REGIONS, REGIONS_DEFAULT } from '../../../../constants/geoData';
+import { REGIONS } from '../../../../constants/geoData';
 import { styles } from './styles';
 
 
-type FilterKey = 'propertyType' | 'market' | 'adType'
-
-const regions = [...REGIONS, REGIONS_DEFAULT];
+type FilterKey = 'propertyType' | 'market' | 'adType';
 
 
 export const Filters: React.FC = () => {
@@ -26,7 +24,7 @@ export const Filters: React.FC = () => {
 
   defaultValues['price'] = priceFromParams;
   defaultValues['area'] = areaFromParams;
-  defaultValues['location'] = [REGIONS_DEFAULT.value];
+  defaultValues['location'] = [];
 
   PROPERTY_TYPES.forEach(({ value }) => {
     defaultValues[value] = propertyTypeFromParams.includes(value);
@@ -94,10 +92,10 @@ export const Filters: React.FC = () => {
                 value={field.value}
                 onChange={(e) => {
                   field.onChange(e);
-                  handleInputFiltersChange('location', e.target.value.toString())
+                  handleInputFiltersChange('location', e.target.value.toString());
                 }}
               >
-                {regions.map(({ value, label }) => (
+                {REGIONS.map(({ value, label }) => (
                   <MenuItem 
                     key={`region_${value}`} 
                     value={value}

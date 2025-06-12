@@ -35,9 +35,9 @@ export const Sorting: React.FC = () => {
 
     const newSearchParams = new URLSearchParams(searchParams);
     if (value === 'default') {
-      newSearchParams.delete('sortBy');
+      newSearchParams.delete('orderBy');
     } else {
-      newSearchParams.set('sortBy', value);
+      newSearchParams.set('orderBy', value);
     }
 
     setSearchParams(newSearchParams);
