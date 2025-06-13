@@ -3,10 +3,10 @@ import { StyleProps } from '../../../../components/types';
 export const styles: StyleProps = {
   container: {
     display: 'flex',
-    gap: 2,
-  },
-  filters: {
-
+    gap: 0,
+    '@media(min-width:600px)': {
+      gap: 2
+    }
   },
   main: {
     flex: 1,

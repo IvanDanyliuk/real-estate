@@ -1,10 +1,15 @@
 import { useSearchParams } from 'react-router-dom';
-import { Box, Button, Checkbox, Divider, FormControlLabel, FormGroup, MenuItem, Select, Slider, Typography } from '@mui/material';
+import { 
+  Box, Button, Checkbox, Dialog, DialogContent, Divider, FormControlLabel, 
+  FormGroup, IconButton, MenuItem, Select, Slider, Typography, useMediaQuery 
+} from '@mui/material';
+import { FilterAlt } from '@mui/icons-material';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { AD_TYPES, MARKET_TYPES, PROPERTY_TYPES } from '../../../../constants/main';
 import { REGIONS } from '../../../../constants/geoData';
 import { styles } from './styles';
+import { useState } from 'react';
 
 
 type FilterKey = 'propertyType' | 'market' | 'adType';
@@ -25,9 +30,11 @@ interface FiltersProps {
 
 export const Filters: React.FC<FiltersProps> = ({ initialValues: { price, area } }) => {
   const { t } = useTranslation();
-
   const [searchParams, setSearchParams] = useSearchParams();
+  const isMobile = useMediaQuery('(max-width:599px)');
 
+  const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState<boolean>(false);
+  
   const propertyTypeFromParams = searchParams.get('propertyType')?.split(',') || [];
   const marketTypeFromParams = searchParams.get('marketType')?.split(',') || [];
   const priceFromParams = searchParams.get('price')?.split(',').map(Number) || [price.min, price.max];
@@ -48,6 +55,10 @@ export const Filters: React.FC<FiltersProps> = ({ initialValues: { price, area }
   });
 
   const { control, reset } = useForm({ defaultValues });
+
+  const handleMobileFiltersOpen = () => {
+    setIsMobileFiltersOpen(!isMobileFiltersOpen);
+  };
 
   const handleInputFiltersChange = (key: string, value: string | number | (string | number)[]) => {
     if (Array.isArray(value)) {
@@ -83,8 +94,8 @@ export const Filters: React.FC<FiltersProps> = ({ initialValues: { price, area }
     reset(defaultValues);
   };
 
-  return (
-    <Box sx={styles.container}>
+  const filters = (
+    <Box sx={styles.content}>
       <Typography variant='h3'>
         {t('pages.properties.filters.title')}
       </Typography>
@@ -282,6 +293,30 @@ export const Filters: React.FC<FiltersProps> = ({ initialValues: { price, area }
           Clear filters
         </Button>
       </Box>
+    </Box>
+  )
+
+  return (
+    <Box>
+      {isMobile ? (
+        <>
+          <IconButton onClick={handleMobileFiltersOpen} sx={styles.mobileFiltersBtn}>
+            <FilterAlt />
+          </IconButton>
+          <Dialog 
+            open={isMobileFiltersOpen} 
+            onClose={handleMobileFiltersOpen}
+          >
+            <DialogContent>
+              {filters}
+            </DialogContent>
+          </Dialog>
+        </>
+      ) : (
+        <>
+          {filters}
+        </>
+      )}
     </Box>
   );
 };
