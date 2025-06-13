@@ -9,16 +9,29 @@ import { styles } from './styles';
 
 type FilterKey = 'propertyType' | 'market' | 'adType';
 
+interface FiltersProps {
+  initialValues: {
+    price: {
+      min: number;
+      max: number;
+    };
+    area: {
+      min: number;
+      max: number;
+    };
+  };
+};
 
-export const Filters: React.FC = () => {
+
+export const Filters: React.FC<FiltersProps> = ({ initialValues: { price, area } }) => {
   const { t } = useTranslation();
 
   const [searchParams, setSearchParams] = useSearchParams();
 
   const propertyTypeFromParams = searchParams.get('propertyType')?.split(',') || [];
   const marketTypeFromParams = searchParams.get('marketType')?.split(',') || [];
-  const priceFromParams = searchParams.get('price')?.split(',').map(Number) || [26000, 185000];
-  const areaFromParams = searchParams.get('area')?.split(',').map(Number) || [26, 470];
+  const priceFromParams = searchParams.get('price')?.split(',').map(Number) || [price.min, price.max];
+  const areaFromParams = searchParams.get('area')?.split(',').map(Number) || [area.min, area.max];
 
   const defaultValues: Record<string, boolean | string[] | number[]> = {};
 

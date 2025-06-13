@@ -7,7 +7,7 @@ import { ListPagination } from '../../../../components/layout/ListPagination/Lis
 import { Loader } from '../../../../components/layout/Loader/Loader';
 import { Filters } from '../../components/Filters/Filters';
 import { Sorting } from '../../components/Sorting/Sorting';
-import { useLazyGetPropertiesQuery } from '../../state/propertyApi';
+import { useGetFiltersInitialValuesQuery, useLazyGetPropertiesQuery } from '../../state/propertyApi';
 import { styles } from './styles';
 
 
@@ -18,7 +18,8 @@ const PropertiesPage = () => {
   const [page, setPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(8);
 
-  const [getProperties, { data, isSuccess, isLoading }] = useLazyGetPropertiesQuery();
+  const [getProperties, { data, isSuccess }] = useLazyGetPropertiesQuery();
+  const { data: filtersInitialValues, isSuccess: isFiltersInitialValuesSuccess } = useGetFiltersInitialValuesQuery({});
 
   useEffect(() => {
     const params = Object.fromEntries(searchParams);
@@ -49,7 +50,11 @@ const PropertiesPage = () => {
 
   return (
     <Container contentStyles={styles.container}>
-      <Filters />
+      {isFiltersInitialValuesSuccess ? (
+        <Filters initialValues={filtersInitialValues} />
+      ) : (
+        <Loader />
+      )}
       <Box sx={styles.main}>
         <Box sx={styles.header}>
           <Typography>
