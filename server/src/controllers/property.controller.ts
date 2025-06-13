@@ -1,7 +1,7 @@
 import { propertySchema } from "../schemas/property.schema";
 import catchErrors from "../utils/catchErrors";
 import { OK } from "../constants/http";
-import { createProperty, deleteProperty, getGeneralStats, getLikedPropertiesByUser, getMonthlyPriceStats, getMonthlyPropertyStats, getPopularProperties, getProperties, getPropertyById, getPropertyStatsByRegion, getUserProperties, updateProperty } from "../services/property.service";
+import { createProperty, deleteProperty, getFiltersInitialValues, getGeneralStats, getLikedPropertiesByUser, getMonthlyPriceStats, getMonthlyPropertyStats, getPopularProperties, getProperties, getPropertyById, getPropertyStatsByRegion, getUserProperties, updateProperty } from "../services/property.service";
 import { removeFalseyFields } from "../utils/removeFlaseyFields";
 
 type FiltersType = {
@@ -123,6 +123,11 @@ export const getPopularPropertiesHandler = catchErrors(async (req, res) => {
   const limitValue = limit ? +limit : 8;
 
   const response = await getPopularProperties(limitValue);
+  return res.status(OK).json(response);
+});
+
+export const getFiltersInitialValuesHandler = catchErrors(async (req, res) => {
+  const response = await getFiltersInitialValues();
   return res.status(OK).json(response);
 });
 
