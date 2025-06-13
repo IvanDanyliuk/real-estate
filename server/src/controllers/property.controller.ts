@@ -102,8 +102,8 @@ export const getLikedPropertiesByUserHandler = catchErrors(async (req, res) => {
 })
 
 export const getPropertyByIdHandler = catchErrors(async (req, res) => {
-  console.log('GET PROPERTY BY ID', req)
-  // const response = await getPropertyById()
+  const response = await getPropertyById(req.params.id);
+  return res.status(OK).json(response);
 });
 
 export const getUserPropertiesHandler = catchErrors(async (req, res) => {
