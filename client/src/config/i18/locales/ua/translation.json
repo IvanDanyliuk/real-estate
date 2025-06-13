@@ -73,6 +73,11 @@
       "secondaryCount": "Вторинний ринок",
       "primaryAvgPrice": "Первинний ринок",
       "secondaryAvgPrice": "Вторинний ринок"
+    },
+    "diffDays": {
+      "today": "Сьогодні",
+      "yesterday": "Вчора",
+      "days_ago": "днів тому"
     }
   },
   "main_layout": {

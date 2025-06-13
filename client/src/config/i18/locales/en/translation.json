@@ -73,6 +73,11 @@
       "secondaryCount": "Secondary market",
       "primaryAvgPrice": "Primary market",
       "secondaryAvgPrice": "Secondary market"
+    },
+    "diffDays": {
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "days_ago": "days ago"
     }
   },
   "main_layout": {
