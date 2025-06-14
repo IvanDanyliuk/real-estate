@@ -403,6 +403,32 @@
           }
         }
       }
+    },
+    "property": {
+      "gallery": {
+        "allImagesBtn": "See all images"
+      },
+      "description": {
+        "title": "Description"
+      },
+      "overview": {
+        "title": "Overview",
+        "options": {
+          "roomsNumber": "Rooms number",
+          "yearBuilt": "Year built",
+          "propertyType": "Property type",
+          "area": "Area"
+        }
+      },
+      "nearbyAmenities": {
+        "title": "Nearby amenities"
+      },
+      "location": {
+        "title": "Location"
+      },
+      "errors": {
+        "notFound": "Property not found"
+      }
     }
   }
 }

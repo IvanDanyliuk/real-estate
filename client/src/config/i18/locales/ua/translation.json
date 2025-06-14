@@ -403,6 +403,32 @@
           }
         }
       }
+    },
+    "property": {
+      "gallery": {
+        "allImagesBtn": "Дивитись всі фото"
+      },
+      "description": {
+        "title": "Опис"
+      },
+      "overview": {
+        "title": "Огляд",
+        "options": {
+          "roomsNumber": "Кількість кімнат",
+          "yearBuilt": "Рік побудови",
+          "propertyType": "Тип об'єкта",
+          "area": "Площа"
+        }
+      },
+      "nearbyAmenities": {
+        "title": "Зручності поруч"
+      },
+      "location": {
+        "title": "Локація"
+      },
+      "errors": {
+        "notFound": "Об'єкт не знайдено"
+      }
     }
   }
 }

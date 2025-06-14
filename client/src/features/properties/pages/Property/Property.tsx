@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Button, Grid2, Stack, Typography, useMediaQuery } from '@mui/material';
+import { Avatar, Box, Button, Card, Divider, Grid2, Stack, Typography, useMediaQuery } from '@mui/material';
 import { AccessTime, AddBoxSharp, CalendarMonth, CropSquare, MapsHomeWork, MeetingRoom, Place } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useGetPropertyByIdQuery } from '../../state/propertyApi';
@@ -10,6 +10,8 @@ import { NotFound } from '../../../../components/layout/NotFound/NotFound';
 import { getDaysFromDate } from '../../../../utils/helpers';
 import { styles } from './styles';
 import 'react-image-gallery/styles/css/image-gallery.css';
+import { PropertyLocationMap } from '../../components/PropertyLocationMap/PropertyLocationMap';
+import { PropertyGallery } from '../../components/PropertyGallery/PropertyGallery';
 
 
 const PropertyPage = () => {
@@ -35,12 +37,12 @@ const PropertyPage = () => {
 
   if(isError) {
     return (
-      <NotFound title='Property not found' />
+      <NotFound title={t('pages.property.errors.notFound')} />
     );
   }
 
   return (
-    <Container>
+    <Container contentStyles={styles.container}>
       <Box sx={styles.header}>
         <Typography variant='h1'>
           {t(data.title)}
@@ -65,8 +67,8 @@ const PropertyPage = () => {
           <Typography sx={styles.price}>
             {`$${data.price}`}
           </Typography>
-          <Typography sx={styles.price}>
-            {`${Math.round(data.price / data.overview.area)} / m2`}
+          <Typography>
+            {`(${Math.round(data.price / data.overview.area)} / m2)`}
           </Typography>
         </Box>
       </Box>
@@ -103,9 +105,7 @@ const PropertyPage = () => {
                   <img src={item} alt={`image_${i + 1}`} />
                   {(i === 3 || i === data.images.length - 2) && (
                     <Box sx={styles.link}>
-                      <Button>
-                        See all images
-                      </Button>
+                      <PropertyGallery data={data.images} />
                     </Box>
                   )}
                 </Box>
@@ -116,27 +116,27 @@ const PropertyPage = () => {
       </Box>
       <Grid2 container spacing={2} sx={styles.content}>
         <Grid2 size={isMobile ? 12 : 8}>
-          <Stack spacing={2}>
-            <Box sx={styles.descriptionItem}>
+          <Stack spacing={4}>
+            <Box sx={styles.infoItem}>
               <Typography variant='h4'>
-                Description
+                {t('pages.property.description.title')}
               </Typography>
               <Typography>
                 {data.description}
               </Typography>
             </Box>
-            <Box sx={styles.descriptionItem}>
+            <Box sx={styles.infoItem}>
               <Typography variant='h4'>
-                Overview
+                {t('pages.property.overview.title')}
               </Typography>
               <Box sx={styles.overview}>
                 <Box sx={styles.overviewItem}>
                   <Box sx={styles.iconContainer}>
                     <MeetingRoom />
                   </Box>
-                  <Box>
+                  <Box sx={styles.overviewItemInfo}>
                     <Typography>
-                      {t('roomsNumber')}
+                      {t('pages.property.overview.options.roomsNumber')}
                     </Typography>
                     <Typography>
                       {data.overview.roomsNumber}
@@ -147,9 +147,9 @@ const PropertyPage = () => {
                   <Box sx={styles.iconContainer}>
                     <CalendarMonth />
                   </Box>
-                  <Box>
+                  <Box sx={styles.overviewItemInfo}>
                     <Typography>
-                      {t('yearBuilt')}
+                      {t('pages.property.overview.options.yearBuilt')}
                     </Typography>
                     <Typography>
                       {data.overview.yearBuilt}
@@ -160,12 +160,12 @@ const PropertyPage = () => {
                   <Box sx={styles.iconContainer}>
                     <MapsHomeWork />
                   </Box>
-                  <Box>
+                  <Box sx={styles.overviewItemInfo}>
                     <Typography>
-                      {t('propertyType')}
+                      {t('pages.property.overview.options.propertyType')}
                     </Typography>
                     <Typography>
-                      {data.overview.propertyType}
+                      {t(`constants.propertyTypes.${data.overview.propertyType}`)}
                     </Typography>
                   </Box>
                 </Box>
@@ -173,9 +173,9 @@ const PropertyPage = () => {
                   <Box sx={styles.iconContainer}>
                     <CropSquare />
                   </Box>
-                  <Box>
+                  <Box sx={styles.overviewItemInfo}>
                     <Typography>
-                      {t('area')}
+                      {t('pages.property.overview.options.area')}
                     </Typography>
                     <Typography>
                       {data.overview.area}
@@ -184,15 +184,16 @@ const PropertyPage = () => {
                 </Box>
               </Box>
             </Box>
-            <Box sx={styles.nearbyAmenities}>
+            <Box sx={styles.infoItem}>
               <Typography variant='h4'>
-                Nearby amenities
+                {t('pages.property.nearbyAmenities.title')}
               </Typography>
               <Box component='ul' sx={styles.nearbyAmenitiesList}>
                 {data.nearbyAmenities.map((item: any, i: number) => (
                   <Box 
                     key={`nearby_amenity_${i + 1}`} 
-                    component='li'
+                    component='li' 
+                    sx={styles.nearbyAmenitiesListItem}
                   >
                     <Typography>
                       {t(item.object)}
@@ -204,18 +205,42 @@ const PropertyPage = () => {
                 ))}
               </Box>
             </Box>
-            <Box sx={styles.location}>
+            <Box sx={styles.infoItem}>
               <Typography variant='h4'>
-                Location
+                {t('pages.property.location.title')}
               </Typography>
-              <AddBoxSharp sx={styles.location}>
-                
-              </AddBoxSharp>
+              <Box sx={styles.location}>
+                <PropertyLocationMap coords={data.location.mapCoords} />
+              </Box>
             </Box>
           </Stack>
         </Grid2>
         <Grid2 size={isMobile ? 12 : 4}>
-
+          <Card sx={styles.userInfo}>
+            <Avatar 
+              src={data.author.profilePhoto} 
+              sx={styles.userPhoto} 
+            />
+            <Typography sx={styles.authorName}>
+              {data.author.name}
+            </Typography>
+            <Typography sx={styles.authorContactInfoItem}>
+              <Typography variant='caption'>
+                Email:
+              </Typography>
+              {data.author.email}
+            </Typography>
+            <Typography sx={styles.authorContactInfoItem}>
+              <Typography variant='caption'>
+                Phone:
+              </Typography>
+              {data.author.phone}
+            </Typography>
+            <Divider sx={{ width: '100%' }} />
+            <Button>
+              Contact
+            </Button>
+          </Card>
         </Grid2>
       </Grid2>
     </Container>
