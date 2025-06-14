@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Avatar, Box, Button, Card, Divider, Grid2, Stack, Typography, useMediaQuery } from '@mui/material';
-import { AccessTime, AddBoxSharp, CalendarMonth, CropSquare, MapsHomeWork, MeetingRoom, Place } from '@mui/icons-material';
+import { AccessTime, CalendarMonth, CropSquare, MapsHomeWork, MeetingRoom, Place } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useGetPropertyByIdQuery } from '../../state/propertyApi';
 import { Container } from '../../../../components/layout/Container/Container';
 import { Loader } from '../../../../components/layout/Loader/Loader';
 import { NotFound } from '../../../../components/layout/NotFound/NotFound';
 import { getDaysFromDate } from '../../../../utils/helpers';
-import { styles } from './styles';
-import 'react-image-gallery/styles/css/image-gallery.css';
 import { PropertyLocationMap } from '../../components/PropertyLocationMap/PropertyLocationMap';
 import { PropertyGallery } from '../../components/PropertyGallery/PropertyGallery';
+import { styles } from './styles';
+import 'react-image-gallery/styles/css/image-gallery.css';
 
 
 const PropertyPage = () => {
