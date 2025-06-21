@@ -3,14 +3,13 @@ import { PropertyGallery } from './PropertyGallery';
 import { vi } from 'vitest';
 import '@testing-library/jest-dom';
 
-// Mock translation
+
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: (key: string) => key,
   }),
 }));
 
-// Mock react-image-gallery
 vi.mock('react-image-gallery', () => ({
   __esModule: true,
   default: ({ items }: { items: any[] }) => (
@@ -49,10 +48,10 @@ describe('PropertyGallery', () => {
     render(<PropertyGallery data={images} />);
     
     const button = screen.getByRole('button');
-    fireEvent.click(button); // open
+    fireEvent.click(button);
     expect(screen.getByTestId('image-gallery')).toBeInTheDocument();
     
-    fireEvent.click(button); // close
+    fireEvent.click(button);
     expect(screen.getByTestId('image-gallery')).not.toBeVisible();
   });
 });
