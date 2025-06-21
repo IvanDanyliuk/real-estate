@@ -60,7 +60,7 @@ export const getLikedPropertiesByUser = async ({ page, itemsPerPage, userId }: G
 }
 
 export const getPropertyById = async (id: string) => {
-  const property = await PropertyModel.findById(id);
+  const property = await PropertyModel.findById(id).populate('author');
   return property;
 };
 
