@@ -4,9 +4,11 @@ import { useTranslation } from 'react-i18next';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
+
 interface PropertyGalleryProps {
   data: string[];
 };
+
 
 export const PropertyGallery: React.FC<PropertyGalleryProps> = ({ data }) => {
   const { t } = useTranslation();
@@ -26,9 +28,9 @@ export const PropertyGallery: React.FC<PropertyGalleryProps> = ({ data }) => {
       <Button onClick={handleGalleryOpen}>
         {t('pages.property.gallery.allImagesBtn')}
       </Button>
-      <Dialog open={isGalleryOpen} onClose={handleGalleryOpen}>
+      <Dialog open={isGalleryOpen} onClose={handleGalleryOpen} maxWidth='md' >
         <DialogContent>
-          <ImageGallery items={formattedData} />
+          <ImageGallery items={formattedData}  />
         </DialogContent>
       </Dialog>
     </>

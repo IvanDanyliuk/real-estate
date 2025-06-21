@@ -2,7 +2,7 @@ import { StyleProps } from '../../../../components/types';
 
 export const styles: StyleProps = {
   container: {
-    padding: '1rem 0',
+    padding: '1rem',
   },
   header: {
     display: 'flex',
@@ -94,7 +94,7 @@ export const styles: StyleProps = {
   overviewItem: {
     padding: '1rem',
     display: 'flex',
-    justifyContent: 'space-between',
+    flex: 1,
     alignItems: 'center',
     gap: 1,
   },

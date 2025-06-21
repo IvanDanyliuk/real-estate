@@ -5,13 +5,16 @@ export const styles: StyleProps = {
     position: 'relative',
   },
   content: {
-    maxWidth: '20rem',
+    minWidth: '100%',
     display: 'flex',
     flexDirection: 'column',
     gap: 2,
     '& h3': {
       fontSize: '1.1rem',
       fontWeight: 500,
+    },
+    '@media(min-width:600px)': {
+      minWidth: '20rem',
     }
   },
   sections: {
