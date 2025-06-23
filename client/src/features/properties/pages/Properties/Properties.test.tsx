@@ -52,6 +52,7 @@ vi.mock('react-router-dom', async (original) => {
   };
 });
 
+
 describe('PropertiesPage', () => {
   beforeEach(() => {
     vi.clearAllMocks();
