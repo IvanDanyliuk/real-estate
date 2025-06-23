@@ -12,6 +12,7 @@ export const getArticlesHandler = catchErrors(async (req, res) => {
 });
 
 export const getArticleHandler = catchErrors(async (req, res) => {
+  console.log('GET ARTICLE CONTROLLER', req.params.id)
   const response = await getArticle(req.params.id);
   return res.status(OK).json(response);
 });
