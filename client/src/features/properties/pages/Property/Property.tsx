@@ -9,9 +9,10 @@ import { Loader } from '../../../../components/layout/Loader/Loader';
 import { NotFound } from '../../../../components/layout/NotFound/NotFound';
 import { getDaysFromDate } from '../../../../utils/helpers';
 import { PropertyLocationMap } from '../../components/PropertyLocationMap/PropertyLocationMap';
-import { PropertyGallery } from '../../components/PropertyGallery/PropertyGallery';
+import { Gallery } from '../../../../components/layout/Gallery/Gallery';
 import { styles } from './styles';
 import 'react-image-gallery/styles/css/image-gallery.css';
+import { ImageList } from '../../../../components/ImageList/ImageList';
 
 
 const PropertyPage = () => {
@@ -72,7 +73,7 @@ const PropertyPage = () => {
           </Typography>
         </Box>
       </Box>
-      <Box sx={styles.images}>
+      {/* <Box sx={styles.images}>
         <Grid2 
           container 
           spacing={1} 
@@ -105,7 +106,7 @@ const PropertyPage = () => {
                   <img src={item} alt={`image_${i + 1}`} />
                   {(i === 3 || i === data.images.length - 2) && (
                     <Box sx={styles.link}>
-                      <PropertyGallery data={data.images} />
+                      <Gallery data={data.images} />
                     </Box>
                   )}
                 </Box>
@@ -113,7 +114,8 @@ const PropertyPage = () => {
             </Stack>
           </Grid2>
         </Grid2>
-      </Box>
+      </Box> */}
+      <ImageList imageUrls={data.images} />
       <Grid2 container spacing={2} sx={styles.content}>
         <Grid2 size={isMobile ? 12 : 8}>
           <Stack spacing={4}>

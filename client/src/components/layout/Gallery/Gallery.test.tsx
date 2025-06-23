@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { PropertyGallery } from './PropertyGallery';
+import { PropertyGallery } from './Gallery';
 import { vi } from 'vitest';
 import '@testing-library/jest-dom';
 

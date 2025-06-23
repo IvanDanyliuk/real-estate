@@ -429,6 +429,9 @@
       "errors": {
         "notFound": "Property not found"
       }
+    },
+    "article": {
+      "notFound": "Cannot find a property with such ID"
     }
   }
 }
