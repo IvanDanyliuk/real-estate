@@ -54,3 +54,16 @@ export const fillEmptyArrayData = (initialData: InitialData[], options: Options[
   });
   return filledData;
 };
+
+export const getDaysFromDate = (inputDate: string | Date) => {
+  const givenDate = new Date(inputDate);
+  const today = new Date();
+
+  givenDate.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
+
+  const diffTime = today.getTime() - givenDate.getTime();
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+  return diffDays;
+}

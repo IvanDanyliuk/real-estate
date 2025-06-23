@@ -18,6 +18,10 @@
       "for_sale": "For sale",
       "for_rent": "For rent"
     },
+    "marketTypes": {
+      "primary": "Primary",
+      "secondary": "Secondary"
+    },
     "propertyTypes": {
       "house": "House",
       "apartment": "Apartment",
@@ -69,6 +73,11 @@
       "secondaryCount": "Secondary market",
       "primaryAvgPrice": "Primary market",
       "secondaryAvgPrice": "Secondary market"
+    },
+    "diffDays": {
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "days_ago": "days ago"
     }
   },
   "main_layout": {
@@ -356,6 +365,69 @@
         "title": "Are you sure you want to delete your account?",
         "acceptBtn": "Yes",
         "cancelBtn": "No"
+      }
+    },
+    "properties": {
+      "resultsFound": {
+        "partOne": "Showing",
+        "partTwo": "of",
+        "partThree": "results"
+      },
+      "sortingMenu": {
+        "default": "Default",
+        "price": "Price",
+        "area": "Area",
+        "roomsNumber": "Rooms number"
+      },
+      "filters": {
+        "title": "Find your property",
+        "sections": {
+          "location": {
+            "title": "Location",
+            "placeholder": "Select location"
+          },
+          "propertyStatus": {
+            "title": "Property status"
+          },
+          "markertType": {
+            "title": "Market"
+          },
+          "adType": {
+            "title": "Ad type"
+          },
+          "price": {
+            "title": "Price"
+          },
+          "area": {
+            "title": "Area"
+          }
+        }
+      }
+    },
+    "property": {
+      "gallery": {
+        "allImagesBtn": "See all images"
+      },
+      "description": {
+        "title": "Description"
+      },
+      "overview": {
+        "title": "Overview",
+        "options": {
+          "roomsNumber": "Rooms number",
+          "yearBuilt": "Year built",
+          "propertyType": "Property type",
+          "area": "Area"
+        }
+      },
+      "nearbyAmenities": {
+        "title": "Nearby amenities"
+      },
+      "location": {
+        "title": "Location"
+      },
+      "errors": {
+        "notFound": "Property not found"
       }
     }
   }

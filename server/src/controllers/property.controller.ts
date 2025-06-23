@@ -1,7 +1,7 @@
 import { propertySchema } from "../schemas/property.schema";
 import catchErrors from "../utils/catchErrors";
 import { OK } from "../constants/http";
-import { createProperty, deleteProperty, getGeneralStats, getLikedPropertiesByUser, getMonthlyPriceStats, getMonthlyPropertyStats, getPopularProperties, getProperties, getPropertyById, getPropertyStatsByRegion, getUserProperties, updateProperty } from "../services/property.service";
+import { createProperty, deleteProperty, getFiltersInitialValues, getGeneralStats, getLikedPropertiesByUser, getMonthlyPriceStats, getMonthlyPropertyStats, getPopularProperties, getProperties, getPropertyById, getPropertyStatsByRegion, getUserProperties, updateProperty } from "../services/property.service";
 import { removeFalseyFields } from "../utils/removeFlaseyFields";
 
 type FiltersType = {
@@ -9,37 +9,68 @@ type FiltersType = {
     $gte?: number,
     $lte?: number,
   },
-  "location.city"?: string,
-  "overview.roomsNumber"?: number,
-  "overview.propertyType"?: string,
-  "overview.yearBuilt"?: number,
-  "overview.area"?: number,
-  "overview.withRenovation"?: string,
-  adType?: string,
+  "location.region"?: {
+    $in: string[];
+  },
+  market?: {
+    $in: string[];
+  },
+  "overview.propertyType"?: {
+    $in: string[]
+  },
+  "overview.area"?: {
+    $gte?: number,
+    $lte?: number,
+  },
+  type?: {
+    $in: string[]
+  },
 };
 
 export const getPropertiesHandler = catchErrors(async (req, res) => {
+  const parsedFilters = req.query.filters ? JSON.parse(req.query.filters.toString()) : {};
+  
   const filters: FiltersType = {};
 
-  if(req.query.priceFrom || req.query.priceTo) {
-    filters.price = {};
-    if(req.query.priceFrom) filters.price.$gte = +req.query.priceFrom;
-    if(req.query.priceTo) filters.price.$lte = +req.query.priceTo;
+  if(parsedFilters.price) {
+    filters.price = {
+      $gte: +parsedFilters.price[0],
+      $lte: +parsedFilters.price[1],
+    };
 
     if(Object.keys(filters.price).length === 0) delete filters.price;
   }
 
-  if(req.query.city) {
-    filters["location.city"] = req.query.city.toString();
+  if(parsedFilters["location.region"]) {
+    filters["location.region"] = {
+      $in: parsedFilters["location.region"]
+    }
   }
 
-  if(req.query.adType) filters.adType = req.query.adType.toString();
+  if(parsedFilters["overview.propertyType"]) {
+    filters["overview.propertyType"] = {
+      $in: parsedFilters["overview.propertyType"]
+    }
+  };
 
-  if(req.query.area) filters["overview.area"] = +req.query.area;
-  if(req.query.roomsNumber) filters["overview.roomsNumber"] = +req.query.roomsNumber;
-  if(req.query.propertyType) filters["overview.propertyType"] = req.query.propertyType.toString();
-  if(req.query.yearBuilt) filters["overview.yearBuilt"] = +req.query.yearBuilt;
-  if(req.query.withRenovation) filters["overview.withRenovation"] = req.query.withRenovation.toString();
+  if(parsedFilters["overview.area"]) {
+    filters["overview.area"] = {
+      $gte: +parsedFilters["overview.area"][0],
+      $lte: +parsedFilters["overview.area"][1],
+    };
+  }
+
+  if(parsedFilters.market) {
+    filters.market = {
+      $in: parsedFilters.market
+    };
+  }
+
+  if(parsedFilters.type) {
+    filters.type = {
+      $in: parsedFilters.type
+    }
+  }
 
   const orderBy = req.query.orderBy 
     ? req.query.orderBy.toString() 
@@ -71,8 +102,8 @@ export const getLikedPropertiesByUserHandler = catchErrors(async (req, res) => {
 })
 
 export const getPropertyByIdHandler = catchErrors(async (req, res) => {
-  console.log('GET PROPERTY BY ID', req)
-  // const response = await getPropertyById()
+  const response = await getPropertyById(req.params.id);
+  return res.status(OK).json(response);
 });
 
 export const getUserPropertiesHandler = catchErrors(async (req, res) => {
@@ -92,6 +123,11 @@ export const getPopularPropertiesHandler = catchErrors(async (req, res) => {
   const limitValue = limit ? +limit : 8;
 
   const response = await getPopularProperties(limitValue);
+  return res.status(OK).json(response);
+});
+
+export const getFiltersInitialValuesHandler = catchErrors(async (req, res) => {
+  const response = await getFiltersInitialValues();
   return res.status(OK).json(response);
 });
 

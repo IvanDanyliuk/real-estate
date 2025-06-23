@@ -18,6 +18,10 @@
       "for_sale": "Продаж",
       "for_rent": "Оренда"
     },
+    "marketTypes": {
+      "primary": "Первинний",
+      "secondary": "Вторинний"
+    },
     "propertyTypes": {
       "house": "Будинок",
       "apartment": "Квартира",
@@ -69,6 +73,11 @@
       "secondaryCount": "Вторинний ринок",
       "primaryAvgPrice": "Первинний ринок",
       "secondaryAvgPrice": "Вторинний ринок"
+    },
+    "diffDays": {
+      "today": "Сьогодні",
+      "yesterday": "Вчора",
+      "days_ago": "днів тому"
     }
   },
   "main_layout": {
@@ -356,6 +365,69 @@
         "title": "Ви впевнені, що хочете видалити свій обліковий запис?",
         "acceptBtn": "Так",
         "cancelBtn": "Ні"
+      }
+    },
+    "properties": {
+      "resultsFound": {
+        "partOne": "Представлено",
+        "partTwo": "з",
+        "partThree": "результатів"
+      },
+      "sortingMenu": {
+        "default": "За замовчуванням",
+        "price": "Ціна",
+        "area": "Площа",
+        "roomsNumber": "Кількість кімнат"
+      },
+      "filters": {
+        "title": "Знайдіть Вашу нерухомість",
+        "sections": {
+          "location": {
+            "title": "Локація",
+            "placeholder": "Оберіть локацію"
+          },
+          "adType": {
+            "title": "Тип оголошення"
+          },
+          "marketType": {
+            "title": "Ринок"
+          },
+          "propertyType": {
+            "title": "Тип об'єкта"
+          },
+          "price": {
+            "title": "Ціна"
+          },
+          "area": {
+            "title": "Площа"
+          }
+        }
+      }
+    },
+    "property": {
+      "gallery": {
+        "allImagesBtn": "Дивитись всі фото"
+      },
+      "description": {
+        "title": "Опис"
+      },
+      "overview": {
+        "title": "Огляд",
+        "options": {
+          "roomsNumber": "Кількість кімнат",
+          "yearBuilt": "Рік побудови",
+          "propertyType": "Тип об'єкта",
+          "area": "Площа"
+        }
+      },
+      "nearbyAmenities": {
+        "title": "Зручності поруч"
+      },
+      "location": {
+        "title": "Локація"
+      },
+      "errors": {
+        "notFound": "Об'єкт не знайдено"
       }
     }
   }

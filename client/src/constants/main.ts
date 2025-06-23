@@ -53,11 +53,11 @@ export const AD_TYPES = [
 export const MARKET_TYPES = [
   {
     value: MARKET_TYPE.Primary,
-    label: 'Primary',
+    label: 'constants.marketTypes.primary',
   },
   {
     value: MARKET_TYPE.Secondary,
-    label: 'Secondary',
+    label: 'constants.marketTypes.secondary',
   },
 ];
 

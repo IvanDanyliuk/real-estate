@@ -2,6 +2,7 @@ import { Router } from "express";
 import { 
   createPropertyHandler, 
   deletePropertyHandler, 
+  getFiltersInitialValuesHandler, 
   getGeneralStatsHandler, 
   getLikedPropertiesByUserHandler, 
   getMonthlyAveragePriceStatsHandler, 
@@ -26,6 +27,7 @@ propertyRoutes.get('/stats/prices', getMonthlyAveragePriceStatsHandler);
 propertyRoutes.get('/popular', getPopularPropertiesHandler);
 propertyRoutes.get('/own', getUserPropertiesHandler);
 propertyRoutes.get('/liked', getLikedPropertiesByUserHandler);
+propertyRoutes.get('/filters', getFiltersInitialValuesHandler);
 propertyRoutes.get('/:id', getPropertyByIdHandler);
 propertyRoutes.post('/', upload.array('images'), createPropertyHandler);
 propertyRoutes.patch('/', upload.array('images'), updatePropertyHandler);

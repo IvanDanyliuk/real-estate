@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: (key: string) => key, // Just return the key
+    t: (key: string) => key,
   }),
 }));
 

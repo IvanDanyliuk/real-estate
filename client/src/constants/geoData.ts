@@ -101,6 +101,11 @@ export const REGIONS = [
   },
 ];
 
+export const REGIONS_DEFAULT = {
+  label: 'constants.regions.All',
+  value: 'All',
+};
+
 export const ADMINISTRATIVE_CENTERS = [
   {
     name: 'Kyiv',

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { MapContainer, Marker, TileLayer, useMapEvents } from 'react-leaflet';
+import { Loader } from '../../layout/Loader/Loader';
 import 'leaflet/dist/leaflet.css';
 
 
@@ -54,6 +55,8 @@ export const MapInput: React.FC<MapInputProps> = ({ coords, onSelectLocation }) 
       </MapContainer>
     );
   } else {
-    return <div>Loading...</div>;
+    return (
+      <Loader />
+    );
   }
 };

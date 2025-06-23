@@ -60,7 +60,7 @@ export const getLikedPropertiesByUser = async ({ page, itemsPerPage, userId }: G
 }
 
 export const getPropertyById = async (id: string) => {
-  const property = await PropertyModel.findById(id);
+  const property = await PropertyModel.findById(id).populate('author');
   return property;
 };
 
@@ -108,7 +108,36 @@ export const getUserProperties = async ({ email, itemsPerPage, page }: GetUserPr
     properties,
     count
   };
-}
+};
+
+export const getFiltersInitialValues = async () => {
+  const result = await PropertyModel.aggregate([
+    {
+      $group: {
+        _id: null,
+        minPrice: { $min: "$price" },
+        maxPrice: { $max: "$price" },
+        minArea: { $min: "$overview.area" },
+        maxArea: { $max: "$overview.area" },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        price: {
+          min: "$minPrice",
+          max: "$maxPrice",
+        },
+        area: {
+          min: "$minArea",
+          max: "$maxArea",
+        },
+      },
+    },
+  ]);
+
+  return result[0];
+};
 
 export interface CreatePropertyParams {
   title: string;
