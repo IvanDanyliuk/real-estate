@@ -7,12 +7,11 @@ import { useGetPropertyByIdQuery } from '../../state/propertyApi';
 import { Container } from '../../../../components/layout/Container/Container';
 import { Loader } from '../../../../components/layout/Loader/Loader';
 import { NotFound } from '../../../../components/layout/NotFound/NotFound';
-import { getDaysFromDate } from '../../../../utils/helpers';
 import { PropertyLocationMap } from '../../components/PropertyLocationMap/PropertyLocationMap';
-import { Gallery } from '../../../../components/layout/Gallery/Gallery';
+import { ImageList } from '../../../../components/ImageList/ImageList';
+import { getDaysFromDate } from '../../../../utils/helpers';
 import { styles } from './styles';
 import 'react-image-gallery/styles/css/image-gallery.css';
-import { ImageList } from '../../../../components/ImageList/ImageList';
 
 
 const PropertyPage = () => {
@@ -73,48 +72,6 @@ const PropertyPage = () => {
           </Typography>
         </Box>
       </Box>
-      {/* <Box sx={styles.images}>
-        <Grid2 
-          container 
-          spacing={1} 
-          sx={styles.gallery}
-        >
-          <Grid2 
-            size={isMobile ? 12 : 8} 
-            sx={styles.column}
-          >
-            <Box sx={styles.mainImageItem}>
-              <img 
-                src={data.images[0]} 
-                alt='main_image' 
-              />
-            </Box>
-          </Grid2>
-          <Grid2 
-            size={isMobile ? 12 : 4} 
-            sx={styles.column}
-          >
-            <Stack 
-              spacing={1} 
-              sx={styles.stack}
-            >
-              {data.images.slice(1, 4).map((item: string, i: number) => (
-                <Box 
-                  key={`image_items_${i + 1}`} 
-                  sx={styles.imageItem}
-                >
-                  <img src={item} alt={`image_${i + 1}`} />
-                  {(i === 3 || i === data.images.length - 2) && (
-                    <Box sx={styles.link}>
-                      <Gallery data={data.images} />
-                    </Box>
-                  )}
-                </Box>
-              ))}
-            </Stack>
-          </Grid2>
-        </Grid2>
-      </Box> */}
       <ImageList imageUrls={data.images} />
       <Grid2 container spacing={2} sx={styles.content}>
         <Grid2 size={isMobile ? 12 : 8}>

@@ -1,6 +1,6 @@
 import { Box, Grid2, Stack, useMediaQuery } from '@mui/material';
-import { styles } from './styles';
 import { Gallery } from '../layout/Gallery/Gallery';
+import { styles } from './styles';
 
 
 interface ImageListProps {
