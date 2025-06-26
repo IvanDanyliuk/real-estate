@@ -3,19 +3,18 @@ import AboutPage from './About';
 import { vi } from 'vitest';
 import * as useMediaQueryModule from '@mui/material/useMediaQuery';
 
-// Mock react-i18next
+
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: (key: string) => key,
   }),
 }));
 
-// Mock MUI's useMediaQuery
 const mockUseMediaQuery = vi.spyOn(useMediaQueryModule, 'default');
 
 describe('AboutPage', () => {
   beforeEach(() => {
-    mockUseMediaQuery.mockReturnValue(false); // Default to desktop
+    mockUseMediaQuery.mockReturnValue(false);
   });
 
   it('renders main heading', () => {
@@ -50,9 +49,8 @@ describe('AboutPage', () => {
   });
 
   it('renders correctly in mobile layout', () => {
-    mockUseMediaQuery.mockReturnValue(true); // Simulate mobile
+    mockUseMediaQuery.mockReturnValue(true);
     render(<AboutPage />);
-    // Just ensure rendering works without crashing
     expect(screen.getByText('pages.about.history.first')).toBeInTheDocument();
   });
 });
