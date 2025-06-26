@@ -432,6 +432,28 @@
     },
     "article": {
       "notFound": "Не вдалося знайти матеріал з таким ID"
+    },
+    "about": {
+      "mainHeading": "Про нас",
+      "history": {
+        "first": "Наша агенція була заснована двома професійними рієлторами. Вони заснували компанію як партерство, працюючи зі свого домашнього офісу. Основим фокусом діяльності був підбір нерухомості для локальних клієнтів.",
+        "second": "Вони відкрили офіси у 18 регіонах України, що дозволило розширити діяльність компанії та бути ближче до своїх клієнтів."
+      },
+      "services": {
+        "heading": "Наші послуги",
+        "consultation": {
+          "heading": "Консультації",
+          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique quos saepe excepturi voluptas rerum assumenda veniam veritatis. Beatae nemo nostrum, possimus non, molestiae quas perspiciatis dolor voluptate commodi deleniti dolorem!"
+        },
+        "spacePlanning": {
+          "heading": "Планування простору",
+          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique quos saepe excepturi voluptas rerum assumenda veniam veritatis. Beatae nemo nostrum, possimus non, molestiae quas perspiciatis dolor voluptate commodi deleniti dolorem!"
+        },
+        "projectManagement": {
+          "heading": "Проєктне управління",
+          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique quos saepe excepturi voluptas rerum assumenda veniam veritatis. Beatae nemo nostrum, possimus non, molestiae quas perspiciatis dolor voluptate commodi deleniti dolorem!"
+        }
+      }
     }
   }
 }

@@ -432,6 +432,28 @@
     },
     "article": {
       "notFound": "Cannot find a property with such ID"
+    },
+    "about": {
+      "mainHeading": "About us",
+      "history": {
+        "first": "Our agency was founded by two passionate realtors. They started a company with a small partnetship, working out of their home office, and focused primarly on finding properties for their clients in the local area.",
+        "second": "They opened their offices in 18 regions of Ukraine, which allowed to privide their services closer to their clients."
+      },
+      "services": {
+        "heading": "Our services",
+        "consultation": {
+          "heading": "Consultation",
+          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique quos saepe excepturi voluptas rerum assumenda veniam veritatis. Beatae nemo nostrum, possimus non, molestiae quas perspiciatis dolor voluptate commodi deleniti dolorem!"
+        },
+        "spacePlanning": {
+          "heading": "Space planning",
+          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique quos saepe excepturi voluptas rerum assumenda veniam veritatis. Beatae nemo nostrum, possimus non, molestiae quas perspiciatis dolor voluptate commodi deleniti dolorem!"
+        },
+        "projectManagement": {
+          "heading": "Project management",
+          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique quos saepe excepturi voluptas rerum assumenda veniam veritatis. Beatae nemo nostrum, possimus non, molestiae quas perspiciatis dolor voluptate commodi deleniti dolorem!"
+        }
+      }
     }
   }
 }
