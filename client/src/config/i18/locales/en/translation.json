@@ -454,6 +454,10 @@
           "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique quos saepe excepturi voluptas rerum assumenda veniam veritatis. Beatae nemo nostrum, possimus non, molestiae quas perspiciatis dolor voluptate commodi deleniti dolorem!"
         }
       }
+    },
+    "contacts": {
+      "mainHeading": "Let's contact!",
+      "subHeading": "Our team of professionals is always open to new projects."
     }
   }
 }
