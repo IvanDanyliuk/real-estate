@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { Container } from '../../components/layout/Container/Container';
 import { Typography } from '@mui/material';
+import { Container } from '../../components/layout/Container/Container';
 import { SocialMediaLinks } from '../../components/layout/SocialMediaLinks/SocialMediaLinks';
 import { styles } from './styles';
 
